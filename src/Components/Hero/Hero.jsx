@@ -13,10 +13,10 @@ export default function Hero() {
             ac turpis. Lectus nulla at volutpat diam ut.
           </p>
         </div>
-      </div>
         <div className=" !relative left-8">
           <img src={HeroImage} alt="Hero Image" />
         </div>
+      </div>
     </div>
   );
 }
