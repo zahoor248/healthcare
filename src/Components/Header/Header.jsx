@@ -8,9 +8,9 @@ export default function Header() {
   return (
     <div className="  bg-[#e5f0ff] ">
       <div className="main-container py-4 md:py-[30px] px-3 items-center  flex justify-between">
-        <div>
+        <Link to={'/'}>
           <img className="w-[276px]  cursor-pointer" src={Logo} alt="Logo" />
-        </div>
+        </Link>
         <div className="flex gap-24">
           <div className="f-f-g-m flex items-center gap-10">
             <span className=" text-lg font-normal text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
