@@ -65,14 +65,14 @@ export default function SignUp() {
   //   const {posts} = post
 
   return (
-    <div className="flex w-full bg-blue-200 h-screen overflow-auto items-center">
-      
-      <div className="w-full max-w-[1440px] mx-auto bg-white rounded-lg py-10 px-8 flex">
-      <div className="w-full">
+    <div className="flex w-full h-screen overflow-auto items-center">
+      <div className="w-full gap-12 rounded-lg flex h-full">
+        <div className="w-full bg-blue-200 h-full flex justify-center items-center">
           <img src={Slide1} className=" m-auto h-96 w-96" />
         </div>
-        <div className="flex flex-col w-full gap-6">
-          <div className="flex w-full gap-6">
+        <div className="flex flex-col w-full gap-6 pt-20">
+          <p className="text-3xl/none font-bold text-neutral-800 text-center">Heloo</p>
+          <div className="w-full max-w-[500px] mx-auto flex flex-col gap-6">
             <div className="flex flex-col gap-3 w-full">
               <p className="text-base/none font-semibold text-neutral-700">
                 First Name
@@ -93,35 +93,34 @@ export default function SignUp() {
                 className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded"
               />
             </div>
-          </div>
-          <div className="flex flex-col gap-3 w-full">
-            <p className="text-base/none font-semibold text-neutral-700">
-              Email
-            </p>
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Enter Email Address"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
-              />
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+            <div className="flex flex-col gap-3 w-full">
+              <p className="text-base/none font-semibold text-neutral-700">
+                Email
+              </p>
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="Enter Email Address"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
                 />
-              </svg>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                  />
+                </svg>
+              </div>
             </div>
-          </div>
-          <div className="flex w-full gap-6">
             <div className="flex flex-col gap-3 w-full">
               <p className="text-base/none font-semibold text-neutral-700">
                 Password
@@ -176,7 +175,6 @@ export default function SignUp() {
             </div>
           </div>
         </div>
-        
       </div>
       {/* <div className="w-full h-full bg-blue-100">
         <img src={Slide1} className=" m-auto h-96 w-96"/>
