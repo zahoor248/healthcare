@@ -8,7 +8,7 @@ export default function Hero() {
     <div className=" bg-[#e5f0ff] flex py-12 pb-60">
       <div className="main-container flex justify-between">
         <div className="flex flex-col mb-auto relative">
-          <div className="flex flex-col pb-40  ">
+          <div className="flex flex-col pb-44 ">
             <h1 className="text-6xl font-bold leading-[1.42] whitespace-nowrap">
               Healthcare professionals <br />
               <span>Ready to hire.</span>
@@ -18,7 +18,7 @@ export default function Hero() {
               ac turpis. Lectus nulla at volutpat diam ut.
             </p>
           </div>
-          <div className="absolute -bottom-72 shadow-md hover:scale-105 transition-all ease-in-out duration-500 hover:shadow-lg w-full max-w-[700px]">
+          <div className="absolute -bottom-72 hover:scale-105 transition-all ease-in-out duration-500 w-full max-w-[700px]">
             {" "}
             <Form />
           </div>

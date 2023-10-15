@@ -67,6 +67,22 @@ body {
 .f-f-g-s {
   font-family: "GilroySemibold", sans-serif;
 }
+
+.f-f-n {
+  font-family: "NunitoRegular", sans-serif;
+}
+.f-f-n-b {
+  font-family: "NunitoBold", sans-serif;
+}
+.f-f-n-b-i {
+  font-family: "NunitoBoldItalic", sans-serif;
+}
+.f-f-n-s {
+  font-family: "NunitoSemibold", sans-serif;
+}
+
 .shadow-class {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+ 
+  box-shadow: 0 6px 24px 0 rgba(16, 39, 79, 0.16);
+
 }

@@ -9,11 +9,11 @@ export default function Form() {
   const [zipCode, setZipCode] = useState("");
 
   return (
-    <div className="bg-white rounded-xl z-50 ">
-      <div className="py-9 px-7 ">
+    <div className="bg-white shadow-class rounded-xl z-50 ">
+      <div className="p-9 ">
         <div className="flex flex-col gap-6">
           <div className="flex justify-between gap-6 items-center text-2xl font-semibold">
-            <p className="whitespace-nowrap ">I am a</p>
+            <p className="whitespace-nowrap f-f-n-b ">I am a</p>
             <input
               type="text"
               placeholder="e-g -Lorem, Dolor"
@@ -24,7 +24,7 @@ export default function Form() {
           </div>
 
           <div className="flex justify-between gap-6 items-center text-2xl font-semibold">
-            <p className="whitespace-nowrap ">Looking for</p>
+            <p className="whitespace-nowrap f-f-n-b ">Looking for</p>
             <input
               type="text"
               placeholder="e-g -Lorem, Dolor"
@@ -35,7 +35,7 @@ export default function Form() {
           </div>
 
           <div className="flex justify-between gap-6 items-center text-2xl font-semibold max-w-[400px] w-full">
-            <p className="whitespace-nowrap ">In zip code</p>
+            <p className="whitespace-nowrap f-f-n-b ">In zip code</p>
             <input
               type="text"
               placeholder="In zip code"
@@ -47,7 +47,7 @@ export default function Form() {
         </div>
         <div className="flex w-full justify-end">
           <Link to="/HiringLayout">
-            <button className="px-8 gap-1 rounded-lg text-white py-3 bg-blue-500 hover:bg-blue-600 transition-all  ease-in-out duration-500 flex items-center ">
+            <button className="px-8 gap-1 rounded-lg text-white py-4 bg-blue-500 hover:bg-blue-600 transition-all  ease-in-out duration-500 flex items-center ">
               <BiSearch className="text-2xl" />
               Search
             </button>
