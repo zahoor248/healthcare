@@ -14,7 +14,6 @@ import { POST } from "../../Api/Post";
 import { REGISTER } from "../../Api/EndPoints";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../Store/Actions/Actions";
-
 import { components } from "react-select";
 
 export default function SignUp() {
