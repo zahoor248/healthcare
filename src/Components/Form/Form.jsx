@@ -9,8 +9,8 @@ export default function Form() {
     const [zipCode, setZipCode] = useState('');
 
   return (
-              <div className='hero-form'>
-                <div className='form-responsive' style={{padding:"0 4rem", marginTop:"3rem"}}>
+              <div className='hero-form z-50 absolute'>
+                <div className='p-9'>
                     <div className='profession-field'>
                         <p>I am a</p>
                         <input 
@@ -31,7 +31,7 @@ export default function Form() {
                         />
                     </div>
 
-                    <div className='zip-field'>
+                    <div className='flex justify-between'>
                         <p>In zip code</p>
                         <input 
                         type="text" 
@@ -41,7 +41,7 @@ export default function Form() {
                         />
                     </div>
 
-                    <div className='search-btn-container'>
+                    <div className='flex w-full justify-end pt-2'>
                         <Link to='/HiringLayout'>
                         <button className='search-btn'><BiSearch className='search-icon'/>Search</button>
                         </Link>

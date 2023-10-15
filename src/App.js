@@ -43,7 +43,7 @@ console.log(user, "here is the user");
       ) : (
         <>
           <Header />
-          <Hero/>
+          <HomeLayout/>
           
         </>
       )}
