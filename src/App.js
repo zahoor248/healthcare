@@ -15,7 +15,7 @@ import Chat from "./Components/Chat/Chat";
 import "./Responsive.css";
 import Address from "./Components/Address/Address";
 import AllPros from "./Components/AllPros";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import cors from "cors";
 import { useSelect } from "@mui/base";
@@ -35,25 +35,23 @@ function App() {
       {/* <SignUp/> */}
       {/* <Profile /> */}
 
-      <HashRouter>
-        <Switch>
+     
           {user ? (
             <>
               <Navbar />
-              <Route path="/" component={HiringLayout} />
-              <Route path="/Profile" component={Profile} />
+              {/* <Route path="/" component={HiringLayout} />
+              <Route path="/Profile" component={Profile} /> */}
             </>
           ) : (
             <>
               <Header />
 
-              <Route exact path="/login" component={LogIn} />
-              <Route path="/register" component={SignUp} />
+              {/* <Route exact path="/login" component={LogIn} />
+              <Route path="/register" component={SignUp} /> */}
             </>
           )}
-        </Switch>
-        <Footer />
-      </HashRouter>
+     
+   
     </>
   );
 }
