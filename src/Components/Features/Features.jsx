@@ -14,7 +14,7 @@ export default function Features() {
             Verified Healthcare Professionals
           </h3>
         </div>
-        <p className="pb-24 pl-[90px] pr-[30px] font-normal f-f-g-m pt-4 text-base text-neutral-600">
+        <p className="pb-16 pl-[90px] pr-[30px] font-normal f-f-g-m pt-4 text-base text-neutral-600">
           Pulvinar elementum integer enim neque. Et netus et malesuada fames ac
           turpis. Lectus nulla at volutpat diam ut.
         </p>
@@ -26,7 +26,7 @@ export default function Features() {
             Scheduling and Reservation Online
           </h3>
         </div>
-        <p className="pb-24 pl-[90px] pr-[30px] font-normal f-f-g-m pt-4 text-base text-neutral-600">
+        <p className="pb-16 pl-[90px] pr-[30px] font-normal f-f-g-m pt-4 text-base text-neutral-600">
           Pulvinar elementum integer enim neque. Et netus et malesuada fames ac
           turpis. Lectus nulla at volutpat diam ut.
         </p>
@@ -39,7 +39,7 @@ export default function Features() {
             <span className="text-2xl">(no middle man)</span>
           </h3>
         </div>
-        <p className="pb-24 pl-[90px] pr-[30px] font-normal f-f-g-m pt-4 text-base text-neutral-600">
+        <p className="pb-16 pl-[90px] pr-[30px] font-normal f-f-g-m pt-4 text-base text-neutral-600">
           Pulvinar elementum integer enim neque. Et netus et malesuada fames ac
           turpis. Lectus nulla at volutpat diam ut.
         </p>
