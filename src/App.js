@@ -24,7 +24,7 @@ import Hero from "./Components/Hero/Hero";
 
 function App() {
   const user = useSelector((state) => state.user);
-console.log(user, "here is the user");
+  console.log(user, "here is the user");
   return (
     <>
       {/* <ForgotPassword/> */}
@@ -33,7 +33,8 @@ console.log(user, "here is the user");
       {/* <Chat/> */}
       {/* <SignUp/> */}
       {/* <Profile /> */}
-
+      <Header />
+      <HomeLayout />
       {user ? (
         <>
           <Navbar />
@@ -41,11 +42,7 @@ console.log(user, "here is the user");
               <Route path="/Profile" component={Profile} /> */}
         </>
       ) : (
-        <>
-          <Header />
-          <HomeLayout/>
-          
-        </>
+        <></>
       )}
       <Footer />
     </>
