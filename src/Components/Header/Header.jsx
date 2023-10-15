@@ -30,7 +30,12 @@ export default function Header() {
             <span className="text-2xl font-semibold text-blue-900">
               Username
             </span> */}
-            <spna className="font-bold text-xl f-f-g cursor-pointer">Register</spna>
+            <Link
+              to={"/register"}
+              className="font-bold text-xl f-f-g cursor-pointer"
+            >
+              Register
+            </Link>
           </div>
         </div>
       </div>

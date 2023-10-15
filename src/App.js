@@ -5,7 +5,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import HiringLayout from "./Components/HiringLayout";
 import LogIn from "./Components/LogIn/LogIn";
-import SignUp from "./Components/SignUp/SignUp";
+
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 import Footer from "./Components/Footer/Footer";
 import Profile from "./Components/Profile/Profile";
@@ -44,8 +44,8 @@ function App() {
         <>
           <Header />
 
-          {/* <Route exact path="/login" component={LogIn} />
-              <Route path="/register" component={SignUp} /> */}
+          {/* <Route exact path="/login" component={LogIn} />*/}
+          
         </>
       )}
       <Footer />
