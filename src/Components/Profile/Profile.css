@@ -1,0 +1,305 @@
+.profile-container {
+    display: flex;
+}
+.profile-sidebar-section {
+    flex-basis: 20%;
+    background-color: lightskyblue;
+    padding: 3rem;
+}
+.profile-editing-section {
+    flex: 1;
+}
+.profile-sidebar-card {
+    border: 1px solid #fff;
+    background-color: #fff;
+    box-shadow: 0 .3rem 1rem rgb(0 0 0 / 0.2);
+    border-radius: 12px;
+}
+.profile-user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+.profile-user-details > img {
+    height: 7rem;
+}
+.profile-user-details > p {
+    font-size: 1.5rem;
+    font-family: "GilroySemibold";
+    color: #101010;
+    margin-top: 1rem;
+}
+.side-nav {
+    margin-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 0;
+}
+
+.side-nav > li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.side-nav-link > img {
+    height: 3.5rem;
+    margin-right: 1rem;
+}
+.side-nav-link > span {
+    font-size: 1.2rem;
+    font-family: "NunitoBold";
+    color: #101010;
+    margin-left: 1rem;
+}
+/* .side-nav-item:hover span{
+    color: #fff;
+} */
+.side-nav-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #e5f0ff;
+    transform: scaleY(0);
+    transition: transform .2s,
+                width .4s cubic-bezier(1,0,0,1) .2s;
+}   
+.side-nav-item:hover::before,
+.side-nav-item-active::before
+{
+    transform: scaleY(1);
+    width: 100%;
+}
+.side-nav-item {
+    position: relative;
+    padding-left: 2rem;
+}
+.side-nav-link:link,
+.side-nav-link:visited
+{
+    position: relative;
+    z-index: 10;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+}
+.pen-icon {
+    font-size: 2rem;
+    color: #0f75bc;
+    margin-right: 1rem;
+}
+.profile-editing-section {
+    padding: 3rem;
+}
+.profile-editing-header {
+    display: flex;
+    align-items: center;
+}
+.edit-box-icon {
+    font-size: 3rem;
+    color: #0f75bc;
+    margin-right: 1rem;
+}
+.my-profile-text {
+    font-size: 2rem;
+    font-family: "GilroySemibold";
+    color: #0f75bc;
+}
+.profile-editing-card {
+    border: 1px solid #fff;
+    background-color: #fff;
+    margin-top: 3rem;
+    padding-top: 6rem;
+    box-shadow: 0 .3rem 1rem rgb(0 0 0 / 0.2);
+}
+.name-field-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.name-field-section > p {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #101010;
+    width: 25%;
+}
+.name-field-section > input {
+    padding: 1rem;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding-left: 1.5rem;
+}
+.country-field-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.country-field-section > p {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #101010;
+    width: 25%;
+}
+.country-select {
+    width: 53%;
+}
+.css-b62m3t-container {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #101010;
+}
+.email-field {
+    width: 53%;
+    position: relative;
+}
+.email-field > p {
+    font-size: 1rem;
+    font-family: "NunitoSemibold";
+    color: #938e8e;
+    display: flex;
+    justify-content: end;
+    margin-bottom: .5rem;
+}
+.email-field-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4rem;
+}
+.email-field-section > p {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #101010;
+    width: 25%;
+    margin-top: 2rem;
+}
+.email-field > input {
+    padding: 1rem;
+    width: 95%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding-left: 1.5rem;
+}
+.phone-field-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.phone-field-section > p {
+font-size: 1.5rem;
+font-family: "NunitoSemibold";
+color: #101010;
+width: 25%;
+margin-top: 2rem;
+}
+.phone-field > input {
+padding: 1rem;
+width: 95%;
+border: 1px solid #ccc;
+border-radius: .6rem;
+padding-left: 1.5rem;
+}
+.profile-edit-btn {
+    position: absolute;
+    top: 2.5rem;
+    right: .4rem;
+    font-size: 1rem;
+    font-family: "NunitoSemibold";
+    color: #fff;
+    background-color: #0f75bc;
+    border: 1px solid #0f75bc;
+    padding: .5rem 1rem;
+    border-radius: .6rem;
+    cursor: pointer;
+}
+.profile-edit-btn:hover {
+    background-color: #E5F0FF;
+    color: #0f75bc;
+    border: 1px solid #0f75bc;
+}
+.edit-pass {
+    display: flex;
+    align-items: center;
+    width: 53%;
+}
+.edit-pass > p {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #101010;
+    margin-right: 5rem  ;
+}
+.edit-pass > button {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #fff;
+    background-color: #0f75bc;
+    border: 1px solid #0f75bc;
+    padding: 1rem 1rem;
+    border-radius: .6rem;
+    cursor: pointer;
+}
+.edit-pass > button:hover {
+    background-color: #E5F0FF;
+    color: #0f75bc;
+    border: 1px solid #0f75bc;
+}
+.pass-field-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.pass-field-section > p {
+font-size: 1.5rem;
+font-family: "NunitoSemibold";
+color: #101010;
+width: 25%;
+}
+.profile-save-btn-container {
+    display: flex;
+    justify-content: end;
+    margin-right: 10rem;
+    margin-top: 7rem;
+    margin-bottom: 5rem;
+}
+.profile-save-btn {
+    font-size: 1.5rem;
+    font-family: "NunitoSemibold";
+    color: #fff;
+    background-color: #0f75bc;
+    border: 1px solid #0f75bc;
+    padding: 1rem 3rem;
+    border-radius: .6rem;
+    cursor: pointer;
+}
+.profile-save-btn:hover {
+    background-color: #E5F0FF;
+    color: #0f75bc;
+    border: 1px solid #0f75bc;
+}
+.profile-fields {
+    display: flex;
+    justify-content: center;
+}
+.profile-fields2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.side-nav-link {
+    position: relative;
+    z-index: 10;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+}

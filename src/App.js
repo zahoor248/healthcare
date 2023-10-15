@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import HomeLayout from "./Components/HomeLayout";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import Header from "./Components/Header/Header";
+import HiringLayout from "./Components/HiringLayout";
+import LogIn from "./Components/LogIn/LogIn";
+import SignUp from "./Components/SignUp/SignUp";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
+import Footer from "./Components/Footer/Footer";
+import Profile from "./Components/Profile/Profile";
+import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
+import Availability from "./Components/Availability/Availability";
+import Chat from "./Components/Chat/Chat";
+import "./Responsive.css";
+import Address from "./Components/Address/Address";
+import AllPros from "./Components/AllPros";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import cors from "cors";
+import { useSelect } from "@mui/base";
+import { useSelector } from "react-redux";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
+  const user = useSelector((state) => state.user);
+
+  console.log(user, "TEsting");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>   
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <ForgotPassword/> */}
+      {/* <ProfileDetails/> */}
+      {/* <Availability/> */}
+      {/* <Chat/> */}
+      {/* <SignUp/> */}
+      {/* <Profile /> */}
+
+      <HashRouter>
+        <Switch>
+          {user ? (
+            <>
+              <Navbar />
+              <Route path="/" component={HiringLayout} />
+              <Route path="/Profile" component={Profile} />
+            </>
+          ) : (
+            <>
+              <Header />
+
+              <Route exact path="/login" component={LogIn} />
+              <Route path="/register" component={SignUp} />
+            </>
+          )}
+        </Switch>
+        <Footer />
+      </HashRouter>
+    </>
   );
 }
 

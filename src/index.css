@@ -1,13 +1,147 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities
+
+
+html {
+  font-size: 62.5%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+@media only screen and (max-width: 5121px) {
+  html {
+    font-size: 250%;
+  }
+}
+
+@media only screen and (max-width: 3841px) {
+  html {
+    font-size: 190%;
+  }
+}
+
+@media only screen and (max-width: 2561px) {
+  html {
+    font-size: 120%;
+  }
+}
+
+@media only screen and (max-width: 1920px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media only screen and (max-width: 1800px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media only screen and (max-width: 1601px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media only screen and (max-width: 1425px) {
+  html {
+    font-size: 70%;
+  }
+}
+
+@media only screen and (max-width: 1281px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+@media only screen and (max-width: 1165px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media only screen and (max-width: 855px) {
+  html {
+    font-size: 40%;
+  }
+}
+
+@media only screen and (max-width: 821px) {
+  html {
+    font-size: 40%;
+  }
+}
+
+@media only screen and (max-width: 732px) {
+  html {
+    font-size: 35%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  html {
+    font-size: 38%;
+  }
+}
+
+@font-face {
+  font-family: "GilroySemibold";
+  src: local("GilroySemibold"),
+    url("./fonts/Gilroy/Gilroy-Semibold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "GilroyMedium";
+  src: local("GilroyMedium"),
+    url("./fonts/Gilroy/Gilroy-Medium.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "GilroyBold";
+  src: local("GilroyBold"),
+    url("./fonts/Gilroy/Gilroy-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "NunitoRegular";
+  src: local("NunitoRegular"),
+    url("./fonts/Nunito/NunitoSans-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "NunitoBold";
+  src: local("NunitoBold"),
+    url("./fonts/Nunito/NunitoSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "NunitoBoldItalic";
+  src: local("NunitoBoldItalic"),
+    url("./fonts/Nunito/NunitoSans-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "NunitoSemibold";
+  src: local("NunitoSemiBold"),
+    url("./fonts/Nunito/NunitoSans-SemiBold.ttf") format("truetype");
+  font-weight: bold;
 }

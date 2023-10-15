@@ -1,0 +1,482 @@
+
+/* @media only screen and (max-width: 414px) {
+    .hero-container {
+        height: 66.5vh;
+    }
+} */
+
+@media only screen and (max-width: 415px) {
+    .hero-container {
+        flex-direction: column;
+    }
+    .text-section {
+        width: 100%;
+        align-items: center;
+        margin-top: 3rem;
+    }
+    .text-section > h1 {
+        text-align: center;
+    }
+    .text-section > p {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-top: 4rem;
+    }
+    .image-section {
+        width: 100%;
+        position: relative;
+    }
+    .hero-image-container {
+        width: 94%;
+        
+    }
+    .hero-form {
+        margin: 0 auto;
+        margin-top: -2rem;
+        width: 90%;
+    }
+    .profession-field {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+    .profession-field > input {
+        margin-top: 1rem;
+        width: 92%;
+    }
+
+    .looking-field {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+    .looking-field > p {
+        margin-top: 1rem;
+    }
+    .looking-field > input {
+        margin-top: 1rem;
+        width: 92%;
+    }
+    .zip-field {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+    .zip-field > p {
+        margin-top: 1rem;
+    }
+    .zip-field > input {
+        margin-top: 1rem;
+        width: 92%;
+    }
+    .search-btn-container {
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .features-container {
+        margin-top: 8rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    .first-feature {
+        width: 45rem;
+        margin-bottom: 4rem;
+        margin-right: 0;
+    }
+    .card-header > h3 {
+        font-size: 2.5rem;
+        line-height: 4rem;
+        margin-left: 11rem;
+        margin-top: 3rem;
+        width: 74%;
+    }
+    .feature-desc {
+        font-size: 1.5rem;
+        width: 46%;
+        line-height: 2.5rem;
+        margin-left: 11rem;
+        margin-top: 2rem;
+    }
+    .card-header > img {
+        width: 9rem;
+        height: 9rem;
+        top: -1.5rem;
+    }
+    .about-container {
+        padding: 0px 4rem;
+    }
+    .about-section > p {
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+    .header-nav {
+        order: 1;
+        margin: 0 auto;
+    margin-top: 4rem;
+    }
+    .header-container {
+        flex-wrap: wrap;
+        height: inherit;
+        padding-top: 2.4rem;
+    }
+    .header-nav > li {
+        margin-right: 4.3rem;
+    margin-left: 4.3rem;
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .copyrights {
+        margin-bottom: .8rem;
+    }
+
+    /* Signup Page */
+
+    .login-container {
+        flex-wrap: wrap;
+    }
+    .signup-image-section {
+        display: none;
+    }
+    .login-credentials-section {
+        flex-basis: 100%;
+    }
+    .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+        top: -.8rem;
+    }
+
+    /* LogIn Page */
+
+    .login-image-section {
+        display: none;
+    }
+    .email-text-field > .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+        top: -.8rem;
+    }
+
+    /* Forgot Password Page */
+
+    .forgot-image-section {
+        display: none;
+    }
+
+    /* Hiring Layout Page */
+
+    .header-container {
+        padding: 2.4rem 2rem;
+    }
+    .logo-header {
+        height: 4.5rem;
+    }
+    .user-image {
+        height: 4.5rem;
+    }
+    .user-section > span {
+        font-size: 1.6rem !important;
+    }
+
+    .hiring-heading > h1 {
+        text-align: center;
+    }
+    .hiring-heading {
+        padding: 5rem 4rem;
+    }
+
+    /* Filter Sidebar */
+
+    .filter-sidebar {
+        width: 41rem;
+        border-radius: 12px;
+        border-right: none;
+    }
+    .tags-input-container {
+        width: 95%;
+        padding: 1rem;
+    }
+    .license-list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+    }
+    .license-selector {
+        width: 50%;
+        align-items: center;
+    }
+    .license-selector2 {
+        width: 50%;
+        align-items: center;
+    }
+    .css-187mznn-MuiSlider-root {
+        width: 34rem !important;
+    }
+    .filter-button {
+        width: 35rem;
+    }
+
+    /* Hiring Section */
+
+    .hiring-container {
+        flex-wrap: wrap;
+        padding: 5rem 4rem;
+    }
+    .card-map-container {
+        width: 41rem;
+    }
+    .hiring-card-section {
+        box-shadow: none;
+        padding: 5rem 0;
+        width: 5rem;
+    }
+    .professional-card {
+        width: 19rem;
+        padding-left: 0;
+    }
+    .user-details {
+        flex-direction: column;
+    }
+    .username-details {
+        text-align: center;
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+    .user-about-section {
+        margin-left: 1.5rem;
+    }
+    .view-btn-container {
+        padding-left: 1.5rem;
+    }
+    .pagi-icons {
+        display: none;
+    }
+
+    html {
+        font-size: 50%;
+    }
+
+    /* Profile Editing Page */
+
+    .profile-container {
+        flex-wrap: wrap;
+    }
+    .profile-sidebar-section {
+        flex-basis: 100%;
+    }
+    .side-nav-item {
+        padding-left: 0;
+        justify-content: center;
+    }
+    .name-field-section {
+        flex-direction: column;
+    }
+    .name-field-section > input {
+        width: 78%;
+        margin-top: 1.5rem;
+    }
+    .country-field-section {
+        flex-direction: column;
+    }
+    .country-select {
+        width: 85%;
+        margin-top: 1.5rem;
+    }
+    .name-field-section > p {
+        width: auto;
+    }
+    .country-field-section > p {
+        width: auto;
+    }
+    .email-field-section {
+        flex-direction: column;
+    }
+    .email-field-section > p {
+        width: auto;
+    }
+    .email-field {
+        width: 85%;
+    }
+    .email-field > input {
+        width: 93%;
+    }
+    .phone-field-section {
+        flex-direction: column;
+    }
+    .pass-field-section {
+        flex-direction: column;
+    }
+    .edit-pass {
+        width: 88%;
+        margin-top: 1.5rem;
+    }
+    .profile-save-btn-container {
+        justify-content: center;
+        margin-right: 0;
+    }
+
+    /* Modal */
+
+    .modal-contact-btn {
+        padding: 1rem 5rem;
+    }
+
+    /* Profile Details */
+
+    .profile-details-container {
+        flex-wrap: wrap;
+    }
+    .profile-about-text {
+        flex-basis: 100%;
+    }
+    .profile-working-hours {
+        flex-basis: 100%;
+    }
+    .date-selection-container {
+        flex-wrap: wrap;
+    }
+    .date-selection-container {
+        padding-left: 2rem;
+    }
+    .calendar-section {
+        padding: 0;
+    }
+    .profile-user-about {
+        flex-basis: 100%;
+    }
+    .contact-profile-btn {
+        margin-top: 0;
+    }
+    .about-text > h3 {
+        text-align: center;
+    }
+    .profile-column1 {
+        flex-basis: 35%;
+    }
+    .working-day-section {
+        justify-content: center;
+    }
+    .responsive-days {
+        flex-basis: 50%;
+    }
+    .responsive-hrs {
+        flex-basis: 50%;
+    }
+    .select-date-section {
+        flex-basis: 100%;
+    }
+    .responsive-fields {
+        flex-direction: column;
+    }
+    .month-selection {
+        width: 95%;
+    }
+    .responsive-days-start {
+        margin-left: 0 !important;
+        margin-top: 2rem;
+    }
+    .react-datepicker__input-container > input {
+        width: 100%;
+    }
+    .responsive-flex {
+        display: flex;
+    }
+    .responsive-days-end {
+        margin-left: 0 !important;
+        margin-top: 4.7rem !important;
+        margin-left: 5rem !important;
+    }
+    .start-days {
+        top: 3.6rem;
+    }
+    .price-container {
+        flex-direction: column;
+    }
+    .price-field {
+        width: 100%;
+    }
+    .price-field > input {
+        width: 85%;
+    }
+    .location-field {
+        width: 108%;
+        margin-top: 2rem;
+    }
+    .pro-btn-container {
+        margin-bottom: 2rem;
+    }
+    .slide1 {
+        width: 65%;
+    }
+    .avatar-img {
+        width: 11rem;
+        height: 11rem;
+    }
+    .border-b3 {
+        border-bottom: 1px solid #C2C9D4;
+        width: 100%;
+    }
+
+    /* Availability Page */
+
+    .appointment-sections {
+        flex-direction: column;
+    }
+    .standard-availability {
+        border-right: none;
+        width: 100%;
+    }
+    .booking-options {
+        width: 95%;
+    }
+    .booking-logo {
+        width: 34%;
+        margin-left: 3rem;
+    }
+    .vacation-update-btn {
+        margin-bottom: 3rem;
+    }
+
+    /* License Page */
+
+    .license-fields-container{
+        flex-direction: column;
+    }
+    .license-input {
+        width: 85%;
+        margin-bottom: 2rem !important;
+    }
+    .license-btn-container {
+        justify-content: center;
+        margin-right: 0;
+        margin-top: 1rem;
+    }
+    .license-detail {
+        flex-direction: column;
+    }
+    .license-del {
+        margin-right: 0;
+    }
+    .license-tbl-header {
+        margin-bottom: 1rem;
+    }
+    .license-edit-btn {
+        margin-bottom: 1rem;
+    }
+    .license-detail2 {
+        flex-direction: column;
+    }
+    .license-state-type {
+        width: 85%;
+        padding: 1.6rem;
+        margin-bottom: 2rem;
+    }
+    .license-picker > .datepicker-area {
+        width: 85%;
+        margin-bottom: 2rem;
+    }
+    .license-list-header {
+        display: none;
+    }
+
+  }
+
+ 
+
+  
