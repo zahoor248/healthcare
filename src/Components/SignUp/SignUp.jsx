@@ -66,6 +66,7 @@ export default function SignUp() {
 
   return (
     <div className="flex w-full h-screen overflow-auto items-center">
+      
       <div className="w-full gap-12 rounded-lg flex h-full">
         <div className="w-full bg-blue-200 h-full flex justify-center items-center">
           <img src={Slide1} className=" m-auto h-96 w-96" />

@@ -10,7 +10,7 @@ export default function Hero() {
         <div className="flex flex-col mb-auto relative">
           <div className="flex flex-col pb-40  ">
             <h1 className="text-6xl font-bold leading-[1.42] whitespace-nowrap">
-              Healthcare professionals <br/>
+              Healthcare professionals <br />
               <span>Ready to hire.</span>
             </h1>
             <p className="text-neutral-500 text-lg mt-5">
@@ -18,7 +18,7 @@ export default function Hero() {
               ac turpis. Lectus nulla at volutpat diam ut.
             </p>
           </div>
-          <div className="absolute -bottom-72 shadow-md">
+          <div className="absolute -bottom-72 shadow-md hover:scale-105 transition-all ease-in-out duration-500 hover:shadow-lg">
             {" "}
             <Form />
           </div>

@@ -7,7 +7,7 @@
   width: 100%;
   margin: auto;
 }
-body{
+body {
   overflow-x: hidden;
 }
 
@@ -66,4 +66,7 @@ body{
 }
 .f-f-g-s {
   font-family: "GilroySemibold", sans-serif;
+}
+.shadow-class {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
 }
