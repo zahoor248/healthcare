@@ -65,16 +65,16 @@ export default function SignUp() {
   //   const {posts} = post
 
   return (
-    <div className="login-container">
-      <div className="signup-image-section">
+    <div className="flex w-full">
+      <div className="w-full">
         <img src={Slide1} />
       </div>
-      <div className="login-credentials-section">
-        <div className="logo-container">
-          <img src={LogoImage} alt="healthcare logo image" />
+      <div className="w-full">
+        <div className="">
+          <img src={LogoImage} alt="" />
         </div>
 
-        <div className="login-hello-text">
+        <div className="">
           <h1>Hello</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
@@ -83,87 +83,87 @@ export default function SignUp() {
         </div>
 
         <div>
-          <div style={{ marginTop: "4rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="First Name"
               variant="outlined"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
-            <MdDriveFileRenameOutline className="email-icon" />
+            <MdDriveFileRenameOutline className="" />
           </div>
-          <div style={{ marginTop: "4rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="Last Name"
               variant="outlined"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <MdDriveFileRenameOutline className="email-icon" />
+            <MdDriveFileRenameOutline className="" />
           </div>
 
-          <div style={{ marginTop: "4rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="Email"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <MdAlternateEmail className="email-icon" />
+            <MdAlternateEmail className="" />
           </div>
 
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="Password"
               type="password"
               variant="outlined"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <BiLock className="email-icon" />
+            <BiLock className="" />
           </div>
 
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="Confirm Password"
               type="password"
               variant="outlined"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <BiLock className="email-icon" />
+            <BiLock className="" />
           </div>
 
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="Phone Number"
               variant="outlined"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-            <AiOutlinePhone className="email-icon" />
+            <AiOutlinePhone className="" />
           </div>
 
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div >
             <TextField
-              className="email-text-field"
+              className=""
               label="Address"
               variant="outlined"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <IoLocationOutline className="email-icon" />
+            <IoLocationOutline className="" />
           </div>
 
-          <div style={{ marginTop: "2rem", position: "relative" }}>
+          <div >
             <select
-              className="user-type"
+              className=""
               value={userType}
               onChange={(e) => setUserType(e.target.value)}
             >
@@ -173,20 +173,20 @@ export default function SignUp() {
             </select>
           </div>
 
-          <div className="login-btns">
-            <button className="login-btn" onClick={registrationHandler}>
+          <div className="">
+            <button className="" onClick={registrationHandler}>
               Sign Up
             </button>
-            <button className="signin-btn">
+            <button className="">
               <img src={GoogleIcon} alt="Google Logo" />
               Sign Up with Google
             </button>
           </div>
         </div>
 
-        <div className="footer-text">
+        <div className="">
           <p>
-            Have an account ? <span className="signup-text">Sign In</span>
+            Have an account ? <span className="">Sign In</span>
           </p>
         </div>
 
