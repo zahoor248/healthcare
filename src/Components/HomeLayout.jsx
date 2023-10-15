@@ -6,11 +6,11 @@ import Hero from './Hero/Hero';
 
 export default function HomeLayout() {
   return (
-    <>
+    <div className='overflow-x-hidden'>
       <Hero/>
-      <Form/>
+   
       <Features/>
       <About/>
-    </>
+    </div>
   )
 }

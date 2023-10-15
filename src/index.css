@@ -7,6 +7,9 @@
   width: 100%;
   margin: auto;
 }
+body{
+  overflow-x: hidden;
+}
 
 @font-face {
   font-family: "GilroySemibold";
