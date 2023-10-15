@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <div className=" bg-[#e5f0ff] flex py-12 pb-60">
       <div className="main-container flex justify-between">
-        <div className="flex flex-col mb-auto relative">
+        <div className="flex flex-col mb-auto relative">       
           <div className="flex flex-col pb-44 ">
             <h1 className="text-6xl font-bold leading-[1.42] whitespace-nowrap">
               Healthcare professionals <br />
