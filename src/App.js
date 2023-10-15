@@ -20,11 +20,11 @@ import cors from "cors";
 import { useSelect } from "@mui/base";
 import { useSelector } from "react-redux";
 import Navbar from "./Components/Navbar/Navbar";
+import Hero from "./Components/Hero/Hero";
 
 function App() {
   const user = useSelector((state) => state.user);
-
-  console.log(user, "TEsting");
+console.log(user, "here is the user");
   return (
     <>
       {/* <ForgotPassword/> */}
@@ -43,8 +43,7 @@ function App() {
       ) : (
         <>
           <Header />
-
-          {/* <Route exact path="/login" component={LogIn} />*/}
+          <Hero/>
           
         </>
       )}
