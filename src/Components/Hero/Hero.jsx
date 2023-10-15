@@ -18,7 +18,7 @@ export default function Hero() {
               ac turpis. Lectus nulla at volutpat diam ut.
             </p>
           </div>
-          <div className="absolute -bottom-72 shadow-md hover:scale-105 transition-all ease-in-out duration-500 hover:shadow-lg">
+          <div className="absolute -bottom-72 shadow-md hover:scale-105 transition-all ease-in-out duration-500 hover:shadow-lg w-full max-w-[700px]">
             {" "}
             <Form />
           </div>
@@ -27,7 +27,7 @@ export default function Hero() {
           <img src={HeroImage} alt="Hero Image" />
         </div>
       </div>
-      <div className="!absolute mt-9 -right-0 w-[905px]">
+      <div className="!absolute mt-[115px] -right-0 w-[810px]">
         <img src={HeroImage} alt="Hero Image" />
       </div>
     </div>
