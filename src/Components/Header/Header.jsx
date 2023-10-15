@@ -7,16 +7,17 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <div className="  bg-[#e5f0ff] ">
-      <div className="main-container py-4 md:py-8 px-4 md:px-20 items-center  flex justify-between">
+      <div className="main-container py-4 md:py-[30px] px-3 items-center  flex justify-between">
         <div>
-          <img className="w-72  cursor-pointer" src={Logo} alt="Logo" />
+          <img className="w-[276px]  cursor-pointer" src={Logo} alt="Logo" />
         </div>
-        <div className="flex gap-16">
-          <div className=" flex items-center gap-8">
-            <span className=" text-lg font-normal text-neutral-800">
+        <div className="flex gap-24">
+          <div className="f-f-g-m flex items-center gap-10">
+            <span className=" text-lg font-normal text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
               For Owners
             </span>
-            <span className="text-lg font-medium text-gray-700">
+
+            <span className="text-lg font-medium text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
               For Workers
             </span>
           </div>
@@ -29,7 +30,7 @@ export default function Header() {
             <span className="text-2xl font-semibold text-blue-900">
               Username
             </span> */}
-            Register
+            <spna className="font-bold text-xl f-f-g cursor-pointer">Register</spna>
           </div>
         </div>
       </div>

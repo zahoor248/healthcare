@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-container{
+.main-container {
   max-width: 1320px;
   width: 100%;
   margin: auto;
 }
-
 
 @font-face {
   font-family: "GilroySemibold";
@@ -56,3 +55,12 @@
   font-weight: bold;
 }
 
+.f-f-g {
+  font-family: "GilroyBold", sans-serif;
+}
+.f-f-g-m {
+  font-family: "GilroyMedium", sans-serif;
+}
+.f-f-g-s {
+  font-family: "GilroySemibold", sans-serif;
+}

@@ -16,7 +16,6 @@ import "./Responsive.css";
 import Address from "./Components/Address/Address";
 import AllPros from "./Components/AllPros";
 
-
 import cors from "cors";
 import { useSelect } from "@mui/base";
 import { useSelector } from "react-redux";
@@ -35,23 +34,21 @@ function App() {
       {/* <SignUp/> */}
       {/* <Profile /> */}
 
-     
-          {user ? (
-            <>
-              <Navbar />
-              {/* <Route path="/" component={HiringLayout} />
+      {user ? (
+        <>
+          <Navbar />
+          {/* <Route path="/" component={HiringLayout} />
               <Route path="/Profile" component={Profile} /> */}
-            </>
-          ) : (
-            <>
-              <Header />
+        </>
+      ) : (
+        <>
+          <Header />
 
-              {/* <Route exact path="/login" component={LogIn} />
+          {/* <Route exact path="/login" component={LogIn} />
               <Route path="/register" component={SignUp} /> */}
-            </>
-          )}
-     
-   
+        </>
+      )}
+      <Footer />
     </>
   );
 }
