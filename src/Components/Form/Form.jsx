@@ -9,7 +9,7 @@ export default function Form() {
     const [zipCode, setZipCode] = useState('');
 
   return (
-              <div className='hero-form z-50 absolute'>
+              <div className='bg-white rounded-xl z-50 '>
                 <div className='p-9'>
                     <div className='profession-field'>
                         <p>I am a</p>
