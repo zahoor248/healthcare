@@ -2,101 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  font-size: 62.5%;
+.main-container{
+  max-width: 1320px;
+  width: 100%;
+  margin: auto;
 }
 
-*,
-*::after,
-*::before {
-  padding: 0;
-  margin: 0;
-  box-sizing: inherit;
-}
-
-@media only screen and (max-width: 5121px) {
-  html {
-    font-size: 250%;
-  }
-}
-
-@media only screen and (max-width: 3841px) {
-  html {
-    font-size: 190%;
-  }
-}
-
-@media only screen and (max-width: 2561px) {
-  html {
-    font-size: 120%;
-  }
-}
-
-@media only screen and (max-width: 1920px) {
-  html {
-    font-size: 90%;
-  }
-}
-
-@media only screen and (max-width: 1800px) {
-  html {
-    font-size: 80%;
-  }
-}
-
-@media only screen and (max-width: 1601px) {
-  html {
-    font-size: 75%;
-  }
-}
-
-@media only screen and (max-width: 1425px) {
-  html {
-    font-size: 70%;
-  }
-}
-
-@media only screen and (max-width: 1281px) {
-  html {
-    font-size: 60%;
-  }
-}
-
-@media only screen and (max-width: 1165px) {
-  html {
-    font-size: 55%;
-  }
-}
-
-@media only screen and (max-width: 1025px) {
-  html {
-    font-size: 50%;
-  }
-}
-
-@media only screen and (max-width: 855px) {
-  html {
-    font-size: 40%;
-  }
-}
-
-@media only screen and (max-width: 821px) {
-  html {
-    font-size: 40%;
-  }
-}
-
-@media only screen and (max-width: 732px) {
-  html {
-    font-size: 35%;
-  }
-}
-
-@media only screen and (max-width: 640px) {
-  html {
-    font-size: 38%;
-  }
-}
 
 @font-face {
   font-family: "GilroySemibold";
@@ -144,3 +55,4 @@ html {
     url("./fonts/Nunito/NunitoSans-SemiBold.ttf") format("truetype");
   font-weight: bold;
 }
+
