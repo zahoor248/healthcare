@@ -65,103 +65,99 @@ export default function SignUp() {
   //   const {posts} = post
 
   return (
-    <div className="flex w-full">
-      <div className="w-full">
-        <img src={Slide1} />
+    <div className="flex w-full h-full">
+      <div className="w-full h-full bg-blue-100">
+        <img src={Slide1} className=" m-auto h-96 w-96"/>
       </div>
-      <div className="w-full">
-        <div className="">
-          <img src={LogoImage} alt="" />
-        </div>
-
-        <div className="">
-          <h1>Hello</h1>
+      <div className="w-full h-full flex flex-col justify-center items-center mx-auto">
+        <div className="w-full flex flex-col gap-4 justify-center items-center">
+          <h1 className="text-4xl font-semibold text-neutral-900">Hello</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
             dolor sit amet consectetur adipisicing elit.{" "}
           </p>
         </div>
 
-        <div>
-          <div >
+        <div className="w-full max-w-[340px] mx-auto">
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="First Name"
               variant="outlined"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
-            <MdDriveFileRenameOutline className="" />
+            <MdDriveFileRenameOutline className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
-          <div >
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="Last Name"
               variant="outlined"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <MdDriveFileRenameOutline className="" />
+            <MdDriveFileRenameOutline className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
 
-          <div >
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="Email"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <MdAlternateEmail className="" />
+            <MdAlternateEmail className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
 
-          <div >
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="Password"
               type="password"
               variant="outlined"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <BiLock className="" />
+            <BiLock className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
 
-          <div >
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="Confirm Password"
               type="password"
               variant="outlined"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <BiLock className="" />
+            <BiLock className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
 
-          <div >
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="Phone Number"
               variant="outlined"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-            <AiOutlinePhone className="" />
+            <AiOutlinePhone className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
 
-          <div >
+          <div className="relative w-full">
             <TextField
-              className=""
+              className="w-full"
               label="Address"
               variant="outlined"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <IoLocationOutline className="" />
+            <IoLocationOutline className="absolute inset-0 my-auto ml-auto right-4" />
           </div>
 
-          <div >
+          <div className="w-full border px-5 py-4 border-neutral-400">
             <select
               className=""
               value={userType}
