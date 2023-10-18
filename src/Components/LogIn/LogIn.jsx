@@ -74,12 +74,12 @@ export default function LogIn() {
   return (
     <div className="flex flex-col w-full h-screen overflow-auto items-center ">
       {/* <Header /> */}
-      <div className="flex w-full h-full ">
-        <div className="bg-[#4169e1] flex items-center justify-center w-[50%]">
+      <div className="flex w-full justify-center h-full ">
+        <div className="bg-[#4169e1] hidden md:flex items-center justify-center w-[50%]">
           <img src={Slide2} className="w-[500px]" />
         </div>
 
-        <div className=" flex flex-col items-start justify-center  p-40 w-[50%]">
+        <div className=" flex flex-col items-start justify-center p-0 md:p-10 lg:p-20 xl:p-40 w-[50%]">
           <div class="">
             <a
               class="flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
