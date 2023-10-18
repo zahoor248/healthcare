@@ -65,10 +65,10 @@ export default function Hiring() {
     <>
       <div className="hiring-heading">
         <h1 className="text-2xl font-bold">
-          Healthcare Professionals Ready to Hire.
+          Healthcare Professionals Ready to Hirexx.
         </h1>
       </div>
-      <div className="grid grid-cols-12 gap-4">
+      {/* <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12">
           <div className="hiring-container">
             <div className="filter-sidebar">
@@ -120,7 +120,7 @@ export default function Hiring() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
