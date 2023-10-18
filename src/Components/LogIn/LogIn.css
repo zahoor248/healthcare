@@ -2,17 +2,7 @@
     display: flex;
     padding: 2.5rem;
 }
-.login-image-section {
-    flex-basis: 50%;
-    background-color: royalblue;
-    border-radius: 12px 0 0 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.login-image-section > img {
-    height: 50rem;
-}
+
 .login-credentials-section {
     flex-basis: 50%;
     background-color: #eee;
