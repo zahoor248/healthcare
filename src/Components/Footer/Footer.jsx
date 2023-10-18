@@ -5,16 +5,30 @@ import { BsDot } from "react-icons/bs";
 export default function Footer() {
   return (
     <div className="bg-[#10274f]">
-      <div className="main-container flex text-white justify-between py-8">
-        <p className="text-white text-base">
+      <div className="main-container flex text-white items-center justify-between py-8">
+        <p className="text-white text-xs sm:text-base">
           © 2023 HealthcareUp. All rights reserved.
         </p>
-        <ul className="flex items-center gap-2 text-base">
-          <li style={{ cursor: "pointer" }}>Terms of Use</li>
-          <li>
-            <BsDot className="text-lg" />
+        <ul className="flex flex-col sm:flex-row items-center sm:gap-2 gap-1 text-xs sm:text-base">
+          <li className="flex items-center" style={{ cursor: "pointer" }}>
+            {" "}
+            <span>
+              {" "}
+              <BsDot className="text-lg  sm:hidden" />
+            </span>{" "}
+            Terms of Use
           </li>
-          <li style={{ cursor: "pointer" }}>Privacy Policy</li>
+          <li>
+            <BsDot className="text-lg hidden sm:block" />
+          </li>
+          <li className="flex items-center" style={{ cursor: "pointer" }}>
+            {" "}
+            <span>
+              {" "}
+              <BsDot className="text-lg  sm:hidden" />
+            </span>{" "}
+            Privacy Policy
+          </li>
         </ul>
       </div>
     </div>

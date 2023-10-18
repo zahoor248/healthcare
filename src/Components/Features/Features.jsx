@@ -6,7 +6,7 @@ import YellowShape from "../../assets/images/yellow-shape.png";
 
 export default function Features() {
   return (
-    <div className="main-container gap-3 flex justify-between pt-52">
+    <div className="main-container flex-col lg:flex-row  lg:items-stretch items-center  gap-8 md:gap-3 flex justify-between pt-32 lg:pt-52">
       <div className="border-2 border-[#C2C9D4] rounded-tl-[100px] max-w-[416px] transition-all ease-in-out duration-400 hover:shadow-md">
         <div className="">
           <img src={BlueShape} alt="Blue Color Shape" />
