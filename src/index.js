@@ -14,6 +14,7 @@ import "./fonts/Nunito/NunitoSans-BoldItalic.ttf";
 import "./fonts/Nunito/NunitoSans-SemiBold.ttf";
 import store from "../src/Store/Store";
 import SignUp from "./Components/SignUp/SignUp";
+import LogIn from "./Components/LogIn/LogIn";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/register" element={<SignUp/>} />
+          <Route path="/login" element={<LogIn/>} />
         </Routes>
       </BrowserRouter>
     </Provider>
