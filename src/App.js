@@ -34,8 +34,8 @@ function App() {
       {/* <SignUp/> */}
       {/* <Profile /> */}
       <Header />
-      {/* <HomeLayout /> */}
-      <HiringLayout />
+      <HomeLayout />
+    
       {user ? (
         <>
           <Navbar />
