@@ -38,6 +38,17 @@ export default function SignUp() {
   // const [post, setPost] = useState([]);
 
   const registrationHandler = async () => {
+    if (
+      firstName == "" ||
+      lastName == "" ||
+      phoneNumber == "" ||
+      email == "" ||
+      password == ""
+    ) {
+      setError("Please fill the above fields");
+      return
+    }
+    setLoading(true);
     let data = {
       type: "pro",
       firstname: firstName,
@@ -53,9 +64,11 @@ export default function SignUp() {
         setError("");
         dispatch(setUser(response.user));
         navigate("/listings");
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
         setError(error?.response?.data?.data);
       });
   };
