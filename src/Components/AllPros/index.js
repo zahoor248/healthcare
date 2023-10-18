@@ -9,7 +9,7 @@ function ListingComponent() {
           <div className="row">
             <div className="col-12">
               <div className="listing-banner">
-                <h2>Healthcare Professionals Ready to Hire.</h2>
+                <h2>Healthcare Professionals Ready to Hirexx.</h2>
               </div>
             </div>
           </div>
