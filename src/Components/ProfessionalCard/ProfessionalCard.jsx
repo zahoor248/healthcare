@@ -24,102 +24,85 @@ export default function ProfessionalCard({ data }) {
       <div className="grid grid-cols-3 gap-8 mt-16">
         {data.map((item, index) => {
           return (
-          
-              <div className="shadow-class rounded-xl w-full">
-                <div className="verify-badge">
+            <div className="shadow-class rounded-xl w-full">
+              <div className="verify-badge">
+                <img
+                  src={require("../../assets/images/verified-badge.png")}
+                  alt="Verification Badge"
+                />
+              </div>
+              <div className="flex flex-col p-10">
+                <div className="flex items-center">
                   <img
-                    src={require("../../assets/images/verified-badge.png")}
-                    alt="Verification Badge"
+                    src={
+                      item.photo_url
+                        ? item.photo_url
+                        : require("../../assets/images/avatar.png")
+                    }
+                    width={55}
+                    height={32}
+                    className="rounded-full object-cover w-16 h-16 "
+                    alt="User Image"
                   />
+                  <div className="username-details">
+                    <p className="text-neutral-700 font-bold text-xl capitalize">
+                      {item.firstname} {item.lastname}
+                    </p>
+                    <p className="card-designation">{item.designation}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col p-10">
-                  <div className="flex items-center">
-                    <img
-                      src={
-                        item.photo_url
-                          ? item.photo_url
-                          : require("../../assets/images/avatar.png")
-                      }
-                      width={55}
-                      height={32}
-                      className="rounded-full object-cover w-16 h-16 "
-                      alt="User Image"
-                    />
-                    <div className="username-details">
-                      <p className="text-neutral-700 font-bold text-xl">
-                        {item.firstname} {item.lastname}
-                      </p>
-                      <p className="card-designation">{item.designation}</p>
-                    </div>
-                  </div>
 
-                  <div className="user-about-section">
-                    <div className="user-rate">
-                      <ul>
-                        <li>
-                          <span
-                            style={{ color: "#1C75BC", marginRight: ".5rem" }}
-                          >
-                            Rates:
-                          </span>{" "}
-                          <span
-                            style={{
-                              color: "#10274F",
-                              fontSize: "1.2rem",
-                              fontFamily: "NunitoBold",
-                            }}
-                          >
-                            {item.pro_profile
-                              ? item.pro_profile.hourly_rate
-                              : "0"}
-                          </span>
-                        </li>
-                        <li>
-                          <span
-                            style={{ color: "#BE1E2D", marginRight: ".5rem" }}
-                          >
-                            Radius:
-                          </span>{" "}
-                          <span
-                            style={{
-                              color: "#10274F",
-                              fontSize: "1.2rem",
-                              fontFamily: "NunitoBold",
-                            }}
-                          >
-                            {item.radius}
-                          </span>
-                        </li>
-                        <li>
-                          <span
-                            style={{ color: "#10274F", marginRight: ".5rem" }}
-                          >
-                            Ratings:
-                          </span>{" "}
-                          <span
-                            style={{
-                              color: "#F2BC27",
-                              fontSize: "1.2rem",
-                              display: "flex",
-                            }}
-                          >
-                            {item.rating}
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
+                <div className="flex flex-col py-6 gap-3">
+                  <div>
+                    <span style={{ color: "#1C75BC", marginRight: ".5rem" }}>
+                      Rates:
+                    </span>{" "}
+                    <span className="text-neutral-700 font-medium">
+                      {item.pro_profile
+                        ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
+                        : "0"}
+                    </span>
                   </div>
-
-                  <div className="w-full">
-                    <button
-                      className=" py-3 border-neutral-500 border w-full"
-                      onClick={handleShow}
+                  <div>
+                    <span style={{ color: "#BE1E2D", marginRight: ".5rem" }}>
+                      Radius:
+                    </span>{" "}
+                    <span
+                      style={{
+                        color: "#10274F",
+                        fontSize: "1.2rem",
+                        fontFamily: "NunitoBold",
+                      }}
                     >
-                      View Details
-                    </button>
+                      {item.radius}
+                    </span>
+                  </div>
+                  <div>
+                    <span style={{ color: "#10274F", marginRight: ".5rem" }}>
+                      Ratings:
+                    </span>{" "}
+                    <span
+                      style={{
+                        color: "#F2BC27",
+                        fontSize: "1.2rem",
+                        display: "flex",
+                      }}
+                    >
+                      {item.rating}
+                    </span>
                   </div>
                 </div>
-                {/* 
+
+                <div className="w-full">
+                  <button
+                    className=" py-3 border-neutral-500 border hover:border-neutral-700 transition-all ease-in-out duration-700 rounded-md hover:bg-neutral-100 w-full"
+                    onClick={handleShow}
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+              {/* 
                 <Modal
                   className="pro-details-modal"
                   show={show}
@@ -226,8 +209,7 @@ export default function ProfessionalCard({ data }) {
                     <ModalReview />
                   </div>
                 </Modal> */}
-              </div>
-          
+            </div>
           );
         })}
       </div>
