@@ -137,7 +137,7 @@ export default function SignUp() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     placeholder="First Name"
-                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                   />
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default function SignUp() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     placeholder="Last Name"
-                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                   />
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default function SignUp() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Please Enter Email"
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
               </div>
             </div>
@@ -178,7 +178,7 @@ export default function SignUp() {
                   type="number"
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="Enter Phone Number"
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
               </div>
             </div>
@@ -192,11 +192,11 @@ export default function SignUp() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Please Enter Password"
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
                 {showPassword ? (
                   <svg
-                    class="w-7 h-7 text-neutral-700 absolute top-[20px] right-4"
+                    class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     onClick={() => setShowPassword(!showPassword)}
                     width="24"
                     height="24"
@@ -228,7 +228,7 @@ export default function SignUp() {
                 ) : (
                   <svg
                     onClick={() => setShowPassword(!showPassword)}
-                    class="w-7 h-7 text-neutral-700 absolute top-[20px] right-4"
+                    class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -253,11 +253,11 @@ export default function SignUp() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Please Enter Password"
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
                 {showPassword ? (
                   <svg
-                    class="w-7 h-7 text-neutral-700 absolute top-[20px] right-4"
+                    class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     onClick={() => setShowPassword(!showPassword)}
                     width="24"
                     height="24"
@@ -289,7 +289,7 @@ export default function SignUp() {
                 ) : (
                   <svg
                     onClick={() => setShowPassword(!showPassword)}
-                    class="w-7 h-7 text-neutral-700 absolute top-[20px] right-4"
+                    class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -305,7 +305,7 @@ export default function SignUp() {
               </div>
             </div>
           </div>
-          <div className="pt-12 w-full relative">
+          <div className="pt-10 w-full relative">
             <span className="absolute bottom-16 text-red-600 text-sm">
               {error}
             </span>

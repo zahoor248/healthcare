@@ -17,21 +17,27 @@ const TagSelector = () => {
   }
 
   return (
-    <div className="tags-input-container">
+    <div className="w-full">
       {tags.map((tag, index) => (
-        <div className="tag-item" key={index}>
+        <div className="" key={index}>
           <span className="text">{tag}</span>
           <span className="close" onClick={() => removeTag(index)}>
             &times;
           </span>
         </div>
       ))}
-      <input
-        onKeyDown={handleKeyDown}
-        type="text"
-        className="tags-input"
-        placeholder="Type something"
-      />
+
+      {/* <p className="text-base/none pb-2 font-normal text-neutral-600">
+          Email
+        </p> */}
+      <div className=" w-full">
+        <input
+          onKeyDown={handleKeyDown}
+          type="text"
+          placeholder="Enter Tags"
+          className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+        />
+      </div>
     </div>
   );
 };

@@ -10,17 +10,19 @@ import { POST } from "../../Api/Post";
 import { LOGIN } from "../../Api/EndPoints";
 import { setUser } from "../../Store/Actions/Actions";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 // import { GoogleLogin } from "react-google-login";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import Header from "../Header/Header";
+
 // import { Alert } from "react-bootstrap";
 
 export default function LogIn() {
   //   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const [email, setEmail] = useState("webbus@yopmail.com");
   const [password, setPassword] = useState("Faraz@123");
@@ -48,7 +50,7 @@ export default function LogIn() {
             }
 
             dispatch(setUser(response.user));
-
+            console.log(user, "here is login");
             localStorage.setItem("User", JSON.stringify(response.user));
             navigate("/listings");
             // AsyncStorage.setItem('User', JSON.stringify(response.user));
@@ -121,7 +123,7 @@ export default function LogIn() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Please Enter Password"
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
               </div>
             </div>
@@ -135,11 +137,11 @@ export default function LogIn() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Please Enter Password"
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-4 border border-[#C2C9D4] rounded w-full"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
                 {showPassword ? (
                   <svg
-                    class="w-7 h-7 text-neutral-700 absolute top-[20px] right-4"
+                    class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     onClick={() => setShowPassword(!showPassword)}
                     width="24"
                     height="24"
@@ -171,7 +173,7 @@ export default function LogIn() {
                 ) : (
                   <svg
                     onClick={() => setShowPassword(!showPassword)}
-                    class="w-7 h-7 text-neutral-700 absolute top-[20px] right-4"
+                    class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -202,7 +204,7 @@ export default function LogIn() {
             </div>
           </div>
 
-          <div className="pt-12 w-full">
+          <div className="pt-10 w-full">
             <button
               className="bg-[#10274F] text-white w-full py-3 rounded-xl transition-all ease-in-out duration-500 hover:bg-[#0d2041] hover:shadow-lg border hover:border hover:border-[#10274F]"
               onClick={() => !loading && loginHandler()}

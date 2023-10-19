@@ -3,8 +3,11 @@ import React from "react";
 import Logo from "../../assets/images/logo-image.png";
 import User from "../../assets/images/avatar.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const user = useSelector((state) => state.user);
+  console.log(user, "HERE IS THE USER");
   return (
     <div className="  bg-[#e5f0ff] w-full ">
       <div className="main-container w-full py-4 md:py-[30px] px-3 items-center  flex justify-between">

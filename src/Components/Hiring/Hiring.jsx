@@ -7,6 +7,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { getAllFav, getAllPros } from "../../Store/Actions/Actions";
+import Header from "../Header/Header";
 export default function Hiring() {
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
@@ -1722,23 +1723,18 @@ export default function Hiring() {
 
   return (
     <>
-      <div className="hiring-heading">
-        <h1 className="text-2xl font-bold">
-          Healthcare Professionals Ready to Hire.
-        </h1>
-      </div>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12">
-          <div className="hiring-container">
-            <div className="filter-sidebar">
-              <Sidebar
-                data={data}
-                filteredData={filteredData}
-                setFilteredData={setFilteredData}
-              />
-            </div>
+      <Header />
+      <div className="flex flex-row w-full px-32">
+        <div className="flex w-full   shadow-class p-14 rounded-2xl">
+          <div className="">
+            <Sidebar
+              data={data}
+              filteredData={filteredData}
+              setFilteredData={setFilteredData}
+            />
+          </div>
 
-            {/* <div
+          {/* <div
               className="modal fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto"
               id="staticBackdrop"
             >
@@ -1756,29 +1752,28 @@ export default function Hiring() {
                 </div>
               </div>
             </div> */}
-            <div className="hiring-card-section">
-              <div className="card-section-header flex justify-between items-center">
-                <div className="sort-by">
-                  <p>Sort by:</p>
-                  <select
-                    className="sort-options"
-                    value={filter}
-                    onChange={(e) => setFilteredData(e.target.value)}
-                  >
-                    <option>Hourly Rate</option>
-                    <option>Daily Rate</option>
-                  </select>
-                </div>
-
-                <div className="pagi-icons flex items-center">
-                  <IoIosArrowDropleft className="mr-2" />
-                  <IoIosArrowDropright />
-                </div>
+          <div className="pl-14 w-full">
+            <div className="card-section-header flex justify-between items-center">
+              <div className="flex gap-2">
+                <p>Sort by:</p>
+                <select
+                  className="bg-blue-400 hover:bg-blue-500 transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
+                  value={filter}
+                  onChange={(e) => setFilteredData(e.target.value)}
+                >
+                  <option>Hourly Rate</option>
+                  <option>Daily Rate</option>
+                </select>
               </div>
 
-              <div>
-                <ProfessionalCard data={filteredData} />
-              </div>
+              {/* <div className="pagi-icons flex items-center">
+                <IoIosArrowDropleft className="mr-2" />
+                <IoIosArrowDropright />
+              </div> */}
+            </div>
+
+            <div>
+              <ProfessionalCard data={filteredData} />
             </div>
           </div>
         </div>

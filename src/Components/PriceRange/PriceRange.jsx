@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import './PriceRange.css'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import "./PriceRange.css";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -15,13 +15,20 @@ export default function PriceRange() {
   };
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box>
       <Slider
-        getAriaLabel={() => 'Temperature range'}
+        getAriaLabel={() => "Temperature range"}
         value={value}
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
+        sx={{
+          width: '90%',
+          marginTop: "20px",
+          "& .MuiSlider-thumb": {
+            borderRadius: "4px",
+          },
+        }}
       />
     </Box>
   );

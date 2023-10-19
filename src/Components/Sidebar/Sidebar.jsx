@@ -56,54 +56,46 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   };
 
   return (
-    <div className="sidebar-container">
-      <div className="filter-head">
-        <img className="filter-head-img" src={FilterIcon} alt="filter icon" />
-        <p className="filter-text">Filters</p>
+    <div className="w-full min-w-[400px] ">
+      <div className="flex pb-3 items-center gap-2">
+        <img className="w-4 h-4" src={FilterIcon} alt="filter icon" />
+        <p className=" text-lg">Filters</p>
       </div>
 
-      <div className="border-filter"></div>
+      <div className="border-b"></div>
 
-      <div className="tag-section">
-        <div className="tags">
-          <p className="tag-text">Tags</p>
-        </div>
+      <div className=" pt-8">
+        <p className="text-lg pb-2">Tags</p>
 
-        <div className="tag-selector">
-          <TagSelector />
-        </div>
+        <TagSelector />
       </div>
 
-      <div className="license-section">
-        <div className="tags">
-          <p className="license-text">License</p>
-        </div>
+      <div className="pt-8">
+        <p className="text-lg pb-2">License Type</p>
+
         {/* All licences list */}
         {licenses.map((license, key) => (
-          <div
-            className="license-selector2 flex items-center cursor-default"
-            key={key}
-          >
+          <div className=" flex items-center cursor-default" key={key}>
             <input
-              className="check-box cursor-pointer"
               type="checkbox"
               onChange={() => handleFilterByLicense(license)}
               value={filterConditions.license.includes(license) ? true : false}
-            />
-            <p className="license1">{license}</p>
+              class="ui-checkbox"
+            ></input>
+            {/* <input className="check-box cursor-pointer" type="checkbox" /> */}
+            <p className="text-neutral-600 px-3 text-lg">{license}</p>
           </div>
         ))}
       </div>
 
-      <div className="price-section">
-        <div className="tags">
-          <p className="price-text">Hourly Rate</p>
-        </div>
+      <div className=" pt-8">
+        <p className="text-lg">Hourly Rate</p>
+
         <PriceRange />
       </div>
 
-      <div className="refine-btn-container">
-        <button className="filter-button" onClick={filterData}>
+      <div className="pt-8">
+        <button className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white " onClick={filterData}>
           Refine
         </button>
       </div>
