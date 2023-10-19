@@ -46,7 +46,7 @@ export default function SignUp() {
       password == ""
     ) {
       setError("Please fill the above fields");
-      return
+      return;
     }
     setLoading(true);
     let data = {
@@ -127,8 +127,8 @@ export default function SignUp() {
           </div>
 
           <div className="w-full gap-4 flex flex-col ">
-            <div className="pt-14 flex gap-3">
-              <div>
+            <div className="pt-14 flex gap-3 w-full">
+              <div className="w-full">
                 <p className="text-base/none pb-2 font-normal text-neutral-600">
                   First Name
                 </p>
@@ -141,7 +141,7 @@ export default function SignUp() {
                   />
                 </div>
               </div>
-              <div>
+              <div className="w-full">
                 <p className="text-base/none pb-2 font-normal text-neutral-600">
                   Last Name
                 </p>
