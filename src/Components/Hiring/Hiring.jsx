@@ -1723,9 +1723,14 @@ export default function Hiring() {
 
   return (
     <>
-      <Header />
-      <div className="flex flex-row w-full px-32">
-        <div className="flex w-full   shadow-class p-14 rounded-2xl">
+      <Header  />
+      <div className=" bg-[#e5f0ff] pb-40 flex ">
+        <h1 className="lg:text-4xl px-32 md:text-5xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
+          Healthcare professionals Ready to hire.
+        </h1>
+      </div>
+      <div className="flex  -mt-28  flex-row w-full px-32">
+        <div className="flex w-full bg-white  shadow-class p-14 rounded-2xl">
           <div className="">
             <Sidebar
               data={data}

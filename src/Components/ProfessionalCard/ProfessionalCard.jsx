@@ -12,25 +12,32 @@ import VerifiedUser from "../../assets/images/icon-verified.png";
 // import ReadMoreText from "../ReadMoreText/ReadMoreText";
 import ModalReview from "../ModalReview/ModalReview";
 import ReactPaginate from "react-paginate";
+import { Modal } from "@mui/base";
 
 export default function ProfessionalCard({ data }) {
   const [show, setShow] = useState(false);
+  const [profileData, setProfileData] = useState(null);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (item) => {
+    setShow(true);
+    setProfileData(item);
+  };
 
   const AllPros = () => {
     return (
-      <div className="grid grid-cols-3 gap-8 mt-16">
+      <div className="grid grid-cols-3  gap-8 mt-16">
         {data.map((item, index) => {
           return (
-            <div className="shadow-class rounded-xl w-full">
-              <div className="verify-badge">
-                <img
-                  src={require("../../assets/images/verified-badge.png")}
-                  alt="Verification Badge"
-                />
-              </div>
+            <div className="shadow-class hover:scale-105 transition-all ease-in-out duration-500 rounded-xl w-full">
+              {item.verified != "no" && (
+                <div className="verify-badge">
+                  <img
+                    src={require("../../assets/images/verified-badge.png")}
+                    alt="Verification Badge"
+                  />
+                </div>
+              )}
               <div className="flex flex-col p-10">
                 <div className="flex items-center">
                   <img
@@ -54,9 +61,7 @@ export default function ProfessionalCard({ data }) {
 
                 <div className="flex flex-col py-6 gap-3">
                   <div>
-                    <span style={{ color: "#1C75BC", marginRight: ".5rem" }}>
-                      Rates:
-                    </span>{" "}
+                    <span className="text-base text-blue-600">Rates:</span>{" "}
                     <span className="text-neutral-700 font-medium">
                       {item.pro_profile
                         ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
@@ -67,28 +72,34 @@ export default function ProfessionalCard({ data }) {
                     <span style={{ color: "#BE1E2D", marginRight: ".5rem" }}>
                       Radius:
                     </span>{" "}
-                    <span
-                      style={{
-                        color: "#10274F",
-                        fontSize: "1.2rem",
-                        fontFamily: "NunitoBold",
-                      }}
-                    >
-                      {item.radius}
+                    <span className="text-neutral-700 font-medium">
+                      {item.pro_profile?.radius
+                        ? `${item.pro_profile?.radius} miles`
+                        : "N/A"}
                     </span>
                   </div>
-                  <div>
+                  <div className="flex items-center">
                     <span style={{ color: "#10274F", marginRight: ".5rem" }}>
                       Ratings:
                     </span>{" "}
-                    <span
-                      style={{
-                        color: "#F2BC27",
-                        fontSize: "1.2rem",
-                        display: "flex",
-                      }}
-                    >
-                      {item.rating}
+                    <span>
+                      {item.pro_profile?.rating ? (
+                        item.pro_profile.rating
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#F3E5AB"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                          />
+                        </svg>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -96,119 +107,167 @@ export default function ProfessionalCard({ data }) {
                 <div className="w-full">
                   <button
                     className=" py-3 border-neutral-500 border hover:border-neutral-700 transition-all ease-in-out duration-700 rounded-md hover:bg-neutral-100 w-full"
-                    onClick={handleShow}
+                    onClick={() => handleShow(item)}
                   >
                     View Details
                   </button>
                 </div>
               </div>
-              {/* 
-                <Modal
-                  className="pro-details-modal"
-                  show={show}
-                  onHide={handleClose}
-                >
-                  <div style={{ display: "flex" }}>
-                    <div className="modal-pro-info">
-                      <div style={{ position: "relative" }}>
-                        <BsBookmark className="bookmark-icon" />
-                        <div style={{ textAlign: "center" }}>
-                          <img
-                            className="avatar-pro"
-                            src={Avatar}
-                            alt="user image"
-                          />
-                          <p className="modal-pro-user-text">
-                            Mathew Bryant{" "}
-                            <span style={{ marginLeft: ".4rem" }}>
-                              <img
-                                style={{ width: "1.2rem" }}
-                                src={VerifiedUser}
-                                alt="verified user"
-                              />
-                            </span>
-                          </p>
-                          <p className="modal-designation">ADON</p>
-                        </div>
-                      </div>
 
-                      <div style={{ display: "flex", marginTop: "2rem" }}>
-                        <p className="modal-rating-heading">Ratings:</p>
-                        <div>
-                          <AiFillStar className="modal-stars" />
-                          <AiFillStar className="modal-stars" />
-                          <AiFillStar className="modal-stars" />
-                          <AiFillStar className="modal-stars" />
-                          <AiFillStar className="modal-stars" />
-                        </div>
-                      </div>
-
-                      <div style={{ display: "flex", marginTop: ".5rem" }}>
-                        <p className="modal-rating-heading">
-                          Licensed in: CT, MA, RI, TN
-                        </p>
-                      </div>
-
-                      <div className="modal-b1"></div>
-                    </div>
-
-                    <div className="modal-working-hrs">
-                      <div style={{ display: "flex", marginTop: "1.5rem" }}>
-                        <p className="modal-rating-heading">
-                          <span style={{ color: "#1C75BC" }}>Rates:</span>{" "}
-                          $100/day , $50/hour
-                        </p>
-                      </div>
-                      <div style={{ display: "flex" }}>
-                        <p className="modal-rating-heading">
-                          <span style={{ color: "#BE1E2D" }}>Radius:</span> 50
-                          miles from 06415
-                        </p>
-                      </div>
-
-                      <div className="modal-working">
-                        <div>
-                          <h5 className="modal-working-text">
-                            Preferred Working Hours
-                          </h5>
-                        </div>
-                        <ul className="modal-days-schedule">
-                          <li>Sun (11 am - 5 pm)</li>
-                          <li>Mon (8 am - 9 pm)</li>
-                          <li>Tue (8 am - 7 pm)</li>
-                          <li>Wed (9 am - 6 pm)</li>
-                          <li>Thu (9 am -6 pm)</li>
-                          <li>Fri (8 am - 7 pm)</li>
-                          <li>Sat (8 am - 7 pm)</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="modal-about">
-                    <h3 className="modal-about-heading">About Mathew</h3>
-                    <ReadMoreText />
-
+              {show && (
+                <div>
+                  <div className="fixed inset-0 w-full h-full !bg-black !opacity-5 backdrop-blur-sm z-[999999]"></div>
+                  <div
+                    onClick={() => setShow(false)}
+                    className="w-full max-w-[700px] flex flex-col gap-6  z-[9999999] h-fit bg-white dark:bg-neutral-800 dark:border-none border-t box-border border-neutral-200 p-6 md:p-8 fixed inset-0 m-auto rounded"
+                  >
                     <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginTop: "2rem",
-                      }}
+                      onClick={() => setShow(false)}
+                      className="absolute top-4 right-4 md:top-6 md:right-6"
                     >
-                      <button className="modal-contact-btn">
-                        Contact this Pro
-                      </button>
-                      <button className="modal-view-btn">View Profile</button>
+                      <svg
+                        width="20"
+                        className="text-neutral-800 dark:text-white cursor-pointer"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M5 15L15 5M5 5L15 15"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+
+                    <div className="flex w-full pt-5 flex-col">
+                      <div className="flex flex-col">
+                        <div className="flex">
+                          <div className="flex flex-col px-10 pt-6 w-[50%]">
+                            <div className="flex items-center flex-col gap-2">
+                              <img
+                                src={
+                                  profileData.photo_url
+                                    ? profileData.photo_url
+                                    : require("../../assets/images/avatar.png")
+                                }
+                                width={65}
+                                height={32}
+                                className="rounded-full object-cover w-20 h-20 "
+                                alt="User Image"
+                              />
+                              <div className="">
+                                <p className="text-neutral-900 font-semibold text-xl capitalize">
+                                  {profileData.firstname} {profileData.lastname}
+                                </p>
+                                <p className="card-designation">
+                                  {profileData.designation}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex pt-2 items-center flex-col pb-2">
+                              <div className="pb-2">
+                                <span
+                                  style={{
+                                    color: "#1C75BC",
+                                    marginRight: ".5rem",
+                                  }}
+                                >
+                                  Rates:
+                                </span>{" "}
+                                <span className="text-neutral-700 font-medium">
+                                  {profileData.pro_profile
+                                    ? `$${profileData.pro_profile.daily_rate}/day $${profileData.pro_profile.hourly_rate}/hour`
+                                    : "0"}
+                                </span>
+                              </div>
+                              <div>
+                                <span
+                                  style={{
+                                    color: "#BE1E2D",
+                                    marginRight: ".5rem",
+                                  }}
+                                >
+                                  Radius:
+                                </span>{" "}
+                                <span className="text-neutral-700 font-medium">
+                                  {profileData.pro_profile?.radius
+                                    ? `${profileData.pro_profile?.radius} miles`
+                                    : "N/A"}
+                                </span>
+                              </div>
+                              <div className="flex pt-2 flex-col gap-3">
+                                <div className="flex items-center">
+                                  <span
+                                    style={{
+                                      color: "#10274F",
+                                      marginRight: ".5rem",
+                                    }}
+                                  >
+                                    Ratings:
+                                  </span>{" "}
+                                  <span>
+                                    {profileData.pro_profile?.rating ? (
+                                      profileData.pro_profile.rating
+                                    ) : (
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="#F3E5AB"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        className="w-6 h-6"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                                        />
+                                      </svg>
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className=" flex items-start flex-col w-[50%]">
+                            <div className="bg-blue-50 w-full flex items-center py-6 flex-col rounded-2xl">
+                              <div>
+                                <h5 className="text-neutral-800 font-semibold">
+                                  Preferred Working Hours
+                                </h5>
+                              </div>
+                              <ul className="text-blue-500 flex flex-col gap-1 pt-4">
+                                <li>Sun (11 am - 5 pm)</li>
+                                <li>Mon (8 am - 9 pm)</li>
+                                <li>Tue (8 am - 7 pm)</li>
+                                <li>Wed (9 am - 6 pm)</li>
+                                <li>Thu (9 am -6 pm)</li>
+                                <li>Fri (8 am - 7 pm)</li>
+                                <li>Sat (8 am - 7 pm)</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        {profileData?.reviews.length > 0 && (
+                          <ModalReview reviewData={profileData?.reviews} />
+                        )}
+                        <div className="flex gap-3 pt-8">
+                          <button className="py-3 border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full">
+                            View Profile
+                          </button>
+                          <button className="bg-blue-600 rounded-lg w-full text-white hover:bg-blue-800 transition-all ease-in-out duration-500">
+                            Contact this Pro
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="modal-b2"></div>
-
-                  <div className="review-section-container">
-                    <ModalReview />
-                  </div>
-                </Modal> */}
+                </div>
+              )}
             </div>
           );
         })}
