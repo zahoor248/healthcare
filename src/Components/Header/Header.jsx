@@ -98,17 +98,17 @@ export default function Header() {
                 </div>
 
                 <div>
-                  <div
+                  <Link
                     className="cursor-pointer"
                     as={Link}
-                    to="/tutorials"
+                    to="/favouraties"
                     onClick={() => updateExpanded(false)}
                   >
                     <AiOutlineFundProjectionScreen
                       style={{ marginBottom: "2px" }}
                     />{" "}
                     Favourites
-                  </div>
+                  </Link>
                 </div>
 
                 <div>

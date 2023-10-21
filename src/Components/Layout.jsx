@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated && !unStrictPages.includes(routePath)) {
-      // navigate("/");
+      navigate("/");
       console.log("hitter");
     }
   }, [isAuthenticated, routePath, navigate]);
