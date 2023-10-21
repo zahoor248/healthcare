@@ -23,10 +23,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/register" element={<SignUp/>} />
-          <Route path="/login" element={<LogIn/>} />
-          <Route path="/listings" element={  <HiringLayout />} />
-        
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/listings" element={<HiringLayout />} />
         </Routes>
       </BrowserRouter>
     </Provider>

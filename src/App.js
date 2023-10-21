@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       {/* <ForgotPassword/> */}
-      {/* <ProfileDetails/> */}
+   
       {/* <Availability/> */}
       {/* <Chat/> */}
       {/* <SignUp/> */}

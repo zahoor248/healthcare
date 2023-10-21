@@ -46,7 +46,7 @@ export default function Form() {
           </div>
         </div>
         <div className="flex w-full justify-end">
-          <Link className="w-full md:w-auto" to="/HiringLayout">
+          <Link className="w-full md:w-auto" to="/listings">
             <button className="px-8  justify-center  mt-8 w-full lg:mt-0 gap-1 rounded-lg text-white py-4 bg-blue-500 hover:bg-blue-600 transition-all  ease-in-out duration-500 flex items-center ">
               <BiSearch className="text-2xl" />
               Search
