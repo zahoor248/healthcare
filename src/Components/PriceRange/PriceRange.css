@@ -1,0 +1,70 @@
+.multi-range-slider {
+    border: none;
+    box-shadow: none;
+    width: 89%;
+    padding-left: 0;
+}
+.multi-range-slider .bar-left {
+    padding: 1px 0px;
+    box-shadow: none;
+    background-color: #DFE3EB;
+}
+.multi-range-slider .bar-inner {
+    box-shadow: none;
+    background-color: #DFE3EB;
+    border: none;
+}
+.multi-range-slider .bar-right {
+    padding: 1px 0px;
+    box-shadow: none;
+    background-color: #DFE3EB;
+}
+.min-value {
+    background-color: #fff !important;
+    color: #1C75BC !important;
+    border-radius: none !important;
+    box-shadow: none !important;
+    font-size: 1.4rem !important;
+    font-family: "NunitoRegular";
+}
+.max-value {
+    background-color: #fff !important;
+    color: #1C75BC !important;
+    border-radius: none !important;
+    box-shadow: none !important;
+    font-size: 1.4rem !important;
+    font-family: "NunitoRegular";
+}
+.multi-range-slider .thumb * {
+    background-color: none !important;
+
+}
+.multi-range-slider .thumb::before {
+    background-color: #1C75BC !important;
+    border: solid 4px #fff;
+    box-shadow: 0px 0px 8px #af9d9d, inset 0px 0px 4px #7a6e6e;
+    margin: -1.3rem;
+}
+.css-eg0mwd-MuiSlider-thumb {
+    border: 4px solid #fff !important;
+    box-shadow: grey 0px 0px 7px !important;
+    width: 2rem !important;
+    height: 2rem !important;
+}
+.css-14pt78w-MuiSlider-rail {
+    background-color: #ccc !important;
+    height: .4rem !important;
+}
+.css-1gv0vcd-MuiSlider-track {
+    background-color: #eee !important;
+    border: none !important;
+}
+.css-17djbj3-MuiSlider-valueLabel.MuiSlider-valueLabelOpen {
+    color: #1C75BC !important;
+}
+.css-17djbj3-MuiSlider-valueLabel {
+    background-color: white !important;
+}
+.css-187mznn-MuiSlider-root {
+    height: .4rem !important;
+}

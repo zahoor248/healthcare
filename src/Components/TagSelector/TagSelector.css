@@ -1,0 +1,70 @@
+.tags-input-container{
+    border: 1px solid #C2C9D4;
+    padding: .5em;
+    border-radius: 6px 6px 6px 6px;
+    width: 69%;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5em;
+}
+
+.tag-item{
+    border: 1px solid #C2C9D4;
+    background-color: #EFF3F8;
+    display: inline-block;
+    padding: .5em .75em;
+    border-radius: 6px 6px 6px 6px;
+}
+.tag-item .close{
+    height: 2rem;
+    width: 2rem;
+    color: #6A6A73;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: .5em;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+.tag-item .close:hover {
+    color: red;
+}
+/* .tag-item :hover {
+    border: 1px solid #1C75BC;
+    background-color: #DEEDF9;
+    
+} */
+
+.tags-input{
+    flex-grow: 1;
+    padding: .5em 0;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+    color: #6A6A73;
+    font-family: "NunitoRegular";
+}
+.tag-item > .text {
+    font-size: 1.4rem;
+    color: #6A6A73;
+    font-family: "NunitoRegular";
+}
+.tags-input-container-mob{
+    border: 1px solid #C2C9D4;
+    padding: .5em;
+    border-radius: 6px 6px 6px 6px;
+    width: 80%;
+    margin-top: 0.5em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5em;
+}
+.tag-item :hover {
+    background-color: #DEEDF9;
+    border: 1px solid #1C75BC;
+    color: #1C75BC;
+}
