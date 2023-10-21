@@ -29,23 +29,10 @@ function App() {
     <>
       {/* <ForgotPassword/> */}
    
-      {/* <Availability/> */}
-      {/* <Chat/> */}
-      {/* <SignUp/> */}
-      {/* <Profile /> */}
-      <Header />
-      <HomeLayout />
     
-      {user ? (
-        <>
-          <Navbar />
-          {/* <Route path="/" component={HiringLayout} />
-              <Route path="/Profile" component={Profile} /> */}
-        </>
-      ) : (
-        <></>
-      )}
-      <Footer />
+ 
+      <HomeLayout />
+  
     </>
   );
 }

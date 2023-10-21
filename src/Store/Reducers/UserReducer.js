@@ -18,6 +18,7 @@ const Reducer = (state = initialState, action) => {
 
   switch (type) {
     case SET_USER:
+      console.log("Setting user in reducer:", payload);
       return {
         ...state,
         user: payload,

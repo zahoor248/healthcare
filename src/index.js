@@ -16,20 +16,32 @@ import store from "../src/Store/Store";
 import SignUp from "./Components/SignUp/SignUp";
 import LogIn from "./Components/LogIn/LogIn";
 import HiringLayout from "./Components/HiringLayout";
+import Profile from "./Components/Profile/Profile";
+import Chat from "./Components/Chat/Chat";
+import Availability from "./Components/Availability/Availability";
+import Layout from "./Components/Layout";
+import Favouraties from "./Components/Favouraties/Favouraties";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Layout> {/* Wrap all routes with the Layout component */}
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/listings" element={<HiringLayout />} />
+          <Route path="/chats" element={<Chat />} />
+          <Route path="/availability" element={<Availability />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/favouraties" element={<Favouraties />} />
         </Routes>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+      </Layout>
+    </BrowserRouter>
+  </Provider>
+</React.StrictMode>
 );
-
 reportWebVitals();

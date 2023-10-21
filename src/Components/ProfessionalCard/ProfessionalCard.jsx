@@ -13,6 +13,7 @@ import VerifiedUser from "../../assets/images/icon-verified.png";
 import ModalReview from "../ModalReview/ModalReview";
 import ReactPaginate from "react-paginate";
 import { Modal } from "@mui/base";
+import { Link } from "react-router-dom";
 
 export default function ProfessionalCard({ data }) {
   const [show, setShow] = useState(false);
@@ -256,9 +257,9 @@ export default function ProfessionalCard({ data }) {
                           <ModalReview reviewData={profileData?.reviews} />
                         )}
                         <div className="flex gap-3 pt-8">
-                          <button className="py-3 border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full">
+                          <Link to={'/profile'}   className="py-3 text-center border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full">
                             View Profile
-                          </button>
+                          </Link>
                           <button className="bg-blue-600 rounded-lg w-full text-white hover:bg-blue-800 transition-all ease-in-out duration-500">
                             Contact this Pro
                           </button>

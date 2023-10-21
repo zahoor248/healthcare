@@ -1723,7 +1723,6 @@ export default function Hiring() {
 
   return (
     <>
-      <Header  />
       <div className=" bg-[#e5f0ff] pb-40 flex ">
         <h1 className="lg:text-4xl px-32 md:text-5xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
           Healthcare professionals Ready to hire.

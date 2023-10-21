@@ -51,7 +51,7 @@ export default function LogIn() {
 
             dispatch(setUser(response.user));
             console.log(user, "here is login");
-            localStorage.setItem("User", JSON.stringify(response.user));
+            localStorage.setItem("token", JSON.stringify(user.token));
             navigate("/listings");
             // AsyncStorage.setItem('User', JSON.stringify(response.user));
             setLoading(false);
