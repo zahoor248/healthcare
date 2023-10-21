@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+// import ReactDatePicker from "react-datepicker";
 import "./DayPicker.css";
 import { FaTrashAlt } from "react-icons/fa";
 
@@ -12,9 +12,9 @@ const DayPicker = () => {
        <h4>Date:</h4>
        <FaTrashAlt className="del-date"/>
 
-      <DatePicker className="availability-picker" 
+      {/* <ReactDatePicker className="availability-picker" 
         selected={startDate} 
-        onChange={(date) => setStartDate(date)}/>
+        onChange={(date) => setStartDate(date)}/> */}
 
         </div> 
     );

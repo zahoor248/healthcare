@@ -12,10 +12,11 @@ import "./fonts/Nunito/NunitoSans-Regular.ttf";
 import "./fonts/Nunito/NunitoSans-Bold.ttf";
 import "./fonts/Nunito/NunitoSans-BoldItalic.ttf";
 import "./fonts/Nunito/NunitoSans-SemiBold.ttf";
-import store from "../src/Store/Store";
+import store from "../src/Store/ReduxStore";
 import SignUp from "./Components/SignUp/SignUp";
 import LogIn from "./Components/LogIn/LogIn";
 import HiringLayout from "./Components/HiringLayout";
+import ListingComponent from "./Components/AllPros";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -23,10 +24,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/register" element={<SignUp/>} />
-          <Route path="/login" element={<LogIn/>} />
-          <Route path="/listings" element={  <HiringLayout />} />
-        
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/listing" element={<ListingComponent />} />
         </Routes>
       </BrowserRouter>
     </Provider>
