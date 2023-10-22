@@ -5,24 +5,29 @@ import { getAllFav } from "../../Store/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Favouraties = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const favourities = useSelector((state) => state.favourites);
   const dispatch = useDispatch();
   useEffect(() => {
-    handleAPIRequest("get", "favorites", null)
-      .then((response) => {
-        console.log(response, "Helelelelelelele");
-        dispatch(getAllFav(response.favorites));
-        setTimeout(() => {
+    console.log(favourities);
+    if (
+      favourities == null ||
+      favourities == undefined ||
+      favourities.length == 0
+    ) {
+      setLoading(true);
+      handleAPIRequest("get", "favorites", null)
+        .then((response) => {
+          console.log(response, "Helelelelelelele");
+          dispatch(getAllFav(response.favorites));
+
           setLoading(false);
-        }, 500);
-      })
-      .catch((error) => {
-        setTimeout(() => {
+        })
+        .catch((error) => {
           setLoading(false);
-        }, 500);
-      });
-  }, [loading,favourities]);
+        });
+    }
+  }, [loading, favourities]);
   return (
     <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">

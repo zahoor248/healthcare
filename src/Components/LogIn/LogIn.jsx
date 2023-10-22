@@ -35,36 +35,14 @@ export default function LogIn() {
       setLoading(true);
       handleAPIRequest("post", "login", { email: email, password: password })
         .then((response) => {
-          if (response) {
-            console.log(response);
-
-            if (response === "invalid") {
-              // showMessage({
-              //   message: 'Alert',
-              //   description: response,
-              //   type: 'danger',
-              // });
-              alert("Error");
-              setLoading(false);
-              return;
-            }
-
-            dispatch(setUser(response.user));
-            dispatch(setIsLoggedIn(true));
-            console.log(user, "here is login");
-            localStorage.setItem("token", user.token);
-            navigate("/listings");
-            // AsyncStorage.setItem('User', JSON.stringify(response.user));
-            setLoading(false);
-          }
+          dispatch(setUser(response.user));
+          dispatch(setIsLoggedIn(true));
+          localStorage.setItem("token", user.token);
+          navigate("/listings");
+          setLoading(false);
         })
         .catch((e) => {
           console.warn(e);
-          // showMessage({
-          //   message: "Alert",
-          //   description: "something went wrong",
-          //   type: "danger",
-          // });
           setLoading(false);
         });
     }

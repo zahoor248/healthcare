@@ -11,6 +11,7 @@ import { getAllPros, setIsLoggedIn, setUser } from "../Store/Actions/Actions";
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.isLoggedIn);
+  const user = useSelector((state) => state.isLoggedIn);
   const navigate = useNavigate();
   const unStrictPages = ["/", "register", "login"];
   const location = useLocation();
@@ -18,29 +19,30 @@ const Layout = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    handleAPIRequest("get", "user", null)
-      .then((response) => {
-        dispatch(setUser(response.user.profile));
+    if (user == null) {
+      handleAPIRequest("get", "user", null)
+        .then((response) => {
+          dispatch(setUser(response.user.profile));
 
-        dispatch(setIsLoggedIn(true));
+          dispatch(setIsLoggedIn(true));
 
-        handleAPIRequest("get", "pros", null)
-          .then((response) => {
-            if (response) {
-              // console.warn(response);
-              dispatch(getAllPros(response));
-              setLoading(false);
-            }
-          })
-          .catch((e) => {});
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
-      });
-
-    if (!isAuthenticated && !unStrictPages.includes(routePath)) {
-      // navigate("/");
+          handleAPIRequest("get", "pros", null)
+            .then((response) => {
+              if (response) {
+                // console.warn(response);
+                dispatch(getAllPros(response));
+                setLoading(false);
+              }
+            })
+            .catch((e) => {});
+        })
+        .catch((error) => {
+          setLoading(false);
+          console.log(error);
+        });
+    }
+    if (!isAuthenticated && !unStrictPages.includes(routePath) && !loading) {
+      navigate("/");
       console.log("hitter");
     }
   }, [isAuthenticated, routePath, navigate]);
