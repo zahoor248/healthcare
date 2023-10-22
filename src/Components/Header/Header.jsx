@@ -84,12 +84,12 @@ export default function Header() {
               </div>
             ) : (
               <div
-                className="ms-auto flex justify-between gap-10"
+                className="ms-auto flex justify-between gap-7"
                 defaultActiveKey="#home"
               >
                 <div className="flex items-center">
                   <Link
-                    className="cursor-pointer text-sm xl:text-base"
+                    className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
                     as={Link}
                     to="/"
                     onClick={() => updateExpanded(false)}
@@ -114,7 +114,7 @@ export default function Header() {
 
                 <div className="flex items-center">
                   <Link
-                   className="cursor-pointer text-sm xl:text-base"
+                    className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
                     as={Link}
                     to="/favouraties"
                     onClick={() => updateExpanded(false)}
@@ -139,7 +139,7 @@ export default function Header() {
 
                 <div className="flex items-center">
                   <Link
-                   className="cursor-pointer text-sm xl:text-base"
+                    className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
                     as={Link}
                     to="/reservations"
                     onClick={() => updateExpanded(false)}
@@ -164,7 +164,7 @@ export default function Header() {
 
                 <div className="flex items-center">
                   <Link
-                   className="cursor-pointer text-sm xl:text-base"
+                    className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
                     as={Link}
                     to="/contacts"
                     onClick={() => updateExpanded(false)}
@@ -188,7 +188,7 @@ export default function Header() {
                 </div>
                 <div className="flex items-center">
                   <Link
-              className="cursor-pointer text-sm xl:text-base"
+                    className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
                     to="/chats"
                     onClick={() => updateExpanded(false)}
                   >

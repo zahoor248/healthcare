@@ -412,3 +412,20 @@ body {
     stroke-dashoffset: -440;
   }
 }
+.banner-area {
+  /* background-image: url(../img/); */
+  background: #e5f0ff;
+  padding-top: 100px;
+  position: relative;
+}
+.banner-img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: 45%;
+}
+.banner-img-mobile {
+  position: relative;
+  z-index: 15;
+  margin-bottom: -10px;
+}
