@@ -7,6 +7,7 @@ import { setPros } from "../../redux-setup/TestSlice";
 function ListingComponent() {
   const { data: allData, isLoading } = useGetDataQuery(null, {});
   // const [data, setData] = useState([]);
+  
   const data = useSelector((state) => state.dataSlice.pros);
   const dispatch = useDispatch();
   useEffect(() => {
