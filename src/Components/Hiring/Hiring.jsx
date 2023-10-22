@@ -590,7 +590,7 @@ export default function Hiring() {
   return (
     <>
       <div className=" bg-[#e5f0ff] pb-40 flex ">
-        <h1 className="xl:text-4xl px-6 xl:px-32 md:text-3xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
+        <h1 className="xl:text-4xl px-6 xl:px-32 md:text-2xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
           Healthcare professionals Ready to hire.
         </h1>
       </div>
