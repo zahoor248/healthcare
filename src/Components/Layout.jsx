@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
                 setLoading(false);
               }
             })
-            .catch((e) => {});
+            .catch((e) => {});    
         })
         .catch((error) => {
           setLoading(false);
