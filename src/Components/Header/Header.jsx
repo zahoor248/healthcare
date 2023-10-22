@@ -73,6 +73,12 @@ export default function Header() {
             <span className="text-2xl font-semibold text-blue-900">
               Username
             </span> */}
+            <Link
+                    to={"/login"}
+                    className="font-normal textlg text-neutral-700 underline px-4 f-f-g cursor-pointer"
+                  >
+                    Login
+                  </Link>
                   <Link
                     to={"/register"}
                     className="font-bold text-xl f-f-g cursor-pointer"
