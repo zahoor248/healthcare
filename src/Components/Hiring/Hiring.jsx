@@ -594,7 +594,7 @@ export default function Hiring() {
           Healthcare professionals Ready to hire.
         </h1>
       </div>
-      <div className="flex -mt-32 xl:-mt-28  flex-row w-full px-6 lg:px-24 xl:px-32">
+      <div className="flex -mt-32 xl:-mt-28  flex-row w-full px-6 xl:px-24 2xl:px-32">
         <div className="flex w-full bg-white  shadow-class p-4 lg:p-8 xl:p-14 rounded-2xl">
           <div className="">
             <Sidebar

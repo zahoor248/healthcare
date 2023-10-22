@@ -27,7 +27,7 @@ export default function ProfessionalCard({ data }) {
 
   const AllPros = () => {
     return (
-      <div className="grid md:grid-cols-2  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-16">
+      <div className="grid md:grid-cols-3  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-16">
         {data.map((item, index) => {
           return (
             <div className="shadow-class hover:scale-105 transition-all ease-in-out duration-500 rounded-xl w-full">
@@ -39,7 +39,7 @@ export default function ProfessionalCard({ data }) {
                   />
                 </div>
               )}
-              <div className="flex flex-col p-6 xl:p-10">
+              <div className="flex flex-col p-6 lg:p-6 2xl:p-10">
                 <div className="flex items-center">
                   <img
                     src={
@@ -49,11 +49,11 @@ export default function ProfessionalCard({ data }) {
                     }
                     width={55}
                     height={32}
-                    className="rounded-full object-cover w-10 md:w-12 md:h-12 h-10 xl:w-16 xl:h-16 "
+                    className="rounded-full object-cover w-10 md:w-8 md:h-8 h-10 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14"
                     alt="User Image"
                   />
                   <div className="username-details">
-                    <p className="text-neutral-700 font-bold md:text-md lg:text-md xl:text-lg 2xl:text-xl capitalize">
+                    <p className="text-neutral-700 font-bold md:text-md lg:text-base xl:text-md 2xl:text-xl capitalize">
                       {item.firstname} {item.lastname}
                     </p>
                     <p className="card-designation">{item.designation}</p>
@@ -63,7 +63,7 @@ export default function ProfessionalCard({ data }) {
                 <div className="flex flex-col py-4 xl:py-6 gap-3">
                   <div>
                     <span className="text-base text-blue-600">Rates:</span>{" "}
-                    <span className="text-neutral-700 text-sm xl:text-lg font-medium">
+                    <span className="text-neutral-700 text-sm  2xl:text-lg font-medium">
                       {item.pro_profile
                         ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
                         : "0"}
