@@ -5,7 +5,7 @@ import Footer from "../Components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { handleAPIRequest } from "../helper/ApiHandler";
-import { setIsLoggedIn, setUser } from "../Store/Actions/Actions";
+import { getAllPros, setIsLoggedIn, setUser } from "../Store/Actions/Actions";
 // Create a Footer component
 
 const Layout = ({ children }) => {
@@ -23,11 +23,20 @@ const Layout = ({ children }) => {
         dispatch(setUser(response.user.profile));
 
         dispatch(setIsLoggedIn(true));
-        setLoading(false);
+
+        handleAPIRequest("get", "pros", null)
+          .then((response) => {
+            if (response) {
+              // console.warn(response);
+              dispatch(getAllPros(response));
+              setLoading(false);
+            }
+          })
+          .catch((e) => {});
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
+        console.log(error);
       });
 
     if (!isAuthenticated && !unStrictPages.includes(routePath)) {

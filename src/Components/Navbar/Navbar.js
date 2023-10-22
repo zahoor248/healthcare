@@ -36,15 +36,12 @@ function NavBar() {
   window.addEventListener("scroll", scrollHandler);
 
   return (
-    <div 
-      className={navColour ? "sticky" : "navbar"}
-    >
+    <div className={navColour ? "sticky" : "navbar"}>
       <div className="flex justify-between">
         <Link to="/" className="d-flex">
           <img src={logo} className="img-fluid logo" alt="brand" />
         </Link>
         <div
-         
           onClick={() => {
             updateExpanded(expand ? false : "expanded");
           }}
@@ -54,10 +51,27 @@ function NavBar() {
           <span></span>
         </div>
         <div id="responsive-navbar-nav" className="flex">
-          <div className="ms-auto flex justify-between gap-10" defaultActiveKey="#home">
+          <div
+            className="ms-auto flex justify-between gap-10"
+            defaultActiveKey="#home"
+          >
             <div>
               <div as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#5c5c5c"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  />
+                </svg>
+                Home
               </div>
             </div>
 
@@ -75,11 +89,7 @@ function NavBar() {
             </div>
 
             <div>
-              <div
-                as={Link}
-                to="/about"
-                onClick={() => updateExpanded(false)}
-              >
+              <div as={Link} to="/about" onClick={() => updateExpanded(false)}>
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Reservations
               </div>
             </div>
@@ -94,11 +104,7 @@ function NavBar() {
               </div>
             </div>
             <div>
-              <div
-                as={Link}
-                to="/terms"
-                onClick={() => updateExpanded(false)}
-              >
+              <div as={Link} to="/terms" onClick={() => updateExpanded(false)}>
                 <ImBlog style={{ marginBottom: "2px" }} /> Chats
               </div>
             </div>

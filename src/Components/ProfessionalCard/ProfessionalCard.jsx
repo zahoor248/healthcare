@@ -27,7 +27,7 @@ export default function ProfessionalCard({ data }) {
 
   const AllPros = () => {
     return (
-      <div className="grid grid-cols-3  gap-8 mt-16">
+      <div className="grid md:grid-cols-2  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-16">
         {data.map((item, index) => {
           return (
             <div className="shadow-class hover:scale-105 transition-all ease-in-out duration-500 rounded-xl w-full">
@@ -39,7 +39,7 @@ export default function ProfessionalCard({ data }) {
                   />
                 </div>
               )}
-              <div className="flex flex-col p-10">
+              <div className="flex flex-col p-6 xl:p-10">
                 <div className="flex items-center">
                   <img
                     src={
@@ -49,21 +49,21 @@ export default function ProfessionalCard({ data }) {
                     }
                     width={55}
                     height={32}
-                    className="rounded-full object-cover w-16 h-16 "
+                    className="rounded-full object-cover w-10 md:w-12 md:h-12 h-10 xl:w-16 xl:h-16 "
                     alt="User Image"
                   />
                   <div className="username-details">
-                    <p className="text-neutral-700 font-bold text-xl capitalize">
+                    <p className="text-neutral-700 font-bold md:text-md lg:text-md xl:text-lg 2xl:text-xl capitalize">
                       {item.firstname} {item.lastname}
                     </p>
                     <p className="card-designation">{item.designation}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col py-6 gap-3">
+                <div className="flex flex-col py-4 xl:py-6 gap-3">
                   <div>
                     <span className="text-base text-blue-600">Rates:</span>{" "}
-                    <span className="text-neutral-700 font-medium">
+                    <span className="text-neutral-700 text-sm xl:text-lg font-medium">
                       {item.pro_profile
                         ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
                         : "0"}
@@ -73,7 +73,7 @@ export default function ProfessionalCard({ data }) {
                     <span style={{ color: "#BE1E2D", marginRight: ".5rem" }}>
                       Radius:
                     </span>{" "}
-                    <span className="text-neutral-700 font-medium">
+                    <span className="text-neutral-700 text-sm xl:text-lg font-medium">
                       {item.pro_profile?.radius
                         ? `${item.pro_profile?.radius} miles`
                         : "N/A"}
@@ -107,7 +107,7 @@ export default function ProfessionalCard({ data }) {
 
                 <div className="w-full">
                   <button
-                    className=" py-3 border-neutral-500 border hover:border-neutral-700 transition-all ease-in-out duration-700 rounded-md hover:bg-neutral-100 w-full"
+                    className="py-2 xl:py-3 border-neutral-500 border text-sm xl:text-md hover:border-neutral-700 transition-all ease-in-out duration-700 rounded-md hover:bg-neutral-100 w-full"
                     onClick={() => handleShow(item)}
                   >
                     View Details
@@ -257,7 +257,10 @@ export default function ProfessionalCard({ data }) {
                           <ModalReview reviewData={profileData?.reviews} />
                         )}
                         <div className="flex gap-3 pt-8">
-                          <Link to={'/profile'}   className="py-3 text-center border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full">
+                          <Link
+                            to={"/profile"}
+                            className="py-3 text-center border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full"
+                          >
                             View Profile
                           </Link>
                           <button className="bg-blue-600 rounded-lg w-full text-white hover:bg-blue-800 transition-all ease-in-out duration-500">

@@ -17,16 +17,23 @@ const TagSelector = () => {
   }
 
   return (
-    <div className="w-full">
-      {tags.map((tag, index) => (
-        <div className="" key={index}>
-          <span className="text">{tag}</span>
-          <span className="close" onClick={() => removeTag(index)}>
-            &times;
-          </span>
-        </div>
-      ))}
-
+    <div className="w-full ">
+      <div className="w-full !max-w-[320px] flex-wrap flex">
+        {tags.map((tag, index) => (
+          <div
+            className="bg-blue-300 px-3  flex-wrap flex-row mx-1 mb-2 rounded-full text-white flex justify-between w-fit"
+            key={index}
+          >
+            <span className="text">{tag}</span>
+            <span
+              className="close pl-2 cursor-pointer"
+              onClick={() => removeTag(index)}
+            >
+              &times;
+            </span>
+          </div>
+        ))}
+      </div>
       {/* <p className="text-base/none pb-2 font-normal text-neutral-600">
           Email
         </p> */}

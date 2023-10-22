@@ -56,7 +56,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   };
 
   return (
-    <div className="w-full min-w-[400px] ">
+    <div className="w-full md:w-[250px] 2xl:min-w-[330px]">
       <div className="flex pb-3 items-center gap-2">
         <img className="w-4 h-4" src={FilterIcon} alt="filter icon" />
         <p className=" text-lg">Filters</p>
@@ -95,7 +95,10 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
       </div>
 
       <div className="pt-8">
-        <button className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white " onClick={filterData}>
+        <button
+          className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white "
+          onClick={filterData}
+        >
           Refine
         </button>
       </div>
