@@ -20,12 +20,13 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     if (user == null) {
+      // on refresh the layout checks if user data is null then the call trigerred and loads data
       handleAPIRequest("get", "user", null)
         .then((response) => {
           dispatch(setUser(response.user.profile));
 
           dispatch(setIsLoggedIn(true));
-
+          // to prevent from loading on listing page we are making call here
           handleAPIRequest("get", "pros", null)
             .then((response) => {
               if (response) {
@@ -34,16 +35,16 @@ const Layout = ({ children }) => {
                 setLoading(false);
               }
             })
-            .catch((e) => {});    
+            .catch((e) => {});
         })
         .catch((error) => {
           setLoading(false);
           console.log(error);
         });
     }
+    // this is checking if the user is not logged in then push back to the home page except public pages
     if (!isAuthenticated && !unStrictPages.includes(routePath) && !loading) {
       navigate("/");
-      console.log("hitter");
     }
   }, [isAuthenticated, routePath, navigate]);
 
