@@ -52,7 +52,7 @@ export default function Hero() {
                 {" "}
                 <Form />
               </div>
-              <div className="absolute z-50 -bottom-24 hover:scale-105 transition-all ease-in-out duration-500 w-full max-w-[500px] md:max-w-[650px]  2xl:max-w-[700px]">
+              <div className="absolute z-50 -bottom-24 hover:scale-105 transition-all ease-in-out duration-500 w-full md:max-w-[550px] xl:max-w-[650px]  2xl:max-w-[700px]">
                 {" "}
                 <Form />
               </div>
