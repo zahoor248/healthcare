@@ -8,7 +8,7 @@ import GoogleIcon from "../../assets/images/google-icon.png";
 import Slide2 from "../../assets/images/slide2.png";
 import { POST } from "../../Api/Post";
 import { LOGIN } from "../../Api/EndPoints";
-import { setUser } from "../../Store/Actions/Actions";
+import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -50,8 +50,9 @@ export default function LogIn() {
             }
 
             dispatch(setUser(response.user));
+            dispatch(setIsLoggedIn(true));
             console.log(user, "here is login");
-            localStorage.setItem("token", JSON.stringify(user.token));
+            localStorage.setItem("token", user.token);
             navigate("/listings");
             // AsyncStorage.setItem('User', JSON.stringify(response.user));
             setLoading(false);

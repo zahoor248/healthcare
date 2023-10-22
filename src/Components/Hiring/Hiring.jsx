@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Hiring.css";
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import ProfessionalCard from "../ProfessionalCard/ProfessionalCard";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { getAllFav, getAllPros } from "../../Store/Actions/Actions";
-import Header from "../Header/Header";
 export default function Hiring() {
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
@@ -1699,12 +1696,14 @@ export default function Hiring() {
     //     dispatch(getAllFav(response.favorites));
     dispatch(getAllFav(favoritesData.favorites));
 
-    //     handleAPIRequest("get", "pros", null)
-    //       .then((response) => {
-    //         if (response) {
-    //           // console.warn(response);
-    //           dispatch(getAllPros(response));
-    dispatch(getAllPros(prosData));
+    handleAPIRequest("get", "pros", null)
+      .then((response) => {
+        if (response) {
+          // console.warn(response);
+          dispatch(getAllPros(response));
+        }
+      })
+      .catch((e) => {});
 
     //           setFilteredData(response);
     setData(prosData);
@@ -1719,7 +1718,7 @@ export default function Hiring() {
     //       });
     //   })
     //   .catch((e) => {});
-  }, []);
+  }, [loading]);
 
   return (
     <>

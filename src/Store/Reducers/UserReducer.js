@@ -5,6 +5,7 @@ import {
   SET_USER,
   UPDATE_USER,
   GET_FAV,
+  isLOGGED_IN,
 } from "../Actions/ActionType";
 
 const initialState = {
@@ -22,6 +23,12 @@ const Reducer = (state = initialState, action) => {
       return {
         ...state,
         user: payload,
+      };
+    case isLOGGED_IN:
+      console.log("Setting user in reducer:", payload);
+      return {
+        ...state,
+        isLoggedIn: payload,
       };
     case UPDATE_USER:
       return {

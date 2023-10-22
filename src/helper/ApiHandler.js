@@ -5,7 +5,7 @@ import store from "../Store/Store";
 
 export const handleAPIRequest = async (method, url, data, params) => {
   const state = store.getState();
-
+  const token = localStorage.getItem("token");
   // store.dispatch(setAppLoading(true));
 
   let header = null;
@@ -13,11 +13,11 @@ export const handleAPIRequest = async (method, url, data, params) => {
   if (method === "post" || method === "put") {
     header = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${state.user && state.user.token}`,
+      Authorization: `Bearer ${JSON.stringify(JSON.parse(token))}`,
     };
   } else {
     header = {
-      Authorization: `Bearer ${state.user && state.user.token}`,
+      Authorization: `Bearer ${token}`,
     };
   }
   try {

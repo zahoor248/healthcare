@@ -5,11 +5,18 @@ import {
   APPLOADING,
   UPDATE_USER,
   GET_FAV,
+  isLOGGED_IN
 } from "./ActionType";
 
 export const setUser = (payload) => async (dispatch) => {
   dispatch({
     type: SET_USER,
+    payload: payload,
+  });
+};
+export const setIsLoggedIn = (payload) => async (dispatch) => {
+  dispatch({
+    type: isLOGGED_IN,
     payload: payload,
   });
 };

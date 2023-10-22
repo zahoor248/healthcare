@@ -25,7 +25,7 @@ export default function Header() {
   const location = useLocation();
   const routePath = location.pathname.split("/")[1];
   let hideHeader = ["login", "register"];
-
+  const isAuthenticate = useSelector((state) => state.isLoggedIn);
   function scrollHandler() {
     if (window.scrollY >= 20) {
       updateNavbar(true);
@@ -33,11 +33,6 @@ export default function Header() {
       updateNavbar(false);
     }
   }
-  useEffect(() => {
-    if (user) {
-      setIsLoggedIn(user);
-    }
-  }, [user]);
 
   window.addEventListener("scroll", scrollHandler);
   console.log(user, "HERE IS THE USER");
@@ -53,7 +48,7 @@ export default function Header() {
                 alt="Logo"
               />
             </Link>
-            {!isLoggedIn ? (
+            {!isAuthenticate ? (
               <div className="flex gap-5 md:gap-10 lg:gap-20 xl:gap-24">
                 <div className="f-f-g-m flex items-center gap-3 md:gap-6 lg:gap-10">
                   <span className=" text-lg font-normal text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
@@ -73,7 +68,7 @@ export default function Header() {
             <span className="text-2xl font-semibold text-blue-900">
               Username
             </span> */}
-            <Link
+                  <Link
                     to={"/login"}
                     className="font-normal textlg text-neutral-700 underline px-4 f-f-g cursor-pointer"
                   >
@@ -92,7 +87,7 @@ export default function Header() {
                 className="ms-auto flex justify-between gap-10"
                 defaultActiveKey="#home"
               >
-                <div>
+                <div className="flex items-end">
                   <Link
                     className="cursor-pointer"
                     as={Link}
@@ -103,7 +98,7 @@ export default function Header() {
                   </Link>
                 </div>
 
-                <div>
+                <div className="flex items-end">
                   <Link
                     className="cursor-pointer"
                     as={Link}
@@ -117,7 +112,7 @@ export default function Header() {
                   </Link>
                 </div>
 
-                <div>
+                <div className="flex items-end">
                   <div
                     className="cursor-pointer"
                     as={Link}
@@ -129,7 +124,7 @@ export default function Header() {
                   </div>
                 </div>
 
-                <div>
+                <div className="flex items-end">
                   <div
                     className="cursor-pointer"
                     as={Link}
@@ -139,7 +134,7 @@ export default function Header() {
                     <MdPrivacyTip style={{ marginBottom: "2px" }} /> Contracts
                   </div>
                 </div>
-                <div>
+                <div className="flex items-end">
                   <Link
                     className="cursor-pointer"
                     to="/chats"
@@ -148,16 +143,18 @@ export default function Header() {
                     <ImBlog style={{ marginBottom: "2px" }} /> Chats
                   </Link>
                 </div>
-                {/* <div className="fork-btn">
-              <Button
-                href="https://github.com/soumyajit4419/Portfolio"
-                target="_blank"
-                className="fork-btn-inner"
-              >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
-              </Button>
-            </div> */}
+
+                <Link to={"/profile"} className="flex items-center gap-2">
+                  <h4 class="text-white   text-lg font-normal leading-3 bg-black/50 w-12 h-12 flex items-center m-auto justify-center rounded-full text-center cursor-pointer">
+                    {user?.firstname?.charAt(0)}
+                  </h4>
+                  {/* <h4 class="text-lg leading-3 text-center w-full h-full rounded-full bg-neutral-400 animate-pulse"></h4> */}
+                  <div className="text-lg mt-2 text-neutral-800">
+                    <div className="text-xs -mt-1">Welcome</div>
+                    {user?.firstname}
+                    {user?.lastname}
+                  </div>
+                </Link>
               </div>
             )}
           </div>
