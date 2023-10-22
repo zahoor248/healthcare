@@ -70,7 +70,7 @@ export default function Chat() {
   ];
 
   return (
-    <div className="flex h-[calc(100vh-202px)] w-full">
+    <div className="flex h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] w-full">
       <div className="flex-col w-full max-w-[450px] flex">
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
           <h4>All Conversations (8) </h4>

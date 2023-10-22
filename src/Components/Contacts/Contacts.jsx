@@ -68,7 +68,7 @@ const Contacts = () => {
   ];
 
   return (
-    <div className="flex main-container h-[calc(100vh-202px)] overflow-auto w-full">
+    <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
           <div className="text-3xl">My Contracts</div>
