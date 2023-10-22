@@ -31,6 +31,43 @@ export default function Chat() {
       last_read_msg: "Lets meet",
     },
   ];
+  const chat_msg = [
+    {
+      id: 1,
+      name: "Jane Doe",
+      user_avtar: user2,
+      un_read_msg: 1,
+      last_read_msg: "Lets meet",
+    },
+    {
+      id: 1,
+      name: "Jane Doe",
+      user_avtar: user2,
+      un_read_msg: 1,
+      last_read_msg: "Lets meet",
+    },
+    {
+      id: 1,
+      name: "Jane Doe",
+      user_avtar: user2,
+      un_read_msg: 1,
+      last_read_msg: "Lets meet",
+    },
+    {
+      id: 1,
+      name: "Jane Doe",
+      user_avtar: user2,
+      un_read_msg: 1,
+      last_read_msg: "Lets meet",
+    },
+    {
+      id: 1,
+      name: "Jane Doe",
+      user_avtar: user2,
+      un_read_msg: 1,
+      last_read_msg: "Lets meet",
+    },
+  ];
 
   return (
     <div className="flex h-[calc(100vh-202px)] w-full">
@@ -77,28 +114,39 @@ export default function Chat() {
           </p>
         </div>
         <div className="w-full h-full justify-between flex flex-col">
-          <div className="chat-message-container">
-            <img className="message-user1-image" src={user2} />
-            <h5 className="chat-name">
-              Isabella{" "}
-              <span
-                style={{ color: "#888", marginLeft: "1rem", fontSize: "1rem" }}
-              >
-                3:51 PM
-              </span>
-            </h5>
-            <p className="message-content">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
-              tempora debitis corrupti dolores consectetur ab non necessitatibus
-              consequatur perferendis rerum aliquam, laboriosam vel!Maiores
-              perspiciatis laudantium asperiores nostrum vel aliquam!
-            </p>
+        <div className="flex flex-col gap-7 pt-8 overflow-auto pb-10">  
+          {chat_msg.map((item, index) => (
+            <div className="flex px-12">
+              <img className="message-user1-image" src={user2} />
+              <h5 className="chat-name">
+                Isabella{" "}
+                <span
+                  style={{
+                    color: "#888",
+                    marginLeft: "1rem",
+                    fontSize: "1rem",
+                  }}
+                >
+                  3:51 PM
+                </span>
+              </h5>
+              <p className="message-content">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
+                tempora debitis corrupti dolores consectetur ab non
+                necessitatibus consequatur perferendis rerum aliquam, laboriosam
+                vel!Maiores perspiciatis laudantium asperiores nostrum vel
+                aliquam!
+              </p>
+            </div>
+          ))}
           </div>
           <div className=" mx-[100px] ms-auto mb-20 w-full">
             <div className="px-7 flex flex-col justify-end items-end">
-              <textarea  className="w-full border h-[100px] shadow-sm p-2  " />
-              <div className='items-end'>
-                <button className="px-8 hover:bg-blue-700 transition-all ease-in-out duration-500 rounded-md mt-3 bg-blue-600 text-white py-3">Send</button>
+              <textarea className="w-full border h-[100px] shadow-sm p-2  " />
+              <div className="items-end">
+                <button className="px-8 hover:bg-blue-700 transition-all ease-in-out duration-500 rounded-md mt-3 bg-blue-600 text-white py-3">
+                  Send
+                </button>
               </div>
             </div>
           </div>

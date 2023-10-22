@@ -113,26 +113,26 @@ export default function Header() {
                 </div>
 
                 <div className="flex items-end">
-                  <div
+                  <Link
                     className="cursor-pointer"
                     as={Link}
-                    to="/about"
+                    to="/reservations"
                     onClick={() => updateExpanded(false)}
                   >
                     <CgFileDocument style={{ marginBottom: "2px" }} />{" "}
                     Reservations
-                  </div>
+                  </Link>
                 </div>
 
                 <div className="flex items-end">
-                  <div
+                  <Link
                     className="cursor-pointer"
                     as={Link}
-                    to="/privacy-policy"
+                    to="/contacts"
                     onClick={() => updateExpanded(false)}
                   >
                     <MdPrivacyTip style={{ marginBottom: "2px" }} /> Contracts
-                  </div>
+                  </Link>
                 </div>
                 <div className="flex items-end">
                   <Link
