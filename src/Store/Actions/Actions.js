@@ -5,7 +5,8 @@ import {
   APPLOADING,
   UPDATE_USER,
   GET_FAV,
-  isLOGGED_IN
+  isLOGGED_IN,
+  ALL_RESERVATION,
 } from "./ActionType";
 
 export const setUser = (payload) => async (dispatch) => {
@@ -46,4 +47,9 @@ export const getAllFav = (payload) => async (dispatch) => {
     payload: payload,
   });
 };
-export const logout = (payload) => async (dispatch) => {};
+export const setAllReasevation = (payload) => async (dispatch) => {
+  dispatch({
+    type: ALL_RESERVATION,
+    payload: payload,
+  });
+};

@@ -6,6 +6,7 @@ import {
   UPDATE_USER,
   GET_FAV,
   isLOGGED_IN,
+  ALL_RESERVATION,
 } from "../Actions/ActionType";
 
 const initialState = {
@@ -50,6 +51,11 @@ const Reducer = (state = initialState, action) => {
         ...state,
         pros: payload,
       };
+      case ALL_RESERVATION:
+        return {
+          ...state,
+          reservations: payload,
+        };
     case APPLOADING:
       return {
         ...state,
