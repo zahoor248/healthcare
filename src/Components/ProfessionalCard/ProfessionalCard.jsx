@@ -258,14 +258,14 @@ export default function ProfessionalCard({ data }) {
                         )}
                         <div className="flex gap-3 pt-8">
                           <Link
-                            to={"/profile"}
+                            to={"/profile-details"}
                             className="py-3 text-center border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full"
                           >
                             View Profile
                           </Link>
-                          <button className="bg-blue-600 rounded-lg w-full text-white hover:bg-blue-800 transition-all ease-in-out duration-500">
+                          <Link to={'/availability'} className="bg-blue-600 rounded-lg w-full text-white hover:bg-blue-800 transition-all ease-in-out duration-500">
                             Contact this Pro
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>

@@ -7,6 +7,7 @@ import {
   GET_FAV,
   isLOGGED_IN,
   ALL_RESERVATION,
+  CONTRACTS,
 } from "./ActionType";
 
 export const setUser = (payload) => async (dispatch) => {
@@ -50,6 +51,12 @@ export const getAllFav = (payload) => async (dispatch) => {
 export const setAllReasevation = (payload) => async (dispatch) => {
   dispatch({
     type: ALL_RESERVATION,
+    payload: payload,
+  });
+};
+export const setContracts = (payload) => async (dispatch) => {
+  dispatch({
+    type: CONTRACTS,
     payload: payload,
   });
 };
