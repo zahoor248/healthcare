@@ -23,6 +23,7 @@ import Layout from "./Components/Layout";
 import Favouraties from "./Components/Favouraties/Favouraties";
 import Contacts from "./Components/Contacts/Contacts";
 import Reservations from "./Components/Reservations/Reservations";
+import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -38,6 +39,7 @@ root.render(
           <Route path="/listings" element={<HiringLayout />} />
           <Route path="/chats" element={<Chat />} />
           <Route path="/availability" element={<Availability />} />
+          <Route path="/profile-details" element={<ProfileDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/favouraties" element={<Favouraties />} />
           <Route path="/contacts" element={<Contacts />} />

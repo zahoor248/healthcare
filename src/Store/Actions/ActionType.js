@@ -6,3 +6,4 @@ export const UPDATE_USER = "UPDATE_USER";
 export const GET_FAV = "GET_FAV";
 export const isLOGGED_IN = "ISLOGGED_IN";
 export const ALL_RESERVATION = "ALL_RESERVATION";
+export const CONTRACTS = "CONTRACTS";

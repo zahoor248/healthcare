@@ -5,42 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setAllReasevation } from "../../Store/Actions/Actions";
 const Reservations = () => {
-  // const reservations = [
-  //   {
-  //     id: 1,
-  //     name: "Alex",
-  //     contract_number: "23",
-  //     contractor_name: "Adam",
-  //     contract_staus: "Open",
-  //     details: "Hello",
-  //     terms_of_service: "Customer",
-  //     price: "10",
-  //     user_avatar: user1,
-  //     description: "Hi there I am available",
-  //     location: "13981 Francisca Drive Suite 203, USA",
-  //     start_date: new Date(),
-  //     end_date: new Date(),
-  //   },
-
-  // ];
-
   const [loading, setLoading] = useState(false);
   const reservations = useSelector((state) => state.reservations);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (
-      reservations == null ||
-      reservations == undefined ||
-      reservations.length == 0
-    ) {
+    if (!reservations) {
       setLoading(true);
+
       handleAPIRequest("get", "reservation", null)
         .then((response) => {
           if (response.data) {
-            setAllReasevation([]);
+            dispatch(setAllReasevation([])); // Update Redux store with an empty array
           } else {
-            console.log(response, "Helelelelelelele");
-            console.log(response, "here is the response");
+            console.log(response, "Here is the response");
             dispatch(setAllReasevation(response));
           }
 
@@ -50,7 +28,7 @@ const Reservations = () => {
           setLoading(false);
         });
     }
-  }, [loading, reservations]);
+  }, [reservations]);
   return (
     <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
@@ -131,7 +109,7 @@ const Reservations = () => {
           </div>
         ) : (
           <div className="flex w-full justify-center center pt-20">
-            <div>Your reservations will appear here</div>
+            <div className="text-3xl ">Your reservations will appear here</div>
           </div>
         )}
       </div>

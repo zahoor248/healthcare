@@ -7,6 +7,7 @@ import {
   GET_FAV,
   isLOGGED_IN,
   ALL_RESERVATION,
+  CONTRACTS,
 } from "../Actions/ActionType";
 
 const initialState = {
@@ -56,6 +57,11 @@ const Reducer = (state = initialState, action) => {
           ...state,
           reservations: payload,
         };
+        case CONTRACTS:
+          return {
+            ...state,
+            contracts: payload,
+          };
     case APPLOADING:
       return {
         ...state,
