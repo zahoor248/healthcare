@@ -20,7 +20,6 @@ export default function ProfileDetails() {
 
   return (
     <>
-      <Header />
       <div className="profile-details-container">
         <div className="profile-user-about">
           <div style={{ display: "flex", paddingLeft: "5rem" }}>

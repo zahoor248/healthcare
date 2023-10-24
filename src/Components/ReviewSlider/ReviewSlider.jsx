@@ -23,9 +23,8 @@ export default function ReviewSlider() {
                     </div>
                 </div>
                 </div>
-                <div>
-                    <p className='review-desc'>Viverra ipsum nunc aliquet bibendum enim facilisis<br/> gravida.</p>
-                </div>
+                    <p className='review-desc w-full break-words'>Viverra ipsum nunc aliquet bibendum enim facilisis<br/> gravida.</p>
+               
             </div>
 
             <div className='slide1'>
