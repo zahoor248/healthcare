@@ -235,10 +235,11 @@ body {
   animation-name: ringD;
   stroke: #000000;
 }
-  
-  /* Animations */
+
+/* Animations */
 @keyframes ringA {
-  from, 4% {
+  from,
+  4% {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -330;
@@ -256,7 +257,8 @@ body {
     stroke-dashoffset: -595;
   }
 
-  40%, 54% {
+  40%,
+  54% {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -660;
@@ -274,7 +276,8 @@ body {
     stroke-dashoffset: -925;
   }
 
-  90%, to {
+  90%,
+  to {
     stroke-dasharray: 0 660;
     stroke-width: 20;
     stroke-dashoffset: -990;
@@ -282,7 +285,8 @@ body {
 }
 
 @keyframes ringB {
-  from, 12% {
+  from,
+  12% {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -110;
@@ -300,7 +304,8 @@ body {
     stroke-dashoffset: -195;
   }
 
-  48%, 62% {
+  48%,
+  62% {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -220;
@@ -318,7 +323,8 @@ body {
     stroke-dashoffset: -305;
   }
 
-  98%, to {
+  98%,
+  to {
     stroke-dasharray: 0 220;
     stroke-width: 20;
     stroke-dashoffset: -330;
@@ -344,7 +350,8 @@ body {
     stroke-dashoffset: -175;
   }
 
-  36%, 58% {
+  36%,
+  58% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -220;
@@ -362,7 +369,8 @@ body {
     stroke-dashoffset: -395;
   }
 
-  94%, to {
+  94%,
+  to {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -440;
@@ -370,7 +378,8 @@ body {
 }
 
 @keyframes ringD {
-  from, 8% {
+  from,
+  8% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: 0;
@@ -388,7 +397,8 @@ body {
     stroke-dashoffset: -175;
   }
 
-  44%, 50% {
+  44%,
+  50% {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -220;
@@ -406,7 +416,8 @@ body {
     stroke-dashoffset: -395;
   }
 
-  86%, to {
+  86%,
+  to {
     stroke-dasharray: 0 440;
     stroke-width: 20;
     stroke-dashoffset: -440;
