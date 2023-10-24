@@ -11,7 +11,6 @@ export default function HomeLayout() {
       <Hero />
       <Features />
       <About />
-   
     </div>
   );
 }

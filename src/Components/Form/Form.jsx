@@ -9,11 +9,11 @@ export default function Form() {
   const [zipCode, setZipCode] = useState("");
 
   return (
-    <div className="bg-white shadow-class rounded-xl z-50 ">
-      <div className="p-6 2xl:p-9 ">
+    <div className="bg-white shadow-class rounded-xl z-50 w-full">
+      <div className="px-4 py-3 md:p-6 2xl:p-9 ">
         <div className="flex flex-col gap-4 2xl:gap-6">
-          <div className="flex justify-between gap-6 items-center text-lg 2xl:text-2xl font-semibold">
-            <p className="whitespace-nowrap f-f-n-b ">I am a</p>
+          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-lg 2xl:text-2xl font-semibold flex-col md:flex-row">
+            <p className="whitespace-nowrap leading-none">I am a</p>
             <input
               type="text"
               placeholder="e-g -Lorem, Dolor"
@@ -23,8 +23,8 @@ export default function Form() {
             />
           </div>
 
-          <div className="flex justify-between gap-6 items-center text-lg 2xl:text-2xl font-semibold">
-            <p className="whitespace-nowrap f-f-n-b ">Looking for</p>
+          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-lg 2xl:text-2xl font-semibold flex-col md:flex-row">
+            <p className="whitespace-nowrap leading-none">Looking for</p>
             <input
               type="text"
               placeholder="e-g -Lorem, Dolor"
@@ -34,8 +34,8 @@ export default function Form() {
             />
           </div>
 
-          <div className="flex justify-between gap-6 items-center text-lg 2xl:text-2xl font-semibold max-w-[400px] w-full">
-            <p className="whitespace-nowrap f-f-n-b ">In zip code</p>
+          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-lg 2xl:text-2xl font-semibold md:max-w-[400px] w-full flex-col md:flex-row">
+            <p className="whitespace-nowrap leading-none">In zip code</p>
             <input
               type="text"
               placeholder="In zip code"
@@ -47,7 +47,7 @@ export default function Form() {
         </div>
         <div className="flex w-full pt-2 justify-end">
           <Link className="w-full md:w-auto" to="/listings">
-            <button className="px-8  justify-center  mt-8 w-full lg:mt-0 gap-1 rounded-lg text-white py-3 2xl:py-4 bg-blue-500 hover:bg-blue-600 transition-all  ease-in-out duration-500 flex items-center ">
+            <button className="px-8  justify-center mt-3 md:mt-8 w-full lg:mt-0 gap-1 rounded-lg text-white py-3 2xl:py-4 bg-blue-500 hover:bg-blue-600 transition-all  ease-in-out duration-500 flex items-center ">
               <BiSearch className="text-2xl" />
               Search
             </button>

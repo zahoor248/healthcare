@@ -48,11 +48,11 @@ export default function Hero() {
               <div class="banner-img-mobile lg:hidden">
                 <img src={HeroImage} alt="img" />
               </div>
-              <div className="opacity-0 -mt-16 xl:mt-4  -bottom-72 hover:scale-105 transition-all ease-in-out duration-500 w-full max-w-[550px] xl:max-w-[600px] 2xl:max-w-[700px]">
+              <div className="opacity-0 -mt-16 xl:mt-4  -bottom-72 hover:scale-105 transition-all ease-in-out duration-500 w-full max-w-fit xl:max-w-[600px] 2xl:max-w-[700px]">
                 {" "}
                 <Form />
               </div>
-              <div className="absolute z-50 -bottom-24 hover:scale-105 transition-all ease-in-out duration-500 w-full md:max-w-[550px] xl:max-w-[650px]  2xl:max-w-[700px]">
+              <div className="absolute z-50 -bottom-24 hover:scale-105 transition-all ease-in-out duration-500 w-[83vw] mx-3 md:mx-0 md:max-w-[550px] xl:max-w-[650px]  2xl:max-w-[700px]">
                 {" "}
                 <Form />
               </div>
