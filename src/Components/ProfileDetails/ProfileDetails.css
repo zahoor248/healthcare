@@ -27,31 +27,13 @@
     margin-top: 1rem;
 }
 .profile-user-name {
-    font-size: 2rem;
     font-family: "GilroySemibold";
-    color: #10274F;
 }
 .profile-designation {
-    font-size: 1.2rem;
     font-family: "GilroyMedium";
-    color: #8F9194;
-    margin-top: .4rem;
 }
 .contact-profile-btn {
-    font-size: 1.2rem;
     font-family: "GilroyMedium";
-    color: #fff;
-    background-color: #1C75BC;
-    border: 1px solid #1C75BC;
-    border-radius: 6px;
-    padding: .6rem 1rem;
-    margin-top: 1.5rem;
-    cursor: pointer;
-}
-.contact-profile-btn:hover {
-    border: 1px solid #10274F;
-    background-color: #fff;
-    color: #1C75BC;
 }
 .profile-border-bottom {
     border-bottom: 1px solid #B0D1EC;

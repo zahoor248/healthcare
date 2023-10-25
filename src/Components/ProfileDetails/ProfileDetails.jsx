@@ -20,29 +20,29 @@ export default function ProfileDetails() {
 
   return (
     <>
-      <div className="profile-details-container">
-        <div className="profile-user-about">
+      <div className="flex shadow-md">
+        <div className="basis-2/5 pt-12">
           <div style={{ display: "flex", paddingLeft: "5rem" }}>
-            <div className="avatar-img"></div>
+            <div className="border border-gray-300 w-40 h-40 bg-gray-300 rounded-lg"></div>
 
-            <div className="profile-user-text">
-              <p className="profile-user-name">Mathew Bryant</p>
-              <p className="profile-designation">ADON</p>
-              <button className="contact-profile-btn transition-all ease-in-out duration-500">
+            <div className="ml-8 mt-4">
+              <p className="profile-user-name text-2xl text-blue-900">Mathew Bryant</p>
+              <p className="profile-designation text-sm text-gray-300 mt-1">ADON</p>
+              <button className="contact-profile-btn text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
                 Contact this Pro
               </button>
             </div>
           </div>
 
-          <div className="profile-border-bottom"></div>
+          <div className="border-b border-blue-300 w-full mt-12"></div>
 
-          <div className="profile-attributes">
-            <div className="profile-columns">
-              <div className="profile-column1">
-                <div className="rating-section">
+          <div className="">
+            <div className="flex flex-row pl-20 mt-10 mb-10">
+              <div className="flex flex-col">
+                <div className="flex">
                   <AiOutlineStar className="star-icon" />
-                  <div className="rating-text">
-                    <p className="rating-heading">Ratings</p>
+                  <div className="ml-4">
+                    <p className="text-lg text-gray-600 mb-2">Ratings</p>
                     <AiFillStar
                       style={{ fontSize: "1.2rem", color: "#F2BC27" }}
                     />
@@ -61,9 +61,9 @@ export default function ProfileDetails() {
                   </div>
                 </div>
 
-                <div className="rating-section" style={{ marginTop: "1.5rem" }}>
-                  <AiOutlineIdcard className="license-icon" />
-                  <div className="rating-text">
+                <div className="flex" style={{ marginTop: "1.5rem" }}>
+                  <AiOutlineIdcard className="text-[2.5rem] text-blue-700" />
+                  <div className="ml-4">
                     <p className="rating-heading">Licensed in</p>
                     <p className="license-areas">CT, MA, RI, TN</p>
                   </div>
