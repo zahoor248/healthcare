@@ -14,6 +14,11 @@
     background-color: #fff;
     box-shadow: 0 .3rem 1rem rgb(0 0 0 / 0.2);
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 0px;
+    height: 100%;
 }
 .profile-user-details {
     display: flex;
@@ -31,9 +36,9 @@
     margin-top: 1rem;
 }
 .side-nav {
-    margin-top: 4rem;
-    padding-bottom: 4rem;
     padding-left: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .side-nav > li {
@@ -50,7 +55,6 @@
     font-size: 1.2rem;
     font-family: "NunitoBold";
     color: #101010;
-    margin-left: 1rem;
 }
 /* .side-nav-item:hover span{
     color: #fff;
@@ -84,14 +88,12 @@
     z-index: 10;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 1.5rem 3rem;
     display: flex;
     align-items: center;
 }
 .pen-icon {
     font-size: 2rem;
     color: #0f75bc;
-    margin-right: 1rem;
 }
 .profile-editing-section {
     padding: 3rem;
@@ -113,8 +115,6 @@
 .profile-editing-card {
     border: 1px solid #fff;
     background-color: #fff;
-    margin-top: 3rem;
-    padding-top: 6rem;
     box-shadow: 0 .3rem 1rem rgb(0 0 0 / 0.2);
 }
 .name-field-section {
@@ -266,9 +266,6 @@ width: 25%;
 .profile-save-btn-container {
     display: flex;
     justify-content: end;
-    margin-right: 10rem;
-    margin-top: 7rem;
-    margin-bottom: 5rem;
 }
 .profile-save-btn {
     font-size: 1.5rem;
@@ -292,14 +289,14 @@ width: 25%;
 .profile-fields2 {
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
 }
 .side-nav-link {
     position: relative;
     z-index: 10;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 1.5rem 3rem;
+    padding: 16px 20px;
     display: flex;
     align-items: center;
+    gap: 8px;
 }

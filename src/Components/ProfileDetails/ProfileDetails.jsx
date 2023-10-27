@@ -20,50 +20,55 @@ export default function ProfileDetails() {
 
   return (
     <>
-      <div className="profile-details-container">
-        <div className="profile-user-about">
+      <div className="flex flex-col xl:flex-row shadow-md">
+        <div className="basis-2/5 pt-12 col-span-2">
           <div style={{ display: "flex", paddingLeft: "5rem" }}>
-            <div className="avatar-img"></div>
-
-            <div className="profile-user-text">
-              <p className="profile-user-name">Mathew Bryant</p>
-              <p className="profile-designation">ADON</p>
-              <button className="contact-profile-btn transition-all ease-in-out duration-500">
+            <div className="border border-gray-300 w-40 h-40 bg-gray-300 rounded-lg"></div>
+            <div className="ml-8 mt-4">
+              <p className="profile-user-name text-2xl text-blue-900">
+                Mathew Bryant
+              </p>
+              <p className="profile-designation text-sm text-gray-300 mt-1">
+                ADON
+              </p>
+              <button className="contact-profile-btn text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
                 Contact this Pro
               </button>
             </div>
           </div>
 
-          <div className="profile-border-bottom"></div>
+          <div className="border-b border-blue-300 w-full mt-12"></div>
 
-          <div className="profile-attributes">
-            <div className="profile-columns">
-              <div className="profile-column1">
-                <div className="rating-section">
+          <div className="">
+            <div className="flex flex-col sm:flex-row xl:flex-col 2xl:flex-row gap-4 2xl:gap-0 pl-20 mt-10 mb-10">
+              <div className="flex flex-col">
+                <div className="flex">
                   <AiOutlineStar className="star-icon" />
-                  <div className="rating-text">
-                    <p className="rating-heading">Ratings</p>
-                    <AiFillStar
-                      style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                    />
-                    <AiFillStar
-                      style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                    />
-                    <AiFillStar
-                      style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                    />
-                    <AiFillStar
-                      style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                    />
-                    <AiFillStar
-                      style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                    />
+                  <div className="ml-4">
+                    <p className="text-lg text-gray-600 mb-2">Ratings</p>
+                    <div className="flex">
+                      <AiFillStar
+                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
+                      />
+                      <AiFillStar
+                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
+                      />
+                      <AiFillStar
+                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
+                      />
+                      <AiFillStar
+                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
+                      />
+                      <AiFillStar
+                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div className="rating-section" style={{ marginTop: "1.5rem" }}>
-                  <AiOutlineIdcard className="license-icon" />
-                  <div className="rating-text">
+                <div className="flex" style={{ marginTop: "1.5rem" }}>
+                  <AiOutlineIdcard className="text-[2.5rem] text-blue-700" />
+                  <div className="ml-4">
                     <p className="rating-heading">Licensed in</p>
                     <p className="license-areas">CT, MA, RI, TN</p>
                   </div>
@@ -92,9 +97,8 @@ export default function ProfileDetails() {
             </div>
           </div>
         </div>
-        <div className="border-b3"></div>
 
-        <div className="profile-about-text">
+        <div className="profile-about-text ">
           <div className="about-text">
             <h3>About Mathew</h3>
             <p className="about-pro-desc">
@@ -121,19 +125,18 @@ export default function ProfileDetails() {
           </div>
         </div>
 
-        <div className="profile-working-hours">
+        <div className="profile-working-hours ">
           <div className="working-hrs-space"></div>
           <p className="working-hrs">Preferred Working Hours</p>
-          <div className="working-day-section">
+          <div className="working-day-section w-full">
             <div
-              className="responsive-days"
+              className="responsive-days w-full xl:w-[12rem]"
               style={{
                 display: "flex",
                 flexDirection: "column",
-                width: "12rem",
               }}
             >
-              <div className="days-container">
+              <div className="days-container w-full">
                 <p>Sunday</p>
                 <p>Monday</p>
                 <p>Tuesday</p>
@@ -145,14 +148,13 @@ export default function ProfileDetails() {
             </div>
 
             <div
-              className="responsive-hrs"
+              className="responsive-hrs w-full xl:w-[14rem]"
               style={{
                 display: "flex",
                 flexDirection: "column",
-                width: "14rem",
               }}
             >
-              <div className="hrs-container">
+              <div className="hrs-container w-full">
                 <p>11 am - 5 pm</p>
                 <p>8 am - 9 pm</p>
                 <p>9 am - 6 pm</p>
@@ -165,71 +167,55 @@ export default function ProfileDetails() {
           </div>
         </div>
       </div>
-
-      <div className=" shadow px-20">
-        <div className="">
-          <h3 className="select-date-heading">Select Date</h3>
-          <div className="responsive-fields" style={{ display: "flex" }}>
-            <div className="month-selection"></div>
-
-            <div className="responsive-flex">
-              <div
-                className="responsive-days-start"
-                style={{ position: "relative", marginLeft: "3rem" }}
-              >
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </div>
-
-              <div
-                className="responsive-days-end"
-                style={{
-                  position: "relative",
-                  marginLeft: "3rem",
-                  marginTop: "2.8rem",
-                }}
-              >
-                <p className="end-days">End</p>
-                <DatePicker
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="price-container">
-            <CommonInput label={"Price"} value={price} setValue={setPrice} />
-            <div className="price-field location-field">
-              <p>Location</p>
+      <div className="review-section-container">
+        <h3 className="review-heading ml-20">Select:</h3>
+        <div className="w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-6 shadow-xl">
+          <div className="w-full flex flex-col gap-2">
+            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+              First Name
+            </p>
+            <div className="relative w-full">
               <input
-                type="text"
-                placeholder="Lorem Ipsum"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                placeholder="First Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               />
             </div>
           </div>
-
-          {/* <div className="price-container">
-            <div className="desc-field">
-              <p>Description</p>
-              <textarea
-                className="pro-description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+          <div className="w-full flex flex-col gap-2">
+            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+              First Name
+            </p>
+            <div className="relative w-full">
+              <input
+                placeholder="First Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               />
             </div>
-          </div> */}
-
-          {/* <div className="pro-btn-container">
-            <button className="reserve-pro-btn">Reserve this Pro</button>
-          </div> */}
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+              First Name
+            </p>
+            <div className="relative w-full">
+              <input
+                placeholder="First Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+              />
+            </div>
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+              First Name
+            </p>
+            <div className="relative w-full">
+              <input
+                placeholder="First Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+              />
+            </div>
+          </div>
         </div>
       </div>
-
       <div className="review-section-container">
         <ReviewSlider />
       </div>
