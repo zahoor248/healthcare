@@ -74,17 +74,17 @@ const ProfileData = () => {
   // }
 
   return (
-    <div className="profile-editing-section">
+    <div className="profile-editing-section mb-12">
       <div className="profile-editing-header">
         <BiMessageSquareEdit className="edit-box-icon" />
         <p className="my-profile-text">My Profile</p>
       </div>
 
-      <div className="profile-editing-card">
+      <div className="profile-editing-card h-full">
         <form onSubmit={submitHandler}>
-          <div className="profile-fields">
+          <div className="grid grid-cols-3 gap-4 w-full h-full">
             <TextField
-              className="hours-input"
+              className=""
               label="First Name"
               variant="outlined"
               id="firstName"
@@ -92,9 +92,8 @@ const ProfileData = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
-
             <TextField
-              className="hours-input"
+              className=""
               label="Last Name"
               variant="outlined"
               id="lastName"
@@ -102,11 +101,9 @@ const ProfileData = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-          </div>
 
-          <div className="profile-fields2">
             <TextField
-              className="hours-input"
+              className=""
               label="Email"
               variant="outlined"
               id="email"
@@ -116,7 +113,7 @@ const ProfileData = () => {
             />
 
             <TextField
-              className="hours-input"
+              className=""
               label="Phone"
               variant="outlined"
               id="phone"
@@ -124,11 +121,9 @@ const ProfileData = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
-          </div>
 
-          <div className="profile-fields2">
             <TextField
-              className="hours-input"
+              className=""
               label="Password"
               variant="outlined"
               id="password"
@@ -138,7 +133,7 @@ const ProfileData = () => {
             />
 
             <TextField
-              className="hours-input"
+              className=""
               label="Confirm Password"
               variant="outlined"
               id="confirmPassword"
@@ -147,7 +142,6 @@ const ProfileData = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-
           <div className="profile-save-btn-container">
             <button className="profile-save-btn">Save</button>
           </div>
@@ -162,10 +156,10 @@ export default function Profile() {
   // const user = useSelector(state=>state.Reducer.user)
   return (
     <>
-      <div className="profile-container">
-        <div className="profile-sidebar-section">
+      <div className="flex">
+        <div className=" bg-lightskyblue p-12">
           <div className="profile-sidebar-card">
-            <div className="profile-user-details">
+            <div className="flex flex-col items-center">
               <img src={User} alt="user profile image" />
               <p>John Doe</p>
             </div>
