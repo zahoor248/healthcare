@@ -250,13 +250,6 @@ export default function Profile() {
                   </div>
                 </li>
 
-                <li onClick={() => setNav("hours")} className="side-nav-item">
-                  <a href="" className="side-nav-link">
-                    <AiOutlineFieldTime className="pen-icon" />
-                    <span>Hours</span>
-                  </a>
-                </li>
-
                 <li
                   onClick={() => setNav("preferences")}
                   className="side-nav-item"

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 export default function Pagination() {
   return (
     <>
-      <div className="flex gap-3">
+      <div className="flex gap-3 w-full justify-end mt-6">
         <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
           <svg
             xmlns="http://www.w3.org/2000/svg"
