@@ -24,6 +24,7 @@ export default function ProfessionalCard({ data }) {
   const handleShow = (item) => {
     setShow(true);
     setProfileData(item);
+    console.log(item, "here is the item");
   };
 
   const AllPros = () => {
@@ -264,7 +265,10 @@ export default function ProfessionalCard({ data }) {
                           >
                             View Profile
                           </Link>
-                          <Link to={'/availability'} className="bg-blue-600 rounded-lg w-full text-white hover:bg-blue-800 transition-all ease-in-out duration-500">
+                          <Link
+                            to={`/chats?${profileData?.uuid}`}
+                            className="bg-blue-600 rounded-lg py-3 w-full text-center text-white hover:bg-blue-800 transition-all ease-in-out duration-500"
+                          >
                             Contact this Pro
                           </Link>
                         </div>
