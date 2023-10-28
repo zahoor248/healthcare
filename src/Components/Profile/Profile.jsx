@@ -262,6 +262,10 @@ export default function Profile() {
         {/* <Preferences/> */}
         {/* <Notification/> */}
         {nav === "profile" && <ProfileData />}
+
+        {nav === "address" && <Address />}
+        {nav === "licenses" && <License />}
+        {nav === "preferences" && <Preferences />}
       </div>
     </>
   );
