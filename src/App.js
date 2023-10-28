@@ -24,15 +24,20 @@ import Hero from "./Components/Hero/Hero";
 
 function App() {
   const user = useSelector((state) => state.user);
+  const isAuthenticated = useSelector((state) => state.isLoggedIn);
+
   console.log(user, "here is the user");
+
   return (
     <>
       {/* <ForgotPassword/> */}
-   
-    
- 
-      <HomeLayout />
-  
+      {isAuthenticated && user.type == "pro" ? (
+        <HiringLayout />
+      ) : isAuthenticated && user.type == "bus" ? (
+        <HiringLayout />
+      ) : (
+        <HomeLayout />
+      )}
     </>
   );
 }
