@@ -74,77 +74,103 @@ const ProfileData = () => {
   // }
 
   return (
-    <div className="profile-editing-section mb-12">
+    <div className="flex flex-col gap-8 w-full my-12">
       <div className="profile-editing-header">
         <BiMessageSquareEdit className="edit-box-icon" />
         <p className="my-profile-text">My Profile</p>
       </div>
 
-      <div className="profile-editing-card h-full">
+      <div className="bg-white shadow-lg h-full p-8 flex flex-col justify-between">
         <form onSubmit={submitHandler}>
-          <div className="grid grid-cols-3 gap-4 w-full h-full">
-            <TextField
-              className=""
-              label="First Name"
-              variant="outlined"
-              id="firstName"
-              name="firstname"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-              className=""
-              label="Last Name"
-              variant="outlined"
-              id="lastName"
-              name="lastname"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-
-            <TextField
-              className=""
-              label="Email"
-              variant="outlined"
-              id="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <TextField
-              className=""
-              label="Phone"
-              variant="outlined"
-              id="phone"
-              name="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-
-            <TextField
-              className=""
-              label="Password"
-              variant="outlined"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <TextField
-              className=""
-              label="Confirm Password"
-              variant="outlined"
-              id="confirmPassword"
-              name="confirmpassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+          <div className="grid grid-cols-2 gap-4 w-full">
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                First Name
+              </p>
+              <TextField
+                className=""
+                label="First Name"
+                variant="outlined"
+                id="firstName"
+                name="firstname"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Last name
+              </p>
+              <TextField
+                className=""
+                label="Last Name"
+                variant="outlined"
+                id="lastName"
+                name="lastname"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Email
+              </p>
+              <TextField
+                className=""
+                label="Email"
+                variant="outlined"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Phone
+              </p>
+              <TextField
+                className=""
+                label="Phone"
+                variant="outlined"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Password
+              </p>
+              <TextField
+                className=""
+                label="Password"
+                variant="outlined"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Confirm Password
+              </p>
+              <TextField
+                className=""
+                label="Confirm Password"
+                variant="outlined"
+                id="confirmPassword"
+                name="confirmpassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="profile-save-btn-container">
-            <button className="profile-save-btn">Save</button>
-          </div>
+          <button className="profile-save-btn self-end flex justify-end ml-auto mt-12">
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -156,8 +182,8 @@ export default function Profile() {
   // const user = useSelector(state=>state.Reducer.user)
   return (
     <>
-      <div className="flex">
-        <div className=" bg-lightskyblue p-12">
+      <div className="flex  max-w-[1920px] mx-auto">
+        <div className=" p-12">
           <div className="profile-sidebar-card">
             <div className="flex flex-col items-center">
               <img src={User} alt="user profile image" />
