@@ -192,8 +192,8 @@ export default function Profile() {
         <div className="py-12">
           <div className="profile-sidebar-card">
             <div className="flex flex-col items-center">
-              <img src={User} alt="user profile image" />
-              <p>John Doe</p>
+              <img src={User} alt="user profile image" className="w-20 h-20"/>
+              <p className="text-xl font-semibold">John Doe</p>
             </div>
 
             <div>
