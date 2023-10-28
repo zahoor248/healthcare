@@ -5,7 +5,7 @@ import { BsDot } from "react-icons/bs";
 export default function Footer() {
   return (
     <div className="bg-[#10274f]">
-      <div className="main-container flex flex-col md:flex-row text-white md:items-center justify-between py-8 gap-2 md:gap-0">
+      <div className="main-container flex flex-col md:flex-row text-white md:items-center justify-between py-8 gap-2 md:gap-0 h-fit">
         <p className="text-white text-xs sm:text-base">
           © 2023 HealthcareUp. All rights reserved.
         </p>
