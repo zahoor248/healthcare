@@ -305,15 +305,7 @@ export default function ProfessionalCard({ data }) {
     return (
       <>
         <AllPros currentItems={currentItems} />
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          renderOnZeroPageCount={null}
-        />
+        
         <Pagination />
       </>
     );
