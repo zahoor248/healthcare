@@ -309,7 +309,6 @@ export default function ProfessionalCard({ data }) {
     return (
       <>
         <AllPros currentItems={currentItems} />
-        
         <Pagination />
       </>
     );
