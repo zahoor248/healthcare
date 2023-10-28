@@ -87,8 +87,9 @@ const ProfileData = () => {
               <p className="text-base/none font-normal text-neutral-600">
                 First Name
               </p>
-              <TextField
-                className=""
+              <input
+              placeholder="First Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="First Name"
                 variant="outlined"
                 id="firstName"
@@ -101,8 +102,9 @@ const ProfileData = () => {
               <p className="text-base/none font-normal text-neutral-600">
                 Last name
               </p>
-              <TextField
-                className=""
+              <input
+              placeholder="Last Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Last Name"
                 variant="outlined"
                 id="lastName"
@@ -115,8 +117,9 @@ const ProfileData = () => {
               <p className="text-base/none font-normal text-neutral-600">
                 Email
               </p>
-              <TextField
-                className=""
+              <input
+              placeholder="Enter Email"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Email"
                 variant="outlined"
                 id="email"
@@ -129,8 +132,9 @@ const ProfileData = () => {
               <p className="text-base/none font-normal text-neutral-600">
                 Phone
               </p>
-              <TextField
-                className=""
+              <input
+              placeholder="Enter Phone Number"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Phone"
                 variant="outlined"
                 id="phone"
@@ -143,8 +147,9 @@ const ProfileData = () => {
               <p className="text-base/none font-normal text-neutral-600">
                 Password
               </p>
-              <TextField
-                className=""
+              <input
+              placeholder="Enter Password"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Password"
                 variant="outlined"
                 id="password"
@@ -157,8 +162,9 @@ const ProfileData = () => {
               <p className="text-base/none font-normal text-neutral-600">
                 Confirm Password
               </p>
-              <TextField
-                className=""
+              <input
+              placeholder="Confirm your Password"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Confirm Password"
                 variant="outlined"
                 id="confirmPassword"
