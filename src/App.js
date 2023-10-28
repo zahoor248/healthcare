@@ -21,6 +21,7 @@ import { useSelect } from "@mui/base";
 import { useSelector } from "react-redux";
 import Navbar from "./Components/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
+import Reservations from "./Components/Reservations/Reservations";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -31,10 +32,10 @@ function App() {
   return (
     <>
       {/* <ForgotPassword/> */}
-      {isAuthenticated && user.type == "pro" ? (
+      {isAuthenticated && user.type == "bus" ? (
         <HiringLayout />
-      ) : isAuthenticated && user.type == "bus" ? (
-        <HiringLayout />
+      ) : isAuthenticated && user.type == "pro" ? (
+        <Reservations />
       ) : (
         <HomeLayout />
       )}
