@@ -182,8 +182,8 @@ export default function Profile() {
   // const user = useSelector(state=>state.Reducer.user)
   return (
     <>
-      <div className="flex  max-w-[1920px] mx-auto">
-        <div className=" p-12">
+      <div className="flex main-container gap-8">
+        <div className="py-12">
           <div className="profile-sidebar-card">
             <div className="flex flex-col items-center">
               <img src={User} alt="user profile image" />
