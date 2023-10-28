@@ -168,11 +168,9 @@ const ProfileData = () => {
               />
             </div>
           </div>
-          <div className="h-full flex justify-end items-end -mb-12">
-            <button className="profile-save-btn self-end flex justify-end mt-auto">
-              Save
-            </button>
-          </div>
+          <button className="profile-save-btn self-end flex justify-end ml-auto mt-12">
+            Save
+          </button>
         </form>
       </div>
     </div>
