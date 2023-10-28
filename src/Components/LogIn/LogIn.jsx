@@ -55,10 +55,9 @@ export default function LogIn() {
 
   return (
     <>
-    
       <div className="flex flex-col w-full h-screen overflow-auto items-center ">
         {/* <Header /> */}
-        <Header />
+
         <div className="flex w-full justify-center h-full ">
           <div className="bg-[#4169e1] hidden md:flex items-center justify-center w-[50%]">
             <img src={Slide2} className="w-[500px]" />

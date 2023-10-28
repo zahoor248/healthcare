@@ -21,10 +21,11 @@ import { TbLicense } from "react-icons/tb";
 import { MdRoomPreferences } from "react-icons/md";
 import Address from "../Address/Address";
 import License from "../License/License";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BusinessProfile from "../BusinessProfile/BusinessProfile";
 import Preferences from "../Preferences/Preferences";
 import Notification from "../Notification/Notification";
+import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 
 const ProfileData = () => {
   const [firstName, setFirstName] = useState("");
@@ -73,6 +74,12 @@ const ProfileData = () => {
 
   // }
 
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(setUser(null));
+    dispatch(setIsLoggedIn(false));
+  };
   return (
     <div className="flex flex-col gap-8 w-full my-12">
       <div className="profile-editing-header">
@@ -168,9 +175,17 @@ const ProfileData = () => {
               />
             </div>
           </div>
-          <button className="profile-save-btn self-end flex justify-end ml-auto mt-12">
-            Save
-          </button>
+          <div className="flex gap-3 justify-end w-auto">
+            <button
+              onClick={() => handleLogout()}
+              className=" border text-blue-600 border-blue-600 px-5 py-2 rounded-lg mt-12"
+            >
+              Logout
+            </button>
+            <button className=" px-6 py-3 bg-blue-600 text-white rounded-lg   mt-12">
+              Update
+            </button>
+          </div>
         </form>
       </div>
     </div>
