@@ -15,7 +15,7 @@
     flex-direction: column;
     gap: 24px;
     padding: 24px 0px;
-    width: 400px;
+    width: 350px;
     height: 100%;
 }
 .profile-user-details {
@@ -262,12 +262,12 @@ color: #101010;
 width: 25%;
 }
 .profile-save-btn {
-    font-size: 1.5rem;
+    font-size: 20px;
     font-family: "NunitoSemibold";
     color: #fff;
     background-color: #0f75bc;
     border: 1px solid #0f75bc;
-    padding: 1rem 3rem;
+    padding: 8px 2rem;
     border-radius: .6rem;
     cursor: pointer;
 }
