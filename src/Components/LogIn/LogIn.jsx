@@ -39,7 +39,7 @@ export default function LogIn() {
           dispatch(setUser(response.user));
           dispatch(setIsLoggedIn(true));
           localStorage.setItem("token", user.token);
-          navigate("/listings");
+          navigate("/");
           setLoading(false);
         })
         .catch((e) => {

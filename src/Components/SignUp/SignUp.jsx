@@ -63,7 +63,7 @@ export default function SignUp() {
         console.log(response);
         setError("");
         dispatch(setUser(response.user));
-        navigate("/listings");
+        navigate("/");
         setLoading(false);
       })
       .catch((error) => {
