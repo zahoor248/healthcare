@@ -1,23 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfileDetails.css";
 import { AiOutlineStar, AiFillStar, AiOutlineIdcard } from "react-icons/ai";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { FaMapPin } from "react-icons/fa";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 import ReviewSlider from "../ReviewSlider/ReviewSlider";
 import DaySelect from "../DaySelect/DaySelect";
 import Header from "../Header/Header";
 import CommonInput from "../ReusableComponents/CommonInput";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Alert, Box } from "@mui/material";
 
 export default function ProfileDetails() {
+  const location = useLocation();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [month, setMonth] = useState("");
   const [price, setPrice] = useState("");
-  const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+  const [userDetails, setUserDetails] = useState("");
 
+  const professionals = useSelector((state) => state.pros);
+  const [cleared, setCleared] = useState(false);
+
+  // co
+  useEffect(() => {
+    let filter_user = [...professionals];
+    let route_uuid = location.search.split("?")[1];
+    let getuser = filter_user.find((temp) => temp.uuid === route_uuid);
+
+    setUserDetails(getuser);
+    console.log(location);
+    console.log(getuser);
+  }, [professionals]);
+
+  useEffect(() => {
+    if (cleared) {
+      const timeout = setTimeout(() => {
+        setCleared(false);
+      }, 1500);
+
+      return () => clearTimeout(timeout);
+    }
+    return () => {};
+  }, [cleared]);
   return (
     <>
       <div className="flex flex-col xl:flex-row shadow-md">
@@ -25,15 +55,17 @@ export default function ProfileDetails() {
           <div style={{ display: "flex", paddingLeft: "5rem" }}>
             <div className="border border-gray-300 w-40 h-40 bg-gray-300 rounded-lg"></div>
             <div className="ml-8 mt-4">
-              <p className="profile-user-name text-2xl text-blue-900">
-                Mathew Bryant
+              <p className="profile-user-name capitalize text-2xl text-blue-900">
+                {userDetails?.firstname} {userDetails?.lastname}
               </p>
               <p className="profile-designation text-sm text-gray-300 mt-1">
                 ADON
               </p>
-              <button className="contact-profile-btn text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
-                Contact this Pro
-              </button>
+              <Link to={`/chats?${userDetails?.uuid}`}>
+                <button className="contact-profile-btn text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
+                  Contact this Pro
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -47,21 +79,17 @@ export default function ProfileDetails() {
                   <div className="ml-4">
                     <p className="text-lg text-gray-600 mb-2">Ratings</p>
                     <div className="flex">
-                      <AiFillStar
-                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                      />
-                      <AiFillStar
-                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                      />
-                      <AiFillStar
-                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                      />
-                      <AiFillStar
-                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                      />
-                      <AiFillStar
-                        style={{ fontSize: "1.2rem", color: "#F2BC27" }}
-                      />
+                      {userDetails?.reviews?.length ? (
+                        <div>
+                          {userDetails?.reviews?.map((item) => (
+                            <AiFillStar
+                              style={{ fontSize: "1.2rem", color: "#F2BC27" }}
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        "N/A"
+                      )}
                     </div>
                   </div>
                 </div>
@@ -70,7 +98,15 @@ export default function ProfileDetails() {
                   <AiOutlineIdcard className="text-[2.5rem] text-blue-700" />
                   <div className="ml-4">
                     <p className="rating-heading">Licensed in</p>
-                    <p className="license-areas">CT, MA, RI, TN</p>
+                    {userDetails?.licenses?.length ? (
+                      <div className="flex gap-1">
+                        {userDetails?.licenses?.map((item) => (
+                          <p className="license-areas">{item?.abbrev}</p>
+                        ))}
+                      </div>
+                    ) : (
+                      "N/A"
+                    )}
                   </div>
                 </div>
               </div>
@@ -82,7 +118,12 @@ export default function ProfileDetails() {
                   <TbCurrencyDollar className="dollar-icon" />
                   <div className="rating-text">
                     <p className="rating-heading">Rates</p>
-                    <p className="license-areas">$100/day, $50/hr</p>
+                    <p className="license-areas">
+                      {" "}
+                      {userDetails?.pro_profile
+                        ? `$${userDetails?.pro_profile?.daily_rate}/day $${userDetails?.pro_profile?.hourly_rate}/hour`
+                        : "0"}
+                    </p>
                   </div>
                 </div>
 
@@ -90,7 +131,12 @@ export default function ProfileDetails() {
                   <FaMapPin className="pin-icon" />
                   <div className="rating-text">
                     <p className="rating-heading">Radius</p>
-                    <p className="license-areas">50 miles from 06415</p>
+                    <p className="license-areas">
+                      {" "}
+                      {userDetails?.pro_profile?.radius
+                        ? `${userDetails?.pro_profile?.radius} miles away`
+                        : "N/A"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -100,27 +146,11 @@ export default function ProfileDetails() {
 
         <div className="profile-about-text ">
           <div className="about-text">
-            <h3>About Mathew</h3>
+            <h3>About {userDetails?.firstname}</h3>
             <p className="about-pro-desc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Viverra ipsum nunc aliquet bibendum enim facilisis gravida. Neque
-              gravida in fermentum et sollicitudin ac orci. At tellus at urna
-              condimentum mattis pellentesque id nibh. Vitae justo eget magna
-              fermentum iaculis eu non vitae magna ac orci gravida Neque gravida
-              in fermentum et non tellus urna at. Platea dictumst quisque
-              sagittis purus sit amet volutpat consequat mauris. In aliquam sem
-              fringilla ut morbi tincidunt augue interdum. Condimentum mattis
-              pellentesque id nibh tortor id aliquet lectus. Tempor id eu.
-              Malesuada proin libero nunc consequat. In dictum non consectetur a
-              erat. Curabitur vitae nunc sed velit dignissim sodales. Diam sit
-              amet nisl suscipit. Elementum tempus egestas sed sed risus pretium
-              quam vulputate. Luctus venenatis lectus magna fringilla. Pulvinar
-              pellentesque habitant morbi tristique senectus. Purus sit amet
-              luctus venenatis lectus magna fringilla urna porttitor. Nisl
-              pretium fusce id velit ut tortor pretium viverra suspendisse.
-              Nullam eget felis eget nunc lobortis mattis aliquam faucibus
-              purus. Donec enim diam vulputate ut.
+              {userDetails?.about_me == null
+                ? `${userDetails?.firstname} has not added description yet.`
+                : userDetails?.about_me}
             </p>
           </div>
         </div>
@@ -128,90 +158,174 @@ export default function ProfileDetails() {
         <div className="profile-working-hours ">
           <div className="working-hrs-space"></div>
           <p className="working-hrs">Preferred Working Hours</p>
-          <div className="working-day-section w-full">
-            <div
-              className="responsive-days w-full xl:w-[12rem]"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <div className="days-container w-full">
-                <p>Sunday</p>
-                <p>Monday</p>
-                <p>Tuesday</p>
-                <p>Wednesday</p>
-                <p>Thursday</p>
-                <p>Friday</p>
-                <p>Saturday</p>
+          {userDetails?.pro_profile?.working_hours.map((item) => (
+            <div className="working-day-section w-full">
+              <div
+                className="responsive-days w-full xl:w-[12rem]"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div className="days-container w-full">{item.name}</div>
               </div>
-            </div>
 
-            <div
-              className="responsive-hrs w-full xl:w-[14rem]"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <div className="hrs-container w-full">
-                <p>11 am - 5 pm</p>
-                <p>8 am - 9 pm</p>
-                <p>9 am - 6 pm</p>
-                <p>9 am - 6 pm</p>
-                <p>9 am - 6 pm</p>
-                <p>9 am - 6 pm</p>
-                <p>9 am - 6 pm</p>
+              <div
+                className="responsive-hrs w-full xl:w-[14rem]"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div className="hrs-container w-full">
+                  <p>
+                    {item?.fromTime ? item?.fromTime + "-" : "Not available "}{" "}
+                    {item?.toTime}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-      <div className="review-section-container">
+      <div className="">
         <h3 className="review-heading ml-20">Select:</h3>
-        <div className="w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-6 shadow-xl">
-          <div className="w-full flex flex-col gap-2">
-            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
-              First Name
-            </p>
-            <div className="relative w-full">
-              <input
-                placeholder="First Name"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-              />
+        <div className="w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-10 flex flex-col gap-5  ">
+          <div className="flex gap-6">
+            <div className="w-full flex flex-col gap-2">
+              <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                Start Date
+              </p>
+              <div className="relative w-full">
+                <LocalizationProvider
+                  className="w-full"
+                  dateAdapter={AdapterDayjs}
+                >
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <DatePicker
+                      sx={{ width: "100%" }}
+                      slotProps={{
+                        field: {
+                          clearable: true,
+                          onClear: () => setCleared(true),
+                        },
+                      }}
+                    />
+
+                    {cleared && (
+                      <Alert
+                        sx={{ position: "absolute", bottom: 0, right: 0 }}
+                        severity="success"
+                      >
+                        Field cleared!
+                      </Alert>
+                    )}
+                  </Box>
+                </LocalizationProvider>
+              </div>
+            </div>
+            <div className="w-full flex flex-col gap-2">
+              <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                End Date
+              </p>
+              <div className="relative w-full">
+                <LocalizationProvider
+                  className="w-full"
+                  dateAdapter={AdapterDayjs}
+                >
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <DatePicker
+                      sx={{ width: "100%" }}
+                      slotProps={{
+                        field: {
+                          clearable: true,
+                          onClear: () => setCleared(true),
+                        },
+                      }}
+                    />
+
+                    {cleared && (
+                      <Alert
+                        sx={{ position: "absolute", bottom: 0, right: 0 }}
+                        severity="success"
+                      >
+                        Field cleared!
+                      </Alert>
+                    )}
+                  </Box>
+                </LocalizationProvider>
+              </div>
             </div>
           </div>
           <div className="w-full flex flex-col gap-2">
             <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
-              First Name
+              Location
             </p>
             <div className="relative w-full">
               <input
-                placeholder="First Name"
+                placeholder="Select Location"
                 className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               />
             </div>
           </div>
-          <div className="w-full flex flex-col gap-2">
-            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
-              First Name
-            </p>
-            <div className="relative w-full">
-              <input
-                placeholder="First Name"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-              />
+          <div className="flex gap-8 flex-col">
+            <div className="flex gap-2 ">
+              <div className="w-full flex flex-col gap-2">
+                <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                  Rate
+                </p>
+                <div className="relative w-full">
+                  <input
+                    placeholder="Enter Value"
+                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  />
+                </div>
+              </div>
+              /{" "}
+              <div className="w-full flex flex-col gap-2">
+                <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                  Rate
+                </p>
+                <div className="relative w-full">
+                  <select className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full">
+                    <option>Hourly Rate</option>
+                    <option>Daily Rate</option>
+                    <option>Fixed</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="w-full flex flex-col gap-2">
-            <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
-              First Name
-            </p>
-            <div className="relative w-full">
-              <input
-                placeholder="First Name"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-              />
+            <div className="w-full flex flex-col gap-2">
+              <div>
+                <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                  Description
+                </p>
+                <div className="relative w-full">
+                  <textarea
+                    placeholder="First Name"
+                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  />
+                </div>
+              </div>
+              <button className="px-6 py-3 rounded-lg bg-blue-600 text-white">
+                Send Reservation
+              </button>
             </div>
           </div>
         </div>

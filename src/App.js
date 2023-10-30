@@ -27,7 +27,6 @@ function App() {
   const user = useSelector((state) => state.user);
   const isAuthenticated = useSelector((state) => state.isLoggedIn);
 
-  console.log(user, "here is the user");
 
   return (
     <>

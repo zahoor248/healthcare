@@ -14,7 +14,7 @@ import ModalReview from "../ModalReview/ModalReview";
 import ReactPaginate from "react-paginate";
 import { Modal } from "@mui/base";
 import { Link } from "react-router-dom";
-import Pagination from "../Pagination/Pagination"
+import Pagination from "../Pagination/Pagination";
 
 export default function ProfessionalCard({ data }) {
   const [show, setShow] = useState(false);
@@ -260,7 +260,7 @@ export default function ProfessionalCard({ data }) {
                         )}
                         <div className="flex gap-3 pt-8">
                           <Link
-                            to={"/profile-details"}
+                            to={`/profile-details?${profileData?.uuid}`}
                             className="py-3 text-center border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full"
                           >
                             View Profile
@@ -309,7 +309,7 @@ export default function ProfessionalCard({ data }) {
     return (
       <>
         <AllPros currentItems={currentItems} />
-        
+
         <Pagination />
       </>
     );

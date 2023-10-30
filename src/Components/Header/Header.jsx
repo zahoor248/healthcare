@@ -35,7 +35,6 @@ export default function Header() {
   }
 
   window.addEventListener("scroll", scrollHandler);
-  console.log(user, "HERE IS THE USER");
   return (
     <>
       {!hideHeader.includes(routePath) && (
