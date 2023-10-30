@@ -14,6 +14,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Alert, Box } from "@mui/material";
+import { handleAPIRequest } from "../../helper/ApiHandler";
 
 export default function ProfileDetails() {
   const location = useLocation();
@@ -26,14 +27,23 @@ export default function ProfileDetails() {
 
   const professionals = useSelector((state) => state.pros);
   const [cleared, setCleared] = useState(false);
+  const [ratting, setRatting] = useState([]);
 
   // co
   useEffect(() => {
     let filter_user = [...professionals];
     let route_uuid = location.search.split("?")[1];
     let getuser = filter_user.find((temp) => temp.uuid === route_uuid);
+    handleAPIRequest("get", `pros/${route_uuid}`, null)
+      .then((response) => {
+        console.log(response, "here is res");
+        setUserDetails(response?.data?.user);
+        // to prevent from loading on listing page we are making call here
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-    setUserDetails(getuser);
     console.log(location);
     console.log(getuser);
   }, [professionals]);
@@ -219,15 +229,6 @@ export default function ProfileDetails() {
                         },
                       }}
                     />
-
-                    {cleared && (
-                      <Alert
-                        sx={{ position: "absolute", bottom: 0, right: 0 }}
-                        severity="success"
-                      >
-                        Field cleared!
-                      </Alert>
-                    )}
                   </Box>
                 </LocalizationProvider>
               </div>
@@ -259,15 +260,6 @@ export default function ProfileDetails() {
                         },
                       }}
                     />
-
-                    {cleared && (
-                      <Alert
-                        sx={{ position: "absolute", bottom: 0, right: 0 }}
-                        severity="success"
-                      >
-                        Field cleared!
-                      </Alert>
-                    )}
                   </Box>
                 </LocalizationProvider>
               </div>
@@ -318,20 +310,44 @@ export default function ProfileDetails() {
                 </p>
                 <div className="relative w-full">
                   <textarea
-                    placeholder="First Name"
+                    placeholder="Describe your self"
                     className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                   />
                 </div>
               </div>
-              <button className="px-6 py-3 rounded-lg bg-blue-600 text-white">
-                Send Reservation
-              </button>
+              <div className="w-auto flex justify-end items-end mt-4">
+                <button className="px-6 py-3 rounded-lg bg-blue-600 text-white">
+                  Send Reservation
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="review-section-container">
-        <ReviewSlider />
+        <div className="slides-container">
+          {userDetails?.reviewer?.map((item) => (
+            <div className="slide1">
+              <div style={{ display: "flex" }}>
+                <div className="slide-image-container"></div>
+                <div style={{ marginLeft: "1.2rem", marginTop: "0.2rem" }}>
+                  <p className="user-review">
+                    {" "}
+                    {item?.reviewer?.firstname} {item?.reviewer?.lastname}
+                  </p>
+                  <div style={{ marginTop: ".5rem" }} className="flex">
+                    <AiFillStar className="review-stars" />
+                    <AiFillStar className="review-stars" />
+                    <AiFillStar className="review-stars" />
+                    <AiFillStar className="review-stars" />
+                    <AiFillStar className="review-stars" />
+                  </div>
+                </div>
+              </div>
+              <p className="review-desc w-full break-words">{item.feedback}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
