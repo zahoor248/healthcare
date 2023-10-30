@@ -15,6 +15,7 @@ import ReactPaginate from "react-paginate";
 import { Modal } from "@mui/base";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination/Pagination"
+import EmptyState from "../EmptyState/EmptyState"
 
 export default function ProfessionalCard({ data }) {
   const [show, setShow] = useState(false);
@@ -29,7 +30,8 @@ export default function ProfessionalCard({ data }) {
 
   const AllPros = () => {
     return (
-      <div className="grid md:grid-cols-3  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-16">
+      <>
+      <div className="grid grid-cols-1 md:grid-cols-2  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-16">
         {data.map((item, index) => {
           return (
             <div className="shadow-class hover:scale-105 transition-all ease-in-out duration-500 rounded-xl w-full">
@@ -280,7 +282,10 @@ export default function ProfessionalCard({ data }) {
             </div>
           );
         })}
+        
       </div>
+      {/* <EmptyState /> */}
+      </>
     );
   };
 
