@@ -38,7 +38,6 @@ export default function ProfileDetails() {
       .then((response) => {
         console.log(response, "here is res");
         setUserDetails(response?.data?.user);
-        // to prevent from loading on listing page we are making call here
       })
       .catch((error) => {
         console.log(error);
