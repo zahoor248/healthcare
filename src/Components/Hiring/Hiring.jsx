@@ -542,36 +542,14 @@ export default function Hiring() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    let favoritesData = {
-      success: "User added to favorites",
-      favorites: [
-        {
-          id: 35,
-          is_admin: 0,
-          type: "pro",
-          uuid: "55f65c92-a55b-4def-9a83-d5cdbcdccd70",
-          firstname: "Mathew",
-          lastname: "Pro",
-          email: "Mat@matbryant.com",
-          email_verified_at: null,
-          created_at: "2023-08-17T19:16:08.000000Z",
-          updated_at: "2023-09-19T16:53:37.000000Z",
-          status: "active",
-          about_me: null,
-          verified: "no",
-          photo_url:
-            "https://app.healthcare-up.com/public/profiles/64f1e78159ce3_image.jpg",
-          fcm_token:
-            "cAHH5UyQTGOz5IreW7Ljiv:APA91bGkX1TQirIbC7e6oYWx9_4sm7DaAdXCQw6JJsckyhlUKmC4CTQ_6-1epMzNt3ujkDrMIdVvsndtKR7m1HFU1m68pcPRtwJfnHlaLbbnn1eZ73zCGeAgzFRO4h8pF8U9jBondEkE",
-          code: null,
-          pivot: {
-            user_id: 61,
-            favorite_user_id: 35,
-          },
-        },
-      ],
-    };
+    handleAPIRequest("get", "pros", null)
+      .then((response) => {
+        if (response) {
+          // console.warn(response);
+          dispatch(getAllPros(response));
+        }
+      })
+      .catch((e) => {});
 
     getAllLincensesTypes();
 
@@ -581,11 +559,9 @@ export default function Hiring() {
         dispatch(getAllFav(response.favorites));
       })
       .catch((error) => {});
-    dispatch(getAllFav(favoritesData.favorites));
     setData(professionals);
     setFilteredData(professionals);
-    setLoading(false);
-  }, [loading]);
+  }, []);
 
   return (
     <>
