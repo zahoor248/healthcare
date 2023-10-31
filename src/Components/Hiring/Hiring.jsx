@@ -560,7 +560,7 @@ export default function Hiring() {
       })
       .catch((error) => {});
     setData(professionals);
-    setFilteredData(professionals);
+    setFilteredData(professionals);       
   }, []);
 
   return (
