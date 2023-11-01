@@ -50,14 +50,15 @@ export default function SignUp() {
     }
     setLoading(true);
     let data = {
-      type: "pro",
       firstname: firstName,
       lastname: lastName,
       email: email,
       phone: phoneNumber,
       password: password,
+      type: userType,
     };
-
+    console.log(data);
+    return;
     POST(data, REGISTER, "post")
       .then((response) => {
         console.log(response);
@@ -73,18 +74,12 @@ export default function SignUp() {
       });
   };
 
-  // useEffect(() => {
+  const handleUserType = (e) => {
+    console.log(e, "here us the response");
+    setUserType(e == "Professional" ? "pro" : e == "Bussiness" ? "bus" : "");
 
-  //     axios.get ('https://jsonplaceholder.typicode.com/posts')
-  //     .then(response => {
-  //         setPost ({
-  //             posts: response.data
-  //         })
-  //         console.log(response.data)
-  //     })
-  //   });
-
-  //   const {posts} = post
+    console.log(userType, "");
+  };
 
   return (
     <div className="flex flex-col w-full h-screen overflow-auto items-center ">
@@ -302,6 +297,20 @@ export default function SignUp() {
                     ></path>
                   </svg>
                 )}
+              </div>
+            </div>
+            <div className="w-full flex flex-col gap-2">
+              <p className="text-base/none pb-2 font-normal text-neutral-600">
+                User Type
+              </p>
+              <div className="relative w-full">
+                <select
+                  onChange={(e) => handleUserType(e.target.value)}
+                  className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
+                >
+                  <option>Professional</option>
+                  <option>Business</option>
+                </select>
               </div>
             </div>
           </div>
