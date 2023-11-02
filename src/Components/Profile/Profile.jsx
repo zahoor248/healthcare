@@ -26,26 +26,42 @@ import BusinessProfile from "../BusinessProfile/BusinessProfile";
 import Preferences from "../Preferences/Preferences";
 import Notification from "../Notification/Notification";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
+import { handleAPIRequest } from "../../helper/ApiHandler";
+import { POST } from "../../Api/Post";
 
 const ProfileData = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+
+  const [firstName, setFirstName] = useState(user?.firstname);
+  const [lastName, setLastName] = useState(user?.lastname);
+  const [email, setEmail] = useState(user?.email);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  console.log(user, "user");
   const submitHandler = (event) => {
     event.preventDefault();
 
-    axios
-      .post("https://jsonplaceholder.typicode.com/posts/", {
-        firstName,
-        lastName,
-        email,
-        phone,
-        password,
-        confirmPassword,
+    let data = {
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      password: password,
+      description: "",
+    };
+    POST(data, `user`, "put")
+      .then((response) => {
+        console.log(response, "here is res");
+        // setUserDetails(response?.data?.user);
       })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts/", {})
       .then((response) => {
         console.log(response);
         event.target.reset();
@@ -55,26 +71,6 @@ const ProfileData = () => {
       });
   };
 
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
-
-  // const updateProfile = ()=>{
-
-  //     let data = {
-  //         "firstname": firstName,
-  // "lastname": lastName,
-  // "email": email,
-  // "phone": phone,
-  // "password": password
-  //     }
-
-  // }
-
-  const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.removeItem("token");
     dispatch(setUser(null));
@@ -89,43 +85,45 @@ const ProfileData = () => {
 
       <div className="bg-white shadow-lg h-full p-8 flex flex-col justify-between">
         <form onSubmit={submitHandler}>
-          <div className="grid grid-cols-2 gap-4 w-full">
-            <div className="flex flex-col gap-2">
-              <p className="text-base/none font-normal text-neutral-600">
-                First Name
-              </p>
-              <input
-              placeholder="First Name"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                label="First Name"
-                variant="outlined"
-                id="firstName"
-                name="firstname"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-base/none font-normal text-neutral-600">
-                Last name
-              </p>
-              <input
-              placeholder="Last Name"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                label="Last Name"
-                variant="outlined"
-                id="lastName"
-                name="lastname"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
+          <div className=" flex flex-col gap-4 w-full">
+            <div className="flex justify-between w-full gap-3">
+              <div className="flex w-full flex-col gap-2">
+                <p className="text-base/none font-normal text-neutral-600">
+                  First Name
+                </p>
+                <input
+                  placeholder="First Name"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="First Name"
+                  variant="outlined"
+                  id="firstName"
+                  name="firstname"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+              <div className="flex w-full flex-col gap-2">
+                <p className="text-base/none font-normal text-neutral-600">
+                  Last name
+                </p>
+                <input
+                  placeholder="Last Name"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="Last Name"
+                  variant="outlined"
+                  id="lastName"
+                  name="lastname"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-base/none font-normal text-neutral-600">
                 Email
               </p>
               <input
-              placeholder="Enter Email"
+                placeholder="Enter Email"
                 className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Email"
                 variant="outlined"
@@ -135,27 +133,13 @@ const ProfileData = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-base/none font-normal text-neutral-600">
-                Phone
-              </p>
-              <input
-              placeholder="Enter Phone Number"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                label="Phone"
-                variant="outlined"
-                id="phone"
-                name="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
+
             <div className="flex flex-col gap-2">
               <p className="text-base/none font-normal text-neutral-600">
                 Password
               </p>
               <input
-              placeholder="Enter Password"
+                placeholder="Enter Password"
                 className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Password"
                 variant="outlined"
@@ -170,7 +154,7 @@ const ProfileData = () => {
                 Confirm Password
               </p>
               <input
-              placeholder="Confirm your Password"
+                placeholder="Confirm your Password"
                 className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 label="Confirm Password"
                 variant="outlined"
@@ -180,15 +164,30 @@ const ProfileData = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                About me
+              </p>
+              <textarea
+                placeholder="Enter Phone Number"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                label="Phone"
+                variant="outlined"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              ></textarea>
+            </div>
           </div>
-          <div className="flex gap-3 justify-end w-auto">
+          <div className="flex mt-6 gap-3 justify-end w-auto">
             <button
               onClick={() => handleLogout()}
-              className=" border text-blue-600 border-blue-600 px-5 py-2 rounded-lg mt-12"
+              className=" border text-blue-600 border-blue-600 px-5 py-2 rounded-lg "
             >
               Logout
             </button>
-            <button className=" px-6 py-3 bg-blue-600 text-white rounded-lg   mt-12">
+            <button className=" px-6 py-3 bg-blue-600 text-white rounded-lg  ">
               Update
             </button>
           </div>
@@ -207,7 +206,7 @@ export default function Profile() {
         <div className="py-12">
           <div className="profile-sidebar-card">
             <div className="flex flex-col items-center">
-              <img src={User} alt="user profile image" className="w-20 h-20"/>
+              <img src={User} alt="user profile image" className="w-20 h-20" />
               <p className="text-xl font-semibold">John Doe</p>
             </div>
 

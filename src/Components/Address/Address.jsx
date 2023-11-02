@@ -18,7 +18,7 @@ export default function Address() {
         <p className="my-profile-text">Address</p>
       </div>
       <div className="bg-white shadow-lg h-full p-8 flex flex-col">
-        <div className="grid grid-cols-2 gap-4 w-full ">
+        <div className=" flex  flex-col gap-4 w-full ">
           <div className="flex flex-col gap-2">
             <p className="text-base/none font-normal text-neutral-600">Country</p>
             <input
