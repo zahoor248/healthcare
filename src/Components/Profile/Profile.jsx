@@ -197,6 +197,138 @@ const ProfileData = () => {
   );
 };
 
+const BusinessProfileData = () => {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+
+  const [firstName, setFirstName] = useState(user?.firstname);
+  const [lastName, setLastName] = useState(user?.lastname);
+  const [email, setEmail] = useState(user?.email);
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  console.log(user, "user");
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    let data = {
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      password: password,
+      description: "",
+    };
+    POST(data, `user`, "put")
+      .then((response) => {
+        console.log(response, "here is res");
+        // setUserDetails(response?.data?.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts/", {})
+      .then((response) => {
+        console.log(response);
+        event.target.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(setUser(null));
+    dispatch(setIsLoggedIn(false));
+  };
+  return (
+    <div className="flex flex-col gap-4 w-full my-12">
+      <div className="profile-editing-header">
+        <BiMessageSquareEdit className="edit-box-icon" />
+        <p className="my-profile-text">My Profile</p>
+      </div>
+
+      <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col justify-between">
+        <form onSubmit={submitHandler}>
+          <div className=" flex flex-col gap-4 w-full">
+         
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Business Name
+              </p>
+              <input
+                placeholder="Enter Name"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                label="Email"
+                variant="outlined"
+                id="email"
+                name="email"
+                value={''}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                Company Website
+              </p>
+              <input
+                placeholder="Enter URL"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                label="Password"
+                variant="outlined"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+              Phone
+              </p>
+              <input
+                placeholder="Enter Phone"
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                label="Confirm Password"
+                variant="outlined"
+                id="confirmPassword"
+                name="confirmpassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="text-base/none font-normal text-neutral-600">
+                About Business
+              </p>
+              <textarea
+                placeholder="Start Writing Here..."
+                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                label="Phone"
+                variant="outlined"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              ></textarea>
+            </div>
+          </div>
+          <div className="flex mt-6 gap-3 justify-end w-auto">
+            
+            <button className="  hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  ">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 const Profile = () => {
   const [nav, setNav] = useState("profile");
   const user = useSelector((state) => state.user);
@@ -214,7 +346,7 @@ const Profile = () => {
             </div>
 
             <div>
-              <ul className="side-nav flex gap-1">
+              <ul className="side-nav flex gap-0.5">
                 <li
                   onClick={() => setNav("profile")}
                   className={`side-nav-item ${
@@ -227,16 +359,19 @@ const Profile = () => {
                   </div>
                 </li>
 
-                {/* <li
-                  className={`side-nav-item ${
-                    nav === "profile" && "side-nav-item-active"
-                  }`}
-                >
-                  <div className="side-nav-link">
-                    <HiUserCircle className="pen-icon" />
-                    <span>Business Profile</span>
-                  </div>
-                </li> */}
+                {user.type == "bus" && (
+                  <li
+                    onClick={() => setNav("business-profile")}
+                    className={`side-nav-item ${
+                      nav === "business-profile" && "side-nav-item-active"
+                    }`}
+                  >
+                    <div className="side-nav-link">
+                      <HiUserCircle className="pen-icon" />
+                      <span>Business Profile</span>
+                    </div>
+                  </li>
+                )}
 
                 <li
                   onClick={() => setNav("address")}
@@ -262,29 +397,33 @@ const Profile = () => {
                   </div>
                 </li>
 
-                <li
-                  onClick={() => setNav("licenses")}
-                  className={`side-nav-item ${
-                    nav === "licenses" && "side-nav-item-active"
-                  }`}
-                >
-                  <div className="side-nav-link">
-                    <TbLicense className="pen-icon" />
-                    <span className="normal-case">Licenses</span>
-                  </div>
-                </li>
+                {user.type != "bus" && (
+                  <li
+                    onClick={() => setNav("licenses")}
+                    className={`side-nav-item ${
+                      nav === "licenses" && "side-nav-item-active"
+                    }`}
+                  >
+                    <div className="side-nav-link">
+                      <TbLicense className="pen-icon" />
+                      <span className="normal-case">Licenses</span>
+                    </div>
+                  </li>
+                )}
 
-                <li
-                  onClick={() => setNav("preferences")}
-                  className={`side-nav-item ${
-                    nav === "preferences" && "side-nav-item-active"
-                  }`}
-                >
-                  <div className="side-nav-link">
-                    <MdRoomPreferences className="pen-icon" />
-                    <span className="normal-case">Preferences</span>
-                  </div>
-                </li>
+                {user.type != "bus" && (
+                  <li
+                    onClick={() => setNav("preferences")}
+                    className={`side-nav-item ${
+                      nav === "preferences" && "side-nav-item-active"
+                    }`}
+                  >
+                    <div className="side-nav-link">
+                      <MdRoomPreferences className="pen-icon" />
+                      <span className="normal-case">Preferences</span>
+                    </div>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -296,7 +435,7 @@ const Profile = () => {
         {/* <Preferences/> */}
         {/* <Notification/> */}
         {nav === "profile" && <ProfileData />}
-
+        {nav == "business-profile" && <BusinessProfileData />}
         {nav === "address" && <Address />}
         {nav === "licenses" && <License />}
         {nav === "preferences" && <Preferences />}
