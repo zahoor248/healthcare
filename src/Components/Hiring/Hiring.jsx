@@ -595,7 +595,7 @@ export default function Hiring() {
         </h1>
       </div>
       <div className="flex -mt-32 xl:-mt-28  flex-row w-full px-6 xl:px-24 2xl:px-32">
-        <div className="flex w-full bg-white  shadow-class p-4 lg:p-8 xl:p-14 rounded-2xl">
+        <div className="flex w-full bg-white  shadow-class p-4 lg:p-8 xl:p-14 rounded-2xl xl:gap-14 lg:gap-10 gap-6">
           <div className="">
             <Sidebar
               data={data}
@@ -603,7 +603,7 @@ export default function Hiring() {
               setFilteredData={setFilteredData}
             />
           </div>
-          <div className="xl:pl-14 lg:pl-10 pl-6 w-full">
+          <div className=" w-full">
             <div className="card-section-header flex justify-between items-center">
               <div className="flex gap-2">
                 <p>Sort by:</p>

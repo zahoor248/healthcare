@@ -63,44 +63,47 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
       </div>
 
       <div className="border-b"></div>
+      <div className="flex flex-col gap-8">
+        <div>
+          <p className="text-lg pb-2">Tags</p>
 
-      <div className=" pt-8">
-        <p className="text-lg pb-2">Tags</p>
+          <TagSelector />
+        </div>
 
-        <TagSelector />
-      </div>
+        <div>
+          <p className="text-lg pb-2">License Type</p>
 
-      <div className="pt-8">
-        <p className="text-lg pb-2">License Type</p>
+          {/* All licences list */}
+          {licenses.map((license, key) => (
+            <div className=" flex items-center cursor-default" key={key}>
+              <input
+                type="checkbox"
+                onChange={() => handleFilterByLicense(license)}
+                value={
+                  filterConditions.license.includes(license) ? true : false
+                }
+                class="ui-checkbox"
+              ></input>
+              {/* <input className="check-box cursor-pointer" type="checkbox" /> */}
+              <p className="text-neutral-600 px-3 text-lg">{license}</p>
+            </div>
+          ))}
+        </div>
 
-        {/* All licences list */}
-        {licenses.map((license, key) => (
-          <div className=" flex items-center cursor-default" key={key}>
-            <input
-              type="checkbox"
-              onChange={() => handleFilterByLicense(license)}
-              value={filterConditions.license.includes(license) ? true : false}
-              class="ui-checkbox"
-            ></input>
-            {/* <input className="check-box cursor-pointer" type="checkbox" /> */}
-            <p className="text-neutral-600 px-3 text-lg">{license}</p>
-          </div>
-        ))}
-      </div>
+        <div>
+          <p className="text-lg">Hourly Rate</p>
 
-      <div className=" pt-8">
-        <p className="text-lg">Hourly Rate</p>
+          <PriceRange />
+        </div>
 
-        <PriceRange />
-      </div>
-
-      <div className="pt-8">
-        <button
-          className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white "
-          onClick={filterData}
-        >
-          Refine
-        </button>
+        <div>
+          <button
+            className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white "
+            onClick={filterData}
+          >
+            Refine
+          </button>
+        </div>
       </div>
     </div>
   );

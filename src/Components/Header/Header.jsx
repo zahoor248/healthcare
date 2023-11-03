@@ -251,7 +251,7 @@ export default function Header() {
                     />
                   </svg>
                 </div>
-                {setShowBar && (<HamburgerSideBar closeModal={handleClose}/>)}
+                {/* {setShowBar && (<HamburgerSideBar closeModal={handleClose}/>)} */}
               </>
             )}
           </div>
