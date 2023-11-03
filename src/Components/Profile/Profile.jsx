@@ -254,7 +254,6 @@ const BusinessProfileData = () => {
       <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col justify-between">
         <form onSubmit={submitHandler}>
           <div className=" flex flex-col gap-4 w-full">
-         
             <div className="flex flex-col gap-2">
               <p className="text-base/none font-normal text-neutral-600">
                 Business Name
@@ -266,7 +265,7 @@ const BusinessProfileData = () => {
                 variant="outlined"
                 id="email"
                 name="email"
-                value={''}
+                value={""}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -288,7 +287,7 @@ const BusinessProfileData = () => {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-base/none font-normal text-neutral-600">
-              Phone
+                Phone
               </p>
               <input
                 placeholder="Enter Phone"
@@ -318,7 +317,6 @@ const BusinessProfileData = () => {
             </div>
           </div>
           <div className="flex mt-6 gap-3 justify-end w-auto">
-            
             <button className="  hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  ">
               Update
             </button>
@@ -435,7 +433,9 @@ const Profile = () => {
         {/* <Preferences/> */}
         {/* <Notification/> */}
         {nav === "profile" && <ProfileData />}
-        {nav == "business-profile" && <BusinessProfileData />}
+        {nav == "business-profile" && user.type == "bus" && (
+          <BusinessProfileData />
+        )}
         {nav === "address" && <Address />}
         {nav === "licenses" && <License />}
         {nav === "preferences" && <Preferences />}
