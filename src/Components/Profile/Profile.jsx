@@ -83,7 +83,7 @@ const ProfileData = () => {
         <p className="my-profile-text">My Profile</p>
       </div>
 
-      <div className="bg-white shadow-lg h-full p-8 flex flex-col justify-between">
+      <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col justify-between">
         <form onSubmit={submitHandler}>
           <div className=" flex flex-col gap-4 w-full">
             <div className="flex justify-between w-full gap-3">
@@ -197,24 +197,29 @@ const ProfileData = () => {
   );
 };
 
-export default function Profile() {
+const Profile = () => {
   const [nav, setNav] = useState("profile");
-  // const user = useSelector(state=>state.Reducer.user)
+  const user = useSelector((state) => state.user);
+
   return (
     <>
       <div className="flex main-container gap-8 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
-        <div className="py-12">
-          <div className="profile-sidebar-card">
-            <div className="flex flex-col items-center">
+        <div className="py-12 w-[40%] max-w-[330px] h-full">
+          <div className=" bg-white   py-10 w-full h-full rounded-lg shadow-class">
+            <div className="flex flex-col pb-6 items-center">
               <img src={User} alt="user profile image" className="w-20 h-20" />
-              <p className="text-xl font-semibold">John Doe</p>
+              <p className="text-xl font-semibold">
+                {user?.firstname} {user?.lastname}
+              </p>
             </div>
 
             <div>
               <ul className="side-nav">
                 <li
                   onClick={() => setNav("profile")}
-                  className="side-nav-item side-nav-item-active"
+                  className={`side-nav-item ${
+                    nav === "profile" && "side-nav-item-active"
+                  }`}
                 >
                   <div className="side-nav-link">
                     <HiUserCircle className="pen-icon" />
@@ -222,17 +227,23 @@ export default function Profile() {
                   </div>
                 </li>
 
-                <li
-                  onClick={() => setNav("profile")}
-                  className="side-nav-item side-nav-item-active"
+                {/* <li
+                  className={`side-nav-item ${
+                    nav === "profile" && "side-nav-item-active"
+                  }`}
                 >
                   <div className="side-nav-link">
                     <HiUserCircle className="pen-icon" />
                     <span>Business Profile</span>
                   </div>
-                </li>
+                </li> */}
 
-                <li onClick={() => setNav("address")} className="side-nav-item">
+                <li
+                  onClick={() => setNav("address")}
+                  className={`side-nav-item ${
+                    nav === "address" && "side-nav-item-active"
+                  }`}
+                >
                   <div className="side-nav-link">
                     <FaAddressBook className="pen-icon" />
                     <span>Address</span>
@@ -241,7 +252,9 @@ export default function Profile() {
 
                 <li
                   onClick={() => setNav("licenses")}
-                  className="side-nav-item"
+                  className={`side-nav-item ${
+                    nav === "licenses" && "side-nav-item-active"
+                  }`}
                 >
                   <div className="side-nav-link">
                     <TbLicense className="pen-icon" />
@@ -251,7 +264,9 @@ export default function Profile() {
 
                 <li
                   onClick={() => setNav("preferences")}
-                  className="side-nav-item"
+                  className={`side-nav-item ${
+                    nav === "preferences" && "side-nav-item-active"
+                  }`}
                 >
                   <div className="side-nav-link">
                     <MdRoomPreferences className="pen-icon" />
@@ -276,4 +291,5 @@ export default function Profile() {
       </div>
     </>
   );
-}
+};
+export default Profile;
