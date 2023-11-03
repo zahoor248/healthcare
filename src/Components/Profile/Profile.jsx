@@ -187,7 +187,7 @@ const ProfileData = () => {
             >
               Logout
             </button>
-            <button className="  transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  ">
+            <button className="  hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  ">
               Update
             </button>
           </div>
@@ -204,7 +204,7 @@ const Profile = () => {
   return (
     <>
       <div className="flex main-container gap-8 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
-        <div className="py-12 w-[40%] max-w-[330px] h-full">
+        <div className="py-12 w-[40%] max-w-[310px] h-full">
           <div className=" bg-white   py-10 w-full h-full rounded-lg shadow-class">
             <div className="flex flex-col pb-6 items-center">
               <img src={User} alt="user profile image" className="w-20 h-20" />
