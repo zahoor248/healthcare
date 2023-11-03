@@ -77,7 +77,7 @@ const ProfileData = () => {
     dispatch(setIsLoggedIn(false));
   };
   return (
-    <div className="flex flex-col gap-8 w-full my-12">
+    <div className="flex flex-col gap-4 w-full my-12">
       <div className="profile-editing-header">
         <BiMessageSquareEdit className="edit-box-icon" />
         <p className="my-profile-text">My Profile</p>
@@ -183,11 +183,11 @@ const ProfileData = () => {
           <div className="flex mt-6 gap-3 justify-end w-auto">
             <button
               onClick={() => handleLogout()}
-              className=" border text-blue-600 border-blue-600 px-5 py-2 rounded-lg "
+              className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
             >
               Logout
             </button>
-            <button className=" px-6 py-3 bg-blue-600 text-white rounded-lg  ">
+            <button className="  transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  ">
               Update
             </button>
           </div>
@@ -208,13 +208,13 @@ const Profile = () => {
           <div className=" bg-white   py-10 w-full h-full rounded-lg shadow-class">
             <div className="flex flex-col pb-6 items-center">
               <img src={User} alt="user profile image" className="w-20 h-20" />
-              <p className="text-xl font-semibold">
+              <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
               </p>
             </div>
 
             <div>
-              <ul className="side-nav">
+              <ul className="side-nav flex gap-1">
                 <li
                   onClick={() => setNav("profile")}
                   className={`side-nav-item ${
@@ -223,7 +223,7 @@ const Profile = () => {
                 >
                   <div className="side-nav-link">
                     <HiUserCircle className="pen-icon" />
-                    <span>My Profile</span>
+                    <span className="normal-case">My Profile</span>
                   </div>
                 </li>
 
@@ -245,8 +245,20 @@ const Profile = () => {
                   }`}
                 >
                   <div className="side-nav-link">
-                    <FaAddressBook className="pen-icon" />
-                    <span>Address</span>
+                    <svg
+                      stroke="currentColor"
+                      fill="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 24 24"
+                      class="edit-box-icon !m-0 !text-xl"
+                      height="1em"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path>
+                    </svg>
+                    <span className="normal-case">Address</span>
                   </div>
                 </li>
 
@@ -258,7 +270,7 @@ const Profile = () => {
                 >
                   <div className="side-nav-link">
                     <TbLicense className="pen-icon" />
-                    <span>Licenses</span>
+                    <span className="normal-case">Licenses</span>
                   </div>
                 </li>
 
@@ -270,7 +282,7 @@ const Profile = () => {
                 >
                   <div className="side-nav-link">
                     <MdRoomPreferences className="pen-icon" />
-                    <span>Preferences</span>
+                    <span className="normal-case">Preferences</span>
                   </div>
                 </li>
               </ul>
