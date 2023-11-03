@@ -16,12 +16,21 @@ import { CgFileDocument } from "react-icons/cg";
 import { IoMdHelp } from "react-icons/io";
 import { MdPrivacyTip } from "react-icons/md";
 import { ImBlog } from "react-icons/im";
+import HamburgerSideBar from "../HamburgerSideBar/HamburgerSideBar";
 
 export default function Header() {
   const user = useSelector((state) => state.user);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showBar, setShowBar] = useState(false);
+  const handleBar = () => {
+    setShowBar(true);
+  };
+  const handleClose = () => {
+    setShowBar(false);
+  };
   const location = useLocation();
   const routePath = location.pathname.split("/")[1];
   let hideHeader = ["login", "register"];
@@ -226,7 +235,26 @@ export default function Header() {
                     </div>
                   </Link>
                 </div>
-                <div className="md:hidden">SideBar</div>
+                <div
+                  className="md:hidden cursor-pointer"
+                  onClick={()=>setShowBar(true)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
+                  </svg>
+                </div>
+                {showBar && <HamburgerSideBar setShowBar={setShowBar} />}
               </>
             )}
           </div>
