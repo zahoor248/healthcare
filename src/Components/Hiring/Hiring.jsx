@@ -545,7 +545,7 @@ export default function Hiring() {
     handleAPIRequest("get", "pros", null)
       .then((response) => {
         if (response) {
-          // console.warn(response);
+          console.log(response);
           dispatch(getAllPros(response));
           setLoading(false);
         }
@@ -564,7 +564,7 @@ export default function Hiring() {
       .catch((error) => {});
     setData(professionals);
     setFilteredData(professionals);
-  }, []);
+  }, [loading]);
 
   return (
     <>
