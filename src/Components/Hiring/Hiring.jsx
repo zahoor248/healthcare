@@ -548,7 +548,7 @@ export default function Hiring() {
           console.log(response);
           dispatch(getAllPros(response));
           setLoading(false);
-        }
+        }  
       })
       .catch((e) => {
         setLoading(false);
