@@ -3,6 +3,7 @@ import "./Address.css";
 import TextField from "@mui/material/TextField";
 import { BiMessageSquareEdit } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
+import { getStates } from "../../Store/helper";
 
 export default function Address() {
   const [country, setCountry] = useState("");
@@ -20,12 +21,13 @@ export default function Address() {
       <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col">
         <div className=" flex  flex-col gap-4 w-full ">
           <div className="flex flex-col gap-2">
-            <p className="text-base/none font-normal text-neutral-600">Country</p>
+            <p className="text-base/none font-normal text-neutral-600">
+              Country
+            </p>
             <input
               className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               label="Country"
               variant="outlined"
-              
               placeholder="Enter your Country"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
@@ -33,14 +35,24 @@ export default function Address() {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-base/none font-normal text-neutral-600">State</p>
-            <input
+            {/* <input
               className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               label="State"
               variant="outlined"
               placeholder="Enter your state"
               value={state}
               onChange={(e) => setState(e.target.value)}
-            />
+            /> */}
+
+            <select
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              className="text-lg placeholder-[#B8C0CB] bg-white text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full outline-none"
+            >
+              {getStates().map((item) => (
+                <option>{item.label}</option>
+              ))}
+            </select>
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-base/none font-normal text-neutral-600">City</p>
@@ -54,7 +66,9 @@ export default function Address() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-base/none font-normal text-neutral-600">Zip Code</p>
+            <p className="text-base/none font-normal text-neutral-600">
+              Zip Code
+            </p>
             <input
               className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               label="Zip Code"
@@ -65,7 +79,9 @@ export default function Address() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-base/none font-normal text-neutral-600">Address</p>
+            <p className="text-base/none font-normal text-neutral-600">
+              Address
+            </p>
             <input
               className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
               label="Address"

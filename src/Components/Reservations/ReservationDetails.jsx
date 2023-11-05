@@ -14,49 +14,43 @@ const ReservationDetails = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(location, "hgere is the location");
-    if (!reservations) {
-      setLoading(true);
-      console.log(user.uuid);
-      handleAPIRequest(
-        "get",
-        `reservation/${location.search.split("?")[1]}`,
-        null
-      )
-        .then((response) => {
-          if (response.data) {
-            console.log(response.data);
-            setReservationDetails(response.data.reservation);
-            let parentReservation = [response.data.reservation];
+    setLoading(true);
+    console.log(user.uuid);
+    handleAPIRequest(
+      "get",
+      `reservation/${location.search.split("?")[1]}`,
+      null
+    )
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+          setReservationDetails(response.data.reservation);
+          let parentReservation = [response.data.reservation];
 
-            let counterOffers = response.data.reservation.counterOffers;
+          let counterOffers = response.data.reservation.counterOffers;
 
-            if (counterOffers.length) {
-              counterOffers.map((item) => {
-                parentReservation.push(item);
-              });
-            }
-
-            let opentoAcceptoffer = parentReservation.filter(
-              (item) => item.status === "open"
-            );
-
-            setOpenToAcceptOffer(opentoAcceptoffer[0]);
-            console.log(opentoAcceptoffer, "test successful");
-            // Update Redux store with an empty array
-            // Update Redux store with an empty array
-          } else {
-            console.log(response, "Here is the response");
-            setReservationDetails(response);
+          if (counterOffers.length) {
+            counterOffers.map((item) => {
+              parentReservation.push(item);
+            });
           }
 
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-        });
-    }
-  }, [reservations]);
+          let opentoAcceptoffer = parentReservation.filter(
+            (item) => item.status === "open"
+          );
+
+          setOpenToAcceptOffer(opentoAcceptoffer[0]);
+      
+        } else {
+          setReservationDetails(response);
+        }
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
+  }, [location, user]);
   return (
     <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
@@ -205,7 +199,7 @@ const ReservationDetails = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                   <div className="flex items-start gap-4 flex-col p-7 border rounded-lg w-full">
-                  <div className="  -right-24 -mt-3 px-6 bg-blue-50 !text-blue-600 border-blue-600 capitalize border rounded-full py-[2px] text-sm">
+                    <div className="  -right-24 -mt-3 px-6 bg-blue-50 !text-blue-600 border-blue-600 capitalize border rounded-full py-[2px] text-sm">
                       {item.status}
                     </div>
                     <div className="flex flex-row justify-between  gap-3">

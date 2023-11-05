@@ -32,6 +32,7 @@ export default function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const loginHandler = () => {
+    console.log('click')
     if (email.length && !emailError && password.length) {
       setLoading(true);
       handleAPIRequest("post", "login", { email: email, password: password })
@@ -191,7 +192,7 @@ export default function LogIn() {
             <div className="pt-10 w-full">
               <button
                 className="bg-[#10274F] text-white w-full py-3 rounded-xl transition-all ease-in-out duration-500 hover:bg-[#0d2041] hover:shadow-lg border hover:border hover:border-[#10274F]"
-                onClick={() => !loading && loginHandler()}
+                onClick={() =>  loginHandler()}
               >
                 {loading ? "Logging In..." : "Login"}
               </button>

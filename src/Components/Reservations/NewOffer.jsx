@@ -16,50 +16,50 @@ export default function NewOffer() {
     dayjs(openToAcceptoffer?.start_date) || null
   );
   const [endDate, setEndDate] = useState(dayjs(openToAcceptoffer?.end_date));
-  const [price, setPrice] = useState(openToAcceptoffer?.pay_rate);
-  const [description, setDescription] = useState(
-    openToAcceptoffer?.description
-  );
+  const [price, setPrice] = useState(null);
+  const [description, setDescription] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [counterLocation, setLocation] = useState(openToAcceptoffer?.location);
+  const [counterLocation, setLocation] = useState("");
   const [payDuration, setPayDuration] = useState("");
   const reservations = useSelector((state) => state.reservations);
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log(location, "hgere is the location");
-    if (!reservations) {
-      handleAPIRequest(
-        "get",
-        `reservation/${location.search.split("?")[1]}`,
-        null
-      )
-        .then((response) => {
-          if (response.data) {
-            let parentReservation = [response.data.reservation];
+    console.log(location, "here is the location");
 
-            let counterOffers = response.data.reservation.counterOffers;
+    handleAPIRequest(
+      "get",
+      `reservation/${location.search.split("?")[1]}`,
+      null
+    )
+      .then((response) => {
+        if (response.data) {
+          let parentReservation = [response.data.reservation];
 
-            if (counterOffers.length) {
-              counterOffers.map((item) => {
-                parentReservation.push(item);
-              });
-            }
+          let counterOffers = response.data.reservation.counterOffers;
 
-            let opentoAcceptoffer = parentReservation.filter(
-              (item) => item.status === "open"
-            );
-
-            console.log(opentoAcceptoffer, "her");
-            setOpenToAcceptOffer(opentoAcceptoffer[0]);
-            setPrice(openToAcceptoffer?.pay_rate);
-            setLocation(openToAcceptoffer?.location);
-            setDescription(openToAcceptoffer?.description);
+          if (counterOffers.length) {
+            counterOffers.map((item) => {
+              parentReservation.push(item);
+            });
           }
-        })
-        .catch((error) => {});
-    }
-  }, [reservations]);
+
+          let opentoAcceptoffer = parentReservation.find(
+            (item) => item.status === "open"
+          );
+
+          if (opentoAcceptoffer) {
+            setOpenToAcceptOffer(opentoAcceptoffer);
+            setStartDate(dayjs(opentoAcceptoffer.start_date));
+            setEndDate(dayjs(opentoAcceptoffer.end_date));
+            setPrice(opentoAcceptoffer.pay_rate);
+            setLocation(opentoAcceptoffer.location);
+            setDescription(opentoAcceptoffer.description);
+          }
+        }
+      })
+      .catch((error) => {});
+  }, [user, location]);
 
   const reserveUser = () => {
     let data = {
@@ -251,7 +251,7 @@ export default function NewOffer() {
                     <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
                       Rate
                     </p>
-                   <div className="relative w-full">
+                    <div className="relative w-full">
                       <select className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full">
                         <option>Hourly Rate</option>
                         <option>Daily Rate</option>

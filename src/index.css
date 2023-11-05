@@ -469,3 +469,107 @@ body {
   padding: 20px;
   color: #fff;
 }
+
+.card {
+  width: 210px;
+  height: 200px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.123);
+  border: 1px dashed black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition-duration: 0.5s;
+}
+
+.profileImage {
+  background: linear-gradient(to right, rgb(54, 54, 54), rgb(32, 32, 32));
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.329);
+  overflow: hidden;
+}
+
+.textContainer {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.name {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.profile {
+  font-size: 0.84em;
+  color: rgb(194, 194, 194);
+  letter-spacing: 0.2px;
+}
+
+.card:hover {
+  background-color: rgb(43, 43, 43);
+  transition-duration: 0.5s;
+}
+
+.upload-button {
+  font-family: inherit;
+  font-size: 16px;
+  background: royalblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.upload-button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.upload-button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.upload-button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.upload-button:hover svg {
+  transform: translateX(0em)  scale(1.1);
+}
+
+.upload-button:hover span {
+  transform: translateX(0.3em);
+}
+
+.upload-button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
