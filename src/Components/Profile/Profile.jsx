@@ -45,7 +45,6 @@ const ProfileData = () => {
   });
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(password);
     if (password.passwordToConfirm == password.passwordToSend) {
       let data = {
         firstname: firstName,
@@ -56,11 +55,9 @@ const ProfileData = () => {
       };
       handleAPIRequest("PUT", "user", data)
         .then((response) => {
-          console.log(response, "here is res");
-          // setUserDetails(response?.data?.user);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else {
       alert("password doesnot match");
@@ -201,6 +198,9 @@ const ProfileData = () => {
   );
 };
 
+
+// BusinessProfileData tab 
+
 const BusinessProfileData = () => {
   const dispatch = useDispatch();
 
@@ -217,7 +217,6 @@ const BusinessProfileData = () => {
   useEffect(() => {
     if (user.accounts) {
       if (user.accounts[0].bus_profile) {
-        console.warn(user.accounts[0].bus_profile, "Fazzyhai");
         setBusiness({
           name: user.accounts[0].bus_profile.company_name,
           url: user.accounts[0].bus_profile.website_url,
@@ -242,27 +241,20 @@ const BusinessProfileData = () => {
       public_phone: business.public_phone,
       uuid: user.accounts[0].uuid,
     };
-    console.log(data);
 
     handleAPIRequest("POST", "bus-profile", data)
       .then((response) => {
         if (response) {
-          console.log(business);
           // return;
           postData();
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(setUser(null));
-    dispatch(setIsLoggedIn(false));
-  };
-  console.log(business, "business");
+  // upload image request
   async function postData() {
     const token = localStorage.getItem("token");
     if (business.bus_logo instanceof File) {
@@ -287,7 +279,6 @@ const BusinessProfileData = () => {
 
         // Check the response data
         if (response.data) {
-          console.log("Upload successful:", response.data);
           handleAPIRequest("get", "user", null).then((response) => {
             dispatch(setUser(response.user.profile));
           });
@@ -303,12 +294,16 @@ const BusinessProfileData = () => {
   // Create a function to handle file selection
   const handleFileSelect = (event) => {
     const selectedFile = event.target.files[0];
-    console.log(selectedFile);
     if (selectedFile) {
       // Set the selected file to the bus_logo state
       setBusiness({ ...business, bus_logo: selectedFile });
-      console.log(business.bus_logo);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(setUser(null));
+    dispatch(setIsLoggedIn(false));
   };
 
   return (
