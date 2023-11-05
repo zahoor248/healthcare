@@ -4,23 +4,29 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setAllReasevation } from "../../Store/Actions/Actions";
+import { Link, useLocation } from "react-router-dom";
 const Reservations = () => {
   const [loading, setLoading] = useState(false);
   const reservations = useSelector((state) => state.reservations);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!reservations) {
       setLoading(true);
-
-      handleAPIRequest("get", "reservation", null)
+      console.log(user.uuid);
+      handleAPIRequest(
+        "get",
+        `reservation`,
+        null
+      )
         .then((response) => {
           if (response.data) {
             const res = {
               data: [
                 {
                   id: 2,
-                  uuid: "8d18a60d-57c9-476b-b083-a3650bdca3a1",
+                  uuid: "b9f68051-e839-43ba-a0ad-a530b79442ee",
                   account_id: 17,
                   parent_id: 0,
                   offered_by: {
@@ -139,7 +145,13 @@ const Reservations = () => {
                     </div>
                     <div className="flex items-center pt-3 gap-4">
                       <div className=" !rounded-full overflow-hidden w-14 h-14">
-                        <img src={item.offered_to?.photo_url} />
+                        {item.offered_to?.photo_url != null ? (
+                          <img src={item.offered_to?.photo_url} />
+                        ) : (
+                          <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
+                            {item?.offered_to?.firstname.charAt(0)}
+                          </div>
+                        )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
@@ -158,7 +170,13 @@ const Reservations = () => {
                     </div>
                     <div className="flex items-center pt-3 gap-4">
                       <div className=" !rounded-full overflow-hidden w-14 h-14">
-                        <img src={item.offered_by?.photo_url} />
+                        {item.offered_by?.photo_url != null ? (
+                          <img src={item.offered_by?.photo_url} />
+                        ) : (
+                          <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
+                            {item?.offered_by?.firstname.charAt(0)}
+                          </div>
+                        )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
@@ -170,9 +188,11 @@ const Reservations = () => {
                       </div>
                     </div>
                     <div className="flex w-full justify-end">
-                      <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
-                        Details
-                      </button>
+                      <Link to={`/reservation-detail?${item?.uuid}`}>
+                        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
+                          Details
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

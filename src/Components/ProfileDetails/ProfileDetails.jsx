@@ -8,18 +8,20 @@ import ReviewSlider from "../ReviewSlider/ReviewSlider";
 import DaySelect from "../DaySelect/DaySelect";
 import Header from "../Header/Header";
 import CommonInput from "../ReusableComponents/CommonInput";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Alert, Box } from "@mui/material";
 import { handleAPIRequest } from "../../helper/ApiHandler";
+import { getAllFav } from "../../Store/Actions/Actions";
+import dayjs from "dayjs";
 
 export default function ProfileDetails() {
   const location = useLocation();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [month, setMonth] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -29,6 +31,10 @@ export default function ProfileDetails() {
   const professionals = useSelector((state) => state.pros);
   const [cleared, setCleared] = useState(false);
   const [ratting, setRatting] = useState([]);
+  const [counterLocation, setLocation] = useState("");
+  const [payDuration, setPayDuration] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   // co
   useEffect(() => {
@@ -51,15 +57,41 @@ export default function ProfileDetails() {
   }, [professionals]);
 
   const reserveUser = () => {
-    const payload = {
-      startDate: startDate,
-      endDate: endDate,
-      price: price,
+    let data = {
+      start_date: startDate,
+      end_date: endDate,
+      pay_rate: price,
+      pay_duration: payDuration?.toLowerCase(),
+      location: counterLocation,
       description: description,
+      account_uuid: user.accounts[0].uuid,
     };
-    console.log(payload, "here is the payload ");
+    console.log(data);
+
+    handleAPIRequest("POST", `reservation`, data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch({});
+
+    console.log(data, "here is the payload ");
   };
 
+  const handleAddFav = (item) => {
+    handleAPIRequest("POST", `favorites/add/${item.id}`, null)
+      .then((response) => {
+        console.log(response, "Helelelelelelele");
+        dispatch(getAllFav(response.favorites));
+      })
+      .catch((error) => {});
+  };
+
+  const handleStartDateChange = (date) => {
+    setStartDate(dayjs(date).format("DD-MM-YYYY"));
+  };
+  const handleEndDateChange = (date) => {
+    setEndDate(dayjs(date).format("DD-MM-YYYY"));
+  };
   return (
     <>
       {loading ? (
@@ -126,8 +158,14 @@ export default function ProfileDetails() {
                   <p className="profile-designation text-sm text-gray-300 mt-1">
                     ADON
                   </p>
+                  <button
+                    onClick={() => handleAddFav(userDetails)}
+                    className="contact-profile-btn text-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500"
+                  >
+                    Add to Favourites
+                  </button>
                   <Link to={`/chats?${userDetails?.uuid}`}>
-                    <button className="contact-profile-btn text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
+                    <button className="contact-profile-btn mx-3 text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
                       Contact this Pro
                     </button>
                   </Link>
@@ -285,7 +323,8 @@ export default function ProfileDetails() {
                       >
                         <DatePicker
                           sx={{ width: "100%" }}
-                          onChange={(e) => setStartDate(e.target.value)}
+                          onChange={handleStartDateChange}
+                          defaultValue={startDate}
                           slotProps={{
                             field: {
                               clearable: true,
@@ -316,7 +355,8 @@ export default function ProfileDetails() {
                       >
                         <DatePicker
                           sx={{ width: "100%" }}
-                          onChange={(e) => setEndDate(e.target.value)}
+                          onChange={handleEndDateChange}
+                          defaultValue={endDate}
                           slotProps={{
                             field: {
                               clearable: true,
@@ -334,6 +374,8 @@ export default function ProfileDetails() {
                 </p>
                 <div className="relative w-full">
                   <input
+                    onChange={(e) => setLocation(e.target.value)}
+                    value={counterLocation}
                     placeholder="Select Location"
                     className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                   />
@@ -348,6 +390,7 @@ export default function ProfileDetails() {
                     <div className="relative w-full">
                       <input
                         onChange={(e) => setPrice(e.target.value)}
+                        value={price}
                         placeholder="Enter Value"
                         type="number"
                         className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
@@ -360,9 +403,12 @@ export default function ProfileDetails() {
                       Rate
                     </p>
                     <div className="relative w-full">
-                      <select className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full">
-                        <option>Hourly Rate</option>
-                        <option>Daily Rate</option>
+                      <select
+                        onChange={(e) => setPayDuration(e.target.value)}
+                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
+                      >
+                        <option>Hourly</option>
+                        <option>Daily</option>
                         <option>Fixed</option>
                       </select>
                     </div>
@@ -376,6 +422,7 @@ export default function ProfileDetails() {
                     <div className="relative w-full">
                       <textarea
                         onChange={(e) => setDescription(e.target.value)}
+                        value={description}
                         placeholder="Describe your self"
                         className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                       />

@@ -11,6 +11,7 @@ export const handleAPIRequest = async (method, url, data, params) => {
   let header = null;
 
   if (method === "post" || method === "put") {
+    console.log(method);
     header = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${JSON.stringify(JSON.parse(token))}`,
@@ -29,7 +30,7 @@ export const handleAPIRequest = async (method, url, data, params) => {
       params: params,
     });
 
-    console.warn(response.data, "faskjhfasjkfahksfhaksfjahs");
+    console.log(response.data, "faskjhfasjkfahksfhaksfjahs");
     // store.dispatch(setAppLoading(false));
     return response.data;
   } catch (error) {

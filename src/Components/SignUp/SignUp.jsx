@@ -58,7 +58,7 @@ export default function SignUp() {
       type: userType,
     };
     console.log(data);
-    return;
+    ;
     POST(data, REGISTER, "post")
       .then((response) => {
         console.log(response);

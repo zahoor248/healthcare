@@ -32,14 +32,16 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileData = () => {
   const dispatch = useDispatch();
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
   const [firstName, setFirstName] = useState(user?.firstname);
   const [lastName, setLastName] = useState(user?.lastname);
   const [email, setEmail] = useState(user?.email);
-  const [phone, setPhone] = useState("");
+  const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const [confirmPassword, setConfirmPassword] = useState("");
   console.log(user, "user");
   const submitHandler = (event) => {
@@ -49,23 +51,15 @@ const navigate = useNavigate()
       firstname: firstName,
       lastname: lastName,
       email: email,
-      password: password,
-      description: "",
+      password: "Faraz@124",
+      about_me: description,
     };
-    POST(data, `user`, "put")
+    // console.log(data, "data here");
+    // return;
+    handleAPIRequest("PUT", "user", data)
       .then((response) => {
         console.log(response, "here is res");
         // setUserDetails(response?.data?.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    axios
-      .post("https://jsonplaceholder.typicode.com/posts/", {})
-      .then((response) => {
-        console.log(response);
-        event.target.reset();
       })
       .catch((error) => {
         console.log(error);
@@ -74,7 +68,7 @@ const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate('/login')
+    navigate("/login");
     dispatch(setUser(null));
     dispatch(setIsLoggedIn(false));
   };
@@ -177,8 +171,8 @@ const navigate = useNavigate()
                 variant="outlined"
                 id="phone"
                 name="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -250,7 +244,7 @@ const BusinessProfileData = () => {
     <div className="flex flex-col gap-4 w-full my-12">
       <div className="profile-editing-header">
         <BiMessageSquareEdit className="edit-box-icon" />
-        <p className="my-profile-text">My Profile</p>
+        <p className="my-profile-text">Business Profile</p>
       </div>
 
       <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col justify-between">
