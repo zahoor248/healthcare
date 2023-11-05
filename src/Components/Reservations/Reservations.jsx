@@ -16,7 +16,77 @@ const Reservations = () => {
       handleAPIRequest("get", "reservation", null)
         .then((response) => {
           if (response.data) {
-            dispatch(setAllReasevation([])); // Update Redux store with an empty array
+            const res = {
+              data: [
+                {
+                  id: 2,
+                  uuid: "8d18a60d-57c9-476b-b083-a3650bdca3a1",
+                  account_id: 17,
+                  parent_id: 0,
+                  offered_by: {
+                    id: 42,
+                    is_admin: 0,
+                    type: "bus",
+                    uuid: "02228226-ef3b-4bc5-a7dc-5862d68f076b",
+                    firstname: "faraz",
+                    lastname: "syed",
+                    email: "syed@yopmail.com",
+                    email_verified_at: null,
+                    created_at: "2023-08-28T15:35:22.000000Z",
+                    updated_at: "2023-11-01T08:27:34.000000Z",
+                    status: "pending",
+                    about_me: null,
+                    verified: "no",
+                    photo_url: null,
+                    fcm_token:
+                      "d-6R9-pSTRSI8PiepUfi-C:APA91bEG1KdNOGjoUlSY3q_ACL1hnpqD4WrkOnj_KfLnUmIWpiTBTnmPtCx18rjLBpjoMjmrhvT3MQv4VxngTFe49pQAfia4OXen3r3y3SdsBUsWIK1b58qKwRCWpEn1l4qaKm7un4tg",
+                    code: null,
+                  },
+                  offered_to: {
+                    id: 25,
+                    is_admin: 0,
+                    type: "pro",
+                    uuid: "f7371985-ef4a-48f6-84b4-897442ae0325",
+                    firstname: "hello",
+                    lastname: "world",
+                    email: "helloworld@yopmail.com",
+                    email_verified_at: null,
+                    created_at: "2023-07-27T09:47:49.000000Z",
+                    updated_at: "2023-10-31T17:31:08.000000Z",
+                    status: "active",
+                    about_me: null,
+                    verified: "no",
+                    photo_url: null,
+                    fcm_token:
+                      "ebn8EGfVg08Btv208a-Kuh:APA91bGHbJISiEsVlo4q-LOZF29aZMEz7VsYh9khnt97Fy5FRHnXB2OMPKW9KbDT8w58CDenPx9KTfoteqV_7nKFlOlJj_ECJfeAUziXX84EOf5U8_O-PK3pVcROfiq1IzqmzP630vxl",
+                    code: null,
+                  },
+                  start_date: "2023-10-31",
+                  end_date: "2023-10-31",
+                  pay_rate: 11,
+                  pay_duration: "hourly",
+                  location: "USA Parkway Sparks NV USA",
+                  description: "Fff",
+                  created_at: "2023-10-31T17:28:16.000000Z",
+                  updated_at: "2023-10-31T17:44:45.000000Z",
+                  status: "countered",
+                  offered_by_me: false,
+                  made_by_owner: false,
+                  counter_offer_counts: 1,
+                  account: {
+                    id: 17,
+                    uuid: "59fd5141-0c50-441b-aa27-ec44c2cf6171",
+                    type: "bus",
+                    owner_id: 41,
+                    name: "test's Account",
+                    updated_at: "2023-08-28T15:22:19.000000Z",
+                    created_at: "2023-08-28T15:22:19.000000Z",
+                    status: "active",
+                  },
+                },
+              ],
+            };
+            dispatch(setAllReasevation(res.data)); // Update Redux store with an empty array
           } else {
             console.log(response, "Here is the response");
             dispatch(setAllReasevation(response));
@@ -69,14 +139,15 @@ const Reservations = () => {
                     </div>
                     <div className="flex items-center pt-3 gap-4">
                       <div className=" !rounded-full overflow-hidden w-14 h-14">
-                        <img src={item.user_avatar} />
+                        <img src={item.offered_to?.photo_url} />
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
-                        <p className="font-bold text-xl">
-                          {item.contractor_name}
+                        <p className="font-bold text-xl capitalize">
+                          {item?.offered_to?.firstname}{" "}
+                          {item?.offered_to?.lastname}
                         </p>
-                        <p className="">{item.description}</p>
+                        <p className="">{item?.offered_to?.about_me}</p>
                       </div>
                     </div>
                   </div>
@@ -87,14 +158,15 @@ const Reservations = () => {
                     </div>
                     <div className="flex items-center pt-3 gap-4">
                       <div className=" !rounded-full overflow-hidden w-14 h-14">
-                        <img src={item.user_avatar} />
+                        <img src={item.offered_by?.photo_url} />
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
-                        <p className="font-bold text-xl">
-                          {item.contractor_name}
+                        <p className="font-bold text-xl capitalize">
+                          {item?.offered_by?.firstname}{" "}
+                          {item?.offered_by?.lastname}
                         </p>
-                        <p className="">{item.description}</p>
+                        <p className="">{item?.offered_by?.about_me}</p>
                       </div>
                     </div>
                     <div className="flex w-full justify-end">

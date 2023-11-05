@@ -11,7 +11,7 @@ export default function Hiring() {
   const professionals = useSelector((state) => state.pros);
   const [data, setData] = useState(professionals);
   const [filteredData, setFilteredData] = useState(professionals);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [item, setItems] = useState([]);
   const getAllLincensesTypes = () => {
@@ -542,36 +542,17 @@ export default function Hiring() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    let favoritesData = {
-      success: "User added to favorites",
-      favorites: [
-        {
-          id: 35,
-          is_admin: 0,
-          type: "pro",
-          uuid: "55f65c92-a55b-4def-9a83-d5cdbcdccd70",
-          firstname: "Mathew",
-          lastname: "Pro",
-          email: "Mat@matbryant.com",
-          email_verified_at: null,
-          created_at: "2023-08-17T19:16:08.000000Z",
-          updated_at: "2023-09-19T16:53:37.000000Z",
-          status: "active",
-          about_me: null,
-          verified: "no",
-          photo_url:
-            "https://app.healthcare-up.com/public/profiles/64f1e78159ce3_image.jpg",
-          fcm_token:
-            "cAHH5UyQTGOz5IreW7Ljiv:APA91bGkX1TQirIbC7e6oYWx9_4sm7DaAdXCQw6JJsckyhlUKmC4CTQ_6-1epMzNt3ujkDrMIdVvsndtKR7m1HFU1m68pcPRtwJfnHlaLbbnn1eZ73zCGeAgzFRO4h8pF8U9jBondEkE",
-          code: null,
-          pivot: {
-            user_id: 61,
-            favorite_user_id: 35,
-          },
-        },
-      ],
-    };
+    handleAPIRequest("get", "pros", null)
+      .then((response) => {
+        if (response) {
+          // console.warn(response);
+          dispatch(getAllPros(response));
+          setLoading(false);
+        }
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
 
     getAllLincensesTypes();
 
@@ -581,54 +562,108 @@ export default function Hiring() {
         dispatch(getAllFav(response.favorites));
       })
       .catch((error) => {});
-    dispatch(getAllFav(favoritesData.favorites));
     setData(professionals);
     setFilteredData(professionals);
-    setLoading(false);
-  }, [loading]);
+  }, []);
 
   return (
     <>
-      <div className=" bg-[#e5f0ff] pb-40 flex ">
-        <h1 className="xl:text-4xl px-6 xl:px-32 md:text-2xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
-          Healthcare professionals Ready to hire.
-        </h1>
-      </div>
-      <div className="flex -mt-32 xl:-mt-28  flex-row w-full px-6 xl:px-24 2xl:px-32">
-        <div className="flex w-full bg-white  shadow-class p-4 lg:p-8 xl:p-14 rounded-2xl xl:gap-14 lg:gap-10 gap-6">
-          <div className="">
-            <Sidebar
-              data={data}
-              filteredData={filteredData}
-              setFilteredData={setFilteredData}
-            />
+      {" "}
+      {loading ? (
+        <div className="flex transition-all ease-in-out duration-500 justify-center items-center my-auto w-full h-[100vh] bg-[#e5f0ff] ">
+          <svg viewBox="0 0 240 240" height="240" width="240" class="pl">
+            <circle
+              stroke-linecap="round"
+              stroke-dashoffset="-330"
+              stroke-dasharray="0 660"
+              stroke-width="20"
+              stroke="#000"
+              fill="none"
+              r="105"
+              cy="120"
+              cx="120"
+              class="pl__ring pl__ring--a"
+            ></circle>
+            <circle
+              stroke-linecap="round"
+              stroke-dashoffset="-110"
+              stroke-dasharray="0 220"
+              stroke-width="20"
+              stroke="#000"
+              fill="none"
+              r="35"
+              cy="120"
+              cx="120"
+              class="pl__ring pl__ring--b"
+            ></circle>
+            <circle
+              stroke-linecap="round"
+              stroke-dasharray="0 440"
+              stroke-width="20"
+              stroke="#000"
+              fill="none"
+              r="70"
+              cy="120"
+              cx="85"
+              class="pl__ring pl__ring--c"
+            ></circle>
+            <circle
+              stroke-linecap="round"
+              stroke-dasharray="0 440"
+              stroke-width="20"
+              stroke="#000"
+              fill="none"
+              r="70"
+              cy="120"
+              cx="155"
+              class="pl__ring pl__ring--d"
+            ></circle>
+          </svg>
+        </div>
+      ) : (
+        <div>
+          <div className=" bg-[#e5f0ff] pb-40 flex ">
+            <h1 className="xl:text-4xl px-6 xl:px-32 md:text-2xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
+              Healthcare professionals Ready to hire.
+            </h1>
           </div>
-          <div className=" w-full">
-            <div className="card-section-header flex justify-between items-center">
-              <div className="flex gap-2">
-                <p>Sort by:</p>
-                <select
-                  className="bg-blue-400 hover:bg-blue-500 transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
-                  value={filter}
-                  onChange={(e) => setFilteredData(e.target.value)}
-                >
-                  <option>Hourly Rate</option>
-                  <option>Daily Rate</option>
-                </select>
+          <div className="flex -mt-32 xl:-mt-28  flex-row w-full px-6 xl:px-24 2xl:px-32">
+            <div className="flex w-full bg-white  shadow-class p-4 lg:p-8 xl:p-14 rounded-2xl">
+              <div className="">
+                <Sidebar
+                  data={data}
+                  filteredData={filteredData}
+                  setFilteredData={setFilteredData}
+                />
               </div>
+              <div className="xl:pl-14 lg:pl-10 pl-6 w-full">
+                <div className="card-section-header flex justify-between items-center">
+                  <div className="flex gap-2">
+                    <p>Sort by:</p>
+                    <select
+                      className="bg-blue-400 hover:bg-blue-500 transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
+                      value={filter}
+                      onChange={(e) => setFilteredData(e.target.value)}
+                    >
+                      <option>Hourly Rate</option>
+                      <option>Daily Rate</option>
+                    </select>
+                  </div>
 
-              {/* <div className="pagi-icons flex items-center">
+                  {/* <div className="pagi-icons flex items-center">
                 <IoIosArrowDropleft className="mr-2" />
                 <IoIosArrowDropright />
               </div> */}
-            </div>
+                </div>
 
-            <div>
-              <ProfessionalCard data={filteredData} />
+                <div>
+                  <ProfessionalCard data={filteredData} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

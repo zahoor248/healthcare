@@ -23,7 +23,8 @@ export default function PriceRange() {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         sx={{
-          width: '90%',
+          width: '100%',
+          margin: 'auto',
           marginTop: "20px",
           "& .MuiSlider-thumb": {
             borderRadius: "4px",

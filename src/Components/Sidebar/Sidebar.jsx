@@ -56,13 +56,12 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   };
 
   return (
-    <div className="w-full md:w-[250px] 2xl:min-w-[330px]">
-      <div className="flex pb-3 items-center gap-2">
+    <div className="w-full md:w-[250px] 2xl:min-w-[330px] flex flex-col gap-8">
+      <div className="flex pb-3 items-center gap-2 border-b">
         <img className="w-4 h-4" src={FilterIcon} alt="filter icon" />
         <p className=" text-lg">Filters</p>
       </div>
 
-      <div className="border-b"></div>
       <div className="flex flex-col gap-8">
         <div>
           <p className="text-lg pb-2">Tags</p>
@@ -103,6 +102,50 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
           >
             Refine
           </button>
+        </div>
+      </div>
+      <div>
+        <div className="fixed w-full h-full inset-0 bg-black/50"></div>
+        <div className="fixed inset-0 m-auto w-full max-w-[550px] bg-white rounded-lg h-fit p-7">
+          <div className="flex flex-col gap-5">
+            <div>
+              <p className="text-lg pb-2">Tags</p>
+              <TagSelector />
+            </div>
+            <div>
+              <p className="text-lg pb-2">License Type</p>
+              <div className="grid grid-cols-5 gap-4">
+                {licenses.map((license, key) => (
+                  <div className=" flex items-center cursor-default" key={key}>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleFilterByLicense(license)}
+                      value={
+                        filterConditions.license.includes(license)
+                          ? true
+                          : false
+                      }
+                      class="ui-checkbox"
+                    ></input>
+                    <p className="text-neutral-600 px-3 text-lg">{license}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-lg">Hourly Rate</p>
+              <PriceRange />
+            </div>
+
+            <div>
+              <button
+                className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white "
+                onClick={filterData}
+              >
+                Refine
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

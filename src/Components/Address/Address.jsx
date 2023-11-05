@@ -12,13 +12,13 @@ export default function Address() {
   const [address, setAddress] = useState("");
 
   return (
-    <div className=" w-full flex flex-col gap-8 py-12">
+    <div className=" w-full flex flex-col gap-4 py-12">
       <div className="profile-editing-header">
         <MdLocationOn className="edit-box-icon" />
         <p className="my-profile-text">Address</p>
       </div>
-      <div className="bg-white shadow-lg h-full p-8 flex flex-col">
-        <div className="grid grid-cols-2 gap-4 w-full ">
+      <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col">
+        <div className=" flex  flex-col gap-4 w-full ">
           <div className="flex flex-col gap-2">
             <p className="text-base/none font-normal text-neutral-600">Country</p>
             <input

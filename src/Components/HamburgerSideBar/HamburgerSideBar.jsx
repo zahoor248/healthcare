@@ -2,30 +2,39 @@ import React, { useState } from "react";
 import Logo from "../../assets/images/logo-image.png";
 import { Link, useLocation } from "react-router-dom";
 
-export default function HamburgerSideBar({ closeModal }) {
+export default function HamburgerSideBar({ setShowBar }) {
   return (
     <>
       <div className="md:hidden">
         <div
           className="fixed w-full h-full inset-0 bg-black/60 z-[9999]"
-          onClick={closeModal}
+          onClick={() => setShowBar(false)}
         ></div>
-        <div className="fixed w-full h-full max-w-[300px] inset-0 ml-auto bg-white z-[99999] py-6 px-4 flex flex-col gap-5">
-          <Link to={"/profile"} className="flex items-center gap-2">
-            <h4 class="text-white   text-sm lg:text-sm 2xl:text-lg  font-normal leading-3 bg-black/50 w-12 h-12 flex items-center justify-center rounded-full text-center cursor-pointer">
-              W
-            </h4>
-            {/* <h4 class="text-lg leading-3 text-center w-full h-full rounded-full bg-neutral-400 animate-pulse"></h4> */}
-            <div className="text-sm lg:text-sm 2xl:text-lg mt-2 text-neutral-800">
-              <div className="text-xl leading-none">Welcome</div>
-              <span className="text-sm leading-none text-neutral-800">
-                Welcome
-              </span>
-            </div>
-          </Link>
-          <div className="flex flex-col">
+        <div className="fixed w-full h-full max-w-[300px] inset-0 ml-auto bg-white z-[99999] py-4 px-4 flex flex-col gap-5">
+          <div
+            onClick={() => setShowBar(false)}
+            className="flex cursor-pointer  w-full justify-end"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5 hover:rotate-90 transition-all ease-in-out duration-500"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          <div className="flex gap-2 flex-col">
             <Link
-              className="cursor-pointer flex items-center gap-3 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
+              className={`${
+                true && "bg-neutral-200"
+              } cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300`}
               as={Link}
               to="/"
             >
@@ -35,7 +44,7 @@ export default function HamburgerSideBar({ closeModal }) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-5 w-5"
               >
                 <path
                   strokeLinecap="round"
@@ -45,7 +54,6 @@ export default function HamburgerSideBar({ closeModal }) {
               </svg>
               Home
             </Link>
-
             <Link
               className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
               as={Link}
@@ -57,7 +65,7 @@ export default function HamburgerSideBar({ closeModal }) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-5 w-5"
               >
                 <path
                   strokeLinecap="round"
@@ -79,7 +87,7 @@ export default function HamburgerSideBar({ closeModal }) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-5 w-5"
               >
                 <path
                   strokeLinecap="round"
@@ -101,7 +109,7 @@ export default function HamburgerSideBar({ closeModal }) {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-6 w-6"
+                class="h-5 w-5"
               >
                 <path
                   stroke-linecap="round"
@@ -122,7 +130,7 @@ export default function HamburgerSideBar({ closeModal }) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-5 w-5"
               >
                 <path
                   strokeLinecap="round"

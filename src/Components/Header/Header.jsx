@@ -27,7 +27,7 @@ export default function Header() {
   const [showBar, setShowBar] = useState(false);
   const handleBar = () => {
     setShowBar(true);
-  }
+  };
   const handleClose = () => {
     setShowBar(false);
   };
@@ -235,7 +235,10 @@ export default function Header() {
                     </div>
                   </Link>
                 </div>
-                <div className="md:hidden cursor-pointer" onClick={handleBar}>
+                <div
+                  className="md:hidden cursor-pointer"
+                  onClick={()=>setShowBar(true)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -251,7 +254,7 @@ export default function Header() {
                     />
                   </svg>
                 </div>
-                {/* {setShowBar && (<HamburgerSideBar closeModal={handleClose}/>)} */}
+                {showBar && <HamburgerSideBar setShowBar={setShowBar} />}
               </>
             )}
           </div>

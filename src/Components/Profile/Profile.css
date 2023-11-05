@@ -87,7 +87,7 @@
   align-items: center;
 }
 .pen-icon {
-  font-size: 24px;
+  font-size: 20px;
   color: #0f75bc;
 }
 .profile-editing-section {
@@ -287,7 +287,7 @@
   z-index: 10;
   text-decoration: none;
   text-transform: uppercase;
-  padding: 20px 0px;
+  padding: 16px 0px;
   display: flex;
   align-items: center;
   gap: 8px;

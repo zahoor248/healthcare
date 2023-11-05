@@ -14,7 +14,8 @@ import ModalReview from "../ModalReview/ModalReview";
 import ReactPaginate from "react-paginate";
 import { Modal } from "@mui/base";
 import { Link } from "react-router-dom";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../Pagination/Pagination"
+import EmptyState from "../EmptyState/EmptyState"
 
 export default function ProfessionalCard({ data }) {
   const [show, setShow] = useState(false);
@@ -313,7 +314,6 @@ export default function ProfessionalCard({ data }) {
     return (
       <>
         <AllPros currentItems={currentItems} />
-
         <Pagination />
       </>
     );
