@@ -28,10 +28,11 @@ import Notification from "../Notification/Notification";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { POST } from "../../Api/Post";
+import { useNavigate } from "react-router-dom";
 
 const ProfileData = () => {
   const dispatch = useDispatch();
-
+const navigate = useNavigate()
   const user = useSelector((state) => state.user);
 
   const [firstName, setFirstName] = useState(user?.firstname);
@@ -73,6 +74,7 @@ const ProfileData = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    navigate('/login')
     dispatch(setUser(null));
     dispatch(setIsLoggedIn(false));
   };

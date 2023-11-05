@@ -27,15 +27,7 @@ const Layout = ({ children }) => {
 
           dispatch(setIsLoggedIn(true));
           // to prevent from loading on listing page we are making call here
-          handleAPIRequest("get", "pros", null)
-            .then((response) => {
-              if (response) {
-                // console.warn(response);
-                dispatch(getAllPros(response));
-                setLoading(false);
-              }
-            })
-            .catch((e) => {});
+          setLoading(false);
         })
         .catch((error) => {
           setLoading(false);

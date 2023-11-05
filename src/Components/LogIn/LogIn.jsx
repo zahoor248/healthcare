@@ -36,11 +36,13 @@ export default function LogIn() {
       setLoading(true);
       handleAPIRequest("post", "login", { email: email, password: password })
         .then((response) => {
-          dispatch(setUser(response.user));
-          dispatch(setIsLoggedIn(true));
-          localStorage.setItem("token", user.token);
-          navigate("/");
-          setLoading(false);
+          if (response) {
+            localStorage.setItem("token", response?.user?.token);
+            dispatch(setUser(response.user));
+            dispatch(setIsLoggedIn(true));
+            navigate("/");
+            setLoading(false);
+          }
         })
         .catch((e) => {
           console.warn(e);
