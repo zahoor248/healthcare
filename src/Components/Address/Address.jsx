@@ -79,7 +79,7 @@ export default function Address() {
       state: data.state.split("-")[0]?.toLowerCase(),
       city: data.city?.toLowerCase(),
       zip: data.zipCode,
-      [`address_${1}`]: data.address,
+      [`address_${1}`]: data.address,    
       type: "mailing",
       uuid: generateUUID(),
     };
