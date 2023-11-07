@@ -8,7 +8,7 @@ import Reducer from "./Reducers/UserReducer";
 const middleware = [thunk];
 
 const store = createStore(
-  Reducer, // root reducer with router state
+  Reducer, 
 
   composeWithDevTools(
     applyMiddleware(
