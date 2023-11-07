@@ -169,7 +169,10 @@ export default function Hiring() {
                 </div>
 
                 <div>
-                  <ProfessionalCard data={filteredData} />
+                  <ProfessionalCard
+                    data={filteredData}
+                    setFilteredData={setFilteredData}
+                  />
                 </div>
               </div>
             </div>
