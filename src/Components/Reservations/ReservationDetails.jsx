@@ -40,7 +40,6 @@ const ReservationDetails = () => {
           );
 
           setOpenToAcceptOffer(opentoAcceptoffer[0]);
-      
         } else {
           setReservationDetails(response);
         }

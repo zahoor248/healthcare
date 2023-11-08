@@ -83,7 +83,12 @@ const Favouraties = () => {
                         <p className="">{item.email}</p>
                       </div>
                     </div>
-                    <div onClick={() => handleRemove(item)}>
+                    <div
+                      onClick={(event) => {
+                        event.preventDefault(); // This prevents the default behavior
+                        handleRemove(item);
+                      }}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
