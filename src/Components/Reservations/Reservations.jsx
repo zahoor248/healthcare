@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import user1 from "../../assets/images/chat1.jpg";
+import emptyState from "../../assets/images/reservation.png";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
@@ -7,140 +7,66 @@ import { setAllReasevation } from "../../Store/Actions/Actions";
 import { Link, useLocation } from "react-router-dom";
 const Reservations = () => {
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
   const reservations = useSelector((state) => state.reservations);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!reservations) {
-      setLoading(true);
-      console.log(user.uuid);
-      handleAPIRequest(
-        "get",
-        `reservation`,
-        null
-      )
-        .then((response) => {
-          if (response.data) {
-            const res = {
-              data: [
-                {
-                  id: 2,
-                  uuid: "b9f68051-e839-43ba-a0ad-a530b79442ee",
-                  account_id: 17,
-                  parent_id: 0,
-                  offered_by: {
-                    id: 42,
-                    is_admin: 0,
-                    type: "bus",
-                    uuid: "02228226-ef3b-4bc5-a7dc-5862d68f076b",
-                    firstname: "faraz",
-                    lastname: "syed",
-                    email: "syed@yopmail.com",
-                    email_verified_at: null,
-                    created_at: "2023-08-28T15:35:22.000000Z",
-                    updated_at: "2023-11-01T08:27:34.000000Z",
-                    status: "pending",
-                    about_me: null,
-                    verified: "no",
-                    photo_url: null,
-                    fcm_token:
-                      "d-6R9-pSTRSI8PiepUfi-C:APA91bEG1KdNOGjoUlSY3q_ACL1hnpqD4WrkOnj_KfLnUmIWpiTBTnmPtCx18rjLBpjoMjmrhvT3MQv4VxngTFe49pQAfia4OXen3r3y3SdsBUsWIK1b58qKwRCWpEn1l4qaKm7un4tg",
-                    code: null,
-                  },
-                  offered_to: {
-                    id: 25,
-                    is_admin: 0,
-                    type: "pro",
-                    uuid: "f7371985-ef4a-48f6-84b4-897442ae0325",
-                    firstname: "hello",
-                    lastname: "world",
-                    email: "helloworld@yopmail.com",
-                    email_verified_at: null,
-                    created_at: "2023-07-27T09:47:49.000000Z",
-                    updated_at: "2023-10-31T17:31:08.000000Z",
-                    status: "active",
-                    about_me: null,
-                    verified: "no",
-                    photo_url: null,
-                    fcm_token:
-                      "ebn8EGfVg08Btv208a-Kuh:APA91bGHbJISiEsVlo4q-LOZF29aZMEz7VsYh9khnt97Fy5FRHnXB2OMPKW9KbDT8w58CDenPx9KTfoteqV_7nKFlOlJj_ECJfeAUziXX84EOf5U8_O-PK3pVcROfiq1IzqmzP630vxl",
-                    code: null,
-                  },
-                  start_date: "2023-10-31",
-                  end_date: "2023-10-31",
-                  pay_rate: 11,
-                  pay_duration: "hourly",
-                  location: "USA Parkway Sparks NV USA",
-                  description: "Fff",
-                  created_at: "2023-10-31T17:28:16.000000Z",
-                  updated_at: "2023-10-31T17:44:45.000000Z",
-                  status: "countered",
-                  offered_by_me: false,
-                  made_by_owner: false,
-                  counter_offer_counts: 1,
-                  account: {
-                    id: 17,
-                    uuid: "59fd5141-0c50-441b-aa27-ec44c2cf6171",
-                    type: "bus",
-                    owner_id: 41,
-                    name: "test's Account",
-                    updated_at: "2023-08-28T15:22:19.000000Z",
-                    created_at: "2023-08-28T15:22:19.000000Z",
-                    status: "active",
-                  },
-                },
-              ],
-            };
-            dispatch(setAllReasevation(res.data)); // Update Redux store with an empty array
-          } else {
-            console.log(response, "Here is the response");
-            dispatch(setAllReasevation(response));
-          }
-
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-        });
-    }
-  }, [reservations]);
+    setLoading(true);
+    console.log(user.uuid);
+    handleAPIRequest("get", `reservation`, null, {
+      account_uuid: user.accounts[0].uuid,
+    })
+      .then((response) => {
+        if (response.data) {
+          dispatch(setAllReasevation(response.data)); // Update Redux store with an empty array
+        } else {
+          console.log(response, "Here is the response");
+          dispatch(setAllReasevation(response));
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
+  }, [location]);
   return (
-    <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
+    <div className="flex main-container  h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
           <div className="text-3xl">My Reservations</div>
         </div>
         {reservations?.length > 0 ? (
-          <div className="grid grid-cols-1 justify-between w-full py-10 gap-9 flex-wrap">
+          <div className="flex justify-between shadow-class border-neutral-300  border w-full rounded-xl my-10 gap-9 flex-wrap">
             {reservations?.map((item, index) => (
-              <div className="border-neutral-900 border h-fit w-full  hover:shadow-sm  rounded-xl">
+              <div className=" h-fit w-full  hover:shadow-sm  ">
                 {" "}
-                <div className="flex justify-startw-full ">
-                  <div className="flex items-start gap-4 border-r w-[35%] p-8">
+                <div className="flex flex-col md:flex-row justify-start w-full ">
+                  <div className="flex items-start gap-4 border-b md:border-r md:w-[35%] p-5 lg:p-8">
                     <div className="">
                       <p className="font-bold text-[#2676BC] text-xl"> Offer</p>
                       <div className="flex flex-row gap-3 pt-4">
                         <div className="font-semibold">Location:</div>
-                        <p className="">{item.location}</p>
+                        <p className="whitespace-pre-wrap">{item?.location}</p>
                       </div>
                       <div className="flex flex-row gap-3 pt-4">
                         <div className="font-semibold">Date:</div>
                         <div className="flex">
                           <p className="">
-                            {dayjs(item.start_date).format("DD/MM/YYYY")}
+                            {dayjs(item?.start_date).format("DD/MM/YYYY")}
                           </p>
                           <span className="px-2">-</span>
                           <p className="">
-                            {dayjs(item.end_date).format("DD/MM/YYYY")}
+                            {dayjs(item?.end_date).format("DD/MM/YYYY")}
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 flex-col p-8 border-r w-[27%]">
+                  <div className="flex items-start gap-4 flex-col p-5 lg:p-8 border-b md:border-r md:w-[27%]">
                     <div className="font-semibold">
-                      100$ / fixed offer to :
+                      {item?.pay_rate}$ / {item?.pay_duration} offer to :
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                     </div>
                     <div className="flex items-center pt-3 gap-4">
@@ -159,11 +85,13 @@ const Reservations = () => {
                           {item?.offered_to?.firstname}{" "}
                           {item?.offered_to?.lastname}
                         </p>
-                        <p className="">{item?.offered_to?.about_me}</p>
+                        <p className="">
+                          {item?.offered_to?.about_me || "N/A"}
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 flex-col !pb-4 !pr-4 p-8 w-[40%]">
+                  <div className="flex items-start gap-4 flex-col !pb-4 !pr-4 p-5 lg:p-8 md:w-[40%]">
                     <div className="font-semibold">
                       Offere by:
                       {/* <GoPrimitiveDot className='online-icon'/> */}
@@ -187,9 +115,9 @@ const Reservations = () => {
                         <p className="">{item?.offered_by?.about_me}</p>
                       </div>
                     </div>
-                    <div className="flex w-full justify-end">
-                      <Link to={`/reservation-detail?${item?.uuid}`}>
-                        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
+                    <div className="flex mt-4 md:mt-0 justify-end w-full">
+                      <Link className="w-full md:w-auto items-end" to={`/reservation-detail?${item?.uuid}`}>
+                        <button className="px-6 w-full md:w-auto py-3 bg-blue-600 text-white rounded-lg mt-2">
                           Details
                         </button>
                       </Link>
@@ -200,7 +128,8 @@ const Reservations = () => {
             ))}
           </div>
         ) : (
-          <div className="flex w-full justify-center center pt-20">
+          <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
+            <img src={emptyState} className="w-32" />
             <div className="text-3xl ">Your reservations will appear here</div>
           </div>
         )}

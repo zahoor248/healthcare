@@ -97,7 +97,7 @@ export default function Preferences() {
               <div
                 key={item.day}
                 onClick={() => openModalForDay(item.day)}
-                className="flex cursor-pointer rounded-md px-8 hover-shaow transition-all ease-in-out py-4 border items-center gap-2"
+                className="flex cursor-pointer rounded-md px-8 hover-shadow transition-all ease-in-out py-4 border items-center gap-2"
               >
                 <div className="flex flex-col items-center justify-center">
                   <p className="capitalize text-md text-neutral-800">

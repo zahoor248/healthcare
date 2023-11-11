@@ -107,7 +107,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
         <p className="text-lg pb-2">License Type</p>
 
         {/* All licences list */}
-        <div className="flex flex-wrap md:flex-col gap-3">
+        <div className="flex flex-wrap md:flex-col md:gap-1 gap-3">
           {licenses.map((license, key) => (
             <div className=" flex items-center cursor-default" key={key}>
               <input
