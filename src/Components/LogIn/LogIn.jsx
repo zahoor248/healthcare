@@ -63,15 +63,18 @@ export default function LogIn() {
               setShowToast({
                 ...showToast,
                 toggle: false,
-                status: "error",
-                message: "Please try again or check your account details",
-                lable: "User not found",
               });
             }, 2000);
           }
         })
         .catch((e) => {
-          alert("wrong");
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "error",
+            message: "Please try again later",
+            lable: "Server Error",
+          });
           setLoading(false);
         });
     }

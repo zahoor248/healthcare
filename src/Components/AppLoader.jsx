@@ -5,9 +5,6 @@ export default function Toast({ showToast, setShowToast }) {
     setShowToast({
       ...showToast,
       toggle: false,
-      status: "info",
-      message: "close",
-      lable: "close",
     });
   };
   return (
