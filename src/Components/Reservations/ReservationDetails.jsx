@@ -80,7 +80,7 @@ const ReservationDetails = () => {
                   <div className="font-bold text-[#2676BC] relative w-fit text-xl flex items-center gap-1">
                     {" "}
                     Offer:
-                    <div className=" absolute -right-24 px-6 bg-blue-50 !text-blue-600 border-blue-600 capitalize border rounded-full py-[2px] text-sm">
+                    <div className="  absolute -right-28 px-6 bg-blue-50 !text-blue-600 border-blue-600 capitalize border rounded-full py-[2px] text-sm">
                       {reservationDetails.status}
                     </div>
                   </div>
