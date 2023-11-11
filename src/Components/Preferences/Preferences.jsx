@@ -8,7 +8,6 @@ export default function Preferences() {
   const [visitingHours, setVisitingHours] = useState(
     DaysOfWeek.map((day) => ({ day, start_hour: "00:00", end_hour: "00:00" }))
   );
-
   const [selectedDay, setSelectedDay] = useState(null);
   const [editedStartTime, setEditedStartTime] = useState("00:00");
   const [editedEndTime, setEditedEndTime] = useState("00:00");
