@@ -523,14 +523,14 @@ body {
 .upload-button {
   font-family: inherit;
   font-size: 16px;
-  background: royalblue;
+  background: #0f75bc;
   color: white;
   padding: 0.7em 1em;
   padding-left: 0.9em;
   display: flex;
   align-items: center;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   transition: all 0.2s;
   cursor: pointer;
@@ -713,3 +713,22 @@ button:active {
   transform: scale(0.95);
   transition: all 0.7 ease-in-out;
  }
+
+ .button-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-ripple:before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  transition: transform 0.4s ease-out;
+  pointer-events: none;
+}
+
+.button-ripple:hover:before {
+  transform: scale(2);
+}

@@ -384,9 +384,9 @@ const BusinessProfileData = () => {
         <form onSubmit={submitHandler}>
           <div className=" flex flex-col justify-center items-center gap-4 w-full">
             <div class="profileImage">
-              {user.accounts[0].bus_profile.logo_url ? (
+              {user.accounts[0].bus_profile?.logo_url ? (
                 <img
-                  src={user.accounts[0].bus_profile.logo_url}
+                  src={user.accounts[0].bus_profile?.logo_url}
                   className="object-cover h-full w-full"
                 />
               ) : (

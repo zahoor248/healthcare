@@ -48,26 +48,23 @@ export default function Toast({ showToast, setShowToast }) {
             )}
             {showToast.status == "error" && (
               <svg
-                classname="'!text-rose-500 dark:text-rose-400'"
-                style={{ verticalAlign: "middle", fill: "#f43f5e" }}
-                width={32}
-                height={32}
-                viewBox="0 0 1024 1024"
-                version="1.1"
+
                 xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="red"
+                className="w-8 h-8"
               >
                 <path
-                  d="M512 56.888889a455.111111 455.111111 0 1 0 0 910.222222A455.111111 455.111111 0 0 0 512 56.888889z m0 796.444444c-188.245333 0-341.333333-153.088-341.333333-341.333333s153.088-341.333333 341.333333-341.333333 341.333333 153.088 341.333333 341.333333-153.088 341.333333-341.333333 341.333333z"
-                  fill
-                />
-                <path
-                  d="M666.851556 357.944889l-0.796445-0.796445a54.044444 54.044444 0 0 0-76.458667 0L512 434.744889 434.403556 357.148444a54.044444 54.044444 0 0 0-76.458667 0l-0.796445 0.796445a54.044444 54.044444 0 0 0 0 76.458667L434.744889 512l-77.596445 77.596444a54.044444 54.044444 0 0 0 0 76.458667l0.796445 0.796445a54.044444 54.044444 0 0 0 76.458667 0L512 589.255111l77.596444 77.596445a54.044444 54.044444 0 0 0 76.458667 0l0.796445-0.796445a54.044444 54.044444 0 0 0 0-76.458667L589.255111 512l77.596445-77.596444a54.044444 54.044444 0 0 0 0-76.458667z"
-                  fill
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
             )}
-            <div className="ml-3">
-              <h3 className="text-base text-neutral-800 font-semibold dark:text-neutral-200">
+            <div className="ml-2">
+              <h3 className="text-base text-neutral-800 font-medium dark:text-neutral-200">
                 {showToast?.lable}
               </h3>
               <p className="font-normal text-xs text-neutral-600 dark:text-neutral-400">
