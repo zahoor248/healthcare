@@ -17,6 +17,7 @@ import { Alert, Box } from "@mui/material";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { getAllFav } from "../../Store/Actions/Actions";
 import dayjs from "dayjs";
+import Toast from "../AppLoader";
 
 export default function ProfileDetails() {
   const location = useLocation();
@@ -35,6 +36,12 @@ export default function ProfileDetails() {
   const [payDuration, setPayDuration] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
 
   // co
   useEffect(() => {
@@ -82,6 +89,24 @@ export default function ProfileDetails() {
       .then((response) => {
         console.log(response, "Helelelelelelele");
         dispatch(getAllFav(response.favorites));
+
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "info",
+          message: "This user has been added to favorites",
+          lable: "Added as Favorites",
+        });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "info",
+            message: "This user has been added to favorites",
+            lable: "Added as Favorites",
+          });
+        }, 2000);
       })
       .catch((error) => {});
   };
@@ -469,6 +494,7 @@ export default function ProfileDetails() {
           </div>
         </div>
       )}
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </>
   );
 }

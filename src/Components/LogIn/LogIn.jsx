@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 // import { GoogleLogin } from "react-google-login";
 import { handleAPIRequest } from "../../helper/ApiHandler";
+import Toast from "../AppLoader";
 // import Header from "../Header/Header";
 
 // import { Alert } from "react-bootstrap";
@@ -24,11 +25,15 @@ export default function LogIn() {
   //   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
   const [email, setEmail] = useState("webbus@yopmail.com");
   const [password, setPassword] = useState("Faraz@123");
   const [loading, setLoading] = useState(false);
-  const [userError, setUserError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -45,8 +50,25 @@ export default function LogIn() {
             navigate("/");
             setLoading(false);
           } else {
-            setUserError("Invalid user");
+        
+            setShowToast({
+              ...showToast,
+              toggle: true,
+              status: "error",
+              message: "Please try again or check your account details",
+              lable: "User not found",
+            });
             setLoading(false);
+
+            setTimeout(() => {
+              setShowToast({
+                ...showToast,
+                toggle: false,
+                status: "error",
+                message: "Please try again or check your account details",
+                lable: "User not found",
+              });
+            }, 2000);
           }
         })
         .catch((e) => {
@@ -192,9 +214,7 @@ export default function LogIn() {
                 </div>
               </div>
             </div>
-            <div className="text-sm capitalize pt-3 text-red-600">
-              {userError}
-            </div>
+           
             <div className="pt-10 w-full">
               <button
                 className="bg-[#10274F] text-white w-full py-3 rounded-xl transition-all ease-in-out duration-500 hover:bg-[#0d2041] hover:shadow-lg border hover:border hover:border-[#10274F]"
@@ -232,6 +252,8 @@ export default function LogIn() {
           </div>
         </div>
       </div>
+
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </>
   );
 }

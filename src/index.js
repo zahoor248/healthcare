@@ -26,13 +26,13 @@ import Reservations from "./Components/Reservations/Reservations";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import ReservationDetails from "./Components/Reservations/ReservationDetails";
 import NewOffer from "./Components/Reservations/NewOffer";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        {/*global  layout  */}
         <Layout>
           {" "}
           {/* Wrap all routes with the Layout component */}

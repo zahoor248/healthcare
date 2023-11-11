@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import user1 from "../../assets/images/chat1.jpg";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { getAllFav } from "../../Store/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Toast from "../AppLoader";
 
 const Favouraties = () => {
   const [loading, setLoading] = useState(false);
   const favourities = useSelector((state) => state.favourites);
+  const location = useLocation();
   const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
   useEffect(() => {
     console.log(favourities);
     if (
@@ -19,7 +26,6 @@ const Favouraties = () => {
       setLoading(true);
       handleAPIRequest("get", "favorites", null)
         .then((response) => {
-          console.log(response, "Helelelelelelele");
           dispatch(getAllFav(response.favorites));
 
           setLoading(false);
@@ -28,16 +34,31 @@ const Favouraties = () => {
           setLoading(false);
         });
     }
-  }, [loading, favourities]);
+  }, [location]);
 
   const handleRemove = (item) => {
     console.log(item);
 
     handleAPIRequest("get", `favorites/remove/${item.id}`, null)
       .then((response) => {
-        console.log(response, "Helelelelelelele");
         dispatch(getAllFav(response.favorites));
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "info",
+          message: "This item has been removed",
+          lable: "Removed as Favorites",
+        });
 
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "info",
+            message: "This item has been removed",
+            lable: "Removed as Favorites",
+          });
+        }, 2000);
         setLoading(false);
       })
       .catch((error) => {
@@ -111,6 +132,7 @@ const Favouraties = () => {
           </div>
         )}
       </div>
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </div>
   );
 };

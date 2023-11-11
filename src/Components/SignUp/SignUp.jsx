@@ -22,7 +22,6 @@ import { useNavigate } from "react-router-dom";
 export default function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,9 +33,6 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // const [post, setPost] = useState([]);
-
   const registrationHandler = async () => {
     if (
       firstName == "" ||
@@ -58,7 +54,6 @@ export default function SignUp() {
       type: userType,
     };
     console.log(data);
-    ;
     POST(data, REGISTER, "post")
       .then((response) => {
         console.log(response);
