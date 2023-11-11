@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
-import user1 from "../../assets/images/chat1.jpg";
+import emptyState from "../../assets/images/icon-contract-19.jpg";
+
 import dayjs from "dayjs";
 import { setContracts } from "../../Store/Actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { Link, useLocation } from "react-router-dom";
+import StarRating from "./RatingStarts";
 
 const Contacts = () => {
   const [loading, setLoading] = useState(false);
   const contracts = useSelector((state) => state.contracts);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const [reviewText, setReviewText] = useState("");
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState({
+    toggle: false,
+    contract_id: "",
+    user_id: "",
+  });
+
   const location = useLocation();
 
   useEffect(() => {
@@ -20,7 +31,6 @@ const Contacts = () => {
         if (response.data) {
           dispatch(setContracts(response.data.contracts)); // Update Redux store with empty array
         } else {
-          console.log(response, "Here is the response");
           dispatch(setContracts(response));
         }
 
@@ -30,20 +40,66 @@ const Contacts = () => {
         setLoading(false);
       });
   }, [location]);
+
+  const handleApprove = (item) => {
+    if (user.type == "pro") {
+      if (
+        item.reviews &&
+        item.pro_acceptance &&
+        !item.reviews.some((review) => review.reviewer_id === user.id)
+      ) {
+        setReview({
+          ...review,
+          toggle: true,
+          contract_id: item.id,
+          user_id: user.type === "bus" ? item.bus_id : item.pro_id,
+        });
+      }
+    } else if (user.type == "bus") {
+      if (
+        item.bus_acceptance &&
+        !item.reviews.some((review) => review.reviewer_id === user.id)
+      ) {
+        setReview({
+          ...review,
+          toggle: true,
+          contract_id: item.id,
+          user_id: user.type === "pro" ? item.bus_id : item.pro_id,
+        });
+      }
+    }
+    console.log(item);
+  };
+
+  const handleReviewSubmit = () => {
+    // Implement your logic to submit the review and rating
+    console.log("Submitting Review:", reviewText);
+    console.log("Rating:", rating);
+
+    handleAPIRequest("POST", "review", {
+      contract_id: review.contract_id,
+      user_id: review.user_id,
+      rating: rating,
+      feedback: reviewText,
+    })
+      .then((response) => {})
+      .catch((error) => {});
+    // Reset state or close the review form if needed
+  };
   return (
-    <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
-      <div className="flex w-full flex-col    py-14">
+    <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)] justify-center  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
+      <div className="flex w-full flex-col py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
           <div className="text-3xl">Active Conrtracts</div>
         </div>
 
-        <div className="grid grid-cols-1 justify-between w-full py-10 gap-9 flex-wrap">
-          {contracts?.map((item, index) => (
-            <div className="border-neutral-900 border h-fit w-full  hover:shadow-sm  rounded-xl">
-              {" "}
-              <div className="flex justify-startw-full ">
-                <div className="flex flex-col items-start border-r w-full p-8">
-             
+        {contracts?.length > 0 ? (
+          <div className="grid grid-cols-1 justify-between w-full py-10 gap-9 flex-wrap">
+            {contracts?.map((item, index) => (
+              <div className="border-neutral-400 shadow-class border h-fit w-full    rounded-xl">
+                {" "}
+                <div className="flex justify-start flex-col md:flex-row w-full ">
+                  <div className="flex flex-col items-start border-b md:border-r w-full p-5 lg::p-8">
                     <div className="flex items-center gap-3">
                       <p className="font-bold text-[#2676BC] text-xl">
                         {" "}
@@ -85,64 +141,123 @@ const Contacts = () => {
                       <div className="text-xl font-bold">Contract Details:</div>
                       {item.additional_terms}
                     </div>
-               
-                </div>
-                <div className="flex items-start gap-4 w-full flex-col p-8 ">
-                  <div className="font-bold text-[#2676BC] text-xl">
-                    {/* <GoPrimitiveDot className='online-icon'/> */}
-                    Contract Between:
                   </div>
-                  <div className="flex items-center pt-3 gap-4">
-                    <div className=" !rounded-full overflow-hidden w-14 h-14">
-                      {item.business?.photo_url != null ? (
-                        <img src={item.business?.photo_url} />
-                      ) : (
-                        <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
-                          {item?.business?.firstname.charAt(0)}
-                        </div>
-                      )}
+                  <div className="flex items-start gap-4 w-full flex-col p-5 lg:p-8 ">
+                    <div className="font-bold text-[#2676BC] text-xl">
                       {/* <GoPrimitiveDot className='online-icon'/> */}
+                      Contract Between:
                     </div>
-                    <div className="">
-                      <p className="font-bold text-xl capitalize">
-                        {item?.business?.firstname} {item?.business?.lastname}
-                      </p>
-                      <p className="">{item?.business?.about_me}</p>
+                    <div className="flex items-center pt-3 gap-4">
+                      <div className=" !rounded-full overflow-hidden w-14 h-14">
+                        {item.business?.photo_url != null ? (
+                          <img src={item.business?.photo_url} />
+                        ) : (
+                          <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
+                            {item?.business?.firstname.charAt(0)}
+                          </div>
+                        )}
+                        {/* <GoPrimitiveDot className='online-icon'/> */}
+                      </div>
+                      <div className="">
+                        <p className="font-bold text-xl capitalize">
+                          {item?.business?.firstname} {item?.business?.lastname}
+                        </p>
+                        <p className="">{item?.business?.about_me}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center pt-3 gap-4">
-                    <div className=" !rounded-full overflow-hidden w-14 h-14">
-                      {item.pro?.photo_url != null ? (
-                        <img src={item.pro?.photo_url} />
-                      ) : (
-                        <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
-                          {item?.pro?.firstname.charAt(0)}
+                    <div className="flex items-center pt-3 gap-4">
+                      <div className=" !rounded-full overflow-hidden w-14 h-14">
+                        {item.pro?.photo_url != null ? (
+                          <img src={item.pro?.photo_url} />
+                        ) : (
+                          <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
+                            {item?.pro?.firstname.charAt(0)}
+                          </div>
+                        )}
+                        {/* <GoPrimitiveDot className='online-icon'/> */}
+                      </div>
+                      <div className="">
+                        <p className="font-bold text-xl capitalize">
+                          {item?.pro?.firstname} {item?.pro?.lastname}
+                        </p>
+                        <p className="">
+                          {item?.pro?.about_me ? item?.pro?.about_me : "N/A"}
+                        </p>
+                      </div>
+                    </div>
+                    {user.type == "pro" && item.pro_acceptance != null && (
+                      <div className="flex w-full justify-end">
+                        <div
+                          className="w-full md:w-auto"
+                          onClick={() => handleApprove(item)}
+                        >
+                          <button className="px-6 w-full md:w-auto mt-4 py-3 bg-blue-600 text-white rounded-lg md:mt-2">
+                            Close Contract
+                          </button>
                         </div>
-                      )}
-                      {/* <GoPrimitiveDot className='online-icon'/> */}
-                    </div>
-                    <div className="">
-                      <p className="font-bold text-xl capitalize">
-                        {item?.pro?.firstname} {item?.pro?.lastname}
-                      </p>
-                      <p className="">
-                        {item?.pro?.about_me ? item?.pro?.about_me : "N/A"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex w-full justify-end">
-                    <Link to={`/reservation-detail?${item?.uuid}`}>
-                      <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
-                        Cancel Contract
-                      </button>
-                    </Link>
+                      </div>
+                    )}
+                    {user.type == "bus" && item.bus_acceptance != null && (
+                      <div className="flex w-full justify-end">
+                        <div
+                          className="w-full md:w-auto"
+                          onClick={() => handleApprove(item)}
+                        >
+                          <button className="px-6 w-full md:w-auto mt-4 py-3 bg-blue-600 text-white rounded-lg md:mt-2">
+                            Close Contract
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
+            <img src={emptyState} className="w-32" />
+            <div className="text-3xl ">Your contracts will appear here</div>
+          </div>
+        )}
       </div>
+      {/* review model here  */}
+      {review.toggle && (
+        <div className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"></div>
+      )}
+      {review.toggle && (
+        <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
+          <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+            <div className="text-xl pb-4">{"Add Review here"}</div>
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-2">
+                <div className="text-base text-neutral-600">
+                  Rate your experience
+                </div>
+                <StarRating onChange={(newRating) => setRating(newRating)} />
+                <p className="text-base mt-2 text-neutral-600">
+                  Share your experience
+                </p>
+                <textarea
+                  className="text-md placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                  placeholder="Write Something"
+                  variant="outlined"
+                ></textarea>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 w-full justify-end mt-8">
+              <button
+                className="profile-save-btn"
+                onClick={() => handleReviewSubmit()}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

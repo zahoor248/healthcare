@@ -10,6 +10,10 @@ const ReservationDetails = () => {
   const location = useLocation();
   const [reservationDetails, setReservationDetails] = useState([]);
   const [opentoAcceptoffer, setOpenToAcceptOffer] = useState([]);
+  const [terms, setTerms] = useState({
+    toggle: false,
+    termsText: "",
+  });
   const reservations = useSelector((state) => state.reservations);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -50,6 +54,16 @@ const ReservationDetails = () => {
         setLoading(false);
       });
   }, [location, user]);
+
+  const handleReviewSubmit = () => {
+    handleAPIRequest("POST", `accept-offer/${location.search.split("?")[1]}`, {
+      additional_terms: terms.termsText,
+    })
+      .then((response) => {
+        setTerms({ ...terms, toggle: false });
+      })
+      .catch((error) => {});
+  };
   return (
     <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
@@ -97,16 +111,19 @@ const ReservationDetails = () => {
                       Chat
                     </button>
                   </Link>
+
                   {opentoAcceptoffer?.offered_by_me === false &&
                     opentoAcceptoffer?.status === "open" && (
                       <>
-                        <Link
-                          to={`/reservation-detail?${reservationDetails?.uuid}`}
+                        <div
+                          onClick={() =>
+                            setTerms({ ...terms, toggle: !terms.toggle })
+                          }
                         >
                           <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
                             Accept
                           </button>
-                        </Link>
+                        </div>
 
                         <Link to={`/counter-offer?${reservationDetails?.uuid}`}>
                           <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
@@ -229,6 +246,41 @@ const ReservationDetails = () => {
           </div>
         </div>
       </div>
+
+      {terms.toggle && (
+        <div className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"></div>
+      )}
+      {terms.toggle && (
+        <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
+          <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+            <div className="text-xl pb-4">{"Add Additional Terms"}</div>
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-2">
+                <p className="text-base mt-2 text-neutral-600">
+                  Additional Terms
+                </p>
+                <textarea
+                  className="text-md placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  value={terms.termsText}
+                  onChange={(e) =>
+                    setTerms({ ...terms, termsText: e.target.value })
+                  }
+                  placeholder="Write Something"
+                  variant="outlined"
+                ></textarea>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 w-full justify-end mt-8">
+              <button
+                className="profile-save-btn"
+                onClick={() => handleReviewSubmit()}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
