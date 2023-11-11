@@ -585,12 +585,12 @@ const Profile = () => {
                   <li
                     onClick={() => setNav("business-profile")}
                     className={`side-nav-item ${
-                      nav === "business-profile" && "side-nav-item-active"
+                      nav === "business-profile" && "side-nav-item-active "
                     }`}
                   >
                     <div className="side-nav-link">
                       <HiUserCircle className="pen-icon" />
-                      <span>Business Profile</span>
+                      <span  className="normal-case">Business Profile</span>
                     </div>
                   </li>
                 )}

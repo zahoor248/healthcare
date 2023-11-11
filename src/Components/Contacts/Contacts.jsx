@@ -42,8 +42,8 @@ const Contacts = () => {
             <div className="border-neutral-900 border h-fit w-full  hover:shadow-sm  rounded-xl">
               {" "}
               <div className="flex justify-startw-full ">
-                <div className="flex items-start gap-4 border-r w-full p-8">
-                  <div className="">
+                <div className="flex flex-col items-start border-r w-full p-8">
+             
                     <div className="flex items-center gap-3">
                       <p className="font-bold text-[#2676BC] text-xl">
                         {" "}
@@ -85,7 +85,7 @@ const Contacts = () => {
                       <div className="text-xl font-bold">Contract Details:</div>
                       {item.additional_terms}
                     </div>
-                  </div>
+               
                 </div>
                 <div className="flex items-start gap-4 w-full flex-col p-8 ">
                   <div className="font-bold text-[#2676BC] text-xl">

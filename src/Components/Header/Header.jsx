@@ -25,6 +25,7 @@ export default function Header() {
   const [navColour, updateNavbar] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBar, setShowBar] = useState(false);
+
   const handleBar = () => {
     setShowBar(true);
   };
@@ -121,55 +122,84 @@ export default function Header() {
                     </Link>
                   </div>
 
-                  <div className="flex items-center">
-                    <Link
-                      className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
-                      as={Link}
-                      to="/favouraties"
-                      onClick={() => updateExpanded(false)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="xl:w-5 xl:h-5 h-3 w-3"
+                  {user.type == "bus" && (
+                    <div className="flex items-center">
+                      <Link
+                        className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                        as={Link}
+                        to="/favouraties"
+                        onClick={() => updateExpanded(false)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                        />
-                      </svg>
-                      Favourites
-                    </Link>
-                  </div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="xl:w-5 xl:h-5 h-3 w-3"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                          />
+                        </svg>
+                        Favourites
+                      </Link>
+                    </div>
+                  )}
 
-                  <div className="flex items-center">
-                    <Link
-                      className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
-                      as={Link}
-                      to="/reservations"
-                      onClick={() => updateExpanded(false)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="xl:w-5 xl:h-5 h-3 w-3"
+                  {user.type == "bus" ? (
+                    <div className="flex items-center">
+                      <Link
+                        className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                        as={Link}
+                        to="/reservations"
+                        onClick={() => updateExpanded(false)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
-                        />
-                      </svg>
-                      Reservations
-                    </Link>
-                  </div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="xl:w-5 xl:h-5 h-3 w-3"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
+                          />
+                        </svg>
+                        Reservations
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="flex items-center">
+                      <Link
+                        className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                        as={Link}
+                        to="/listings"
+                        onClick={() => updateExpanded(false)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="xl:w-5 xl:h-5 h-3 w-3"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
+                          />
+                        </svg>
+                        Hiring
+                      </Link>
+                    </div>
+                  )}
 
                   <div className="flex items-center">
                     <Link
@@ -237,7 +267,7 @@ export default function Header() {
                 </div>
                 <div
                   className="md:hidden cursor-pointer"
-                  onClick={()=>setShowBar(true)}
+                  onClick={() => setShowBar(true)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
