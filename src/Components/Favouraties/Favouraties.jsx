@@ -55,9 +55,6 @@ const Favouraties = () => {
           setShowToast({
             ...showToast,
             toggle: false,
-            status: "info",
-            message: "This item has been removed",
-            lable: "Removed as Favorites",
           });
         }, 2000);
         setLoading(false);

@@ -10,25 +10,21 @@ import {
   HiStar,
 } from "react-icons/hi";
 import { BiMessageSquareEdit } from "react-icons/bi";
-import Select from "react-select";
-import csc from "country-state-city";
-import { TiTick } from "react-icons/ti";
-import { AiOutlineFieldTime } from "react-icons/ai";
-import Availability from "../Availability/Availability";
-import TextField from "@mui/material/TextField";
-import { FaAddressBook } from "react-icons/fa";
+
 import { TbLicense } from "react-icons/tb";
 import { MdRoomPreferences } from "react-icons/md";
 import Address from "../Address/Address";
 import License from "../License/License";
 import { useDispatch, useSelector } from "react-redux";
-import BusinessProfile from "../BusinessProfile/BusinessProfile";
+
 import Preferences from "../Preferences/Preferences";
-import Notification from "../Notification/Notification";
+
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 import { handleAPIRequest } from "../../helper/ApiHandler";
-import { POST } from "../../Api/Post";
+
 import { useNavigate } from "react-router-dom";
+import Toast from "../AppLoader";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 const ProfileData = () => {
   const dispatch = useDispatch();
@@ -39,28 +35,71 @@ const ProfileData = () => {
   const [lastName, setLastName] = useState(user?.lastname);
   const [email, setEmail] = useState(user?.email);
   const [description, setDescription] = useState(user?.about_me);
+  const [loading_button, setLoading_button] = useState(false);
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
   const [password, setPassword] = useState({
     passwordToSend: null,
     passwordToConfirm: "",
   });
   const submitHandler = (event) => {
-    event.preventDefault();
+    setLoading_button(true);
     if (password.passwordToConfirm == password.passwordToSend) {
       let data = {
         firstname: firstName,
         lastname: lastName,
         email: email,
-        password: "Faraz@124",
+        password: password.passwordToSend,
         about_me: description,
       };
       handleAPIRequest("PUT", "user", data)
         .then((response) => {
+          setLoading_button(false);
+
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "success",
+            message: "Settings has been updated successfully",
+            lable: "Settings Updated",
+          });
+          setTimeout(() => {
+            setShowToast({
+              ...showToast,
+              toggle: false,
+              status: "success",
+              message: "Settings has been updated successfully",
+              lable: "Settings Updated",
+            });
+          }, 2000);
         })
         .catch((error) => {
           console.error(error);
+          setLoading_button(false);
         });
     } else {
-      alert("password doesnot match");
+      setLoading_button(false);
+
+      setShowToast({
+        ...showToast,
+        toggle: true,
+        status: "error",
+        message: "Please recheck your password",
+        lable: "Wrong Password",
+      });
+      setTimeout(() => {
+        setShowToast({
+          ...showToast,
+          toggle: false,
+          status: "error",
+          message: "Please recheck your password",
+          lable: "Wrong Password",
+        });
+      }, 2000);
     }
   };
 
@@ -77,8 +116,8 @@ const ProfileData = () => {
         <p className="my-profile-text">My Profile</p>
       </div>
 
-      <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col justify-between">
-        <form onSubmit={submitHandler}>
+      <div className="bg-white shadow-class rounded-lg h-full overflow-auto p-8 flex flex-col justify-between">
+        <div>
           <div className=" flex flex-col gap-4 w-full">
             <div className="flex justify-between w-full gap-3">
               <div className="flex w-full flex-col gap-2">
@@ -127,43 +166,44 @@ const ProfileData = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
-            <div className="flex flex-col gap-2">
-              <p className="text-base/none font-normal text-neutral-600">
-                Password
-              </p>
-              <input
-                placeholder="Enter Password"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                label="Password"
-                variant="outlined"
-                id="password"
-                name="password"
-                value={password.passwordToSend}
-                onChange={(e) =>
-                  setPassword({ ...password, passwordToSend: e.target.value })
-                }
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="text-base/none font-normal text-neutral-600">
-                Confirm Password
-              </p>
-              <input
-                placeholder="Confirm your Password"
-                className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                label="Confirm Password"
-                variant="outlined"
-                id="confirmPassword"
-                name="confirmpassword"
-                value={password.passwordToConfirm}
-                onChange={(e) =>
-                  setPassword({
-                    ...password,
-                    passwordToConfirm: e.target.value,
-                  })
-                }
-              />
+            <div className="flex justify-between w-full gap-3">
+              <div className="flex flex-col gap-2 w-full">
+                <p className="text-base/none font-normal text-neutral-600">
+                  Password
+                </p>
+                <input
+                  placeholder="Enter Password"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="Password"
+                  variant="outlined"
+                  id="password"
+                  name="password"
+                  value={password.passwordToSend}
+                  onChange={(e) =>
+                    setPassword({ ...password, passwordToSend: e.target.value })
+                  }
+                />
+              </div>
+              <div className="flex flex-col gap-2 w-full">
+                <p className="text-base/none font-normal text-neutral-600">
+                  Confirm Password
+                </p>
+                <input
+                  placeholder="Confirm your Password"
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="Confirm Password"
+                  variant="outlined"
+                  id="confirmPassword"
+                  name="confirmpassword"
+                  value={password.passwordToConfirm}
+                  onChange={(e) =>
+                    setPassword({
+                      ...password,
+                      passwordToConfirm: e.target.value,
+                    })
+                  }
+                />
+              </div>
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-base/none font-normal text-neutral-600">
@@ -188,24 +228,28 @@ const ProfileData = () => {
             >
               Logout
             </button>
-            <button className="  hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  ">
-              Update
-            </button>
+            <CommonPrimaryButton
+              onClick={() => submitHandler()}
+              loading={loading_button}
+              text={"Update"}
+            />
           </div>
-        </form>
+        </div>
       </div>
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </div>
   );
 };
 
-
-// BusinessProfileData tab 
+// BusinessProfileData tab
 
 const BusinessProfileData = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const fileInputRef = useRef(null);
+  const [loading_button, setLoading_button] = useState(false);
+
   const [business, setBusiness] = useState({
     name: "",
     about: "",
@@ -213,17 +257,23 @@ const BusinessProfileData = () => {
     public_phone: "",
     bus_logo: "",
   });
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
 
   useEffect(() => {
     if (user.accounts) {
       if (user.accounts[0].bus_profile) {
         setBusiness({
-          name: user.accounts[0].bus_profile.company_name,
-          url: user.accounts[0].bus_profile.website_url,
-          about: user.accounts[0].bus_profile.about,
-          public_phone: user.accounts[0].bus_profile.public_phone,
-          bus_logo: user.accounts[0].bus_profile.logo_url
-            ? user.accounts[0].bus_profile.logo_url
+          name: user.accounts[0].bus_profile?.company_name,
+          url: user.accounts[0].bus_profile?.website_url,
+          about: user.accounts[0].bus_profile?.about,
+          public_phone: user.accounts[0]?.bus_profile?.public_phone,
+          bus_logo: user.accounts[0].bus_profile?.logo_url
+            ? user.accounts[0].bus_profile?.logo_url
             : "",
           uuid: user.accounts[0].uuid,
         });
@@ -233,7 +283,7 @@ const BusinessProfileData = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
+    setLoading_button(true);
     let data = {
       company_name: business.name,
       about: business.about,
@@ -247,6 +297,23 @@ const BusinessProfileData = () => {
         if (response) {
           // return;
           postData();
+          setLoading_button(false);
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "success",
+            message: "Settings has been updated successfully",
+            lable: "Settings Updated",
+          });
+          setTimeout(() => {
+            setShowToast({
+              ...showToast,
+              toggle: false,
+              status: "success",
+              message: "Settings has been updated successfully",
+              lable: "Settings Updated",
+            });
+          }, 2000);
         }
       })
       .catch((error) => {
@@ -538,15 +605,15 @@ const BusinessProfileData = () => {
             </div>
           </div>
           <div className="flex mt-6 gap-3 justify-end w-auto">
-            <button
+            <CommonPrimaryButton
               onClick={(e) => submitHandler(e)}
-              className="  hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  "
-            >
-              Update
-            </button>
+              loading={loading_button}
+              text={"Update Profile"}
+            />
           </div>
         </form>
       </div>
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </div>
   );
 };
@@ -590,7 +657,7 @@ const Profile = () => {
                   >
                     <div className="side-nav-link">
                       <HiUserCircle className="pen-icon" />
-                      <span  className="normal-case">Business Profile</span>
+                      <span className="normal-case">Business Profile</span>
                     </div>
                   </li>
                 )}
