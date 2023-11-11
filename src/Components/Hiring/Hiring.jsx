@@ -141,7 +141,7 @@ export default function Hiring() {
           </div>
           <div className="flex -mt-32 xl:-mt-28 f md:flex-row w-full px-6 xl:px-24 2xl:px-32">
             <div className="flex w-full flex-col md:flex-row relative bg-white  shadow-class p-6 md:p-4 lg:p-8 xl:p-14 rounded-2xl">
-              <div className="card-section-header absolute right-4 justify-between items-center  md:flex">
+              <div className="card-section-header absolute right-4 justify-between items-center  md:!hidden">
                 <div className="flex gap-2">
                   <p>Sort by:</p>
                   <select

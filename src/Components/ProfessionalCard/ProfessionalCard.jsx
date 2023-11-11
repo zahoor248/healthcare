@@ -34,7 +34,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-6 md:mt-16">
-        <div className="py-3  text-xl font-bold text-neutral-800">All Professionals:</div>
+        <div className="py-3 md:hidden  text-xl font-bold text-neutral-800">All Professionals:</div>
         {data.slice((currentPage - 1) * 9, currentPage * 9).map(
           (item, index) => {
             return (
