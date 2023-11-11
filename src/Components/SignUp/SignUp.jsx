@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SignUp.css";
-import LogoImage from "../../assets/images/logo-image.png";
-import TextField from "@mui/material/TextField";
-import { MdAlternateEmail } from "react-icons/md";
-import { BiLock } from "react-icons/bi";
-import GoogleIcon from "../../assets/images/google-icon.png";
-import { AiOutlinePhone } from "react-icons/ai";
-import { IoLocationOutline } from "react-icons/io5";
-import Slide1 from "../../assets/images/slide1.png";
-import axios from "axios";
-import { MdDriveFileRenameOutline } from "react-icons/md";
 import { POST } from "../../Api/Post";
 import { REGISTER } from "../../Api/EndPoints";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../Store/Actions/Actions";
-import { components } from "react-select";
-import Header from "../Header/Header";
+import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 import Slide2 from "../../assets/images/slide2.png";
 import { useNavigate } from "react-router-dom";
 
@@ -23,42 +11,56 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState({
+    password: "",
+    showPassword: false,
+    password_to_confirm: "",
+    showPassword_confirm: false,
+  });
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [userType, setUserType] = useState("");
+  const [userType, setUserType] = useState("bus");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const user_type = [
+    { name: "Business", value: "bus" },
+    { name: "Professional", value: "pro" },
+  ];
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const registrationHandler = async () => {
+    // error handling
     if (
       firstName == "" ||
       lastName == "" ||
       phoneNumber == "" ||
       email == "" ||
-      password == ""
+      password.password == ""
     ) {
       setError("Please fill the above fields");
       return;
     }
+    if (password.password != password.password_to_confirm) {
+      setError("Password does not match");
+      return;
+    }
+
     setLoading(true);
     let data = {
       firstname: firstName,
       lastname: lastName,
       email: email,
       phone: phoneNumber,
-      password: password,
+      password: password.password,
       type: userType,
     };
     console.log(data);
     POST(data, REGISTER, "post")
       .then((response) => {
-        console.log(response);
         setError("");
         dispatch(setUser(response.user));
+        localStorage.setItem("token", response?.user?.token);
+        dispatch(setUser(response.user));
+        dispatch(setIsLoggedIn(true));
         navigate("/");
         setLoading(false);
       })
@@ -69,28 +71,25 @@ export default function SignUp() {
       });
   };
 
-  const handleUserType = (e) => {
-    console.log(e, "here us the response");
-    setUserType(e == "Professional" ? "pro" : e == "Bussiness" ? "bus" : "");
-
-    console.log(userType, "");
+  const handleUserType = (value) => {
+    setUserType(value);
   };
 
   return (
-    <div className="flex flex-col w-full h-screen overflow-auto items-center ">
+    <div className="flex flex-col w-full h-screen  overflow-auto items-center ">
       {/* <Header /> */}
-      <div className="flex w-full justify-center h-full ">
-        <div className="bg-[#4169e1] hidden md:flex items-center justify-center w-[50%]">
-          <img src={Slide2} className="w-[500px]" />
+      <div className="flex w-full h-full justify-center flex-col md:flex-row ">
+        <div className="bg-[#4169e1]  flex items-center justify-center w-full">
+          <img src={Slide2} className="w-[100px] py-6 md:!p-0  md:w-[500px]" />
         </div>
 
-        <div className=" flex flex-col items-start justify-center p-0 md:p-10 lg:p-20 xl:p-40 w-[50%]">
+        <div className="h-full w-full md:p-12 p-6 lg:p-24 overflow-auto flex flex-col  md:justify-center justify-start">
           <div class="">
             <a
-              class="flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
+              class="absolute md:relative  top-6 left-4 md:top-0 md:left-0 md:flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
               href="/"
             >
-              <div class="flex gap-1 items-center hover:text-primary  transition-colors duration-300 ease-in-out   cursor-pointer font-sm font-normal text-neutral-600 underline leading-normal -ml-2">
+              <div class="flex gap-1 items-center hover:text-primary  transition-colors duration-300 ease-in-out   cursor-pointer font-sm font-normal text-white md:text-neutral-600 underline leading-normal -ml-2">
                 <svg
                   width="25"
                   height="25"
@@ -178,16 +177,23 @@ export default function SignUp() {
               </p>
               <div className="relative w-full">
                 <input
-                  type={!showPassword ? "password" : "text"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  type={!password.showPassword ? "password" : "text"}
+                  value={password.password}
+                  onChange={(e) =>
+                    setPassword({ ...password, password: e.target.value })
+                  }
                   placeholder="Please Enter Password"
                   className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
-                {showPassword ? (
+                {password.showPassword ? (
                   <svg
                     class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() =>
+                      setPassword({
+                        ...password,
+                        showPassword: !password.showPassword,
+                      })
+                    }
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -217,7 +223,12 @@ export default function SignUp() {
                   </svg>
                 ) : (
                   <svg
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() =>
+                      setPassword({
+                        ...password,
+                        showPassword: !password.showPassword,
+                      })
+                    }
                     class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     width="24"
                     height="24"
@@ -239,16 +250,26 @@ export default function SignUp() {
               </p>
               <div className="relative w-full">
                 <input
-                  type={!showPassword ? "password" : "text"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  type={!password.showPassword_confirm ? "password" : "text"}
+                  value={password.password_to_confirm}
+                  onChange={(e) =>
+                    setPassword({
+                      ...password,
+                      password_to_confirm: e.target.value,
+                    })
+                  }
                   placeholder="Please Enter Password"
                   className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                 />
-                {showPassword ? (
+                {password.showPassword_confirm ? (
                   <svg
                     class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() =>
+                      setPassword({
+                        ...password,
+                        showPassword_confirm: !password.showPassword_confirm,
+                      })
+                    }
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -278,7 +299,12 @@ export default function SignUp() {
                   </svg>
                 ) : (
                   <svg
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() =>
+                      setPassword({
+                        ...password,
+                        showPassword_confirm: !password.showPassword_confirm,
+                      })
+                    }
                     class="w-7 h-7 text-neutral-700 absolute top-[12px] right-4"
                     width="24"
                     height="24"
@@ -303,8 +329,9 @@ export default function SignUp() {
                   onChange={(e) => handleUserType(e.target.value)}
                   className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
                 >
-                  <option>Professional</option>
-                  <option>Business</option>
+                  {user_type.map((item) => (
+                    <option value={item.value}>{item.name}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -350,152 +377,4 @@ export default function SignUp() {
       </div>
     </div>
   );
-}
-{
-  /* <div className="flex flex-col gap-3 w-full">
-<p className="text-base/none font-semibold text-neutral-700">
-  Email
-</p>
-<div className="relative w-full">
-  <input
-    type="text"
-    placeholder="Enter Email Address"
-    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
-  />
-
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-    />
-  </svg>
-</div>
-</div>
-<div className="flex flex-col gap-3 w-full">
-<p className="text-base/none font-semibold text-neutral-700">
-  Password
-</p>
-<div className="relative w-full">
-  <input
-    type="password"
-    placeholder="Please Enter Password"
-    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
-  />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-    />
-  </svg>
-</div>
-</div>
-<div className="flex flex-col gap-3 w-full">
-<p className="text-base/none font-semibold text-neutral-700">
-  Confirm Password
-</p>
-<div className="relative w-full">
-  <input
-    type="password"
-    placeholder="Please Confirm your Password"
-    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
-  />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-    />
-  </svg>
-</div>
-</div>
-<div className="flex flex-col gap-3 w-full">
-<p className="text-base/none font-semibold text-neutral-700">
-  Phone Number
-</p>
-<div className="relative w-full">
-  <input
-    type="text"
-    placeholder="Please enter phone number"
-    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
-  />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-    />
-  </svg>
-</div>
-</div>
-<div className="flex flex-col gap-3 w-full">
-<p className="text-base/none font-semibold text-neutral-700">
-  Address
-</p>
-<div className="relative w-full">
-  <input
-    type="text"
-    placeholder="Please enter your address"
-    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full"
-  />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-4 h-4 text-neutral-700 absolute top-[23px] right-4"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-    />
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-    />
-  </svg>
-</div>
-</div>
-<div className="flex flex-col gap-3 w-full">
-<p className="text-base/none font-semibold text-neutral-700">
-  User Type
-</p>
-<select className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-4 px-8 border border-[#C2C9D4] rounded w-full">
-  <option value="volvo">Beginner</option>
-  <option value="saab">Advanced</option>
-  <option value="opel">Expert</option>
-</select>
-</div> */
 }
