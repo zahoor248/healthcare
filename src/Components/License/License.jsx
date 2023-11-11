@@ -9,8 +9,8 @@ import { useLocation } from "react-router-dom";
 export default function License() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [user_license, setLicense] = useState("");
+  const [number, setNumber] = useState("");
   const [address, setAddress] = useState("");
   const location = useLocation();
 
@@ -27,16 +27,16 @@ export default function License() {
       setSelectedAddress(address);
       setCountry(address.country);
       setState(address.state);
-      setCity(address.city);
-      setZipCode(address.zipCode);
+      setLicense(address.user_license);
+      setNumber(address.number);
       setAddress(address.address);
       setIsEditing(true);
     } else {
       setSelectedAddress(null);
       setCountry("");
       setState("");
-      setCity("");
-      setZipCode("");
+      setLicense("");
+      setNumber("");
       setAddress("");
       setIsEditing(false);
     }
@@ -51,8 +51,8 @@ export default function License() {
           return {
             country,
             state,
-            city,
-            zipCode,
+            user_license,
+            number,
             address,
           };
         }
@@ -66,8 +66,8 @@ export default function License() {
       const newAddress = {
         country,
         state,
-        city,
-        zipCode,
+        user_license,
+        number,
         address,
       };
       setAddresses([...addresses, newAddress]);
@@ -79,8 +79,8 @@ export default function License() {
     let payload = {
       country: data.country?.toLowerCase(),
       state: data.state.split("-")[0]?.toLowerCase(),
-      city: data.city?.toLowerCase(),
-      zip: data.zipCode,
+      user_license: data.user_license?.toLowerCase(),
+      zip: data.number,
       [`address_${1}`]: data.address,
       type: "mailing",
       uuid: generateUUID(),
@@ -175,7 +175,7 @@ export default function License() {
                       <strong className="text-neutral-600 font-bold">
                         License Type:
                       </strong>{" "}
-                      {address.address}
+                      {address.user_license}
                     </p>
                     <p>
                       <strong className="text-neutral-600 font-bold">
@@ -189,7 +189,7 @@ export default function License() {
                       <strong className="text-neutral-600 font-bold">
                         Number:
                       </strong>{" "}
-                      {address.country}
+                      {address.number}
                     </p>
                   </div>
                 </div>
@@ -207,7 +207,8 @@ export default function License() {
         ></div>
       )}
       {openModel && (
-        <div className="w-full max-w-[600px] flex flex-col fixed p-8 z-20  transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+                  <div className="w-full max-w-[600px] flex flex-col fixed p-8  z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+
           <div className="text-xl pb-4">
             {isEditing ? "Edit License" : "Add License"}
           </div>
@@ -217,8 +218,8 @@ export default function License() {
                 License Type
               </p>
               <select
-                value={state}
-                onChange={(e) => setState(e.target.value)}
+                value={user_license}
+                onChange={(e) => setLicense(e.target.value)}
                 className="text-lg placeholder-[#B8C0CB] bg-white text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full outline-none"
               >
                 {licenseTyes.map((item) => (
@@ -254,13 +255,13 @@ export default function License() {
                 label="Address"
                 placeholder="Enter your address"
                 variant="outlined"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
               />
             </div>
           </div>
-          <div className="flex items-center gap-2 w-full justify-end mt-12">
-            <button className="profile-save-btn" onClick={saveAddress}>
+          <div className="flex items-center gap-2 w-full justify-end mt-8">
+            <button className="hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-8 py-3  bg-[#0f75bc] text-white rounded-md " onClick={saveAddress}>
               Save
             </button>
           </div>
