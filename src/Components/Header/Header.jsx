@@ -25,6 +25,7 @@ export default function Header() {
   const [navColour, updateNavbar] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBar, setShowBar] = useState(false);
+  const [collpse, setCollaps] = useState(false);
 
   const handleBar = () => {
     setShowBar(true);
@@ -49,27 +50,28 @@ export default function Header() {
     <>
       {!hideHeader.includes(routePath) && (
         <div className="  bg-[#e5f0ff] w-full ">
-          <div className="main-container w-full py-3 2xl:py-[30px] px-3 items-center  flex justify-between">
+          <div className="main-container w-full py-4 2xl:py-[30px] px-3 items-start  flex justify-between">
             <Link to={"/"}>
               <img
-                className="2xl:w-[276px] xl:w-[200px] w-[150px] cursor-pointer"
+                className="2xl:w-[276px] absolute md:relative xl:w-[200px] w-[150px] cursor-pointer"
                 src={Logo}
                 alt="Logo"
               />
             </Link>
             {!isAuthenticate ? (
-              <div className="flex gap-5 md:gap-10 lg:gap-20 xl:gap-24">
-                <div className="f-f-g-m flex items-center gap-3 md:gap-6 lg:gap-10">
-                  <span className=" text-lg font-normal text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
-                    For Owners
-                  </span>
+              <>
+                <div className=" hidden md:flex gap-5 md:gap-10 lg:gap-20 xl:gap-24">
+                  <div className="f-f-g-m flex items-center gap-3 md:gap-6 lg:gap-10">
+                    <span className=" text-lg font-normal text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
+                      For Owners
+                    </span>
 
-                  <span className="text-lg font-medium text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
-                    For Workers
-                  </span>
-                </div>
-                <div className=" flex items-center">
-                  {/* <img
+                    <span className="text-lg font-medium text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
+                      For Workers
+                    </span>
+                  </div>
+                  <div className=" flex items-center">
+                    {/* <img
               className="user-image h-10 mr-2 md:mr-5"
               src={User}
               alt="User Image"
@@ -77,20 +79,69 @@ export default function Header() {
             <span className="text-2xl font-semibold text-blue-900">
               Username
             </span> */}
-                  <Link
-                    to={"/login"}
-                    className="font-normal textlg text-neutral-700 underline px-4 f-f-g cursor-pointer"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to={"/register"}
-                    className="font-bold text-xl f-f-g cursor-pointer"
-                  >
-                    Register
-                  </Link>
+                    <Link
+                      to={"/login"}
+                      className="font-normal textlg text-neutral-700 underline px-4 f-f-g cursor-pointer"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to={"/register"}
+                      className="font-bold text-xl f-f-g cursor-pointer"
+                    >
+                      Register
+                    </Link>
+                  </div>
                 </div>
-              </div>
+
+                <div
+                  className={`block md:hidden h-0 w-full overflow-hidden justify-center items-center relative transition-all ease-in-out duration-300 
+        ${collpse ? "h-[238px]" : "py-1.5"}
+        `}
+                >
+                  <div className="h-full flex mt-8 w-full items-center gap-4 justify-center flex-col">
+                    <span className=" text-lg font-normal text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
+                      For Owners
+                    </span>
+
+                    <span className="text-lg font-medium text-neutral-500 hover:text-[#10274f] cursor-pointer transition-all ease-in-out duration-300">
+                      For Workers
+                    </span>
+
+                    <Link
+                      to={"/register"}
+                      className="font-bold text-xl f-f-g cursor-pointer"
+                    >
+                      Register
+                    </Link>
+                    <Link
+                      to={"/login"}
+                      className="font-normal textlg text-neutral-700 underline px-4 f-f-g cursor-pointer"
+                    >
+                      Login
+                    </Link>
+                  </div>
+                </div>
+                <div
+                  className={"md:hidden absolute right-4  cursor-pointer"}
+                  onClick={() => setCollaps(!collpse)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
+                  </svg>
+                </div>
+              </>
             ) : (
               <>
                 <div
