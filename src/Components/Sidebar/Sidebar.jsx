@@ -90,38 +90,42 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   }
   return (
     <div className="w-full md:w-[250px] 2xl:min-w-[330px]">
-      <div className="flex pb-3 items-center gap-2">
+      <div className="flex md:pb-3 items-center gap-2 pb-3">
         <img className="w-4 h-4" src={FilterIcon} alt="filter icon" />
         <p className=" text-lg">Filters</p>
       </div>
 
       <div className="border-b"></div>
 
-      <div className=" pt-8">
+      <div className="pt-4 md:pt-8">
         <p className="text-lg pb-2">Tags</p>
 
         <TagSelector />
       </div>
 
-      <div className="pt-8">
+      <div className="pt-4 md:pt-8">
         <p className="text-lg pb-2">License Type</p>
 
         {/* All licences list */}
-        {licenses.map((license, key) => (
-          <div className=" flex items-center cursor-default" key={key}>
-            <input
-              type="checkbox"
-              onChange={() => handleFilterByLicense(license)}
-              value={filterConditions.license.includes(license) ? true : false}
-              class="ui-checkbox"
-            ></input>
-            {/* <input className="check-box cursor-pointer" type="checkbox" /> */}
-            <p className="text-neutral-600 px-3 text-lg">{license}</p>
-          </div>
-        ))}
+        <div className="flex flex-wrap md:flex-col gap-3">
+          {licenses.map((license, key) => (
+            <div className=" flex items-center cursor-default" key={key}>
+              <input
+                type="checkbox"
+                onChange={() => handleFilterByLicense(license)}
+                value={
+                  filterConditions.license.includes(license) ? true : false
+                }
+                class="ui-checkbox"
+              ></input>
+              {/* <input className="check-box cursor-pointer" type="checkbox" /> */}
+              <p className="text-neutral-600 px-3 text-lg">{license}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className=" pt-8">
+      <div className="pt-4 md:pt-8">
         <p className="text-lg">Hourly Rate</p>
         <Slider
           getAriaLabel={() => "Temperature range"}
@@ -139,7 +143,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
         />
       </div>
 
-      <div className="pt-8">
+      <div className="pt-4 md:pt-8">
         <button
           className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white "
           onClick={() => filterData()}

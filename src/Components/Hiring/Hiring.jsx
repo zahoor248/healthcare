@@ -28,7 +28,6 @@ export default function Hiring() {
 
     handleAPIRequest("get", "favorites", null)
       .then((response) => {
-        console.warn(response, "Helelelelelelele");
         dispatch(getAllFav(response.favorites));
       })
       .catch((error) => {});
@@ -136,12 +135,29 @@ export default function Hiring() {
       ) : (
         <div>
           <div className=" bg-[#e5f0ff] pb-40 flex ">
-            <h1 className="xl:text-4xl px-6 xl:px-32 md:text-2xl text-3xl  font-bold leading-[1.3] md:!leading-[1.42] whitespace-nowrap">
+            <h1 className="xl:text-4xl px-6 xl:px-32 md:text-2xl whitespace-pre-wrap sm:text-xl  font-bold leading-[1.3] md:!leading-[1.42] ">
               Healthcare professionals Ready to hire.
             </h1>
           </div>
-          <div className="flex -mt-32 xl:-mt-28  flex-row w-full px-6 xl:px-24 2xl:px-32">
-            <div className="flex w-full bg-white  shadow-class p-4 lg:p-8 xl:p-14 rounded-2xl">
+          <div className="flex -mt-32 xl:-mt-28 f md:flex-row w-full px-6 xl:px-24 2xl:px-32">
+            <div className="flex w-full flex-col md:flex-row relative bg-white  shadow-class p-6 md:p-4 lg:p-8 xl:p-14 rounded-2xl">
+              <div className="card-section-header absolute right-4 justify-between items-center  md:flex">
+                <div className="flex gap-2">
+                  <p>Sort by:</p>
+                  <select
+                    className="bg-blue-400 hover:bg-blue-500 transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
+                    onChange={(e) => handleSortItem(e.target.value)}
+                  >
+                    <option>Hourly Rate</option>
+                    <option>Daily Rate</option>
+                  </select>
+                </div>
+
+                {/* <div className="pagi-icons flex items-center">
+                <IoIosArrowDropleft className="mr-2" />
+                <IoIosArrowDropright />
+              </div> */}
+              </div>
               <div className="">
                 <Sidebar
                   data={data}
@@ -149,8 +165,9 @@ export default function Hiring() {
                   setFilteredData={setFilteredData}
                 />
               </div>
-              <div className="xl:pl-14 lg:pl-10 pl-6 w-full">
-                <div className="card-section-header flex justify-between items-center">
+              <div className="xl:pl-14 lg:pl-10 md:pl-6 w-full">
+                {/* sorting large screen  */}
+                <div className="card-section-header  justify-between items-center !hidden md:flex">
                   <div className="flex gap-2">
                     <p>Sort by:</p>
                     <select
