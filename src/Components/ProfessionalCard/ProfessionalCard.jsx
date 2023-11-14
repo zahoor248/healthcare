@@ -2,6 +2,8 @@ import React, { useState } from "react";
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
 import VerifiedBadge from "../../assets/images/verified-badge.png";
+import emptyState from "../../assets/images/reservation.png";
+
 import UserImage from "../../assets/images/avatar.png";
 import { AiFillStar } from "react-icons/ai";
 import "./ProfessionalCard.css";
@@ -33,102 +35,118 @@ export default function ProfessionalCard({ data, setFilteredData }) {
   };
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-6 md:mt-16">
+      <div className="h-full">
         <div className="py-3 md:hidden  text-xl font-bold text-neutral-800">
           All Professionals:
         </div>
-        {data
-          .slice((currentPage - 1) * 9, currentPage * 9)
-          .map((item, index) => {
-            return (
-              <div className="shadow-class hover:scale-105 transition-all ease-in-out duration-500 rounded-xl w-full">
-                {item.verified != "no" && (
-                  <div className="verify-badge">
-                    <img
-                      src={require("../../assets/images/verified-badge.png")}
-                      alt="Verification Badge"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-col p-6 lg:p-6 2xl:p-10">
-                  <div className="flex items-center">
-                    <img
-                      src={
-                        item.photo_url
-                          ? item.photo_url
-                          : require("../../assets/images/avatar.png")
-                      }
-                      width={55}
-                      height={32}
-                      className="rounded-full object-cover w-10 md:w-8 md:h-8 h-10 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14"
-                      alt="User Image"
-                    />
-                    <div className="username-details">
-                      <p className="text-neutral-700 font-bold md:text-md lg:text-base xl:text-md 2xl:text-xl capitalize">
-                        {item.firstname} {item.lastname}
-                      </p>
-                      <p className="card-designation">{item.designation}</p>
-                    </div>
-                  </div>
+        {data?.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2  2xl:grid-cols-3  gap-6 2xl:gap-8 mt-6 md:mt-16">
+            {" "}
+            {data
+              .slice((currentPage - 1) * 9, currentPage * 9)
+              .map((item, index) => {
+                return (
+                  <div className="shadow-class hover:scale-105 transition-all ease-in-out duration-500 rounded-xl w-full">
+                    {item.verified != "no" && (
+                      <div className="verify-badge">
+                        <img
+                          src={require("../../assets/images/verified-badge.png")}
+                          alt="Verification Badge"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col p-6 lg:p-6 2xl:p-10">
+                      <div className="flex items-center">
+                        <img
+                          src={
+                            item.photo_url
+                              ? item.photo_url
+                              : require("../../assets/images/avatar.png")
+                          }
+                          width={55}
+                          height={32}
+                          className="rounded-full object-cover w-10 md:w-8 md:h-8 h-10 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14"
+                          alt="User Image"
+                        />
+                        <div className="username-details">
+                          <p className="text-neutral-700 font-bold md:text-md lg:text-base xl:text-md 2xl:text-xl capitalize">
+                            {item.firstname} {item.lastname}
+                          </p>
+                          <p className="card-designation">{item.designation}</p>
+                        </div>
+                      </div>
 
-                  <div className="flex flex-col py-4 xl:py-6 gap-3">
-                    <div>
-                      <span className="text-base text-blue-600">Rates:</span>{" "}
-                      <span className="text-neutral-700 text-sm  2xl:text-lg font-medium">
-                        {item.pro_profile
-                          ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
-                          : "0"}
-                      </span>
-                    </div>
-                    <div>
-                      <span style={{ color: "#BE1E2D", marginRight: ".5rem" }}>
-                        Radius:
-                      </span>{" "}
-                      <span className="text-neutral-700 text-sm xl:text-lg font-medium">
-                        {item.pro_profile?.radius
-                          ? `${item.pro_profile?.radius} miles`
-                          : "N/A"}
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <span style={{ color: "#10274F", marginRight: ".5rem" }}>
-                        Ratings:
-                      </span>{" "}
-                      <span>
-                        {item.pro_profile?.rating ? (
-                          item.pro_profile.rating
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="#F3E5AB"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            className="w-6 h-6"
+                      <div className="flex flex-col py-4 xl:py-6 gap-3">
+                        <div>
+                          <span className="text-base text-blue-600">
+                            Rates:
+                          </span>{" "}
+                          <span className="text-neutral-700 text-sm  2xl:text-lg font-medium">
+                            {item.pro_profile
+                              ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
+                              : "0"}
+                          </span>
+                        </div>
+                        <div>
+                          <span
+                            style={{ color: "#BE1E2D", marginRight: ".5rem" }}
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                            />
-                          </svg>
-                        )}
-                      </span>
-                    </div>
-                  </div>
+                            Radius:
+                          </span>{" "}
+                          <span className="text-neutral-700 text-sm xl:text-lg font-medium">
+                            {item.pro_profile?.radius
+                              ? `${item.pro_profile?.radius} miles`
+                              : "N/A"}
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <span
+                            style={{ color: "#10274F", marginRight: ".5rem" }}
+                          >
+                            Ratings:
+                          </span>{" "}
+                          <span>
+                            {item.pro_profile?.rating ? (
+                              item.pro_profile.rating
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#F3E5AB"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                className="w-6 h-6"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                                />
+                              </svg>
+                            )}
+                          </span>
+                        </div>
+                      </div>
 
-                  <div className="w-full">
-                    <button
-                      className="py-2 xl:py-3 border-neutral-500 border text-sm xl:text-md hover:border-neutral-700 transition-all ease-in-out duration-700 rounded-md hover:bg-neutral-100 w-full"
-                      onClick={() => handleShow(item)}
-                    >
-                      View Details
-                    </button>
+                      <div className="w-full">
+                        <button
+                          className="py-2 xl:py-3 border-neutral-500 border text-sm xl:text-md hover:border-neutral-700 transition-all ease-in-out duration-700 rounded-md hover:bg-neutral-100 w-full"
+                          onClick={() => handleShow(item)}
+                        >
+                          View Details
+                        </button>
+                      </div>
+                    </div>
+                    {/* here is the model for the user detail  */}
                   </div>
-                </div>
-                {/* here is the model for the user detail  */}
-              </div>
-            );
-          })}
+                );
+              })}
+          </div>
+        ) : (
+          <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 h-[60vh] bg-slate-50 rounded-md mt-8">
+            <img src={emptyState} className="w-32" />
+            <div className="text-3xl ">No Profile matches your search</div>
+          </div>
+        )}
         {show != null && show == profileData.uuid && (
           <div>
             <div className="fixed inset-0 w-full h-full !bg-black/60  backdrop-blur-sm z-30"></div>

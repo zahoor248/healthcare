@@ -167,7 +167,7 @@ export default function Hiring() {
               </div>
               <div className="xl:pl-14 lg:pl-10 md:pl-6 w-full">
                 {/* sorting large screen  */}
-                <div className="card-section-header  justify-between items-center !hidden md:flex">
+                <div className="card-section-header  justify-between items-center !hidden md:!flex">
                   <div className="flex gap-2">
                     <p>Sort by:</p>
                     <select
