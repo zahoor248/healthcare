@@ -624,10 +624,10 @@ const Profile = () => {
 
   return (
     <>
-      <div className="flex main-container gap-8 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
-        <div className="py-12 w-[40%] max-w-[310px] h-full">
-          <div className=" bg-white   py-10 w-full h-full rounded-lg shadow-class">
-            <div className="flex flex-col pb-6 items-center">
+      <div className="flex flex-col md:flex-row main-container gap-8 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
+        <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px] h-full">
+          <div className=" bg-white h-fit   md:py-10 w-full md:h-full rounded-lg shadow-class">
+            <div className="hidden md:flex flex-col pb-6 items-center">
               <img src={User} alt="user profile image" className="w-20 h-20" />
               <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
@@ -635,10 +635,10 @@ const Profile = () => {
             </div>
 
             <div>
-              <ul className="side-nav flex gap-0.5">
+              <ul className="side-nav flex !flex-row md:!flex-col gap-0.5">
                 <li
                   onClick={() => setNav("profile")}
-                  className={`side-nav-item ${
+                  className={`side-nav-item !pl-1 md:!pl-8 ${
                     nav === "profile" && "side-nav-item-active"
                   }`}
                 >
@@ -651,7 +651,7 @@ const Profile = () => {
                 {user.type == "bus" && (
                   <li
                     onClick={() => setNav("business-profile")}
-                    className={`side-nav-item ${
+                    className={`side-nav-item !pl-1 md:!pl-8 ${
                       nav === "business-profile" && "side-nav-item-active "
                     }`}
                   >
@@ -664,7 +664,7 @@ const Profile = () => {
 
                 <li
                   onClick={() => setNav("address")}
-                  className={`side-nav-item ${
+                  className={`side-nav-item !pl-1 md:!pl-8 ${
                     nav === "address" && "side-nav-item-active"
                   }`}
                 >
@@ -689,7 +689,7 @@ const Profile = () => {
                 {user.type != "bus" && (
                   <li
                     onClick={() => setNav("licenses")}
-                    className={`side-nav-item ${
+                    className={`side-nav-item !pl-1 md:!pl-8 ${
                       nav === "licenses" && "side-nav-item-active"
                     }`}
                   >

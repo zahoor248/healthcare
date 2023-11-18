@@ -22,6 +22,7 @@ export default function Address() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [openModel, setOpenModel] = useState(false);
   const [button_loading, setButton_loading] = useState(false);
+  const [uuid, setUuid] = useState(null);
   const [showToast, setShowToast] = useState({
     toggle: false,
     lable: "",
@@ -37,8 +38,9 @@ export default function Address() {
       setCountry(address.country);
       setState(address.state);
       setCity(address.city);
-      setZipCode(address.zipCode);
-      setAddress(address.address);
+      setZipCode(address.zip);
+      setAddress(address.address_1);
+      setUuid(address.uuid);
       setIsEditing(true);
     } else {
       setSelectedAddress(null);
@@ -73,19 +75,59 @@ export default function Address() {
         // Edit the existing address
         setOpenModel(false);
 
-        const updatedAddresses = addresses.map((addr) => {
-          if (addr === selectedAddress) {
-            return {
-              country,
-              state,
-              city,
-              zipCode,
-              address,
-            };
-          }
-          return addr;
-        });
-        setAddresses(updatedAddresses);
+        let payload = {
+          state: selectedAddress.state,
+          city: selectedAddress.city,
+          zip: selectedAddress.zip,
+          [`address_${1}`]: selectedAddress.address_1,
+          type: "mailing",
+        };
+
+        handleAPIRequest("PUT", `address/${uuid}`, payload)
+          .then((response) => {
+            if (response) {
+              setOpenModel(false);
+              setButton_loading(false);
+
+              setShowToast({
+                ...showToast,
+                toggle: true,
+                status: "info",
+                message: "Adress has been updated",
+                lable: "Adress Updated",
+              });
+              setTimeout(() => {
+                setShowToast({
+                  ...showToast,
+                  toggle: false,
+                  status: "info",
+                  message: "Adress has been updated",
+                  lable: "Adress Updated",
+                });
+              }, 2000);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            setButton_loading(false);
+
+            setShowToast({
+              ...showToast,
+              toggle: true,
+              status: "error",
+              message: "Looks like the address you entered was not valid",
+              lable: "Server Error",
+            });
+            setTimeout(() => {
+              setShowToast({
+                ...showToast,
+                toggle: false,
+                status: "info",
+                message: "Looks like the address you entered was not valid",
+                lable: "Server Error",
+              });
+            }, 2000);
+          });
         // submitHandler(updatedAddresses, true);
       } else {
         // Create a new address object and add it to the addresses array
@@ -104,9 +146,9 @@ export default function Address() {
 
   const submitHandler = (data) => {
     let payload = {
-      country: data.country?.toLowerCase(),
-      state: data.state.split("-")[0]?.toLowerCase(),
-      city: data.city?.toLowerCase(),
+      country: data.country,
+      state: data.state,
+      city: data.city,
       zip: data.zipCode,
       [`address_${1}`]: data.address,
       type: "mailing",
@@ -119,6 +161,23 @@ export default function Address() {
           setOpenModel(false);
           setAddresses([...addresses, data]);
           setButton_loading(false);
+
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "info",
+            message: "Adress has been added successfully",
+            lable: "Adress Added",
+          });
+          setTimeout(() => {
+            setShowToast({
+              ...showToast,
+              toggle: false,
+              status: "info",
+              message: "Adress has been added successfully",
+              lable: "Adress Added",
+            });
+          }, 2000);
         }
       })
       .catch((error) => {
@@ -159,9 +218,9 @@ export default function Address() {
       </div>
 
       <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col overflow-auto">
-        {addresses.length > 0 ? (
+        {user?.addresses?.length > 0 ? (
           <div class="w-full flex flex-col gap-4">
-            {addresses.map((address, index) => (
+            {user?.addresses?.map((address, index) => (
               <div class=" " key={index}>
                 <div class=" bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-700">
                   <div class="text-lg px-6 py-2 flex items-center border-b bg-neutral-100 justify-between w-full font-semibold text-gray-900 dark:text-white">
@@ -186,7 +245,8 @@ export default function Address() {
                           />
                         </svg>
                       </button>
-                      <svg
+                      {/* delete icon here  */}
+                      {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -199,7 +259,7 @@ export default function Address() {
                           strokeLinejoin="round"
                           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                         />
-                      </svg>
+                      </svg> */}
                     </div>
                   </div>
                   <div className="flex gap-3 flex-col p-6">
@@ -208,7 +268,7 @@ export default function Address() {
                         <strong className="text-neutral-600 font-bold">
                           Adress:
                         </strong>{" "}
-                        {address.address}
+                        {address.address_1}
                       </p>
                       <p>
                         <strong className="text-neutral-600 font-bold">
@@ -220,24 +280,18 @@ export default function Address() {
                     <div className="flex justify-between w-full">
                       <p>
                         <strong className="text-neutral-600 font-bold">
-                          Country:
-                        </strong>{" "}
-                        {address.country}
-                      </p>
-                      <p>
-                        <strong className="text-neutral-600 font-bold">
                           City:
                         </strong>{" "}
                         {address.city}
                       </p>
+                      <p>
+                        <strong className="text-neutral-600 font-bold">
+                          {" "}
+                          Zip Code:
+                        </strong>{" "}
+                        {address.zip}
+                      </p>
                     </div>
-                    <p>
-                      <strong className="text-neutral-600 font-bold">
-                        {" "}
-                        Zip Code:
-                      </strong>{" "}
-                      {address.zipCode}
-                    </p>
                   </div>
                 </div>
               </div>
@@ -292,8 +346,11 @@ export default function Address() {
                   onChange={(e) => setState(e.target.value)}
                   className="text-lg placeholder-[#B8C0CB] bg-white text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full outline-none"
                 >
+                  <option value="" disabled selected>
+                    <div className="!text-neutral-500"> Select State</div>
+                  </option>
                   {getStates().map((item) => (
-                    <option key={item.label} value={item.label}>
+                    <option key={item.label} value={item.value}>
                       {item.label}
                     </option>
                   ))}
