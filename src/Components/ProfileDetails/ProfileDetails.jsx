@@ -18,6 +18,7 @@ import { handleAPIRequest } from "../../helper/ApiHandler";
 import { getAllFav } from "../../Store/Actions/Actions";
 import dayjs from "dayjs";
 import Toast from "../AppLoader";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function ProfileDetails() {
   const location = useLocation();
@@ -175,26 +176,43 @@ export default function ProfileDetails() {
         <div>
           <div className="flex flex-col xl:flex-row shadow-md">
             <div className="basis-2/5 pt-12 col-span-2">
-              <div style={{ display: "flex", paddingLeft: "5rem" }}>
-                <div className="border border-gray-300 w-40 h-40 bg-gray-300 rounded-lg"></div>
-                <div className="ml-8 mt-4">
+              <div className=" flex w-full gap-6 pl-20 items-center ">
+                {userDetails.photo_url != null ? (
+                  <img className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white" src={userDetails.photo_url} />
+                ) : (
+                  <div className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin text-white">
+                    {userDetails?.firstname}
+                  </div>
+                )}
+                <div className=" mt-4">
                   <p className="profile-user-name capitalize text-2xl text-blue-900">
                     {userDetails?.firstname} {userDetails?.lastname}
                   </p>
                   <p className="profile-designation text-sm text-gray-300 mt-1">
-                    ADON
+                    {userDetails?.licenses?.length ? (
+                      <div className="flex gap-1">
+                        {userDetails?.licenses?.map((item) => (
+                          <p className="license-areas">{item?.abbrev},</p>
+                        ))}
+                      </div>
+                    ) : (
+                      "N/A"
+                    )}
                   </p>
-                  <button
-                    onClick={() => handleAddFav(userDetails)}
-                    className="contact-profile-btn text-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500"
-                  >
-                    Add to Favourites
-                  </button>
-                  <Link to={`/chats?${userDetails?.uuid}`}>
-                    <button className="contact-profile-btn mx-3 text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
-                      Contact this Pro
-                    </button>
-                  </Link>
+                  <div className="flex gap-3 mt-4 flex-wrap">
+                    <CommonPrimaryButton
+                      onClick={() => handleAddFav(userDetails)}
+                      loading={false}
+                      text={"Add to Favourites"}
+                    />
+
+                    <Link to={`/chats?${userDetails?.uuid}`}>
+                      <CommonPrimaryButton
+                        loading={false}
+                        text={"Contact this PRO"}
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
 
@@ -293,36 +311,54 @@ export default function ProfileDetails() {
             <div className="profile-working-hours ">
               <div className="working-hrs-space"></div>
               <p className="working-hrs">Preferred Working Hours</p>
-              {userDetails?.pro_profile?.working_hours.map((item) => (
-                <div className="working-day-section w-full">
-                  <div
-                    className="responsive-days w-full xl:w-[12rem]"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <div className="days-container w-full">{item.name}</div>
-                  </div>
+              {userDetails?.pro_profile?.working_hours.length > 0 ? (
+                <div className="w-full">
+                  {userDetails?.pro_profile?.working_hours.map((item) => (
+                    <div className="flex px-4 border-b  w-full">
+                      <div
+                        className="responsive-days w-full xl:w-[12rem]"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <div className="p-2 w-full">{item.name}</div>
+                      </div>
 
-                  <div
-                    className="responsive-hrs w-full xl:w-[14rem]"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <div className="hrs-container w-full">
-                      <p>
-                        {item?.fromTime
-                          ? item?.fromTime + "-"
-                          : "Not available "}{" "}
-                        {item?.toTime}
-                      </p>
+                      <div className=" w-full xl:w-[14rem]">
+                        <div className=" flex text-neutral-500 p-2 w-full">
+                          <p>
+                            {item?.fromTime
+                              ? item?.fromTime + "-"
+                              : "Not available "}{" "}
+                            {item?.toTime}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <div className="flex flex-col h-full justify-center text-neutral-800 font-normal items-center">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="#5c5c5c"
+                      className="w-20 h-20 mb-3"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  Hours not available for this PRO
+                </div>
+              )}
             </div>
           </div>
           <div className="">

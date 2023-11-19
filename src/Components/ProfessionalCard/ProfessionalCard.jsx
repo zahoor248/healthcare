@@ -202,7 +202,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           </p>
                         </div>
                       </div>
-                      <div className="flex pt-2 items-center flex-col pb-2">
+                      <div className="flex pt-2 items-start flex-col pb-2">
                         <div className="pb-2">
                           <span
                             style={{
@@ -268,34 +268,77 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                     </div>
 
                     <div className=" flex items-start flex-col w-[50%]">
-                      <div className="bg-blue-50 w-full flex items-center py-6 flex-col rounded-2xl">
+                      <div className="bg-blue-50 h-full w-full flex items-center py-6 flex-col rounded-2xl">
                         <div>
-                          <h5 className="text-neutral-800 font-semibold">
+                          <h5 className="text-neutral-800 pb-3 font-semibold">
                             Preferred Working Hours
                           </h5>
                         </div>
-                        <ul className="text-blue-500 flex flex-col gap-1 pt-4">
-                          <li>Sun (11 am - 5 pm)</li>
-                          <li>Mon (8 am - 9 pm)</li>
-                          <li>Tue (8 am - 7 pm)</li>
-                          <li>Wed (9 am - 6 pm)</li>
-                          <li>Thu (9 am -6 pm)</li>
-                          <li>Fri (8 am - 7 pm)</li>
-                          <li>Sat (8 am - 7 pm)</li>
-                        </ul>
+                        {profileData?.pro_profile?.working_hours.length > 0 ? (
+                          <div className="w-full">
+                            {profileData?.pro_profile?.working_hours.map(
+                              (item) => (
+                                <div className="flex px-4 border-b  w-full">
+                                  <div
+                                    className="responsive-days w-full xl:w-[12rem]"
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "column",
+                                    }}
+                                  >
+                                    <div className="p-2 w-full">
+                                      {item.name}
+                                    </div>
+                                  </div>
+
+                                  <div className=" w-full xl:w-[14rem]">
+                                    <div className=" flex text-neutral-500 p-2 w-full">
+                                      <p>
+                                        {item?.fromTime
+                                          ? item?.fromTime + "-"
+                                          : "Not available "}{" "}
+                                        {item?.toTime}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        ) : (
+                          <div className="flex flex-col h-full justify-center text-neutral-800 font-normal items-center">
+                            <div>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="#5c5c5c"
+                                className="w-20 h-20 mb-3"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                            </div>
+                            Hours not available for this PRO
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                   <div className="flex gap-3 pt-8">
                     <Link
                       to={`/profile-details?${profileData?.uuid}`}
-                      className="py-3 text-center border rounded-lg hover:!bg-blue-100 text-neutral-800 border-blue-600 w-full"
+                      className="py-3 text-center border rounded-lg hover:bg-[#0f75bc]/5 border-[#0f75bc] w-full text-[#0f75bc]"
                     >
                       View Profile
                     </Link>
                     <Link
                       to={`/chats?${profileData?.uuid}`}
-                      className="bg-blue-600 rounded-lg py-3 w-full text-center text-white hover:bg-blue-800 transition-all ease-in-out duration-500"
+                      className="hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3 w-full items-center text-center bg-[#0f75bc] text-white rounded-md "
                     >
                       Contact this Pro
                     </Link>

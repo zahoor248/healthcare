@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { Link, useLocation } from "react-router-dom";
 import StarRating from "./RatingStarts";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 const Contacts = () => {
   const [loading, setLoading] = useState(false);
   const contracts = useSelector((state) => state.contracts);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [button_loading, setButtonLoading] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState({
@@ -57,8 +59,9 @@ const Contacts = () => {
       }
     } else if (user.type == "bus") {
       if (
-        item.bus_acceptance &&
-        !item.reviews.some((review) => review.reviewer_id === user.id)
+        // item.bus_acceptance &&
+        // !item.reviews.some((review) => review.reviewer_id === user.id)
+        true
       ) {
         setReview({
           ...review,
@@ -72,6 +75,7 @@ const Contacts = () => {
   };
 
   const handleReviewSubmit = () => {
+    setButtonLoading(true);
     // Implement your logic to submit the review and rating
     console.log("Submitting Review:", reviewText);
     console.log("Rating:", rating);
@@ -82,8 +86,20 @@ const Contacts = () => {
       rating: rating,
       feedback: reviewText,
     })
-      .then((response) => {})
-      .catch((error) => {});
+      .then((response) => {
+        setButtonLoading(false);
+        setReview({
+          ...review,
+          toggle: false,
+        });
+      })
+      .catch((error) => {
+        setButtonLoading(false);
+        setReview({
+          ...review,
+          toggle: false,
+        });
+      });
     // Reset state or close the review form if needed
   };
   return (
@@ -99,7 +115,7 @@ const Contacts = () => {
               <div className="border-neutral-400 shadow-class border h-fit w-full    rounded-xl">
                 {" "}
                 <div className="flex justify-start flex-col md:flex-row w-full ">
-                  <div className="flex flex-col items-start border-b md:border-r w-full p-5 lg::p-8">
+                  <div className="flex flex-col items-start border-b md:border-b-0 md:border-r w-full p-5 lg::p-8">
                     <div className="flex items-center gap-3">
                       <p className="font-bold text-[#2676BC] text-xl">
                         {" "}
@@ -191,9 +207,10 @@ const Contacts = () => {
                           className="w-full md:w-auto"
                           onClick={() => handleApprove(item)}
                         >
-                          <button className="px-6 w-full md:w-auto mt-4 py-3 bg-blue-600 text-white rounded-lg md:mt-2">
-                            Close Contract
-                          </button>
+                          <CommonPrimaryButton
+                            loading={false}
+                            text={"Close Contract"}
+                          />
                         </div>
                       </div>
                     )}
@@ -203,9 +220,10 @@ const Contacts = () => {
                           className="w-full md:w-auto"
                           onClick={() => handleApprove(item)}
                         >
-                          <button className="px-6 w-full md:w-auto mt-4 py-3 bg-blue-600 text-white rounded-lg md:mt-2">
-                            Close Contract
-                          </button>
+                          <CommonPrimaryButton
+                            loading={false}
+                            text={"Close Contract"}
+                          />
                         </div>
                       </div>
                     )}
@@ -248,12 +266,11 @@ const Contacts = () => {
               </div>
             </div>
             <div className="flex items-center gap-2 w-full justify-end mt-8">
-              <button
-                className="profile-save-btn"
+              <CommonPrimaryButton
                 onClick={() => handleReviewSubmit()}
-              >
-                Submit
-              </button>
+                loading={button_loading}
+                text={"Submit"}
+              />
             </div>
           </div>
         </div>
