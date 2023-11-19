@@ -205,7 +205,7 @@ export default function License() {
               <select
                 value={user_license}
                 onChange={(e) => setLicense(e.target.value)}
-                className="text-lg placeholder-[#B8C0CB] bg-white text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full outline-none"
+                className="text-lg placeholder-[#B8C0CB] bg-white text-neutral-800  py-3 px-4 border border-[#C2C9D4] rounded w-full outline-none"
               >
                 {licenseTyes.map((item) => (
                   <option key={item.label} value={item.value}>

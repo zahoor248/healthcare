@@ -4,10 +4,12 @@ import FilterIcon from "../../assets/images/filter-solid.png";
 import TagSelector from "../TagSelector/TagSelector";
 import PriceRange from "../PriceRange/PriceRange";
 import Slider from "@mui/material/Slider";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function Sidebar({ data, filteredData, setFilteredData }) {
   const [check, setCheck] = useState("");
   const [value, setValue] = useState([20, 37]);
+  const [filter, setFilter] = useState(false);
 
   const licenses = data
     .map((item) => item.licenses.map((license) => license.abbrev))
@@ -39,7 +41,12 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
     });
   };
 
-  const filterData = () => {
+  const filterData = (reset) => {
+    if (reset) {
+      setFilteredData(data);
+      return;
+    }
+    setFilter(true);
     let temp = [...data];
 
     // Filter based on selected tags
@@ -76,7 +83,11 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
     });
 
     // Update the state with the filtered data
-    setFilteredData(temp);
+
+    setTimeout(() => {
+      setFilteredData(temp);
+      setFilter(false);
+    }, 1000);
   };
 
   const handleChange = (event, newValue) => {
@@ -107,9 +118,9 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
         <p className="text-lg pb-2">License Type</p>
 
         {/* All licences list */}
-        <div className="flex flex-wrap md:flex-col md:gap-1 gap-3">
+        <div className="flex   flex-wrap  md:gap-1 gap-5">
           {licenses.map((license, key) => (
-            <div className=" flex items-center cursor-default" key={key}>
+            <div className=" flex p-2  items-center cursor-default" key={key}>
               <input
                 type="checkbox"
                 onChange={() => handleFilterByLicense(license)}
@@ -143,13 +154,17 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
         />
       </div>
 
-      <div className="pt-4 md:pt-8">
-        <button
-          className="hover:bg-blue-700 transition-all ease-in-out duration-500 py-3 w-full bg-blue-600 rounded-xl text-white "
+      <div className="pt-4 flex gap-4 justify-end md:pt-8">
+        <CommonPrimaryButton
+          onClick={() => filterData(true)}
+          loading={false}
+          text={"Clear Filters"}
+        />
+        <CommonPrimaryButton
           onClick={() => filterData()}
-        >
-          Refine
-        </button>
+          loading={filter}
+          text={"Apply Filters"}
+        />
       </div>
     </div>
   );
