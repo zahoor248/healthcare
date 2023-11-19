@@ -123,54 +123,32 @@ export default function ProfileDetails() {
     <>
       {loading ? (
         <div className="flex transition-all ease-in-out duration-500 justify-center items-center my-auto w-full h-[100vh] bg-[#e5f0ff] ">
-          <svg viewBox="0 0 240 240" height="240" width="240" class="pl">
-            <circle
-              stroke-linecap="round"
-              stroke-dashoffset="-330"
-              stroke-dasharray="0 660"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="105"
-              cy="120"
-              cx="120"
-              class="pl__ring pl__ring--a"
-            ></circle>
-            <circle
-              stroke-linecap="round"
-              stroke-dashoffset="-110"
-              stroke-dasharray="0 220"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="35"
-              cy="120"
-              cx="120"
-              class="pl__ring pl__ring--b"
-            ></circle>
-            <circle
-              stroke-linecap="round"
-              stroke-dasharray="0 440"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="70"
-              cy="120"
-              cx="85"
-              class="pl__ring pl__ring--c"
-            ></circle>
-            <circle
-              stroke-linecap="round"
-              stroke-dasharray="0 440"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="70"
-              cy="120"
-              cx="155"
-              class="pl__ring pl__ring--d"
-            ></circle>
-          </svg>
+          <div class="boxes">
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         </div>
       ) : (
         <div>
@@ -178,7 +156,10 @@ export default function ProfileDetails() {
             <div className="basis-2/5 pt-12 col-span-2">
               <div className=" flex w-full gap-6 pl-20 items-center ">
                 {userDetails.photo_url != null ? (
-                  <img className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white" src={userDetails.photo_url} />
+                  <img
+                    className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white"
+                    src={userDetails.photo_url}
+                  />
                 ) : (
                   <div className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin text-white">
                     {userDetails?.firstname}
