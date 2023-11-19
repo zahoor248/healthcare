@@ -171,7 +171,7 @@ export default function Hiring() {
                   <div className="flex gap-2">
                     <p>Sort by:</p>
                     <select
-                      className="bg-blue-400 hover:bg-blue-500 transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
+                      className="bg-[#0f75bc]/90  transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
                       onChange={(e) => handleSortItem(e.target.value)}
                     >
                       <option>Hourly Rate</option>

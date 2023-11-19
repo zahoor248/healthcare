@@ -8,8 +8,8 @@ const Pagination = ({ currentPage, pageCount, onPageChange }) => {
       pageNumbers.push(
         <div
           key={i}
-          className={` flex px-4 py-2 border hover:shadow-lg border-blue-300 text-neutral-600 rounded-lg  gap-3 ${
-            currentPage === i + 1 ? "active text-neutral-900 border-blue-500" : ""
+          className={` flex px-4 py-2 cursor-pointer border hover:shadow-lg border-[#0f75bc]/50 text-neutral-600 rounded-lg  gap-3 ${
+            currentPage === i + 1 ? "active text-white bg-[#0f75bc]" : ""
           }`}
           onClick={() => onPageChange(i + 1)}
         >
@@ -24,7 +24,7 @@ const Pagination = ({ currentPage, pageCount, onPageChange }) => {
   return (
     <div className="w-full flex gap-3 justify-end mt-5">
       <div
-        className={` flex px-4 items-center  h-auto cursor-pointer py-2 border border-blue-300 text-neutral-600 rounded-md bg-blue-50  gap-3 ${
+        className={` flex px-4 items-center  h-auto cursor-pointer py-2 border border-blue-300  rounded-md bg-[#0f75bc] text-white  gap-3 ${
           currentPage === 0 ? "disabled" : ""
         }`}
         onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
@@ -48,7 +48,7 @@ const Pagination = ({ currentPage, pageCount, onPageChange }) => {
       <div className=" flex gap-3 text-neutral-500">{renderPageNumbers()}</div>
 
       <div
-        className={` flex items-center px-4 py-2 border border-blue-300 text-neutral-600 rounded-md bg-blue-50  gap-3 ${
+        className={` flex items-center px-4 py-2 border border-blue-300  rounded-md bg-[#0f75bc] text-white  gap-3 ${
           currentPage === pageCount - 1 ? "disabled" : ""
         }`}
         onClick={() => currentPage < pageCount && onPageChange(currentPage + 1)}
