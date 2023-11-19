@@ -21,6 +21,7 @@ const Contacts = () => {
     toggle: false,
     contract_id: "",
     user_id: "",
+    item: "",
   });
 
   const location = useLocation();
@@ -55,6 +56,7 @@ const Contacts = () => {
           toggle: true,
           contract_id: item.id,
           user_id: user.type === "bus" ? item.bus_id : item.pro_id,
+          item: item,
         });
       }
     } else if (user.type == "bus") {
@@ -68,6 +70,7 @@ const Contacts = () => {
           toggle: true,
           contract_id: item.id,
           user_id: user.type === "pro" ? item.bus_id : item.pro_id,
+          item: item,
         });
       }
     }
@@ -88,6 +91,10 @@ const Contacts = () => {
     })
       .then((response) => {
         setButtonLoading(false);
+
+        handleAPIRequest("POST", `approve-contract/${review.item.uuid}`, null)
+          .then((response) => {})
+          .catch((error) => {});
         setReview({
           ...review,
           toggle: false,

@@ -353,7 +353,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
 
       <div className=" w-full flex justify-end">
         {data?.length > 0 && (
-          <Pagination
+        <Pagination
             currentPage={currentPage}
             pageCount={Math.ceil(data.length / 9)}
             onPageChange={handlePageChange}
