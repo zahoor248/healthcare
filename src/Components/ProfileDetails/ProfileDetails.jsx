@@ -65,6 +65,7 @@ export default function ProfileDetails() {
 
   const reserveUser = () => {
     let data = {
+      uuid: location.search.split("?")[1],
       start_date: startDate,
       end_date: endDate,
       pay_rate: price,

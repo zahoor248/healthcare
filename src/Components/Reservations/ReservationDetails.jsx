@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setAllReasevation } from "../../Store/Actions/Actions";
 import { Link, useLocation } from "react-router-dom";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 const ReservationDetails = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -108,9 +109,7 @@ const ReservationDetails = () => {
                   </div>
                   <div className="flex gap-3 w-full justify-start">
                     <Link to={`/chats?${reservationDetails?.uuid}`}>
-                      <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
-                        Chat
-                      </button>
+                      <CommonPrimaryButton loading={false} text={"Chat"} />
                     </Link>
 
                     {opentoAcceptoffer?.offered_by_me === false &&
@@ -121,17 +120,19 @@ const ReservationDetails = () => {
                               setTerms({ ...terms, toggle: !terms.toggle })
                             }
                           >
-                            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
-                              Accept
-                            </button>
+                            <CommonPrimaryButton
+                              loading={false}
+                              text={"Accept"}
+                            />
                           </div>
 
                           <Link
                             to={`/counter-offer?${reservationDetails?.uuid}`}
                           >
-                            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg mt-2">
-                              Counter
-                            </button>
+                            <CommonPrimaryButton
+                              loading={false}
+                              text={"Counter"}
+                            />
                           </Link>
                         </>
                       )}
@@ -284,13 +285,20 @@ const ReservationDetails = () => {
                 ></textarea>
               </div>
             </div>
+
             <div className="flex items-center gap-2 w-full justify-end mt-8">
+              {" "}
               <button
-                className="profile-save-btn"
-                onClick={() => handleReviewSubmit()}
+                onClick={() => setTerms({ ...terms, toggle: false })}
+                className="px-6 py-3 text-[#0f75bc] hover:bg-[#0f75bc]/20 transition-all ease-in-out duration-500 rounded-md"
               >
-                Submit
+                Cancel
               </button>
+              <CommonPrimaryButton
+                onClick={() => handleReviewSubmit()}
+                loading={false}
+                text={"Accept Now"}
+              />
             </div>
           </div>
         </div>

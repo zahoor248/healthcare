@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setAllReasevation } from "../../Store/Actions/Actions";
 import { Link, useLocation } from "react-router-dom";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 const Reservations = () => {
   const [loading, setLoading] = useState(false);
   const location = useLocation();
@@ -32,20 +33,23 @@ const Reservations = () => {
       });
   }, [location]);
   return (
-    <div className="flex main-container  h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
+    <div className="flex main-container   h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
           <div className="text-3xl">My Reservations</div>
         </div>
         {reservations?.length > 0 ? (
-          <div className="flex justify-between shadow-class border-neutral-300  border w-full rounded-xl my-10 gap-9 flex-wrap">
+          <div className="flex justify-between  w-full my-10 gap-6 flex-wrap">
             {reservations?.map((item, index) => (
-              <div className=" h-fit w-full  hover:shadow-sm  ">
+              <div className=" h-fit w-full  hover:shadow-sm shadow-class border-neutral-300 rounded-xl overflow-hidden border ">
                 {" "}
                 <div className="flex flex-col md:flex-row justify-start w-full ">
-                  <div className="flex items-start gap-4 border-b md:border-r md:w-[35%] p-5 lg:p-8">
+                  <div className="flex items-start gap-4 border-b md:border-b-0 md:border-r md:w-[35%] p-5 lg:p-8">
                     <div className="">
-                      <p className="font-bold text-[#2676BC] text-xl"> Offer</p>
+                      <p className="font-bold text-[#2676BC] text-xl">
+                        {" "}
+                        Offer # {index + 1}
+                      </p>
                       <div className="flex flex-row gap-3 pt-4">
                         <div className="font-semibold">Location:</div>
                         <p className="whitespace-pre-wrap">{item?.location}</p>
@@ -64,7 +68,7 @@ const Reservations = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 flex-col p-5 lg:p-8 border-b md:border-r md:w-[27%]">
+                  <div className="flex items-start gap-4 flex-col p-5 lg:p-8 border-b md:border-b-0 md:border-r md:w-[27%]">
                     <div className="font-semibold">
                       {item?.pay_rate}$ / {item?.pay_duration} offer to :
                       {/* <GoPrimitiveDot className='online-icon'/> */}
@@ -116,10 +120,11 @@ const Reservations = () => {
                       </div>
                     </div>
                     <div className="flex mt-4 md:mt-0 justify-end w-full">
-                      <Link className="w-full md:w-auto items-end" to={`/reservation-detail?${item?.uuid}`}>
-                        <button className="px-6 w-full md:w-auto py-3 bg-blue-600 text-white rounded-lg mt-2">
-                          Details
-                        </button>
+                      <Link
+                        className="w-full md:w-auto items-end"
+                        to={`/reservation-detail?${item?.uuid}`}
+                      >
+                        <CommonPrimaryButton loading={false} text={"Details"} />
                       </Link>
                     </div>
                   </div>

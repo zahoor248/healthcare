@@ -8,19 +8,19 @@ import { Box } from "@mui/material";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function NewOffer() {
   const location = useLocation();
-  const [openToAcceptoffer, setOpenToAcceptOffer] = useState([]);
-  const [startDate, setStartDate] = useState(
-    dayjs(openToAcceptoffer?.start_date) || null
-  );
-  const [endDate, setEndDate] = useState(dayjs(openToAcceptoffer?.end_date));
+  const [openAcceptoffer, setOpenToAcceptOffer] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [price, setPrice] = useState(null);
   const [description, setDescription] = useState(null);
   const [loading, setLoading] = useState(false);
   const [counterLocation, setLocation] = useState("");
   const [payDuration, setPayDuration] = useState("");
+  const [button_loading, setButtonLoading] = useState(false);
   const reservations = useSelector((state) => state.reservations);
   const user = useSelector((state) => state.user);
 
@@ -55,41 +55,48 @@ export default function NewOffer() {
             setPrice(opentoAcceptoffer.pay_rate);
             setLocation(opentoAcceptoffer.location);
             setDescription(opentoAcceptoffer.description);
+            setPayDuration(opentoAcceptoffer.pay_duration);
           }
         }
       })
       .catch((error) => {});
+    console.log(startDate, dayjs(openAcceptoffer.end_date));
   }, [user, location]);
 
   const reserveUser = () => {
+    setButtonLoading(true);
     let data = {
-      start_date: startDate,
-      end_date: endDate,
+      start_date: dayjs(startDate).format("DD-MM-YYYY"),
+      end_date: dayjs(endDate).format("DD-MM-YYYY"),
       pay_rate: price,
       pay_duration: payDuration?.toLowerCase(),
       location: counterLocation,
       description: description,
       account_uuid: user.accounts[0].uuid,
+      uuid: location.search.split("?")[1],
     };
 
     handleAPIRequest(
       "POST",
-      `reservation/counter-offer/${location.search.split("?")[1]}`,
+      `counter-offer/${location.search.split("?")[1]}`,
       data
     )
       .then((response) => {
         console.log(response);
+        setButtonLoading(false);
       })
-      .catch({});
+      .catch((err) => {
+        setButtonLoading(false);
+      });
 
     console.log(data, "here is the payload ");
   };
 
   const handleStartDateChange = (date) => {
-    setStartDate(dayjs(date).format("DD-MM-YYYY"));
+    setStartDate(dayjs(date));
   };
   const handleEndDateChange = (date) => {
-    setEndDate(dayjs(date).format("DD-MM-YYYY"));
+    setEndDate(dayjs(date));
   };
   return (
     <>
@@ -147,15 +154,16 @@ export default function NewOffer() {
       ) : (
         <div className="flex m-auto flex-col justify-center h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
           <div className=" justify-center items-center text-neutral-700 flex w-full">
-            <div className="text-3xl">Make a Counter Offer</div>
+            <div className="text-2xl md:text-3xl">Make a Counter Offer</div>
           </div>
           <div className="">
-            <div className="w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-10 flex flex-col gap-5  ">
+            <div className="md:w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-4 md:mt-10 flex flex-col gap-3 md:gap-5  ">
               <div className="flex gap-6">
                 <div className="w-full flex flex-col gap-2">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
                     Start Date
                   </p>
+
                   <div className="relative w-full">
                     <LocalizationProvider
                       className="w-full"
@@ -174,6 +182,7 @@ export default function NewOffer() {
                           sx={{ width: "100%" }}
                           onChange={handleStartDateChange}
                           defaultValue={startDate}
+                          value={startDate}
                           slotProps={{
                             field: {
                               clearable: true,
@@ -206,6 +215,7 @@ export default function NewOffer() {
                           sx={{ width: "100%" }}
                           onChange={handleEndDateChange}
                           defaultValue={endDate}
+                          value={endDate}
                           slotProps={{
                             field: {
                               clearable: true,
@@ -252,10 +262,14 @@ export default function NewOffer() {
                       Rate
                     </p>
                     <div className="relative w-full">
-                      <select className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full">
-                        <option>Hourly Rate</option>
-                        <option>Daily Rate</option>
-                        <option>Fixed</option>
+                      <select
+                        value={payDuration}
+                        onChange={(e) => setPayDuration(e.target.value)}
+                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
+                      >
+                        <option value={"hourly"}>Hourly Rate</option>
+                        <option value={"daily"}>Daily Rate</option>
+                        <option value={"fixed"}>Fixed</option>
                       </select>
                     </div>
                   </div>
@@ -275,12 +289,11 @@ export default function NewOffer() {
                     </div>
                   </div>
                   <div className="w-auto flex justify-end items-end mt-4">
-                    <button
+                    <CommonPrimaryButton
                       onClick={() => reserveUser()}
-                      className="px-6 py-3 rounded-lg bg-blue-600 text-white"
-                    >
-                      Submit Offer
-                    </button>
+                      loading={button_loading}
+                      text={"   Submit Offer"}
+                    />
                   </div>
                 </div>
               </div>

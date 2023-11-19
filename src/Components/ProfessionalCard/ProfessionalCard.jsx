@@ -16,13 +16,13 @@ import ModalReview from "../ModalReview/ModalReview";
 import ReactPaginate from "react-paginate";
 import { Modal } from "@mui/base";
 import { Link } from "react-router-dom";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "./Pagination";
 import EmptyState from "../EmptyState/EmptyState";
 
 export default function ProfessionalCard({ data, setFilteredData }) {
   const [show, setShow] = useState(null);
   const [profileData, setProfileData] = useState(null);
-  let currentPage = 1;
+  let [currentPage, setCurrentPage] = useState(1);
   const handleClose = () => setShow(null);
   const handleShow = (item) => {
     setShow(item.uuid);
@@ -30,8 +30,9 @@ export default function ProfessionalCard({ data, setFilteredData }) {
     console.log(item, "here is the item");
   };
 
-  const paginate = (val) => {
-    currentPage = val;
+  const handlePageChange = (page) => {
+    // Handle page change event
+    setCurrentPage(page);
   };
   return (
     <>
@@ -306,54 +307,15 @@ export default function ProfessionalCard({ data, setFilteredData }) {
         )}
       </div>
       {/* here is pagination  */}
-      <div className="flex gap-3 w-full justify-end mt-6">
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-4 h-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </div>
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          1
-        </div>
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          2
-        </div>
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          3
-        </div>
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          4
-        </div>
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          ...
-        </div>
-        <div className="w-7 h-7 rounded-full flex justify-center items-center border border-neutral-400 bg-neutral-100">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-4 h-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </div>
+
+      <div className=" w-full flex justify-end">
+        {data?.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            pageCount={Math.ceil(data.length / 9)}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
     </>
 

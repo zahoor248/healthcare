@@ -658,7 +658,11 @@ body {
 .jimu-primary-loading:before,
 .jimu-primary-loading:after,
 .jimu-primary-loading {
-  background: linear-gradient(320deg, rgba(0, 140, 255, 0.678), rgba(128, 0, 128, 0.308));
+  background: linear-gradient(
+    320deg,
+    rgba(0, 140, 255, 0.678),
+    rgba(128, 0, 128, 0.308)
+  );
   -webkit-animation: loading-keys-app-loading 0.8s infinite ease-in-out;
   animation: loading-keys-app-loading 0.8s infinite ease-in-out;
   width: 6px;
@@ -712,15 +716,15 @@ body {
 button:active {
   transform: scale(0.95);
   transition: all 0.7 ease-in-out;
- }
+}
 
- .button-ripple {
+.button-ripple {
   position: relative;
   overflow: hidden;
 }
 
 .button-ripple:before {
-  content: '';
+  content: "";
   position: absolute;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.6);

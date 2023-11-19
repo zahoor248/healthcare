@@ -279,7 +279,7 @@ const BusinessProfileData = () => {
         });
       }
     }
-  }, []);
+  }, [user.accounts]);
 
   const submitHandler = (event) => {
     event.preventDefault();
