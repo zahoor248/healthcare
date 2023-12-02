@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Sidebar.css";
 import FilterIcon from "../../assets/images/filter-solid.png";
 import TagSelector from "../TagSelector/TagSelector";
@@ -7,7 +7,6 @@ import Slider from "@mui/material/Slider";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function Sidebar({ data, filteredData, setFilteredData }) {
-  const [check, setCheck] = useState("");
   const [value, setValue] = useState([20, 37]);
   const [filter, setFilter] = useState(false);
 

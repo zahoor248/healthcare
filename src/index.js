@@ -26,6 +26,7 @@ import Reservations from "./Components/Reservations/Reservations";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import ReservationDetails from "./Components/Reservations/ReservationDetails";
 import NewOffer from "./Components/Reservations/NewOffer";
+import ChatBox from "./Components/Chat/TestChat";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(

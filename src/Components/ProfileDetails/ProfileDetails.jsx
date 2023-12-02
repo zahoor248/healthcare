@@ -29,6 +29,7 @@ export default function ProfileDetails() {
   const [description, setDescription] = useState("");
   const [userDetails, setUserDetails] = useState("");
   const [loading, setLoading] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const professionals = useSelector((state) => state.pros);
   const [cleared, setCleared] = useState(false);
@@ -65,6 +66,7 @@ export default function ProfileDetails() {
   }, [professionals]);
 
   const reserveUser = () => {
+    setButtonLoading(true);
     let data = {
       uuid: location.search.split("?")[1],
       start_date: startDate,
@@ -79,9 +81,46 @@ export default function ProfileDetails() {
 
     handleAPIRequest("POST", `reservation`, data)
       .then((response) => {
-        console.log(response);
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "info",
+          message: "This user has been Reserved",
+          lable: "Reservation Booked",
+        });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "info",
+            message: "This user has been Reserved",
+            lable: "Reservation Booked",
+          });
+        }, 2000);
+
+        setButtonLoading(false);
       })
-      .catch({});
+      .catch((error) => {
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "error",
+          message: "Please try again later",
+          lable: "Server Error",
+        });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "error",
+            message: "Please try again later",
+            lable: "Server Error",
+          });
+        }, 2000);
+        setButtonLoading(false);
+      });
 
     console.log(data, "here is the payload ");
   };
@@ -152,7 +191,7 @@ export default function ProfileDetails() {
         </div>
       ) : (
         <div>
-          <div className="flex flex-col xl:flex-row shadow-md">
+          <div className="flex flex-col xl:flex-row border-b">
             <div className="basis-2/5 pt-12 col-span-2">
               <div className=" flex w-full gap-6 pl-20 items-center ">
                 {userDetails.photo_url != null ? (
@@ -190,7 +229,7 @@ export default function ProfileDetails() {
                     <Link to={`/chats?${userDetails?.uuid}`}>
                       <CommonPrimaryButton
                         loading={false}
-                        text={"Contact this PRO"}
+                        text={"Contact this Pro"}
                       />
                     </Link>
                   </div>
@@ -279,7 +318,7 @@ export default function ProfileDetails() {
             </div>
 
             <div className="profile-about-text ">
-              <div className="about-text">
+              <div className="about-text ">
                 <h3>About {userDetails?.firstname}</h3>
                 <p className="about-pro-desc">
                   {userDetails?.about_me == null
@@ -289,13 +328,12 @@ export default function ProfileDetails() {
               </div>
             </div>
 
-            <div className="profile-working-hours ">
-              <div className="working-hrs-space"></div>
+            <div className=" border-l">
               <p className="working-hrs">Preferred Working Hours</p>
               {userDetails?.pro_profile?.working_hours.length > 0 ? (
-                <div className="w-full">
+                <div className="w-full flex flex-col justify-center items-center">
                   {userDetails?.pro_profile?.working_hours.map((item) => (
-                    <div className="flex px-4 border-b  w-full">
+                    <div className="flex px-4 py-2 border-t  w-full">
                       <div
                         className="responsive-days w-full xl:w-[12rem]"
                         style={{
@@ -342,9 +380,9 @@ export default function ProfileDetails() {
               )}
             </div>
           </div>
-          <div className="">
-            <h3 className="review-heading ml-20">Select:</h3>
-            <div className="w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-10 flex flex-col gap-5  ">
+          <div className="flex flex-col items-center py-5 ">
+            <h3 className=" text-neutral-800 text-3xl ">Book Reservation</h3>
+            <div className="w-[80vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
               <div className="flex gap-6">
                 <div className="w-full flex flex-col gap-2">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
@@ -472,12 +510,11 @@ export default function ProfileDetails() {
                     </div>
                   </div>
                   <div className="w-auto flex justify-end items-end mt-4">
-                    <button
+                    <CommonPrimaryButton
                       onClick={() => reserveUser()}
-                      className="px-6 py-3 rounded-lg bg-blue-600 text-white"
-                    >
-                      Send Reservation
-                    </button>
+                      loading={buttonLoading}
+                      text={"Send Reservation"}
+                    />
                   </div>
                 </div>
               </div>

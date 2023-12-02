@@ -1,20 +1,7 @@
 import React, { useState } from "react";
-// import Button from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
-import VerifiedBadge from "../../assets/images/verified-badge.png";
 import emptyState from "../../assets/images/reservation.png";
 
-import UserImage from "../../assets/images/avatar.png";
-import { AiFillStar } from "react-icons/ai";
 import "./ProfessionalCard.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import { BsBookmark } from "react-icons/bs";
-import Avatar from "../../assets/images/avatar.png";
-import VerifiedUser from "../../assets/images/icon-verified.png";
-// import ReadMoreText from "../ReadMoreText/ReadMoreText";
-import ModalReview from "../ModalReview/ModalReview";
-import ReactPaginate from "react-paginate";
-import { Modal } from "@mui/base";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 import EmptyState from "../EmptyState/EmptyState";
