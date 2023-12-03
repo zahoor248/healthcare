@@ -24,31 +24,40 @@ import Favouraties from "./Components/Favouraties/Favouraties";
 import Contacts from "./Components/Contacts/Contacts";
 import Reservations from "./Components/Reservations/Reservations";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
-
+import ReservationDetails from "./Components/Reservations/ReservationDetails";
+import NewOffer from "./Components/Reservations/NewOffer";
+import ChatBox from "./Components/Chat/TestChat";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
-      <Layout> {/* Wrap all routes with the Layout component */}
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/register" element={<SignUp />} />
-          <Route path="/login" element={<LogIn />} />
-          {/* <Route path="/listings" element={<HiringLayout />} /> */}
-          <Route path="/chats" element={<Chat />} />
-          <Route path="/availability" element={<Availability />} />
-          <Route path="/profile-details" element={<ProfileDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/favouraties" element={<Favouraties />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/reservations" element={<Reservations />} />
-
-        </Routes>
-      </Layout>
-    </BrowserRouter>
-  </Provider>
-</React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        {/*global  layout  */}
+        <Layout>
+          {" "}
+          {/* Wrap all routes with the Layout component */}
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/listings" element={<HiringLayout />} />
+            <Route path="/chats" element={<Chat />} />
+            <Route path="/availability" element={<Availability />} />
+            <Route path="/profile-details" element={<ProfileDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/favouraties" element={<Favouraties />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/reservations" element={<Reservations />} />
+            <Route
+              path="/reservation-detail"
+              element={<ReservationDetails />}
+            />
+            <Route path="/counter-offer" element={<NewOffer />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
 );
 reportWebVitals();

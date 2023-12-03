@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 // import { GoogleLogin } from "react-google-login";
 import { handleAPIRequest } from "../../helper/ApiHandler";
+import Toast from "../AppLoader";
 // import Header from "../Header/Header";
 
 // import { Alert } from "react-bootstrap";
@@ -24,7 +25,12 @@ export default function LogIn() {
   //   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
   const [email, setEmail] = useState("webbus@yopmail.com");
   const [password, setPassword] = useState("Faraz@123");
   const [loading, setLoading] = useState(false);
@@ -32,20 +38,43 @@ export default function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const loginHandler = () => {
+    console.log("click");
     if (email.length && !emailError && password.length) {
       setLoading(true);
       handleAPIRequest("post", "login", { email: email, password: password })
         .then((response) => {
-          if (response) {
+          if (response !== "invalid") {
             localStorage.setItem("token", response?.user?.token);
             dispatch(setUser(response.user));
             dispatch(setIsLoggedIn(true));
             navigate("/");
             setLoading(false);
+          } else {
+            setShowToast({
+              ...showToast,
+              toggle: true,
+              status: "error",
+              message: "Please try again or check your account details",
+              lable: "User not found",
+            });
+            setLoading(false);
+
+            setTimeout(() => {
+              setShowToast({
+                ...showToast,
+                toggle: false,
+              });
+            }, 2000);
           }
         })
         .catch((e) => {
-          console.warn(e);
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "error",
+            message: "Please try again later",
+            lable: "Server Error",
+          });
           setLoading(false);
         });
     }
@@ -57,21 +86,23 @@ export default function LogIn() {
 
   return (
     <>
-      <div className="flex flex-col w-full h-screen overflow-auto items-center ">
+      <div className="flex flex-col w-full h-screen  overflow-auto items-center ">
         {/* <Header /> */}
-
-        <div className="flex w-full justify-center h-full ">
-          <div className="bg-[#4169e1] hidden md:flex items-center justify-center w-[50%]">
-            <img src={Slide2} className="w-[500px]" />
+        <div className="flex w-full h-full justify-center flex-col md:flex-row ">
+          <div className="bg-[#4169e1]  flex items-center justify-center w-full">
+            <img
+              src={Slide2}
+              className="w-[100px] py-6 md:!p-0  md:w-[500px]"
+            />
           </div>
 
-          <div className=" flex flex-col items-start justify-center p-0 md:p-10 lg:p-20 xl:p-40 w-[50%]">
+          <div className="h-full w-full md:p-12 p-6 lg:p-24 overflow-auto md:justify-center flex flex-col justify-start ">
             <div class="">
               <a
-                class="flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
+                class="absolute md:relative  top-6 left-4 md:top-0 md:left-0 md:flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
                 href="/"
               >
-                <div class="flex gap-1 items-center hover:text-primary  transition-colors duration-300 ease-in-out   cursor-pointer font-sm font-normal text-neutral-600 underline leading-normal -ml-2">
+                <div class="flex gap-1 items-center hover:text-primary  transition-colors duration-300 ease-in-out   cursor-pointer font-sm font-normal text-white md:text-neutral-600 underline leading-normal -ml-2">
                   <svg
                     width="25"
                     height="25"
@@ -174,7 +205,7 @@ export default function LogIn() {
               </div>
             </div>
 
-            <div className="flex justify-between w-full pt-4">
+            <div className="flex justify-between flex-col md:flex-row gap-3 w-full pt-4">
               <div className="flex items-center text-center w-full gap-2">
                 <input className="" type="checkbox" />
                 <div className="text-base/none text-center font-normal text-neutral-600">
@@ -191,7 +222,7 @@ export default function LogIn() {
             <div className="pt-10 w-full">
               <button
                 className="bg-[#10274F] text-white w-full py-3 rounded-xl transition-all ease-in-out duration-500 hover:bg-[#0d2041] hover:shadow-lg border hover:border hover:border-[#10274F]"
-                onClick={() => !loading && loginHandler()}
+                onClick={() => loginHandler()}
               >
                 {loading ? "Logging In..." : "Login"}
               </button>
@@ -225,6 +256,8 @@ export default function LogIn() {
           </div>
         </div>
       </div>
+
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </>
   );
 }

@@ -8,27 +8,42 @@ import ReviewSlider from "../ReviewSlider/ReviewSlider";
 import DaySelect from "../DaySelect/DaySelect";
 import Header from "../Header/Header";
 import CommonInput from "../ReusableComponents/CommonInput";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Alert, Box } from "@mui/material";
 import { handleAPIRequest } from "../../helper/ApiHandler";
+import { getAllFav } from "../../Store/Actions/Actions";
+import dayjs from "dayjs";
+import Toast from "../AppLoader";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function ProfileDetails() {
   const location = useLocation();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [month, setMonth] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [userDetails, setUserDetails] = useState("");
   const [loading, setLoading] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const professionals = useSelector((state) => state.pros);
   const [cleared, setCleared] = useState(false);
   const [ratting, setRatting] = useState([]);
+  const [counterLocation, setLocation] = useState("");
+  const [payDuration, setPayDuration] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
 
   // co
   useEffect(() => {
@@ -51,86 +66,173 @@ export default function ProfileDetails() {
   }, [professionals]);
 
   const reserveUser = () => {
-    const payload = {
-      startDate: startDate,
-      endDate: endDate,
-      price: price,
+    setButtonLoading(true);
+    let data = {
+      uuid: location.search.split("?")[1],
+      start_date: startDate,
+      end_date: endDate,
+      pay_rate: price,
+      pay_duration: payDuration?.toLowerCase(),
+      location: counterLocation,
       description: description,
+      account_uuid: user.accounts[0].uuid,
     };
-    console.log(payload, "here is the payload ");
+    console.log(data);
+
+    handleAPIRequest("POST", `reservation`, data)
+      .then((response) => {
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "info",
+          message: "This user has been Reserved",
+          lable: "Reservation Booked",
+        });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "info",
+            message: "This user has been Reserved",
+            lable: "Reservation Booked",
+          });
+        }, 2000);
+
+        setButtonLoading(false);
+      })
+      .catch((error) => {
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "error",
+          message: "Please try again later",
+          lable: "Server Error",
+        });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "error",
+            message: "Please try again later",
+            lable: "Server Error",
+          });
+        }, 2000);
+        setButtonLoading(false);
+      });
+
+    console.log(data, "here is the payload ");
   };
 
+  const handleAddFav = (item) => {
+    handleAPIRequest("POST", `favorites/add/${item.id}`, null)
+      .then((response) => {
+        console.log(response, "Helelelelelelele");
+        dispatch(getAllFav(response.favorites));
+
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "info",
+          message: "This user has been added to favorites",
+          lable: "Added as Favorites",
+        });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "info",
+            message: "This user has been added to favorites",
+            lable: "Added as Favorites",
+          });
+        }, 2000);
+      })
+      .catch((error) => {});
+  };
+
+  const handleStartDateChange = (date) => {
+    setStartDate(dayjs(date).format("DD-MM-YYYY"));
+  };
+  const handleEndDateChange = (date) => {
+    setEndDate(dayjs(date).format("DD-MM-YYYY"));
+  };
   return (
     <>
       {loading ? (
         <div className="flex transition-all ease-in-out duration-500 justify-center items-center my-auto w-full h-[100vh] bg-[#e5f0ff] ">
-          <svg viewBox="0 0 240 240" height="240" width="240" class="pl">
-            <circle
-              stroke-linecap="round"
-              stroke-dashoffset="-330"
-              stroke-dasharray="0 660"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="105"
-              cy="120"
-              cx="120"
-              class="pl__ring pl__ring--a"
-            ></circle>
-            <circle
-              stroke-linecap="round"
-              stroke-dashoffset="-110"
-              stroke-dasharray="0 220"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="35"
-              cy="120"
-              cx="120"
-              class="pl__ring pl__ring--b"
-            ></circle>
-            <circle
-              stroke-linecap="round"
-              stroke-dasharray="0 440"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="70"
-              cy="120"
-              cx="85"
-              class="pl__ring pl__ring--c"
-            ></circle>
-            <circle
-              stroke-linecap="round"
-              stroke-dasharray="0 440"
-              stroke-width="20"
-              stroke="#000"
-              fill="none"
-              r="70"
-              cy="120"
-              cx="155"
-              class="pl__ring pl__ring--d"
-            ></circle>
-          </svg>
+          <div class="boxes">
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <div class="box">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         </div>
       ) : (
         <div>
-          <div className="flex flex-col xl:flex-row shadow-md">
+          <div className="flex flex-col xl:flex-row border-b">
             <div className="basis-2/5 pt-12 col-span-2">
-              <div style={{ display: "flex", paddingLeft: "5rem" }}>
-                <div className="border border-gray-300 w-40 h-40 bg-gray-300 rounded-lg"></div>
-                <div className="ml-8 mt-4">
+              <div className=" flex w-full gap-6 pl-20 items-center ">
+                {userDetails.photo_url != null ? (
+                  <img
+                    className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white"
+                    src={userDetails.photo_url}
+                  />
+                ) : (
+                  <div className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin text-white">
+                    {userDetails?.firstname}
+                  </div>
+                )}
+                <div className=" mt-4">
                   <p className="profile-user-name capitalize text-2xl text-blue-900">
                     {userDetails?.firstname} {userDetails?.lastname}
                   </p>
                   <p className="profile-designation text-sm text-gray-300 mt-1">
-                    ADON
+                    {userDetails?.licenses?.length ? (
+                      <div className="flex gap-1">
+                        {userDetails?.licenses?.map((item) => (
+                          <p className="license-areas">{item?.abbrev},</p>
+                        ))}
+                      </div>
+                    ) : (
+                      "N/A"
+                    )}
                   </p>
-                  <Link to={`/chats?${userDetails?.uuid}`}>
-                    <button className="contact-profile-btn text-white bg-blue-700 border border-blue-700 rounded-md py-1.5 px-4 mt-6 cursor-pointer hover:border-blue-900 hover:bg-white hover:text-blue-700 transition-all ease-in-out duration-500">
-                      Contact this Pro
-                    </button>
-                  </Link>
+                  <div className="flex gap-3 mt-4 flex-wrap">
+                    <CommonPrimaryButton
+                      onClick={() => handleAddFav(userDetails)}
+                      loading={false}
+                      text={"Add to Favourites"}
+                    />
+
+                    <Link to={`/chats?${userDetails?.uuid}`}>
+                      <CommonPrimaryButton
+                        loading={false}
+                        text={"Contact this Pro"}
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
 
@@ -216,7 +318,7 @@ export default function ProfileDetails() {
             </div>
 
             <div className="profile-about-text ">
-              <div className="about-text">
+              <div className="about-text ">
                 <h3>About {userDetails?.firstname}</h3>
                 <p className="about-pro-desc">
                   {userDetails?.about_me == null
@@ -226,44 +328,61 @@ export default function ProfileDetails() {
               </div>
             </div>
 
-            <div className="profile-working-hours ">
-              <div className="working-hrs-space"></div>
+            <div className=" border-l">
               <p className="working-hrs">Preferred Working Hours</p>
-              {userDetails?.pro_profile?.working_hours.map((item) => (
-                <div className="working-day-section w-full">
-                  <div
-                    className="responsive-days w-full xl:w-[12rem]"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <div className="days-container w-full">{item.name}</div>
-                  </div>
+              {userDetails?.pro_profile?.working_hours.length > 0 ? (
+                <div className="w-full flex flex-col justify-center items-center">
+                  {userDetails?.pro_profile?.working_hours.map((item) => (
+                    <div className="flex px-4 py-2 border-t  w-full">
+                      <div
+                        className="responsive-days w-full xl:w-[12rem]"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <div className="p-2 w-full">{item.name}</div>
+                      </div>
 
-                  <div
-                    className="responsive-hrs w-full xl:w-[14rem]"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <div className="hrs-container w-full">
-                      <p>
-                        {item?.fromTime
-                          ? item?.fromTime + "-"
-                          : "Not available "}{" "}
-                        {item?.toTime}
-                      </p>
+                      <div className=" w-full xl:w-[14rem]">
+                        <div className=" flex text-neutral-500 p-2 w-full">
+                          <p>
+                            {item?.fromTime
+                              ? item?.fromTime + "-"
+                              : "Not available "}{" "}
+                            {item?.toTime}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <div className="flex flex-col h-full justify-center text-neutral-800 font-normal items-center">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="#5c5c5c"
+                      className="w-20 h-20 mb-3"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  Hours not available for this PRO
+                </div>
+              )}
             </div>
           </div>
-          <div className="">
-            <h3 className="review-heading ml-20">Select:</h3>
-            <div className="w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-10 flex flex-col gap-5  ">
+          <div className="flex flex-col items-center py-5 ">
+            <h3 className=" text-neutral-800 text-3xl ">Book Reservation</h3>
+            <div className="w-[80vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
               <div className="flex gap-6">
                 <div className="w-full flex flex-col gap-2">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
@@ -285,7 +404,8 @@ export default function ProfileDetails() {
                       >
                         <DatePicker
                           sx={{ width: "100%" }}
-                          onChange={(e) => setStartDate(e.target.value)}
+                          onChange={handleStartDateChange}
+                          defaultValue={startDate}
                           slotProps={{
                             field: {
                               clearable: true,
@@ -316,7 +436,8 @@ export default function ProfileDetails() {
                       >
                         <DatePicker
                           sx={{ width: "100%" }}
-                          onChange={(e) => setEndDate(e.target.value)}
+                          onChange={handleEndDateChange}
+                          defaultValue={endDate}
                           slotProps={{
                             field: {
                               clearable: true,
@@ -334,6 +455,8 @@ export default function ProfileDetails() {
                 </p>
                 <div className="relative w-full">
                   <input
+                    onChange={(e) => setLocation(e.target.value)}
+                    value={counterLocation}
                     placeholder="Select Location"
                     className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                   />
@@ -348,6 +471,7 @@ export default function ProfileDetails() {
                     <div className="relative w-full">
                       <input
                         onChange={(e) => setPrice(e.target.value)}
+                        value={price}
                         placeholder="Enter Value"
                         type="number"
                         className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
@@ -360,9 +484,12 @@ export default function ProfileDetails() {
                       Rate
                     </p>
                     <div className="relative w-full">
-                      <select className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full">
-                        <option>Hourly Rate</option>
-                        <option>Daily Rate</option>
+                      <select
+                        onChange={(e) => setPayDuration(e.target.value)}
+                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
+                      >
+                        <option>Hourly</option>
+                        <option>Daily</option>
                         <option>Fixed</option>
                       </select>
                     </div>
@@ -376,18 +503,18 @@ export default function ProfileDetails() {
                     <div className="relative w-full">
                       <textarea
                         onChange={(e) => setDescription(e.target.value)}
+                        value={description}
                         placeholder="Describe your self"
                         className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                       />
                     </div>
                   </div>
                   <div className="w-auto flex justify-end items-end mt-4">
-                    <button
+                    <CommonPrimaryButton
                       onClick={() => reserveUser()}
-                      className="px-6 py-3 rounded-lg bg-blue-600 text-white"
-                    >
-                      Send Reservation
-                    </button>
+                      loading={buttonLoading}
+                      text={"Send Reservation"}
+                    />
                   </div>
                 </div>
               </div>
@@ -422,6 +549,7 @@ export default function ProfileDetails() {
           </div>
         </div>
       )}
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </>
   );
 }

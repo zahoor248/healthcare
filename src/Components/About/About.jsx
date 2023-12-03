@@ -6,12 +6,14 @@ export default function About() {
   return (
     <div className="main-container">
       <div className="flex flex-col justify-center items-center py-6 md:py-10 lg:py-16 xl:py-20">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">About Us</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
+          About Us
+        </h1>
         <div className="mt-4">
           <img src={Border} alt="border bottom" />
         </div>
         <div className="pt-4 md:pt-6 lg:pt-8 xl:pt-10">
-          <p className="text-center font-normal text-[17px] f-f-g-m text-neutral-500 leading-[1.7]">
+          <p className="text-center font-normal text-sm md:text-[17px] f-f-g-m text-neutral-500 leading-[1.7]">
             Leo vel fringilla est ullamcorper. Viverra ipsum nunc aliquet
             bibendum enim. Suscipit tellus mauris a diam maecenas sed. Rhoncus
             est pellentesque elit ullamcorper dignissim cras tincidunt lobortis.

@@ -10,9 +10,9 @@ export default function Form() {
 
   return (
     <div className="bg-white shadow-class rounded-xl z-50 w-full">
-      <div className="px-4 py-3 md:p-6 2xl:p-9 ">
-        <div className="flex flex-col gap-4 2xl:gap-6">
-          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-lg 2xl:text-2xl font-semibold flex-col md:flex-row">
+      <div className="p-6 2xl:p-9 ">
+        <div className="flex flex-col gap-2 md:gap-4 2xl:gap-6">
+          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-md md:text-lg 2xl:text-2xl font-semibold flex-col md:flex-row">
             <p className="whitespace-nowrap leading-none">I am a</p>
             <input
               type="text"
@@ -23,7 +23,7 @@ export default function Form() {
             />
           </div>
 
-          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-lg 2xl:text-2xl font-semibold flex-col md:flex-row">
+          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-md md:text-lg 2xl:text-2xl font-semibold flex-col md:flex-row">
             <p className="whitespace-nowrap leading-none">Looking for</p>
             <input
               type="text"
@@ -34,7 +34,7 @@ export default function Form() {
             />
           </div>
 
-          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-lg 2xl:text-2xl font-semibold md:max-w-[400px] w-full flex-col md:flex-row">
+          <div className="flex justify-between gap-3 md:gap-6 md:items-center text-md md:text-lg 2xl:text-2xl font-semibold md:max-w-[400px] w-full flex-col md:flex-row">
             <p className="whitespace-nowrap leading-none">In zip code</p>
             <input
               type="text"
