@@ -113,94 +113,105 @@ const Contacts = () => {
     <div className="flex main-container h-[calc(100vh-147px)] md:h-[calc(100vh-148px)] justify-center  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
       <div className="flex w-full flex-col py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
-          <div className="text-3xl">Active Conrtracts</div>
+          <div className="text-3xl">My Conrtracts</div>
         </div>
 
         {contracts?.length > 0 ? (
-          <div className="grid grid-cols-1 justify-between w-full py-10 gap-9 flex-wrap">
+          <div className=" justify-between w-full py-10 gap-9 flex-wrap">
             {contracts?.map((item, index) => (
-              <div className="border-neutral-400 shadow-class border h-fit w-full    rounded-xl">
+              <div className="shadow-class  h-fit w-full max-w-[400px]   rounded-xl">
                 {" "}
-                <div className="flex justify-start flex-col md:flex-row w-full ">
+                <div className="flex justify-start flex-col w-full ">
                   <div className="flex flex-col items-start border-b md:border-b-0 md:border-r w-full p-5 lg::p-8">
-                    <div className="flex items-center gap-3">
-                      <p className="font-bold text-[#2676BC] text-xl">
-                        {" "}
-                        Contract #: {item.id}
-                      </p>
-                      <div className="  px-6 bg-blue-50 !text-blue-600 border-blue-600 capitalize border rounded-full py-[2px] text-sm">
-                        {item.business.status}
-                      </div>
-                    </div>
-                    <div className="  flex flex-col ">
-                      <div className="py-2 pt-8 text-xl font-bold">
-                        Contract Details:
-                      </div>
-                      <div className="flex text-neutral-700 flex-row gap-3 pt-2">
-                        <div className="font-semibold">Location:</div>
-                        <p className="">{item.location}</p>
-                      </div>
-                      <div className="flex text-neutral-700 flex-row gap-3 pt-4">
-                        <div className="font-semibold">Date:</div>
-                        <div className="flex">
-                          <p className="">
-                            {dayjs(item.start_date).format("DD/MM/YYYY")}
-                          </p>
-                          <span className="px-2">-</span>
-                          <p className="">
-                            {dayjs(item.end_date).format("DD/MM/YYYY")}
-                          </p>
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="flex items-center text-neutral-700 bg-slate-100 px-2 flex-row gap-3 py-4 w-full">
+                        <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#2563eb"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-calendar-days"
+                        >
+                          <rect
+                            width="18"
+                            height="18"
+                            x="3"
+                            y="4"
+                            rx="2"
+                            ry="2"
+                          />
+                          <line x1="16" x2="16" y1="2" y2="6" />
+                          <line x1="8" x2="8" y1="2" y2="6" />
+                          <line x1="3" x2="21" y1="10" y2="10" />
+                          <path d="M8 14h.01" />
+                          <path d="M12 14h.01" />
+                          <path d="M16 14h.01" />
+                          <path d="M8 18h.01" />
+                          <path d="M12 18h.01" />
+                          <path d="M16 18h.01" />
+                        </svg>
+                        </div>
+                        <div className=" flex flex-col">
+                          <span className=" text-neutral-600">Date</span>
+                          <div className="flex">
+                            <p className="font-semibold">
+                              {dayjs(item.start_date, {
+                                format: "DD/MM/YYYY",
+                              }).format("MMM. DD, YYYY")}
+                            </p>
+                            <span className="px-2">-</span>
+                            <p className="font-semibold">
+                              {dayjs(item.end_date, {
+                                format: "DD/MM/YYYY",
+                              }).format("MMM. DD, YYYY")}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div className="pt-4 text-neutral-700 flex gap-2">
-                        {" "}
-                        <div className="font-semibold">Description:</div>
-                        {item.description}
-                      </div>
-                    </div>
-
-                    <div className="pt-4 flex flex-col gap-2">
-                      {" "}
-                      <div className="text-xl font-bold">Contract Details:</div>
-                      {item.additional_terms}
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 w-full flex-col p-5 lg:p-8 ">
-                    <div className="font-bold text-[#2676BC] text-xl">
+                  <div className="flex items-start gap-4 w-full flex-col px-5 pb-8 lg:px-8 ">
+                    <div className="font-bold text-neutral-800 text-xl">
                       {/* <GoPrimitiveDot className='online-icon'/> */}
-                      Contract Between:
+                      Between:
                     </div>
-                    <div className="flex items-center pt-3 gap-4">
-                      <div className=" !rounded-full overflow-hidden w-14 h-14">
+                    <div className="flex items-center  gap-4">
+                      <div className=" !rounded-full overflow-hidden w-10 h-10">
                         {item.business?.photo_url != null ? (
                           <img src={item.business?.photo_url} />
                         ) : (
-                          <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
+                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-green-500 text-white">
                             {item?.business?.firstname.charAt(0)}
                           </div>
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
-                        <p className="font-bold text-xl capitalize">
+                        <p className="font-semibold text-md text-neutral-600 capitalize">
                           {item?.business?.firstname} {item?.business?.lastname}
                         </p>
                         <p className="">{item?.business?.about_me}</p>
                       </div>
                     </div>
                     <div className="flex items-center pt-3 gap-4">
-                      <div className=" !rounded-full overflow-hidden w-14 h-14">
+                      <div className=" !rounded-full overflow-hidden w-10 h-10">
                         {item.pro?.photo_url != null ? (
                           <img src={item.pro?.photo_url} />
                         ) : (
-                          <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
+                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-blue-500 text-white">
                             {item?.pro?.firstname.charAt(0)}
                           </div>
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
-                        <p className="font-bold text-xl capitalize">
+                        <p className="font-semibold text-md text-neutral-600 capitalize">
                           {item?.pro?.firstname} {item?.pro?.lastname}
                         </p>
                         <p className="">
@@ -208,32 +219,41 @@ const Contacts = () => {
                         </p>
                       </div>
                     </div>
-                    {user.type == "pro" && item.pro_acceptance != null && (
-                      <div className="flex w-full justify-end">
-                        <div
-                          className="w-full md:w-auto"
-                          onClick={() => handleApprove(item)}
-                        >
-                          <CommonPrimaryButton
-                            loading={false}
-                            text={"Close Contract"}
-                          />
-                        </div>
+                    <div className="flex w-full justify-between pt-2  border-t-2 items-center">
+                      <div className=" flex font-bold text-md   text-blue-600  text-sm">
+                        Status:{" "}
+                        <span className="underline  font-normal capitalize text-green-500">
+                          {item.business.status}
+                        </span>
                       </div>
-                    )}
-                    {user.type == "bus" && item.bus_acceptance != null && (
-                      <div className="flex w-full justify-end">
-                        <div
-                          className="w-full md:w-auto"
-                          onClick={() => handleApprove(item)}
-                        >
-                          <CommonPrimaryButton
-                            loading={false}
-                            text={"Close Contract"}
-                          />
+
+                      {user.type == "pro" && item.pro_acceptance != null && (
+                        <div className="flex w-full justify-end pt-2">
+                          <div
+                            className="w-full md:w-auto"
+                            onClick={() => handleApprove(item)}
+                          >
+                            <CommonPrimaryButton
+                              loading={false}
+                              text={"Close Contract"}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                      {user.type == "bus" && item.bus_acceptance != null && (
+                        <div className="flex w-full justify-end pt-2">
+                          <div
+                            className="w-full md:w-auto"
+                            onClick={() => handleApprove(item)}
+                          >
+                            <CommonPrimaryButton
+                              loading={false}
+                              text={"Close Contract"}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
