@@ -17,7 +17,6 @@ body {
   font-family: "GilroySemibold";
   src: local("GilroySemibold"),
     url("./fonts/Gilroy/Gilroy-Semibold.ttf") format("truetype");
-  font-weight: bold;
 }
 
 @font-face {
@@ -38,7 +37,6 @@ body {
   font-family: "NunitoRegular";
   src: local("NunitoRegular"),
     url("./fonts/Nunito/NunitoSans-Regular.ttf") format("truetype");
-  font-weight: bold;
 }
 
 @font-face {
