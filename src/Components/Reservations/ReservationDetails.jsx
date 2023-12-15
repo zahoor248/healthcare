@@ -171,40 +171,43 @@ const ReservationDetails = () => {
                   {/* reservation offer section  */}
                   <div className="w-[60%]">
                     {reservationDetails?.offered_by_me ? (
-                      <div className="flex items-start gap-4 flex-col w-full">
-                        <div className="font-semibold">
-                          {reservationDetails?.pay_rate}$ /{" "}
-                          {reservationDetails?.pay_duration} offer to :
-                        </div>
-                        <div className="flex items-center pt-3 gap-4">
-                          <div className=" !rounded-full overflow-hidden w-14 h-14">
-                            {reservationDetails?.offered_to?.photo_url !=
-                            null ? (
-                              <img
-                                src={reservationDetails?.offered_to?.photo_url}
-                              />
-                            ) : (
-                              <div className="w-14 h-14 flex justify-center capitalize items-center bg-slate-700 text-white">
-                                <p className="">
-                                  {reservationDetails?.offered_to?.about_me}
-                                </p>
-                                <p className="">
-                                  {reservationDetails?.offered_to?.about_me}
-                                </p>
-                                {reservationDetails.offered_to?.firstname.charAt(
-                                  0
-                                )}
-                              </div>
-                            )}
+                      <>
+                        <div className="flex items-start gap-4 flex-col w-full">
+                          <div className=" capitalize font-bold text-lg text-neutral-600">
+                            ${reservationDetails?.pay_rate}{" "}
+                            {reservationDetails?.pay_duration} offer to:
+                            {/* <GoPrimitiveDot className='online-icon'/> */}
                           </div>
-                          <div className="">
-                            <p className="font-bold text-xl capitalize">
-                              {reservationDetails.offered_to?.firstname}{" "}
-                              {reservationDetails.offered_to?.lastname}
-                            </p>
+
+                          <div className="flex items-center gap-4">
+                            <div className=" !rounded-full overflow-hidden w-10 h-10">
+                              {reservationDetails.offered_to?.photo_url !=
+                              null ? (
+                                <img
+                                  src={reservationDetails.offered_to?.photo_url}
+                                />
+                              ) : (
+                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-green-500 text-white">
+                                  {reservationDetails?.offered_to?.firstname.charAt(
+                                    0
+                                  )}
+                                </div>
+                              )}
+                              {/* <GoPrimitiveDot className='online-icon'/> */}
+                            </div>
+                            <div className="">
+                              <p className="font-semibold text-base text-neutral-600 capitalize">
+                                {reservationDetails?.offered_to?.firstname}{" "}
+                                {reservationDetails?.offered_to?.lastname}
+                              </p>
+                              <p className="text-sm pt-2">
+                                {reservationDetails?.offered_to?.about_me ||
+                                  "N/A"}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                       </>
                     ) : (
                       <div className="flex items-start gap-4 flex-col w-full">
                         <div className=" capitalize font-bold text-lg text-neutral-600">
@@ -283,10 +286,14 @@ const ReservationDetails = () => {
                     )}
                 </div>
               </div>
-              <div className="w-full border-t my-10" />
-              <div className="text-3xl font-semibold text-center text-neutral-800">
-                Offer History
-              </div>
+              {reservationDetails?.counterOffers.length > 0 && (
+                <>
+                  <div className="w-full border-t my-10" />
+                  <div className="text-3xl font-semibold text-center text-neutral-800">
+                    Offer History
+                  </div>
+                </>
+              )}
               {reservationDetails?.counterOffers?.map((item, index) => (
                 <div className="flex justify-start w-full flex-col ">
                   <div className="flex  flex-row gap-6 mt-6">

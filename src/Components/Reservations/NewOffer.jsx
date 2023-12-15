@@ -98,6 +98,35 @@ export default function NewOffer() {
   const handleEndDateChange = (date) => {
     setEndDate(dayjs(date));
   };
+  function DateIcon(props) {
+    return (
+      <div className="px-2 py-1.5 rounded-md bg-blue-700 text-white">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-calendar-days"
+        >
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+          <line x1="16" x2="16" y1="2" y2="6" />
+          <line x1="8" x2="8" y1="2" y2="6" />
+          <line x1="3" x2="21" y1="10" y2="10" />
+          <path d="M8 14h.01" />
+          <path d="M12 14h.01" />
+          <path d="M16 14h.01" />
+          <path d="M8 18h.01" />
+          <path d="M12 18h.01" />
+          <path d="M16 18h.01" />
+        </svg>
+      </div>
+    );
+  }
   return (
     <>
       {loading ? (
@@ -135,10 +164,49 @@ export default function NewOffer() {
             <div className="text-2xl md:text-3xl">Make a Counter Offer</div>
           </div>
           <div className="">
-            <div className="md:w-[80vw] bg-white px-10 py-8 rounded-md mx-auto mt-4 md:mt-10 flex flex-col gap-3 md:gap-5  ">
-              <div className="flex gap-6">
+            <div className="xl:w-[60vw] bg-white px-10  rounded-md mx-auto mt-4 md:mt-10 flex flex-col gap-3 md:gap-5  ">
+              <div className="flex gap-12 lg:gap-12 mb-6">
+                <div className="flex items-center gap-5 border p-4 w-full rounded-lg">
+                  <span className="text-blue-600">Offer by:</span>
+                  <div className="flex items-center gap-4">
+                    <div className=" !rounded-full overflow-hidden w-8 h-8">
+                      <div className="w-8 h-8 flex justify-center items-center capitalize  bg-green-500 text-white">
+                        {openAcceptoffer?.offered_by?.firstname.charAt(0)}
+                      </div>
+
+                      {/* <GoPrimitiveDot className='online-icon'/> */}
+                    </div>
+                    <div className="">
+                      <p className="font-semibold text-base text-neutral-800 capitalize">
+                        {openAcceptoffer?.offered_by?.firstname}{" "}
+                        {openAcceptoffer?.offered_by?.lastname}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-5 border p-4 w-full rounded-lg">
+                  <span className="text-blue-600">Offer to:</span>
+                  <div className="flex items-center gap-4">
+                    <div className=" !rounded-full overflow-hidden w-8 h-8">
+                      <div className="w-8 h-8 flex justify-center items-center capitalize  bg-blue-500 text-white">
+                        {openAcceptoffer?.offered_to?.firstname?.charAt(0)}
+                      </div>
+
+                      {/* <GoPrimitiveDot className='online-icon'/> */}
+                    </div>
+                    <div className="">
+                      <p className="font-semibold text-base text-neutral-800 capitalize">
+                        {openAcceptoffer?.offered_to?.firstname}{" "}
+                        {openAcceptoffer?.offered_to?.lastname}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-12 lg:gap-24">
                 <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     Start Date
                   </p>
 
@@ -157,7 +225,13 @@ export default function NewOffer() {
                         }}
                       >
                         <DatePicker
-                          sx={{ width: "100%" }}
+                        sx={{
+                          width: "100%",
+                          "& .MuiInputBase-input": {
+                            padding: "12px",
+                            // Your other styles for the Paper component
+                          },
+                        }}
                           onChange={handleStartDateChange}
                           defaultValue={startDate}
                           value={startDate}
@@ -166,13 +240,16 @@ export default function NewOffer() {
                               clearable: true,
                             },
                           }}
+                          slots={{
+                            openPickerIcon: DateIcon,
+                          }}
                         />
                       </Box>
                     </LocalizationProvider>
                   </div>
                 </div>
                 <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     End Date
                   </p>
                   <div className="relative w-full">
@@ -190,7 +267,13 @@ export default function NewOffer() {
                         }}
                       >
                         <DatePicker
-                          sx={{ width: "100%" }}
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputBase-input": {
+                              padding: "12px",
+                              // Your other styles for the Paper component
+                            },
+                          }}
                           onChange={handleEndDateChange}
                           defaultValue={endDate}
                           value={endDate}
@@ -199,29 +282,39 @@ export default function NewOffer() {
                               clearable: true,
                             },
                           }}
+                          Props={{
+                            sx: {
+                              ".MuiPaper-root": {
+                                padding: "6px",
+                              },
+                            },
+                          }}
+                          slots={{
+                            openPickerIcon: DateIcon,
+                          }}
                         />
                       </Box>
                     </LocalizationProvider>
                   </div>
                 </div>
               </div>
-              <div className="w-full flex flex-col gap-2">
-                <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
-                  Location
-                </p>
-                <div className="relative w-full">
-                  <input
-                    onChange={(e) => setLocation(e.target.value)}
-                    value={counterLocation}
-                    placeholder="Select Location"
-                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                  />
+              <div className="flex pt-4 justify-between gap-12 lg:gap-24">
+                <div className=" flex flex-col gap-2 w-full">
+                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
+                    Location
+                  </p>
+                  <div className="relative w-full">
+                    <input
+                      onChange={(e) => setLocation(e.target.value)}
+                      value={counterLocation}
+                      placeholder="Select Location"
+                      className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-8 flex-col">
-                <div className="flex gap-2 ">
+                <div className="flex gap-2 w-full ">
                   <div className="w-full flex flex-col gap-2">
-                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                       Rate
                     </p>
                     <div className="relative w-full">
@@ -230,20 +323,20 @@ export default function NewOffer() {
                         value={price}
                         placeholder="Enter Value"
                         type="number"
-                        className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                        className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
                       />
                     </div>
                   </div>
                   /{" "}
                   <div className="w-full flex flex-col gap-2">
-                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                       Rate
                     </p>
-                    <div className="relative w-full">
+                    <div className="relative w-full text-neutral-500">
                       <select
                         value={payDuration}
                         onChange={(e) => setPayDuration(e.target.value)}
-                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
+                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-[11px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
                       >
                         <option value={"hourly"}>Hourly Rate</option>
                         <option value={"daily"}>Daily Rate</option>
@@ -252,9 +345,11 @@ export default function NewOffer() {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="flex gap-8 pt-4 flex-col">
                 <div className="w-full flex flex-col gap-2">
                   <div>
-                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                    <p className="font-semibold pb-5 text-base/none lg:text-xl/none text-neutral-800">
                       Description
                     </p>
                     <div className="relative w-full">
@@ -262,15 +357,16 @@ export default function NewOffer() {
                         onChange={(e) => setDescription(e.target.value)}
                         value={description}
                         placeholder="Describe your self"
-                        className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                        className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
                       />
                     </div>
                   </div>
-                  <div className="w-auto flex justify-end items-end mt-4">
+                  <div className="w-auto flex justify-center items-center mt-4">
                     <CommonPrimaryButton
                       onClick={() => reserveUser()}
                       loading={button_loading}
-                      text={"   Submit Offer"}
+                      text={"   Send Offer"}
+                      classes="px-20"
                     />
                   </div>
                 </div>

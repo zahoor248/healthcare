@@ -124,41 +124,42 @@ const Contacts = () => {
                 <div className="flex justify-start flex-col w-full ">
                   <div className="flex flex-col items-start border-b md:border-b-0 md:border-r w-full p-5 lg::p-8">
                     <div className="flex items-center gap-3 w-full">
-                      <div className="flex items-center text-neutral-700 bg-slate-100 px-2 flex-row gap-3 py-4 w-full">
+                      {/* Date here  */}
+                      <div className="flex items-center text-neutral-700 bg-blue-50 px-4 rounded flex-row gap-3 py-4 w-full">
                         <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#2563eb"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="lucide lucide-calendar-days"
-                        >
-                          <rect
-                            width="18"
-                            height="18"
-                            x="3"
-                            y="4"
-                            rx="2"
-                            ry="2"
-                          />
-                          <line x1="16" x2="16" y1="2" y2="6" />
-                          <line x1="8" x2="8" y1="2" y2="6" />
-                          <line x1="3" x2="21" y1="10" y2="10" />
-                          <path d="M8 14h.01" />
-                          <path d="M12 14h.01" />
-                          <path d="M16 14h.01" />
-                          <path d="M8 18h.01" />
-                          <path d="M12 18h.01" />
-                          <path d="M16 18h.01" />
-                        </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#2563eb"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-calendar-days"
+                          >
+                            <rect
+                              width="18"
+                              height="18"
+                              x="3"
+                              y="4"
+                              rx="2"
+                              ry="2"
+                            />
+                            <line x1="16" x2="16" y1="2" y2="6" />
+                            <line x1="8" x2="8" y1="2" y2="6" />
+                            <line x1="3" x2="21" y1="10" y2="10" />
+                            <path d="M8 14h.01" />
+                            <path d="M12 14h.01" />
+                            <path d="M16 14h.01" />
+                            <path d="M8 18h.01" />
+                            <path d="M12 18h.01" />
+                            <path d="M16 18h.01" />
+                          </svg>
                         </div>
                         <div className=" flex flex-col">
-                          <span className=" text-neutral-600">Date</span>
+                          <span className=" text-neutral-600 pb-1">Date</span>
                           <div className="flex">
                             <p className="font-semibold">
                               {dayjs(item.start_date, {
@@ -220,9 +221,11 @@ const Contacts = () => {
                       </div>
                     </div>
                     <div className="flex w-full justify-between pt-2  border-t-2 items-center">
-                      <div className=" flex font-bold text-md   text-blue-600  text-sm">
-                        Status:{" "}
-                        <span className="underline  font-normal capitalize text-green-500">
+                      <div className=" flex items-center ">
+                        <span className="font-bold text-md   text-blue-600 ">
+                          Status:{" "}
+                        </span>
+                        <span className="underline px-1 f-f-g-m capitalize text-green-500">
                           {item.business.status}
                         </span>
                       </div>
@@ -254,6 +257,32 @@ const Contacts = () => {
                         </div>
                       )}
                     </div>
+                    <div className="bg-slate-50 w-full rounded px-4 ">
+                      <div className="font-bold text-md flex items-center gap-3">
+                        Feedback:{" "}
+                        {[...Array(5)].map((_, index) => (
+                          <span
+                            key={index}
+                            role="button"
+                            tabIndex={0}
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "30px",
+                              color:
+                                index + 1 <= item.reviews[0]?.rating
+                                  ? "#ffd700"
+                                  : "#c2c2c2",
+                            }}
+                          >
+                            &#9733; {/* Unicode character for a solid star */}
+                          </span>
+                        ))}
+                      </div>
+
+                      <p className="f-f-g-m text-neutral-600 pb-2 capitalize">
+                        {item.reviews[0]?.feedback}
+                      </p>
+                    </div>{" "}
                   </div>
                 </div>
               </div>
@@ -268,7 +297,15 @@ const Contacts = () => {
       </div>
       {/* review model here  */}
       {review.toggle && (
-        <div className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"></div>
+        <div
+          onClick={() =>
+            setReview({
+              ...review,
+              toggle: !review.toggle,
+            })
+          }
+          className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"
+        ></div>
       )}
       {review.toggle && (
         <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
