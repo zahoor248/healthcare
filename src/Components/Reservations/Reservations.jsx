@@ -41,7 +41,7 @@ const Reservations = () => {
         {reservations?.length > 0 ? (
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-8">
             {reservations?.map((item, index) => (
-              <div className=" h-fit w-full  shadow-class rounded-lg overflow-hidden p-6 ">
+              <div className=" h-full w-full  shadow-class rounded-lg overflow-hidden p-6 ">
                 {" "}
                 <div className="flex flex-col w-full justify-start ">
                   <div className="flex flex-col items-center gap-3 w-full">
