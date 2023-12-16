@@ -44,8 +44,8 @@ const Reservations = () => {
               <div className=" h-full w-full  shadow-class rounded-lg overflow-hidden p-6 ">
                 {" "}
                 <div className="flex flex-col w-full justify-start ">
-                  <div className="flex flex-col items-center gap-3 w-full">
-                    <div className="flex items-center text-neutral-700 bg-blue-50 rounded-sm px-4 flex-row gap-3 py-4 w-full">
+                  <div className="flex flex-col items-center gap-4 w-full">
+                    <div className="flex items-center text-neutral-700 bg-[#EFF4F8] rounded-sm px-4 flex-row gap-3 py-4 w-full">
                       <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -79,17 +79,17 @@ const Reservations = () => {
                         </svg>
                       </div>
                       <div className=" flex flex-col">
-                        <span className=" text-neutral-500 font-normal">
+                        <span className=" text-neutral-500 font-normal text-sm">
                           Date
                         </span>
                         <div className="flex">
-                          <p className="font-semibold">
+                          <p className="font-normal text-base text-[#10274F]">
                             {dayjs(item.start_date, {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
                           </p>
-                          <span className="px-2">-</span>
-                          <p className="font-semibold">
+                          <span className="font-normal text-base text-[#10274F] px-1.5">-</span>
+                          <p className="font-normal text-base text-[#10274F]">
                             {dayjs(item.end_date, {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
@@ -97,7 +97,7 @@ const Reservations = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex justify-start w-full flex-col gap-1 pt-4">
+                    <div className="flex justify-start w-full flex-col gap-1">
                       <div className="font-semibold flex items-center gap-1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -115,18 +115,18 @@ const Reservations = () => {
                           <circle cx="12" cy="10" r="2" fill="#ffffff" />
                         </svg>
 
-                        <span className="font-medium text-neutral-500">
+                        <span className="font-normal text-sm text-[#828487]">
                           Location:
                         </span>
                       </div>
-                      <p className="whitespace-pre-wrap pl-1 font-semibold text-blue-700 capitalize">
+                      <p className="whitespace-pre-wrap pl-1 font-normal text-base text-[#0060FF] capitalize">
                         {item?.location}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start w-full gap-4 flex-col pt-8 ">
-                    <div className=" capitalize font-bold text-lg text-neutral-600">
+                  <div className="flex items-start w-full gap-4 flex-col pt-5">
+                    <div className=" capitalize font-bold text-xl text-[#10274F]">
                       ${item?.pay_rate} {item?.pay_duration} offer to:
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                     </div>
@@ -142,20 +142,20 @@ const Reservations = () => {
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="">
-                        <p className="font-semibold text-base text-neutral-600 capitalize">
+                        <p className="font-medium text-base text-[#696F7A] capitalize">
                           {item?.offered_to?.firstname}{" "}
                           {item?.offered_to?.lastname}
                         </p>
-                        <p className="text-sm pt-2">
+                        <p className="text-sm font-medium text-[#828487] pt-2">
                           {item?.offered_to?.about_me || "N/A"}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex justify-between border-t items-end pt-3 mt-5 w-full">
+                  <div className="flex justify-between border-t items-end pt-5 mt-5 w-full">
                   <div className="w-full">
-                    <div className="font-semibold">
+                    <div className=" capitalize font-bold text-xl text-[#10274F]">
                       Offere by:
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                     </div>
@@ -171,7 +171,7 @@ const Reservations = () => {
                           )}
                           {/* <GoPrimitiveDot className='online-icon'/> */}
                         </div>
-                          <p className="font-semibold text-base text-neutral-600 capitalize">
+                          <p className="font-medium text-base text-[#696F7A] capitalize">
                             {item?.offered_by?.firstname}{" "}
                             {item?.offered_by?.lastname}
                           </p>
