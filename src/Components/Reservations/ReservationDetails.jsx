@@ -78,18 +78,25 @@ const ReservationDetails = () => {
           <div className="grid grid-cols-1 justify-between w-full py-10 gap-9 flex-wrap">
             <div className="border-neutral-900  h-fit w-full flex  flex-col  hover:shadow-sm  rounded-xl">
               {" "}
-              <div className="font-bold text-[#2676BC] relative w-fit text-xl flex items-center gap-1">
+            
+              <div className="font-semibold text-[#2676BC] relative w-fit text-xl flex items-center gap-1">
                 {" "}
-                Current Offers:
+                Current Offer:
                 {/* <div className="  absolute -right-28 px-6 bg-blue-50 !text-blue-600 border-blue-600 capitalize border rounded-full py-[2px] text-sm">
                   {reservationDetails.status}
                 </div> */}
               </div>
-              <div className="flex justify-start shadow-class rounded-xl p-6  mt-6 flex-col ">
+              <div className="flex justify-start relative shadow-class rounded-xl p-6  mt-6 flex-col ">
+              <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                        <p className="font-bold  text-neutral-700 text-lg">
+                          Status:
+                        </p>{" "}
+                        {reservationDetails.status}
+                      </div>
                 <div className="flex  gap-12 w-full">
                   <div className="flex flex-col items-start gap-4 w-[40%] ">
                     {/* Date here  */}
-                    <div className="flex items-center text-neutral-700 bg-blue-50 px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                    <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
                       <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +177,7 @@ const ReservationDetails = () => {
                     {reservationDetails?.offered_by_me ? (
                       <>
                         <div className="flex items-start gap-4 flex-col w-full">
-                          <div className=" capitalize font-bold text-lg text-neutral-600">
+                          <div className=" capitalize font-semibold text-xl text-neutral-600">
                             ${reservationDetails?.pay_rate}{" "}
                             {reservationDetails?.pay_duration} offer to:
                             {/* <GoPrimitiveDot className='online-icon'/> */}
@@ -193,7 +200,7 @@ const ReservationDetails = () => {
                               {/* <GoPrimitiveDot className='online-icon'/> */}
                             </div>
                             <div className="">
-                              <p className="font-semibold text-base text-neutral-600 capitalize">
+                              <p className="font-medium text-base text-neutral-500 capitalize">
                                 {reservationDetails?.offered_to?.firstname}{" "}
                                 {reservationDetails?.offered_to?.lastname}
                               </p>
