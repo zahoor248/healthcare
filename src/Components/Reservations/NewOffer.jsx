@@ -66,8 +66,8 @@ export default function NewOffer() {
   const reserveUser = () => {
     setButtonLoading(true);
     let data = {
-      start_date: dayjs(startDate).format("DD-MM-YYYY"),
-      end_date: dayjs(endDate).format("DD-MM-YYYY"),
+      start_date: dayjs(startDate).format("YYYY-MM-DD"),
+      end_date: dayjs(endDate).format("YYYY-MM-DD"),
       pay_rate: price,
       pay_duration: payDuration?.toLowerCase(),
       location: counterLocation,

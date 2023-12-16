@@ -300,6 +300,7 @@ const ReservationDetails = () => {
                     <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
                       {item?.offered_to?.firstname.charAt(0)}
                     </div>{" "}
+                    
                     <div className="flex w-[85%] relative flex-row gap-12 items-start p-7 shadow-class rounded-lg ">
                       <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
                         <p className="font-bold  text-neutral-700 text-lg">
