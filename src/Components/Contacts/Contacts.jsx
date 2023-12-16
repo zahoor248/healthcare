@@ -9,6 +9,35 @@ import { Link, useLocation } from "react-router-dom";
 import StarRating from "./RatingStarts";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 
+import { FaStar } from "react-icons/fa";
+import Toast from "../AppLoader";
+
+const Rating = ({ rating, onRatingPress }) => {
+  const stars = [];
+  const maxRating = 5; // Change this to set the maximum rating
+
+  for (let i = 1; i <= maxRating; i++) {
+    const iconColor = i <= rating ? "gold" : "#9E9E9E";
+    // Use 'gold' for selected stars and 'gray' for unselected stars
+
+    // Use 'star' for filled and 'star-o' for empty stars
+    stars.push(
+      <div key={i} onClick={() => onRatingPress(i)}>
+        <FaStar color={iconColor} />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="text-2xl gap-2.5"
+      style={{ display: "flex", flexDirection: "row", marginVertical: 5 }}
+    >
+      {stars}
+    </div>
+  );
+};
+
 const Contacts = () => {
   const [loading, setLoading] = useState(false);
   const contracts = useSelector((state) => state.contracts);
@@ -17,11 +46,18 @@ const Contacts = () => {
   const [button_loading, setButtonLoading] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
+  const [feedback, setFeedback] = useState("");
   const [review, setReview] = useState({
     toggle: false,
     contract_id: "",
     user_id: "",
     item: "",
+  });
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
   });
 
   const location = useLocation();
@@ -45,83 +81,140 @@ const Contacts = () => {
   }, [location]);
 
   const handleApprove = (item) => {
-    if (user.type == "pro") {
-      if (
-        item.reviews &&
-        item.pro_acceptance &&
-        !item.reviews.some((review) => review.reviewer_id === user.id)
-      ) {
-        setReview({
-          ...review,
-          toggle: true,
-          contract_id: item.id,
-          user_id: user.type === "bus" ? item.bus_id : item.pro_id,
-          item: item,
-        });
-      }
-    } else if (user.type == "bus") {
-      if (
-        // item.bus_acceptance &&
-        // !item.reviews.some((review) => review.reviewer_id === user.id)
-        true
-      ) {
-        setReview({
-          ...review,
-          toggle: true,
-          contract_id: item.id,
-          user_id: user.type === "pro" ? item.bus_id : item.pro_id,
-          item: item,
-        });
-      }
-    }
-    console.log(item);
+    setLoading(true);
+    handleAPIRequest("POST", `approve-contract/${item.uuid}`, null)
+      .then((res) => {
+        handleAPIRequest("get", "contract", null)
+          .then((response) => {
+            if (response.data) {
+              dispatch(setContracts(response.data.contracts)); // Update Redux store with empty array
+
+              setShowToast({
+                ...showToast,
+                toggle: true,
+                status: "info",
+                message: "Contract has been approved",
+                lable: "Contract Approved",
+              });
+
+              setTimeout(() => {
+                setShowToast({
+                  ...showToast,
+                  toggle: false,
+                  status: "info",
+                  message: "Contract has been approved",
+                  lable: "Contract Approved",
+                });
+              }, 2000);
+            } else {
+              dispatch(setContracts(response));
+            }
+
+            setLoading(false);
+          })
+          .catch((error) => {
+            setLoading(false);
+            setShowToast({
+              ...showToast,
+              toggle: true,
+              status: "error",
+              message: "Please try again later",
+              lable: "Server Error",
+            });
+
+            setTimeout(() => {
+              setShowToast({
+                ...showToast,
+                toggle: false,
+                status: "error",
+                message: "Please try again later",
+                lable: "Server Error",
+              });
+            }, 2000);
+          });
+      })
+      .catch((error) => {});
   };
 
-  const handleReviewSubmit = () => {
-    setButtonLoading(true);
-    // Implement your logic to submit the review and rating
-    console.log("Submitting Review:", reviewText);
-    console.log("Rating:", rating);
+  const handleSubmit = (contract_id, user_id, rating, reviewText) => {
+    // You can implement your submission logic here
 
+    console.log(contract_id, user_id, rating, reviewText);
+    // setLoading(true);
     handleAPIRequest("POST", "review", {
-      contract_id: review.contract_id,
-      user_id: review.user_id,
+      contract_id: contract_id,
+      user_id: user_id,
       rating: rating,
       feedback: reviewText,
     })
       .then((response) => {
-        setButtonLoading(false);
+        console.log(response, "TEstigngngngn");
+        setLoading(false);
+        // navigation.goBack();
 
-        handleAPIRequest("POST", `approve-contract/${review.item.uuid}`, null)
-          .then((response) => {})
-          .catch((error) => {});
-        setReview({
-          ...review,
-          toggle: false,
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "info",
+          message: "Thanks for your feedback",
+          lable: "Review Added",
         });
+
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "info",
+            message: "Thanks for your feedback",
+            lable: "Review Added",
+          });
+        }, 2000);
+
+        handleAPIRequest("get", "contract", null)
+          .then((response) => {
+            if (response.data) {
+              dispatch(setContracts(response.data.contracts)); // Update Redux store with empty array
+            } else {
+              dispatch(setContracts(response));
+            }
+
+            setLoading(false);
+          })
+          .catch((error) => {
+            setLoading(false);
+          });
+
+        setRating(0);
+        setReviewText("");
+        // navigation.goBack();
       })
       .catch((error) => {
-        setButtonLoading(false);
-        setReview({
-          ...review,
-          toggle: false,
-        });
+        setLoading(false);
+        console.log(error);
+        // showMessage({
+        //   message: `Alert`,
+        //   description: 'Something went wrong',
+        //   type: 'danger',
+        // });
       });
-    // Reset state or close the review form if needed
+  };
+
+  const handleRatingPress = (newRating) => {
+    setRating(newRating); // Update the rating when a star is pressed
   };
   return (
     <div className="flex main-container  overflow-auto w-full">
       <div className="flex w-full flex-col py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
-          <div className="text-3xl">My Contracts</div>
+          <div className="text-3xl font-semibold">My Contracts</div>
         </div>
 
         {contracts?.length > 0 ? (
-          <div className=" justify-between w-full py-10 gap-9 flex-wrap">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-8">
             {contracts?.map((item, index) => (
-              <div className="shadow-class  h-fit w-full max-w-[400px]   rounded-xl">
+              <div className=" h-full w-full  shadow-class rounded-lg overflow-hidden">
                 {" "}
-                <div className="flex justify-start flex-col w-full ">
+                <div className="flex justify-start flex-col w-full h-full ">
                   <div className="flex flex-col items-start border-b md:border-b-0 md:border-r w-full p-5 lg::p-8">
                     <div className="flex items-center gap-3 w-full">
                       {/* Date here  */}
@@ -177,7 +270,7 @@ const Contacts = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 w-full flex-col px-5 pb-8 lg:px-8 ">
+                  <div className="flex items-start gap-4 w-full flex-col px-5 pb-8 lg:px-8 h-full">
                     <div className="font-bold text-neutral-800 text-xl">
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                       Between:
@@ -230,59 +323,187 @@ const Contacts = () => {
                         </span>
                       </div>
 
-                      {user.type == "pro" && item.pro_acceptance != null && (
-                        <div className="flex w-full justify-end pt-2">
-                          <div
-                            className="w-full md:w-auto"
-                            onClick={() => handleApprove(item)}
-                          >
-                            <CommonPrimaryButton
-                              loading={false}
-                              text={"Close Contract"}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {user.type == "bus" && item.bus_acceptance != null && (
-                        <div className="flex w-full justify-end pt-2">
-                          <div
-                            className="w-full md:w-auto"
-                            onClick={() => handleApprove(item)}
-                          >
-                            <CommonPrimaryButton
-                              loading={false}
-                              text={"Close Contract"}
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div className="bg-slate-50 w-full rounded px-4 ">
-                      <div className="font-bold text-md flex items-center gap-3">
-                        Feedback:{" "}
-                        {[...Array(5)].map((_, index) => (
-                          <span
-                            key={index}
-                            role="button"
-                            tabIndex={0}
-                            style={{
-                              cursor: "pointer",
-                              fontSize: "30px",
-                              color:
-                                index + 1 <= item.reviews[0]?.rating
-                                  ? "#ffd700"
-                                  : "#c2c2c2",
-                            }}
-                          >
-                            &#9733; {/* Unicode character for a solid star */}
-                          </span>
-                        ))}
-                      </div>
+                      {user.type == "pro" ? (
+                        <>
+                          {user.type == "pro" && !item.pro_acceptance && (
+                            <div className="flex w-full justify-end pt-2">
+                              <div
+                                className="w-full md:w-auto"
+                                onClick={() => handleApprove(item)}
+                              >
+                                <CommonPrimaryButton
+                                  loading={false}
+                                  text={"Close"}
+                                />
+                              </div>
+                            </div>
+                          )}
 
-                      <p className="f-f-g-m text-neutral-600 pb-2 capitalize">
+                          {user.type === "pro" &&
+                          item.pro_acceptance &&
+                          !item.reviews.some(
+                            (review) => review.reviewer_id === user.id
+                          ) ? (
+                            <div className="flex w-full justify-end pt-2">
+                              <div
+                                className="w-full md:w-auto"
+                                onClick={() => {
+                                  if (rating > 0 && feedback.length > 6) {
+                                    handleSubmit(
+                                      item.id,
+                                      user.type === "pro"
+                                        ? item.bus_id
+                                        : item.pro_id,
+                                      rating,
+                                      feedback
+                                    );
+                                  } else {
+                                    //show Toast for select rating
+                                  }
+                                }}
+                              >
+                                <CommonPrimaryButton
+                                  loading={false}
+                                  text={"Leave Review"}
+                                />
+                              </div>
+                            </div>
+                          ) : null}
+                        </>
+                      ) : null}
+
+                      {user.type == "bus" ? (
+                        <>
+                          {user.type == "bus" && !item.bus_acceptance && (
+                            <div className="flex w-full justify-end pt-2">
+                              <div
+                                className="w-full md:w-auto"
+                                onClick={() => handleApprove(item)}
+                              >
+                                <CommonPrimaryButton
+                                  loading={false}
+                                  text={"Close"}
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                          {user.type === "bus" &&
+                          item.bus_acceptance &&
+                          !item.reviews.some(
+                            (review) => review.reviewer_id === user.id
+                          ) ? (
+                            <div className="flex w-full justify-end pt-2">
+                              <div
+                                className="w-full md:w-auto"
+                                onClick={() => {
+                                  if (rating > 0 && feedback.length > 6) {
+                                    handleSubmit(
+                                      item.id,
+                                      user.type === "pro"
+                                        ? item.bus_id
+                                        : item.pro_id,
+                                      rating,
+                                      feedback
+                                    );
+                                  } else {
+                                    //show Toast for select rating
+                                  }
+                                }}
+                              >
+                                <CommonPrimaryButton
+                                  loading={false}
+                                  text={"Leave Review"}
+                                />
+                              </div>
+                            </div>
+                          ) : null}
+                        </>
+                      ) : null}
+                    </div>
+
+                    {user.type === "bus" &&
+                    item.bus_acceptance &&
+                    !item.reviews.some(
+                      (review) => review.reviewer_id === user.id
+                    ) ? (
+                      <div className="bg-slate-50 w-full rounded px-4 ">
+                        <div className="font-bold text-md flex items-center gap-3">
+                          Feedback:{" "}
+                          <Rating
+                            // maxScale={5}
+                            // style={{marginVertical: 20}}
+                            rating={rating}
+                            onRatingPress={handleRatingPress}
+                          />
+                        </div>
+                        <input
+                          placeholder="Write a feedback..."
+                          value={feedback}
+                          onChange={(e) => setFeedback(e.target.value)}
+                          className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                        />
+                        {/* <p className="f-f-g-m text-neutral-600 pb-2 capitalize">
                         {item.reviews[0]?.feedback}
-                      </p>
-                    </div>{" "}
+                      </p> */}
+                      </div>
+                    ) : null}
+
+                    {user.type === "pro" &&
+                    item.pro_acceptance &&
+                    !item.reviews.some(
+                      (review) => review.reviewer_id === user.id
+                    ) ? (
+                      <div className="bg-slate-50 w-full rounded py-2 px-3 ">
+                        <div className="font-semibold text-lg flex items-center gap-3">
+                          Feedback:{" "}
+                          <Rating
+                            // maxScale={5}
+                            // style={{marginVertical: 20}}
+                            rating={rating}
+                            onRatingPress={handleRatingPress}
+                          />
+                        </div>
+                        <textarea
+                          placeholder="Write a feedback..."
+                          value={feedback}
+                          onChange={(e) => setFeedback(e.target.value)}
+                          className="text-lg placeholder-[#B8C0CB] bg-[#EFEFF8] mt-3 text-neutral-800 py-3 px-4 border border-transparent rounded-md w-full"
+                        ></textarea>
+                        {/* <p className="f-f-g-m text-neutral-600 pb-2 capitalize">
+                        {item.reviews[0]?.feedback}
+                      </p> */}
+                      </div>
+                    ) : null}
+
+                    {item.reviews.some(
+                      (review) => review.reviewer_id === user.id
+                    ) && (
+                      <div className="bg-slate-50 w-full rounded px-3 p-2 h-full">
+                        <div className="font-semibold text-lg flex items-center gap-3">
+                          Feedback:{" "}
+                          <Rating
+                            // maxScale={5}
+                            // style={{marginVertical: 20}}
+                            rating={
+                              item.reviews && item.reviews.length > 0
+                                ? item.reviews.filter(
+                                    (review) => review.reviewer_id !== user.id
+                                  )[0]?.rating || 0
+                                : 0
+                            }
+                            onRatingPress={handleRatingPress}
+                          />
+                        </div>
+                        <p className="f-f-g-m text-neutral-600 pb-2 capitalize h-full">
+                          {item.reviews && item.reviews.length > 0
+                            ? item.reviews.filter(
+                                (review) => review.reviewer_id !== user.id
+                              )[0]?.feedback || ""
+                            : ""}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -307,7 +528,7 @@ const Contacts = () => {
           className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"
         ></div>
       )}
-      {review.toggle && (
+      {/* {review.toggle && (
         <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
           <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
             <div className="text-xl pb-4">{"Add Review here"}</div>
@@ -338,7 +559,9 @@ const Contacts = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
+
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </div>
   );
 };
