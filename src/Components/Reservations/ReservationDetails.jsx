@@ -5,13 +5,14 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setAllReasevation } from "../../Store/Actions/Actions";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 const ReservationDetails = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [reservationDetails, setReservationDetails] = useState([]);
   const [opentoAcceptoffer, setOpenToAcceptOffer] = useState([]);
+  const navigate = useNavigate();
   const [terms, setTerms] = useState({
     toggle: false,
     termsText: "",
@@ -62,6 +63,7 @@ const ReservationDetails = () => {
     })
       .then((response) => {
         setTerms({ ...terms, toggle: false });
+        navigate('/contacts')
       })
       .catch((error) => {});
   };
@@ -307,8 +309,8 @@ const ReservationDetails = () => {
                     )}{" "}
                     {index % 2 === 1 ? (
                       <div
-                        className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
-                          index % 2 === 1 ? "items-start" : "items-end"
+                        className={`flex w-[85%] left-32 relative flex-row gap-12  p-7 shadow-class rounded-lg ${
+                           "items-start"
                         }`}
                       >
                         <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
@@ -436,7 +438,7 @@ const ReservationDetails = () => {
                     ) : (
                       <div
                         className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
-                          index % 2 === 1 ? "items-start" : "items-end"
+                          index % 2 != 1 ? "items-start" : "items-end"
                         }`}
                       >
                         <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
@@ -563,7 +565,7 @@ const ReservationDetails = () => {
                       </div>
                     )}
                     {index % 2 == 1 && (
-                      <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                      <div className="w-10 relative -right-32 rounded-full h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
                         {item?.offered_to?.firstname.charAt(0)}
                       </div>
                     )}{" "}
