@@ -20,6 +20,7 @@ export default function Chat() {
   const [meUser, setMeUser] = useState(null);
   const [getUser, setGetUser] = useState(null);
   const [text, setText] = useState("");
+  const [showChat, setShowChat] = useState(false);
 
   const userLogin = useSelector((state) => state.user);
   const [chatId, setChatId] = useState("");
@@ -360,19 +361,24 @@ export default function Chat() {
   };
   return (
     <div className="flex h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] w-full">
-      <div className="flex-col w-full max-w-[450px] flex">
+      <div
+        className={`${
+          !showChat ? "flex " : "hidden "
+        } md:flex flex-col w-full md:max-w-[450px]`}
+      >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
           <h4>All Conversations ({historyArray.length}) </h4>
           <BiSearchAlt className="search-message" />
         </div>
 
-        <div className="">
+        <div className=" h-full overflow-auto">
           {historyArray.map((item, key) => (
             <div
               className="flex py-6 border-b"
               onClick={() => {
                 setChatId(item.chatId);
                 setSelectedItem(item);
+                setShowChat(true);
               }}
             >
               <div className="flex px-4 justify-between items-center w-full">
@@ -407,10 +413,33 @@ export default function Chat() {
         </div>
       </div>
 
-      <div className=" border-l w-full">
+      <div
+        className={`${showChat ? "block" : "hidden"} md:block border-l w-full`}
+      >
         {selectedItem && (
           <div className="py-5 px-8 bg-neutral-100">
             {/* <h3><GoPrimitiveDot className='user-online'/>Isabella</h3> */}
+
+            <div
+              className="text-neutral-600 flex items-center mr-3"
+              onClick={() => setShowChat(false)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-left"
+              >
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+              Back
+            </div>
             <p className="font-bold text-xl">
               {`${selectedItem.user.firstname} ${selectedItem.user.lastname}`}
             </p>
@@ -454,8 +483,8 @@ export default function Chat() {
                         <img
                           src={dataURI}
                           alt="Selected"
-                          className=" h-20 w-20 object-cover bg-neutral-100 border border-neutral-500 rounded-xl"
-                          style={{ maxWidth: "200px",Height: "100px" }}
+                          className=" h-20 w-20 object-cover bg-neutral-100 border border-neutral-300 rounded-xl"
+                          style={{ maxWidth: "200px", Height: "100px" }}
                         />
                       </div>
                     </div>
