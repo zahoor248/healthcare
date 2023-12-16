@@ -36,7 +36,7 @@ function NavBar() {
   window.addEventListener("scroll", scrollHandler);
 
   return (
-    <div className={navColour ? "sticky" : "navbar"}>
+    <div className={navColour ? "" : "navbar"}>
       <div className="flex justify-between">
         <Link to="/" className="d-flex">
           <img src={logo} className="img-fluid logo" alt="brand" />

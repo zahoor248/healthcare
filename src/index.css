@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 .main-container {
   max-width: 1320px;
   width: 100%;
@@ -66,7 +68,7 @@ body {
   font-family: "GilroyMedium", sans-serif;
 }
 .f-f-g-s {
-  font-family: "GilroySemibold", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .f-f-n {

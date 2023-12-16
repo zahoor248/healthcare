@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <>
       {!hideHeader.includes(routePath) && (
-        <div className="bg-[#10274f] fixed bottom-0 w-full">
+        <div className="bg-[#10274F] fixed w-full bottom-0">
           <div className="main-container flex flex-col md:flex-row text-white md:items-center justify-between py-8 gap-2 md:gap-0 h-fit ">
             <p className="text-white text-xs sm:text-base">
               © 2023 HealthcareUp. All rights reserved.

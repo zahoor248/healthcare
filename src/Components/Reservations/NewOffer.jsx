@@ -170,7 +170,7 @@ export default function NewOffer() {
                   <span className="text-blue-600">Offer by:</span>
                   <div className="flex items-center gap-4">
                     <div className=" !rounded-full overflow-hidden w-8 h-8">
-                      <div className="w-8 h-8 flex justify-center items-center capitalize  bg-green-500 text-white">
+                      <div className="w-8 h-8 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
                         {openAcceptoffer?.offered_by?.firstname.charAt(0)}
                       </div>
 
@@ -225,13 +225,13 @@ export default function NewOffer() {
                         }}
                       >
                         <DatePicker
-                        sx={{
-                          width: "100%",
-                          "& .MuiInputBase-input": {
-                            padding: "12px",
-                            // Your other styles for the Paper component
-                          },
-                        }}
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputBase-input": {
+                              padding: "12px",
+                              // Your other styles for the Paper component
+                            },
+                          }}
                           onChange={handleStartDateChange}
                           defaultValue={startDate}
                           value={startDate}
