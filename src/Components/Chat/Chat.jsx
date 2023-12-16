@@ -429,13 +429,35 @@ export default function Chat() {
               <div className=" mx-[100px] ms-auto mb-20 w-full">
                 <div className="px-7 flex flex-row justify-end  gap-2 items-end">
                   {dataURI ? (
-                    <div className="w-full border h-[100px] shadow-sm p-2">
-                      <button onClick={() => setDataURI(null)}>&#x2715;</button>
-                      <img
-                        src={dataURI}
-                        alt="Selected"
-                        style={{ maxWidth: "100%", maxHeight: "100px" }}
-                      />
+                    <div className="w-full relative border  shadow-sm p-2">
+                      <button
+                        className=" relative border rounded-full p-1 mb-1"
+                        onClick={() => setDataURI(null)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#5c5c5c"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-x"
+                        >
+                          <path d="M18 6 6 18" />
+                          <path d="m6 6 12 12" />
+                        </svg>
+                      </button>
+                      <div className="h-20 w-20">
+                        <img
+                          src={dataURI}
+                          alt="Selected"
+                          className=" h-20 w-20 object-cover bg-neutral-100 border border-neutral-500 rounded-xl"
+                          style={{ maxWidth: "200px",Height: "100px" }}
+                        />
+                      </div>
                     </div>
                   ) : (
                     <input
