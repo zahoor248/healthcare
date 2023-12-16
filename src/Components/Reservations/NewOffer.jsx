@@ -225,13 +225,13 @@ export default function NewOffer() {
                         }}
                       >
                         <DatePicker
-                        sx={{
-                          width: "100%",
-                          "& .MuiInputBase-input": {
-                            padding: "12px",
-                            // Your other styles for the Paper component
-                          },
-                        }}
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputBase-input": {
+                              padding: "12px",
+                              // Your other styles for the Paper component
+                            },
+                          }}
                           onChange={handleStartDateChange}
                           defaultValue={startDate}
                           value={startDate}

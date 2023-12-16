@@ -207,7 +207,7 @@ const ReservationDetails = () => {
                             </div>
                           </div>
                         </div>
-                       </>
+                      </>
                     ) : (
                       <div className="flex items-start gap-4 flex-col w-full">
                         <div className=" capitalize font-bold text-lg text-neutral-600">
@@ -297,11 +297,14 @@ const ReservationDetails = () => {
               {reservationDetails?.counterOffers?.map((item, index) => (
                 <div className="flex justify-start w-full flex-col ">
                   <div className="flex  flex-row gap-6 mt-6">
-                    <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
+                    { index % 2 === 1&&<div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
                       {item?.offered_to?.firstname.charAt(0)}
-                    </div>{" "}
-                    
-                    <div className="flex w-[85%] relative flex-row gap-12 items-start p-7 shadow-class rounded-lg ">
+                    </div>}{" "}
+                    <div
+                      className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
+                        index % 2 === 1 ? "items-end" : "items-start"
+                      }`}
+                    >
                       <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
                         <p className="font-bold  text-neutral-700 text-lg">
                           Status:
@@ -424,6 +427,9 @@ const ReservationDetails = () => {
                         </div>
                       </div>
                     </div>
+                    { index % 2 != 1&&<div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
+                      {item?.offered_to?.firstname.charAt(0)}
+                    </div>}{" "}
                   </div>
                 </div>
               ))}
