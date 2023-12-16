@@ -380,7 +380,7 @@ export default function ProfileDetails() {
               )}
             </div>
           </div>
-          <div className="flex flex-col items-center py-5 ">
+          <div className="flex flex-col items-center py-5 mb-28">
             <h3 className=" text-neutral-800 text-3xl ">Book Reservation</h3>
             <div className="w-[60vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
               <div className="flex gap-12 lg:gap-24">
@@ -493,7 +493,7 @@ export default function ProfileDetails() {
                   /{" "}
                   <div className="w-full flex flex-col gap-2">
                     <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                      Rate
+                      Options
                     </p>
                     <div className="relative w-full">
                       <select
@@ -522,7 +522,7 @@ export default function ProfileDetails() {
                     />
                   </div>
                 </div>
-                <div className="w-auto flex justify-end items-end mt-4">
+                <div className="w-auto flex justify-center items-end mt-4">
                   <CommonPrimaryButton
                     onClick={() => reserveUser()}
                     loading={buttonLoading}
