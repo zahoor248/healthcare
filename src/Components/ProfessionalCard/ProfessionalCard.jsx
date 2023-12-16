@@ -317,18 +317,21 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                     </div>
                   </div>
                   <div className="flex gap-3 pt-8">
+                    <button className="hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3 w-full items-center text-center bg-[#0f75bc] text-white rounded-md ">
+                      Cancel
+                    </button>
                     <Link
                       to={`/profile-details?${profileData?.uuid}`}
                       className="py-3 text-center border rounded-lg hover:bg-[#0f75bc]/5 border-[#0f75bc] w-full text-[#0f75bc]"
                     >
                       View Profile
                     </Link>
-                    <Link
+                    {/* <Link
                       to={`/chats?${profileData?.uuid}`}
                       className="hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3 w-full items-center text-center bg-[#0f75bc] text-white rounded-md "
                     >
                       Contact this Pro
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>
@@ -340,7 +343,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
 
       <div className=" w-full flex justify-end">
         {data?.length > 0 && (
-        <Pagination
+          <Pagination
             currentPage={currentPage}
             pageCount={Math.ceil(data.length / 9)}
             onPageChange={handlePageChange}

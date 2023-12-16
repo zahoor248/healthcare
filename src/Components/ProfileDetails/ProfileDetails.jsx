@@ -190,7 +190,7 @@ export default function ProfileDetails() {
           </div>
         </div>
       ) : (
-        <div className="pb-32">
+        <div>
           <div className="flex flex-col xl:flex-row border-b">
             <div className="basis-2/5 pt-12 col-span-2">
               <div className=" flex w-full gap-6 pl-20 items-center ">

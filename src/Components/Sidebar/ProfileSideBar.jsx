@@ -9,7 +9,7 @@ const ProfileSideBar = () => {
     const user = useSelector((state) => state.user);
   return (
     <div className="flex main-container gap-8 overflow-auto w-full">
-    <div className="py-12">
+    <div className="py-12 h-full">
       <div className="profile-sidebar-card">
         <div className="flex flex-col items-center">
           <img src={User} alt="user profile image" className="w-20 h-20" />
