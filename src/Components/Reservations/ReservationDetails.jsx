@@ -143,21 +143,18 @@ const ReservationDetails = () => {
                     <div className="flex justify-start w-full flex-col gap-1">
                       <div className="font-semibold flex items-center gap-1">
                         <svg
+                          width="11"
+                          height="14"
+                          viewBox="0 0 11 14"
+                          fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="#2563eb"
-                          stroke="#ffff"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="lucide lucide-map-pin"
                         >
-                          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                          <circle cx="12" cy="10" r="2" fill="#ffffff" />
+                          <path
+                            d="M5.91335 13.6854C7.31972 11.9254 10.5272 7.65967 10.5272 5.26362C10.5272 2.35766 8.16958 0 5.26362 0C2.35766 0 0 2.35766 0 5.26362C0 7.65967 3.20752 11.9254 4.61389 13.6854C4.95109 14.1049 5.57615 14.1049 5.91335 13.6854ZM5.26362 3.50908C6.23263 3.50908 7.01816 4.29462 7.01816 5.26362C7.01816 6.23263 6.23263 7.01816 5.26362 7.01816C4.29462 7.01816 3.50908 6.23263 3.50908 5.26362C3.50908 4.29462 4.29462 3.50908 5.26362 3.50908Z"
+                            fill="#2174FF"
+                          />
                         </svg>
-
+                        
                         <span className="font-medium text-neutral-500">
                           Location:
                         </span>
@@ -187,7 +184,7 @@ const ReservationDetails = () => {
                                   src={reservationDetails.offered_to?.photo_url}
                                 />
                               ) : (
-                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-green-500 text-white">
+                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
                                   {reservationDetails?.offered_to?.firstname.charAt(
                                     0
                                   )}
@@ -224,7 +221,7 @@ const ReservationDetails = () => {
                                 src={reservationDetails.offered_by?.photo_url}
                               />
                             ) : (
-                              <div className="w-10 h-10 flex justify-center items-center capitalize  bg-green-500 text-white">
+                              <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
                                 {reservationDetails?.offered_by?.firstname.charAt(
                                   0
                                 )}
@@ -297,12 +294,14 @@ const ReservationDetails = () => {
               {reservationDetails?.counterOffers?.map((item, index) => (
                 <div className="flex justify-start w-full flex-col ">
                   <div className="flex  flex-row gap-6 mt-6">
-                    { index % 2 === 1&&<div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
-                      {item?.offered_to?.firstname.charAt(0)}
-                    </div>}{" "}
+                    {index % 2 != 1 && (
+                      <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
+                        {item?.offered_to?.firstname.charAt(0)}
+                      </div>
+                    )}{" "}
                     <div
                       className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
-                        index % 2 === 1 ? "items-end" : "items-start"
+                        index % 2 === 1 ? "items-start" : "items-end"
                       }`}
                     >
                       <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
@@ -313,7 +312,7 @@ const ReservationDetails = () => {
                       </div>
                       <div className="flex justify-between flex-col  gap-3">
                         {/* Date here  */}
-                        <div className="flex items-center text-neutral-700 bg-blue-50 px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                        <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
                           <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +403,7 @@ const ReservationDetails = () => {
                               {item?.offered_to?.photo_url != null ? (
                                 <img src={item?.offered_to?.photo_url} />
                               ) : (
-                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-green-500 text-white">
+                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
                                   {item?.offered_to?.firstname.charAt(0)}
                                 </div>
                               )}
@@ -427,9 +426,11 @@ const ReservationDetails = () => {
                         </div>
                       </div>
                     </div>
-                    { index % 2 != 1&&<div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
-                      {item?.offered_to?.firstname.charAt(0)}
-                    </div>}{" "}
+                    {index % 2 == 1 && (
+                      <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                        {item?.offered_to?.firstname.charAt(0)}
+                      </div>
+                    )}{" "}
                   </div>
                 </div>
               ))}

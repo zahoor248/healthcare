@@ -33,10 +33,10 @@ const Reservations = () => {
       });
   }, [location]);
   return (
-    <div className="flex main-container   h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
-      <div className="flex w-full flex-col    py-14">
+    <div className="flex main-container overflow-auto w-full">
+      <div className="flex w-full flex-col    py-[52px]">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
-          <div className="text-3xl">My Offers</div>
+          <div className="text-[32px] font-semibold">My Offers</div>
         </div>
         {reservations?.length > 0 ? (
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-8">
@@ -88,7 +88,9 @@ const Reservations = () => {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
                           </p>
-                          <span className="font-normal text-base text-[#10274F] px-1.5">-</span>
+                          <span className="font-normal text-base text-[#10274F] px-1.5">
+                            -
+                          </span>
                           <p className="font-normal text-base text-[#10274F]">
                             {dayjs(item.end_date, {
                               format: "DD/MM/YYYY",
@@ -126,7 +128,7 @@ const Reservations = () => {
                   </div>
 
                   <div className="flex items-start w-full gap-4 flex-col pt-5">
-                    <div className=" capitalize font-bold text-xl text-[#10274F]">
+                    <div className=" capitalize font-semibold text-xl text-[#10274F]">
                       ${item?.pay_rate} {item?.pay_duration} offer to:
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                     </div>
@@ -135,32 +137,33 @@ const Reservations = () => {
                         {item.offered_to?.photo_url != null ? (
                           <img src={item.offered_to?.photo_url} />
                         ) : (
-                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-green-500 text-white">
+                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-[#39B7A5] text-white">
                             {item?.offered_to?.firstname.charAt(0)}
                           </div>
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
-                      <div className="">
+                      <div className=" flex flex-col items-start">
                         <p className="font-medium text-base text-[#696F7A] capitalize">
                           {item?.offered_to?.firstname}{" "}
                           {item?.offered_to?.lastname}
                         </p>
-                        <p className="text-sm font-medium text-[#828487] pt-2">
-                          {item?.offered_to?.about_me || "N/A"}
-                        </p>
+                        {item?.offered_to?.about_me && (
+                          <p className="text-sm font-medium text-[#828487] pt-2">
+                            {item?.offered_to?.about_me}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex justify-between border-t items-end pt-5 mt-5 w-full">
-                  <div className="w-full">
-                    <div className=" capitalize font-bold text-xl text-[#10274F]">
-                      Offere by:
-                      {/* <GoPrimitiveDot className='online-icon'/> */}
-                    </div>
-                    <div className="flex items-center w-fit gap-2 justify-between pt-3 ">
-                     
+                    <div className="w-full">
+                      <div className=" capitalize font-semibold text-lg text-[#10274F]">
+                        Offere by:
+                        {/* <GoPrimitiveDot className='online-icon'/> */}
+                      </div>
+                      <div className="flex items-center w-fit gap-2 justify-between pt-3 ">
                         <div className=" !rounded-full overflow-hidden w-10 h-10">
                           {item.offered_by?.photo_url != null ? (
                             <img src={item.offered_by?.photo_url} />
@@ -171,24 +174,19 @@ const Reservations = () => {
                           )}
                           {/* <GoPrimitiveDot className='online-icon'/> */}
                         </div>
-                          <p className="font-medium text-base text-[#696F7A] capitalize">
-                            {item?.offered_by?.firstname}{" "}
-                            {item?.offered_by?.lastname}
-                          </p>
-                      
+                        <p className="font-medium text-base text-[#696F7A] capitalize">
+                          {item?.offered_by?.firstname}{" "}
+                          {item?.offered_by?.lastname}
+                        </p>
                       </div>
                     </div>
-             
-                        <Link
-                          className="w-full flex justify-end"
-                          to={`/reservation-detail?${item?.uuid}`}
-                        >
-                          <CommonPrimaryButton
-                            loading={false}
-                            text={"Details"}
-                          />
-                        </Link>
-                   
+
+                    <Link
+                      className="w-full flex justify-end"
+                      to={`/reservation-detail?${item?.uuid}`}
+                    >
+                      <CommonPrimaryButton loading={false} text={"Details"} />
+                    </Link>
                   </div>
                 </div>
               </div>

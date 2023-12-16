@@ -187,7 +187,7 @@ const Contacts = () => {
                         {item.business?.photo_url != null ? (
                           <img src={item.business?.photo_url} />
                         ) : (
-                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-green-500 text-white">
+                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-[#39B7A5] text-white">
                             {item?.business?.firstname.charAt(0)}
                           </div>
                         )}
