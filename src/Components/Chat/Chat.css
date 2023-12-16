@@ -189,13 +189,13 @@ p {
 }
 
 .sent p {
-  color: white;
-  background: #28c073;
+  color: black;
+  background: #E7F5FB;
   align-self: flex-end;
 }
 .received p {
-  background: #0b93f6;
-  color: white;
+  background: #A3D6EE;
+  color: black;
 }
 
 .circle-img {
