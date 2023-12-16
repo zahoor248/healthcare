@@ -411,10 +411,10 @@ export default function ProfileDetails() {
           </div>
           <div className="flex flex-col items-center py-5 mb-28">
             <h3 className=" text-neutral-800 text-3xl ">Book Reservation</h3>
-            <div className="w-[60vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
-              <div className="flex gap-12 lg:gap-24">
+            <div className="w-[80vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
+              <div className="flex gap-6">
                 <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
+                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
                     Start Date
                   </p>
                   <div className="relative w-full">
@@ -432,13 +432,7 @@ export default function ProfileDetails() {
                         }}
                       >
                         <DatePicker
-                          sx={{
-                            width: "100%",
-                            "& .MuiInputBase-input": {
-                              padding: "12px",
-                              // Your other styles for the Paper component
-                            },
-                          }}
+                          sx={{ width: "100%" }}
                           onChange={handleStartDateChange}
                           defaultValue={startDate}
                           slotProps={{
@@ -455,7 +449,7 @@ export default function ProfileDetails() {
                   </div>
                 </div>
                 <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
+                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
                     End Date
                   </p>
                   <div className="relative w-full">
@@ -473,13 +467,7 @@ export default function ProfileDetails() {
                         }}
                       >
                         <DatePicker
-                          sx={{
-                            width: "100%",
-                            "& .MuiInputBase-input": {
-                              padding: "12px",
-                              // Your other styles for the Paper component
-                            },
-                          }}
+                          sx={{ width: "100%" }}
                           onChange={handleEndDateChange}
                           defaultValue={endDate}
                           slotProps={{
@@ -496,23 +484,23 @@ export default function ProfileDetails() {
                   </div>
                 </div>
               </div>
-              <div className="flex pt-4 justify-between gap-12 lg:gap-24">
-                <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                    Location
-                  </p>
-                  <div className="relative w-full">
-                    <input
-                      onChange={(e) => setLocation(e.target.value)}
-                      value={counterLocation}
-                      placeholder="Select Location"
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                    />
-                  </div>
+              <div className="w-full flex flex-col gap-2">
+                <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                  Location
+                </p>
+                <div className="relative w-full">
+                  <input
+                    onChange={(e) => setLocation(e.target.value)}
+                    value={counterLocation}
+                    placeholder="Select Location"
+                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  />
                 </div>
-                <div className="flex gap-2 w-full">
+              </div>
+              <div className="flex gap-8 flex-col">
+                <div className="flex gap-2 ">
                   <div className="w-full flex flex-col gap-2">
-                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
+                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
                       Rate
                     </p>
                     <div className="relative w-full">
@@ -521,7 +509,7 @@ export default function ProfileDetails() {
                         value={price}
                         placeholder="Enter Value"
                         type="number"
-                        className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
+                        className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                       />
                     </div>
                   </div>
@@ -533,7 +521,7 @@ export default function ProfileDetails() {
                     <div className="relative w-full">
                       <select
                         onChange={(e) => setPayDuration(e.target.value)}
-                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-[11px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
+                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-800 py-[15px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
                       >
                         <option>Hourly</option>
                         <option>Daily</option>
@@ -542,18 +530,25 @@ export default function ProfileDetails() {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="w-full flex flex-col gap-2">
-                <div>
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                    Description
-                  </p>
-                  <div className="relative w-full">
-                    <textarea
-                      onChange={(e) => setDescription(e.target.value)}
-                      value={description}
-                      placeholder="Describe your self"
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                <div className="w-full flex flex-col gap-2">
+                  <div>
+                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-600">
+                      Description
+                    </p>
+                    <div className="relative w-full">
+                      <textarea
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
+                        placeholder="Describe your self"
+                        className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                      />
+                    </div>
+                  </div>
+                  <div className="w-auto flex justify-end items-end mt-4">
+                    <CommonPrimaryButton
+                      onClick={() => reserveUser()}
+                      loading={buttonLoading}
+                      text={"Send Reservation"}
                     />
                   </div>
                 </div>

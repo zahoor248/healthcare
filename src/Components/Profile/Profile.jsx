@@ -624,7 +624,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row main-container gap-8 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
+      <div className="flex flex-col md:flex-row main-container gap-8 overflow-auto w-full">
         <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px] md:h-full">
           <div className=" bg-white h-fit   md:py-10 w-full md:h-full rounded-lg shadow-class">
             <div className="hidden md:flex flex-col pb-6 items-center">
