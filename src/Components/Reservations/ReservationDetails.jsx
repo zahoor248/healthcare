@@ -410,7 +410,7 @@ const ReservationDetails = () => {
                                 {item?.offered_to?.photo_url != null ? (
                                   <img src={item?.offered_to?.photo_url} />
                                 ) : (
-                                  <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                                  <div className="w-10 h-10 flex justify-center items-center font-normal text-base capitalize  bg-blue-500 text-white">
                                     {item?.offered_to?.firstname.charAt(0)}
                                   </div>
                                 )}
@@ -538,7 +538,7 @@ const ReservationDetails = () => {
                                 {item?.offered_by?.photo_url != null ? (
                                   <img src={item?.offered_by?.photo_url} />
                                 ) : (
-                                  <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                                  <div className="w-10 h-10 flex justify-center items-center font-normal text-base capitalize  bg-[#39B7A5] text-white">
                                     {item?.offered_by?.firstname.charAt(0)}
                                   </div>
                                 )}
