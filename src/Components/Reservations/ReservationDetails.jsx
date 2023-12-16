@@ -78,7 +78,6 @@ const ReservationDetails = () => {
           <div className="grid grid-cols-1 justify-between w-full py-10 gap-9 flex-wrap">
             <div className="border-neutral-900  h-fit w-full flex  flex-col  hover:shadow-sm  rounded-xl">
               {" "}
-            
               <div className="font-semibold text-[#2676BC] relative w-fit text-xl flex items-center gap-1">
                 {" "}
                 Current Offer:
@@ -87,12 +86,12 @@ const ReservationDetails = () => {
                 </div> */}
               </div>
               <div className="flex justify-start relative shadow-class rounded-xl p-6  mt-6 flex-col ">
-              <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
-                        <p className="font-bold  text-neutral-700 text-lg">
-                          Status:
-                        </p>{" "}
-                        {reservationDetails.status}
-                      </div>
+                <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                  <p className="font-semibold pr-1 text-neutral-700 text-lg">
+                    Status:
+                  </p>{" "}
+                  {reservationDetails.status}
+                </div>
                 <div className="flex  gap-12 w-full">
                   <div className="flex flex-col items-start gap-4 w-[40%] ">
                     {/* Date here  */}
@@ -161,7 +160,7 @@ const ReservationDetails = () => {
                             fill="#2174FF"
                           />
                         </svg>
-                        
+
                         <span className="font-medium text-neutral-500">
                           Location:
                         </span>
@@ -293,7 +292,7 @@ const ReservationDetails = () => {
               {reservationDetails?.counterOffers.length > 0 && (
                 <>
                   <div className="w-full border-t my-10" />
-                  <div className="text-3xl font-semibold text-center text-neutral-800">
+                  <div className="text-2xl font-semibold text-center text-neutral-800">
                     Offer History
                   </div>
                 </>
@@ -306,133 +305,263 @@ const ReservationDetails = () => {
                         {item?.offered_to?.firstname.charAt(0)}
                       </div>
                     )}{" "}
-                    <div
-                      className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
-                        index % 2 === 1 ? "items-start" : "items-end"
-                      }`}
-                    >
-                      <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
-                        <p className="font-bold  text-neutral-700 text-lg">
-                          Status:
-                        </p>{" "}
-                        {item.status}
-                      </div>
-                      <div className="flex justify-between flex-col  gap-3">
-                        {/* Date here  */}
-                        <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
-                          <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="#2563eb"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="lucide lucide-calendar-days"
-                            >
-                              <rect
-                                width="18"
-                                height="18"
-                                x="3"
-                                y="4"
-                                rx="2"
-                                ry="2"
-                              />
-                              <line x1="16" x2="16" y1="2" y2="6" />
-                              <line x1="8" x2="8" y1="2" y2="6" />
-                              <line x1="3" x2="21" y1="10" y2="10" />
-                              <path d="M8 14h.01" />
-                              <path d="M12 14h.01" />
-                              <path d="M16 14h.01" />
-                              <path d="M8 18h.01" />
-                              <path d="M12 18h.01" />
-                              <path d="M16 18h.01" />
-                            </svg>
-                          </div>
-                          <div className=" flex flex-col">
-                            <span className=" text-neutral-600">Date</span>
-                            <div className="flex">
-                              <p className="font-semibold">
-                                {dayjs(item.start_date, {
-                                  format: "DD/MM/YYYY",
-                                }).format("MMM. DD, YYYY")}
-                              </p>
-                              <span className="px-2">-</span>
-                              <p className="font-semibold">
-                                {dayjs(item.end_date, {
-                                  format: "DD/MM/YYYY",
-                                }).format("MMM. DD, YYYY")}
-                              </p>
+                    {index % 2 === 1 ? (
+                      <div
+                        className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
+                          index % 2 === 1 ? "items-start" : "items-end"
+                        }`}
+                      >
+                        <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                          <p className="font-semibold  text-neutral-700 text-lg">
+                            Status:
+                          </p>{" "}
+                          {item.status}
+                        </div>
+                        <div className="flex justify-between flex-col  gap-3">
+                          {/* Date here  */}
+                          <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                            <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2563eb"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-calendar-days"
+                              >
+                                <rect
+                                  width="18"
+                                  height="18"
+                                  x="3"
+                                  y="4"
+                                  rx="2"
+                                  ry="2"
+                                />
+                                <line x1="16" x2="16" y1="2" y2="6" />
+                                <line x1="8" x2="8" y1="2" y2="6" />
+                                <line x1="3" x2="21" y1="10" y2="10" />
+                                <path d="M8 14h.01" />
+                                <path d="M12 14h.01" />
+                                <path d="M16 14h.01" />
+                                <path d="M8 18h.01" />
+                                <path d="M12 18h.01" />
+                                <path d="M16 18h.01" />
+                              </svg>
+                            </div>
+                            <div className=" flex flex-col">
+                              <span className=" text-neutral-600">Date</span>
+                              <div className="flex">
+                                <p className="font-semibold">
+                                  {dayjs(item.start_date, {
+                                    format: "DD/MM/YYYY",
+                                  }).format("MMM. DD, YYYY")}
+                                </p>
+                                <span className="px-2">-</span>
+                                <p className="font-semibold">
+                                  {dayjs(item.end_date, {
+                                    format: "DD/MM/YYYY",
+                                  }).format("MMM. DD, YYYY")}
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex justify-start w-full flex-col gap-1">
-                          <div className="font-semibold flex items-center gap-1">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="#2563eb"
-                              stroke="#ffff"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="lucide lucide-map-pin"
-                            >
-                              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                              <circle cx="12" cy="10" r="2" fill="#ffffff" />
-                            </svg>
+                          <div className="flex justify-start w-full flex-col gap-1">
+                            <div className="font-semibold flex items-center gap-1">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="#2563eb"
+                                stroke="#ffff"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-map-pin"
+                              >
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="2" fill="#ffffff" />
+                              </svg>
 
-                            <span className="font-medium text-neutral-500">
-                              Location:
+                              <span className="font-medium text-neutral-500">
+                                Location:
+                              </span>
+                            </div>
+                            <p className="whitespace-pre-wrap pl-1 font-semibold text-blue-700 capitalize">
+                              {item?.location}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-start pt-3 gap-4">
+                          <div className="font-semibold text-xl text-blue-600">
+                            Counter Offer:{" "}
+                            <span className="text-neutral-700 capitalize">
+                              ${item?.pay_rate} {item?.pay_duration}
                             </span>
                           </div>
-                          <p className="whitespace-pre-wrap pl-1 font-semibold text-blue-700 capitalize">
-                            {item?.location}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-start pt-3 gap-4">
-                        <div className="font-bold text-xl text-blue-600">
-                          Counter Offer:{" "}
-                          <span className="text-neutral-700 capitalize">
-                            ${item?.pay_rate} {item?.pay_duration}
-                          </span>
-                        </div>
-                        <div className="font-bold flex items-center gap-4  text-xl">
-                          <div className="text-blue-600 text-xl"> to:</div>{" "}
-                          <div className="flex items-center gap-4">
-                            <div className=" !rounded-full overflow-hidden w-10 h-10">
-                              {item?.offered_to?.photo_url != null ? (
-                                <img src={item?.offered_to?.photo_url} />
-                              ) : (
-                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
-                                  {item?.offered_to?.firstname.charAt(0)}
-                                </div>
-                              )}
-                              {/* <GoPrimitiveDot className='online-icon'/> */}
-                            </div>
-                            <div className="">
-                              <p className="font-semibold text-base text-neutral-600 capitalize">
-                                {item?.offered_to?.firstname}{" "}
-                                {item?.offered_to?.lastname}
-                              </p>
-                              <p className="text-sm pt-2">
-                                {item?.offered_to?.about_me || "N/A"}
-                              </p>
+                          <div className="font-bold flex items-center gap-4  text-xl">
+                            <div className="text-blue-600 text-xl"> to:</div>{" "}
+                            <div className="flex items-center gap-4">
+                              <div className=" !rounded-full overflow-hidden w-10 h-10">
+                                {item?.offered_to?.photo_url != null ? (
+                                  <img src={item?.offered_to?.photo_url} />
+                                ) : (
+                                  <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                                    {item?.offered_to?.firstname.charAt(0)}
+                                  </div>
+                                )}
+                                {/* <GoPrimitiveDot className='online-icon'/> */}
+                              </div>
+                              <div className="">
+                                <p className="font-semibold text-base text-neutral-600 capitalize">
+                                  {item?.offered_to?.firstname}{" "}
+                                  {item?.offered_to?.lastname}
+                                </p>
+                                <p className="text-sm pt-2">
+                                  {item?.offered_to?.about_me || "N/A"}
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex justify-start">
-                          Notes:
-                          <p className="">{item?.offered_to?.about_me}</p>
+                          <div className="flex justify-start">
+                            Notes:
+                            <p className="">{item?.offered_to?.about_me}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div
+                        className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
+                          index % 2 === 1 ? "items-start" : "items-end"
+                        }`}
+                      >
+                        <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                          <p className="font-semibold  text-neutral-700 text-lg">
+                            Status:
+                          </p>{" "}
+                          {item.status}
+                        </div>
+                        <div className="flex justify-between flex-col  gap-3">
+                          {/* Date here  */}
+                          <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                            <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#2563eb"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-calendar-days"
+                              >
+                                <rect
+                                  width="18"
+                                  height="18"
+                                  x="3"
+                                  y="4"
+                                  rx="2"
+                                  ry="2"
+                                />
+                                <line x1="16" x2="16" y1="2" y2="6" />
+                                <line x1="8" x2="8" y1="2" y2="6" />
+                                <line x1="3" x2="21" y1="10" y2="10" />
+                                <path d="M8 14h.01" />
+                                <path d="M12 14h.01" />
+                                <path d="M16 14h.01" />
+                                <path d="M8 18h.01" />
+                                <path d="M12 18h.01" />
+                                <path d="M16 18h.01" />
+                              </svg>
+                            </div>
+                            <div className=" flex flex-col">
+                              <span className=" text-neutral-600">Date</span>
+                              <div className="flex">
+                                <p className="font-semibold">
+                                  {dayjs(item.start_date, {
+                                    format: "DD/MM/YYYY",
+                                  }).format("MMM. DD, YYYY")}
+                                </p>
+                                <span className="px-2">-</span>
+                                <p className="font-semibold">
+                                  {dayjs(item.end_date, {
+                                    format: "DD/MM/YYYY",
+                                  }).format("MMM. DD, YYYY")}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex justify-start w-full flex-col gap-1">
+                            <div className="font-semibold flex items-center gap-1">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="#2563eb"
+                                stroke="#ffff"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-map-pin"
+                              >
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="2" fill="#ffffff" />
+                              </svg>
+
+                              <span className="font-medium text-neutral-500">
+                                Location:
+                              </span>
+                            </div>
+                            <p className="whitespace-pre-wrap pl-1 font-semibold text-blue-700 capitalize">
+                              {item?.location}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-start pt-3 gap-4">
+                          <div className="font-semibold text-xl text-blue-600">
+                            Counter Offer:{" "}
+                            <span className="text-neutral-700 capitalize">
+                              ${item?.pay_rate} {item?.pay_duration}
+                            </span>
+                          </div>
+                          <div className="font-bold flex items-center gap-4  text-xl">
+                            <div className="text-blue-600 text-xl"> to:</div>{" "}
+                            <div className="flex items-center gap-4">
+                              <div className=" !rounded-full overflow-hidden w-10 h-10">
+                                {item?.offered_by?.photo_url != null ? (
+                                  <img src={item?.offered_by?.photo_url} />
+                                ) : (
+                                  <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                                    {item?.offered_by?.firstname.charAt(0)}
+                                  </div>
+                                )}
+                                {/* <GoPrimitiveDot className='online-icon'/> */}
+                              </div>
+                              <div className="">
+                                <p className="font-semibold text-base text-neutral-600 capitalize">
+                                  {item?.offered_by?.firstname}{" "}
+                                  {item?.offered_by?.lastname}
+                                </p>
+                                <p className="text-sm pt-2">
+                                  {item?.offered_by?.about_me || "N/A"}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex justify-start">
+                            Notes:
+                            <p className="">{item?.offered_by?.about_me}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     {index % 2 == 1 && (
                       <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
                         {item?.offered_to?.firstname.charAt(0)}
