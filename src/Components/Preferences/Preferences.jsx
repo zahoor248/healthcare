@@ -44,13 +44,13 @@ export default function Preferences() {
   ];
 
   const [preferences, setPreferences] = useState({
-    hourly_rate: user.pro_profile.hourly_rate || "",
-    daily_rate: user.pro_profile.daily_rate || "",
-    radius: user.pro_profile.radius || "",
+    hourly_rate: user.pro_profile?.hourly_rate || "",
+    daily_rate: user.pro_profile?.daily_rate || "",
+    radius: user.pro_profile?.radius || "",
   });
 
   const [workingHours, setWorkingHours] = useState(
-    user.pro_profile.working_hours ||
+    user.pro_profile?.working_hours ||
       WEEK_DAYS.map((day) => ({
         id: day.id,
         day: day.day,
