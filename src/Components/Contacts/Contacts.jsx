@@ -427,8 +427,8 @@ const Contacts = () => {
                     !item.reviews.some(
                       (review) => review.reviewer_id === user.id
                     ) ? (
-                      <div className="bg-slate-50 w-full rounded px-4 ">
-                        <div className="font-bold text-md flex items-center gap-3">
+                      <div className="bg-slate-50 w-full rounded  py-2 px-3">
+                        <div className="font-semibold text-lg flex items-center gap-3">
                           Feedback:{" "}
                           <Rating
                             // maxScale={5}
@@ -437,12 +437,12 @@ const Contacts = () => {
                             onRatingPress={handleRatingPress}
                           />
                         </div>
-                        <input
+                        <textarea
                           placeholder="Write a feedback..."
                           value={feedback}
                           onChange={(e) => setFeedback(e.target.value)}
-                          className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                        />
+                          className="text-lg placeholder-[#B8C0CB] bg-[#EFEFF8] mt-3 text-neutral-800 py-3 px-4 border border-transparent rounded-md w-full"
+                        ></textarea>
                         {/* <p className="f-f-g-m text-neutral-600 pb-2 capitalize">
                         {item.reviews[0]?.feedback}
                       </p> */}
