@@ -159,7 +159,7 @@ export default function NewOffer() {
           </div>
         </div>
       ) : (
-        <div className="flex m-auto flex-col justify-center h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] overflow-auto w-full">
+        <div className="flex m-auto flex-col justify-center overflow-auto w-full">
           <div className=" justify-center items-center text-neutral-700 flex w-full">
             <div className="text-2xl md:text-3xl">Make a Counter Offer</div>
           </div>
