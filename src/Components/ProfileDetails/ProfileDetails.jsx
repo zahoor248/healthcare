@@ -31,7 +31,7 @@ export default function ProfileDetails() {
     fields: ["formatted_address"],
     types: ["establishment"],
   };
-  useEffect(() => {
+  const handleLocationLoad = () => {
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
       inputRef.current,
       options
@@ -41,9 +41,9 @@ export default function ProfileDetails() {
       const place = await autoCompleteRef.current.getPlace();
       console.log({ place }, "Testing place");
       setLocation(place.formatted_address);
-      console.log(autoCompleteRef)
+      console.log(autoCompleteRef);
     });
-  }, []);
+  };
 
   const [chatId, setChatId] = useState(false);
   const navigate = useNavigate();
@@ -559,6 +559,7 @@ export default function ProfileDetails() {
                   <div className="relative w-full">
                     <input
                       ref={inputRef}
+                      onKeyUp={()=>handleLocationLoad()}
                       value={counterLocation}
                       onChange={(e) => setLocation(e.target.value)}
                       placeholder="Select Location"
