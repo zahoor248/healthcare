@@ -161,7 +161,7 @@ const ReservationDetails = () => {
                           />
                         </svg>
 
-                        <span className="font-medium text-neutral-500">
+                        <span className="font-normal text-sm md:text-base text-neutral-500">
                           Location:
                         </span>
                       </div>
@@ -299,7 +299,7 @@ const ReservationDetails = () => {
               )}
               {reservationDetails?.counterOffers?.map((item, index) => (
                 <div className="flex justify-start w-full flex-col ">
-                  <div className="flex  flex-row gap-3 md:gap-6 mt-6">
+                  <div className={`flex  flex-row gap-3 md:gap-6 mt-6 ${index % 2 != 1 ? "justify-start" : "justify-end"}`}>
                     {index % 2 != 1 && (
                       <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
                         {item?.offered_to?.firstname.charAt(0)}
@@ -311,13 +311,8 @@ const ReservationDetails = () => {
                           index % 2 === 1 ? "items-start" : "items-end"
                         }`}
                       >
-                        <div className="  absolute right-0 md:top-0 top-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
-                          <p className="font-semibold  text-neutral-700 text-lg">
-                            Status:
-                          </p>{" "}
-                          {item.status}
-                        </div>
-                        <div className="flex justify-between flex-col  gap-3 w-full">
+                        
+                        <div className="flex justify-between flex-col  gap-3 w-full md:w-fit">
                           {/* Date here  */}
                           <div className="flex items-center text-neutral-700 bg-[#EFF4F8] p-2 md:p-4 rounded-sm flex-row gap-2 md:gap-3 w-full">
                             <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
@@ -387,7 +382,7 @@ const ReservationDetails = () => {
                                 <circle cx="12" cy="10" r="2" fill="#ffffff" />
                               </svg>
 
-                              <span className="font-medium text-neutral-500">
+                              <span className="font-normal text-sm md:text-base text-neutral-500">
                                 Location:
                               </span>
                             </div>
@@ -427,6 +422,12 @@ const ReservationDetails = () => {
                               </div>
                             </div>
                           </div>
+                          <div className="  md:absolute md:right-0 md:top-3 px-6  text-green-600  capitalize flex items-center justify-end w-full rounded-full py-[2px] ">
+                          <p className="font-semibold  text-neutral-700 text-lg">
+                            Status:
+                          </p>{" "}
+                          {item.status}
+                        </div>
                           <div className="flex justify-start">
                             Notes:
                             <p className="">{item?.offered_to?.about_me}</p>
@@ -439,13 +440,8 @@ const ReservationDetails = () => {
                           index % 2 === 1 ? "items-start" : "md:items-end"
                         }`}
                       >
-                        <div className="  absolute right-0 md:top-0 top-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
-                          <p className="font-semibold  text-neutral-700 text-lg">
-                            Status:
-                          </p>{" "}
-                          {item.status}
-                        </div>
-                        <div className="flex justify-between flex-col  gap-3 w-full">
+                        
+                        <div className="flex justify-between flex-col  gap-3 w-full md:w-fit">
                           {/* Date here  */}
                           <div className="flex items-center text-neutral-700 bg-[#EFF4F8] p-2 md:p-4 rounded-sm flex-row gap-2 md:gap-3 w-full">
                             <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
@@ -515,7 +511,7 @@ const ReservationDetails = () => {
                                 <circle cx="12" cy="10" r="2" fill="#ffffff" />
                               </svg>
 
-                              <span className="font-medium text-neutral-500">
+                              <span className="font-normal text-sm md:text-base text-neutral-500">
                                 Location:
                               </span>
                             </div>
@@ -524,7 +520,7 @@ const ReservationDetails = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex flex-col items-start md:pt-3 gap-4">
+                        <div className="flex flex-col items-start pt-3 gap-4">
                           <div className="font-semibold text-xl text-blue-600">
                             Counter Offer:{" "}
                             <span className="text-neutral-700 capitalize">
@@ -555,6 +551,12 @@ const ReservationDetails = () => {
                               </div>
                             </div>
                           </div>
+                          <div className="  md:absolute md:right-0 md:top-3 px-6  text-green-600  capitalize flex items-center justify-end w-full rounded-full py-[2px] ">
+                          <p className="font-semibold  text-neutral-700 text-lg">
+                            Status:
+                          </p>{" "}
+                          {item.status}
+                        </div>
                           <div className="flex justify-start">
                             Notes:
                             <p className="">{item?.offered_by?.about_me}</p>

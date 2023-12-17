@@ -644,7 +644,9 @@ const Profile = () => {
                 >
                   <div className="side-nav-link !py-2 md:!py-4">
                     <HiUserCircle className="pen-icon" />
-                    <span className="normal-case !text-xs md:!text-base">My Profile</span>
+                    <span className="normal-case !text-xs md:!text-base">
+                      My Profile
+                    </span>
                   </div>
                 </li>
 
@@ -657,7 +659,9 @@ const Profile = () => {
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
                       <HiUserCircle className="pen-icon" />
-                      <span className="normal-case !text-xs md:!text-base whitespace-nowrap md:whitespace-normal">Business Profile</span>
+                      <span className="normal-case !text-xs md:!text-base whitespace-nowrap md:whitespace-normal">
+                        Business Profile
+                      </span>
                     </div>
                   </li>
                 )}
@@ -682,7 +686,9 @@ const Profile = () => {
                       <path fill="none" d="M0 0h24v24H0z"></path>
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path>
                     </svg>
-                    <span className="normal-case !text-xs md:!text-base">Address</span>
+                    <span className="normal-case !text-xs md:!text-base">
+                      Address
+                    </span>
                   </div>
                 </li>
 
@@ -695,7 +701,9 @@ const Profile = () => {
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
                       <TbLicense className="pen-icon" />
-                      <span className="normal-case !text-xs md:!text-base">Licenses</span>
+                      <span className="normal-case !text-xs md:!text-base">
+                        Licenses
+                      </span>
                     </div>
                   </li>
                 )}
@@ -709,7 +717,9 @@ const Profile = () => {
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
                       <MdRoomPreferences className="pen-icon" />
-                      <span className="normal-case !text-xs md:!text-base mr-2.5 md:mr-0">Preferences</span>
+                      <span className="normal-case !text-xs md:!text-base mr-2.5 md:mr-0">
+                        Preferences
+                      </span>
                     </div>
                   </li>
                 )}
