@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { Link, useLocation } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -23,6 +23,27 @@ export default function NewOffer() {
   const [button_loading, setButtonLoading] = useState(false);
   const reservations = useSelector((state) => state.reservations);
   const user = useSelector((state) => state.user);
+
+  const autoCompleteRef = useRef();
+  const inputRef = useRef();
+  const options = {
+    componentRestrictions: { country: "us" },
+    fields: ["formatted_address"],
+    types: ["establishment"],
+  };
+
+  useEffect(() => {
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      options
+    );
+
+    autoCompleteRef.current.addListener("place_changed", async function () {
+      const place = await autoCompleteRef.current.getPlace();
+      console.log({ place }, "Testing place");
+      setLocation(place.formatted_address);
+    });
+  }, []);
 
   useEffect(() => {
     console.log(location, "here is the location");
@@ -305,6 +326,7 @@ export default function NewOffer() {
                   </p>
                   <div className="relative w-full">
                     <input
+                      ref={inputRef}
                       onChange={(e) => setLocation(e.target.value)}
                       value={counterLocation}
                       placeholder="Select Location"

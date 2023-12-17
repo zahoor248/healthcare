@@ -8,9 +8,6 @@ import Reservations from "./Components/Reservations/Reservations";
 function App() {
   const user = useSelector((state) => state.user);
   const isAuthenticated = useSelector((state) => state.isLoggedIn);
-  {
-    /* Home page handler  */
-  }
   return (
     <>
       {isAuthenticated && user.type == "bus" ? (

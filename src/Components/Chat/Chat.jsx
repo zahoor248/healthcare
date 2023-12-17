@@ -8,19 +8,20 @@ import { useSelector } from "react-redux";
 import { db } from "../../firebase";
 import uuid from "react-uuid";
 import { handleAPIRequest } from "../../helper/ApiHandler";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 export default function Chat() {
   const [historyArray, setHistoryArray] = useState([]);
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
   const location = useLocation();
+  const [showChat, setShowChat] = useState(false);
+
   const [image, setImage] = useState(null);
 
   const [meUser, setMeUser] = useState(null);
   const [getUser, setGetUser] = useState(null);
   const [text, setText] = useState("");
-  const [showChat, setShowChat] = useState(false);
 
   const userLogin = useSelector((state) => state.user);
   const [chatId, setChatId] = useState("");
@@ -30,9 +31,8 @@ export default function Chat() {
 
   const [messages, setMessages] = useState([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (selectedItem) {
-      console.log(selectedItem);
       const messageRef = db
         .collection("Chats")
         .doc(selectedItem.chatId)
@@ -56,12 +56,12 @@ export default function Chat() {
           }
         });
 
+        console.log(allmsg, "testingfarazsyed");
         setMessages(allmsg);
       });
-
-      getUserDataForChat();
     }
   }, [selectedItem]);
+
   function ChatMessage(props) {
     const { text, user } = props.message;
 
@@ -85,129 +85,144 @@ export default function Chat() {
       </div>
     );
   }
-  const getUserChats = async () => {
-    db.collection("Chats").onSnapshot(async (chatsSnapshot) => {
-      const userChats = [];
 
-      for (const chatDoc of chatsSnapshot.docs) {
+  const getUserChats = async () => {
+    const chatsSnapshot = await db.collection("Chats").get();
+
+    const userChats = await Promise.all(
+      chatsSnapshot.docs.map(async (chatDoc) => {
         const users = chatDoc.data().users;
 
-        const imNotUser = users.filter((i) => i.uuid !== userLogin.uuid);
-        const hasUser = users.some((u) => u.uuid === userLogin.uuid);
+        if (users) {
+          const imNotUser = users.filter((i) => i.uuid !== userLogin.uuid);
+          const hasUser = users.some((u) => u.uuid === userLogin.uuid);
 
-        if (hasUser) {
-          const chatId = chatDoc.id;
-          const messagesRef = db
-            .collection("Chats")
-            .doc(chatId)
-            .collection("messages");
+          if (hasUser) {
+            const chatId = chatDoc.id;
+            const messagesRef = db
+              .collection("Chats")
+              .doc(chatId)
+              .collection("messages");
+            const lastMessageQuery = messagesRef
+              .orderBy("createdAt", "desc")
+              .limit(1);
+            const lastMessageSnapshot = await lastMessageQuery.get();
 
-          const lastMessageQuery = messagesRef
-            .orderBy("createdAt", "desc")
-            .limit(1);
+            const userChat = {
+              chatId,
+              user: imNotUser[0],
+              messageText: "",
+              time: "",
+            };
 
-          const lastMessageSnapshot = await lastMessageQuery.get();
+            lastMessageSnapshot.forEach((lastMessageDoc) => {
+              const messageData = lastMessageDoc.data();
 
-          const userChat = {
-            chatId,
-            user: imNotUser[0],
-            messageText: "",
-            time: "",
-          };
+              const timestamp = messageData.createdAt;
+              const date = timestamp.toDate();
+              const currentDate = new Date();
+              userChat.createdAt = messageData.createdAt;
+              const isToday =
+                date.getDate() === currentDate.getDate() &&
+                date.getMonth() === currentDate.getMonth() &&
+                date.getFullYear() === currentDate.getFullYear();
 
-          lastMessageSnapshot.forEach((lastMessageDoc) => {
-            const messageData = lastMessageDoc.data();
+              const isYesterday =
+                date.getDate() === currentDate.getDate() - 1 &&
+                date.getMonth() === currentDate.getMonth() &&
+                date.getFullYear() === currentDate.getFullYear();
 
-            const timestamp = messageData.createdAt;
-            const date = timestamp.toDate();
-            const currentDate = new Date();
+              let formattedDateTime;
 
-            const isToday =
-              date.getDate() === currentDate.getDate() &&
-              date.getMonth() === currentDate.getMonth() &&
-              date.getFullYear() === currentDate.getFullYear();
+              if (isToday) {
+                formattedDateTime = date.toLocaleTimeString("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                });
+              } else if (isYesterday) {
+                formattedDateTime = "Yesterday";
+              } else {
+                formattedDateTime = date.toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "long",
+                });
+              }
 
-            const isYesterday =
-              date.getDate() === currentDate.getDate() - 1 &&
-              date.getMonth() === currentDate.getMonth() &&
-              date.getFullYear() === currentDate.getFullYear();
+              userChat.messageText = messageData.text;
+              userChat.time = formattedDateTime;
+            });
 
-            let formattedDateTime;
-
-            if (isToday) {
-              formattedDateTime = date.toLocaleTimeString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              });
-            } else if (isYesterday) {
-              formattedDateTime = "Yesterday";
-            } else {
-              formattedDateTime = date.toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-              });
-            }
-
-            userChat.messageText = messageData.text;
-            userChat.time = formattedDateTime;
-          });
-
-          userChats.push(userChat);
+            return userChat;
+          }
         }
-      }
+        return null;
+      })
+    );
 
-      console.log(historyArray, "TestingHistory");
-      setHistoryArray(userChats);
+    // Filter out null values (in case there are chats that do not meet the conditions)
+    const filteredUserChats = userChats.filter((chat) => chat !== null);
+
+    const sortedData = [...filteredUserChats].sort((a, b) => {
+      const dateA = a.createdAt.toDate();
+      const dateB = b.createdAt.toDate();
+      return dateB - dateA;
     });
-  };
 
-  useEffect(() => {
-    if (location.hash) {
-      let chatIdhas = location.hash.split("#");
+    // Update state or perform other operations with the filtered array
+    setHistoryArray(sortedData);
 
-      if (!isNaN(chatIdhas[1])) {
-        setChatId(chatIdhas[1]);
+    if (location.state) {
+      if (location.state.chatId) {
+        console.log(location.state, "FarazFarazFarazFaraz");
+        setSelectedItem(
+          userChats.filter(
+            (item) => item.user.uuid === location.state.userId
+          )[0]
+        );
       } else {
-        console.log(JSON.parse(chatIdhas[1]));
-      }
-    }
-    getUserChats();
-  }, []);
-
-  const getUserDataForChat = () => {
-    let user_uuid = "";
-    if (location.search) {
-      user_uuid = location.search.split("=")[1];
-    } else {
-      user_uuid = selectedItem.user.uuid;
-    }
-
-    handleAPIRequest("get", `userChat/${user_uuid}`, null)
-      .then((response) => {
-        handleAPIRequest("get", `userChat/${userLogin.uuid}`, null).then(
+        handleAPIRequest("get", `userChat/${location.state.userId}`, null).then(
           (response2) => {
+            console.log(response2, "testingngngnsnsnsnsnsns");
             if (response2) {
-              setMeUser(response2);
+              let newUser = {
+                chatId: `${Math.floor(100000 + Math.random() * 900000)}`,
+                messageText: "Type your message",
+                time: new Date().toLocaleDateString(), // Set time to current JavaScript date and time
+
+                user: response2,
+              };
+
+              // Add the newUser to the first index of newData
+
+              setHistoryArray((prevHistory) => {
+                // Check if newUser already exists in the history
+                const newUserExists = prevHistory.some(
+                  (item) => item.user.uuid === newUser.user.uuid
+                );
+
+                // If newUser doesn't exist, add it to the beginning of the history
+                if (!newUserExists) {
+                  return [newUser, ...prevHistory];
+                }
+
+                // If newUser already exists, return the current history without any changes
+                return prevHistory;
+              });
+
+              setSelectedItem(newUser);
+              setChatId(newUser.chatId);
+              setGetUser(response2);
             }
           }
         );
-        if (response) {
-          setGetUser(response);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      }
+    }
   };
 
-  // useEffect(() => {
-  //   getUserDataForChat();
-  // }, []);
-
-  const handleClick = () => {
-    fileInputRef.current.click();
-  };
+  useEffect(() => {
+    getUserChats();
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -271,10 +286,10 @@ export default function Chat() {
 
             user: {
               _id: userLogin.uuid,
-              name: `${meUser.firstname} ${meUser.lastname}`,
+              name: `${userLogin.firstname} ${userLogin.lastname}`,
 
-              avatar: meUser.photo_url
-                ? meUser.photo_url
+              avatar: userLogin.photo_url
+                ? userLogin.photo_url
                 : "https://kristalle.com/wp-content/uploads/2020/07/dummy-profile-pic-1.jpg",
             },
           })
@@ -282,7 +297,7 @@ export default function Chat() {
             db.collection("Chats")
               .doc(chatId)
               .set({
-                users: [meUser, getUser],
+                users: [userLogin, getUser],
 
                 last_message: {
                   text: "photo",
@@ -324,8 +339,8 @@ export default function Chat() {
           user: {
             _id: message.user._id,
             name: message.user.name,
-            avatar: meUser.photo_url
-              ? meUser.photo_url
+            avatar: userLogin.photo_url
+              ? userLogin.photo_url
               : "https://kristalle.com/wp-content/uploads/2020/07/dummy-profile-pic-1.jpg",
           },
         })
@@ -333,14 +348,13 @@ export default function Chat() {
           db.collection("Chats")
             .doc(chatId)
             .set({
-              users: [meUser, getUser],
-
-              last_message: {
-                text: text,
+              users: [userLogin, getUser],
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-              },
             });
 
+          setText("");
+          setDataURI("");
+          setImage("");
           // sendMessageNotification(
           //   getUser.fcm_token,
           //   `${meUser.firstname} ${meUser.lastname}`,
@@ -379,6 +393,8 @@ export default function Chat() {
                 setChatId(item.chatId);
                 setSelectedItem(item);
                 setShowChat(true);
+
+                setGetUser(item.user);
               }}
             >
               <div className="flex px-4 justify-between items-center w-full">

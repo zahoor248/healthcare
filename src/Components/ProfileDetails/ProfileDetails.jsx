@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./ProfileDetails.css";
 import { AiOutlineStar, AiFillStar, AiOutlineIdcard } from "react-icons/ai";
 import { TbCurrencyDollar } from "react-icons/tb";
@@ -9,7 +9,7 @@ import DaySelect from "../DaySelect/DaySelect";
 import Header from "../Header/Header";
 import CommonInput from "../ReusableComponents/CommonInput";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -19,9 +19,34 @@ import { getAllFav } from "../../Store/Actions/Actions";
 import dayjs from "dayjs";
 import Toast from "../AppLoader";
 import CommonPrimaryButton from "../CommonPrimaryButton";
+import { db } from "../../firebase";
 
 export default function ProfileDetails() {
   const location = useLocation();
+
+  const autoCompleteRef = useRef();
+  const inputRef = useRef();
+  const options = {
+    componentRestrictions: { country: "us" },
+    fields: ["formatted_address"],
+    types: ["establishment"],
+  };
+  useEffect(() => {
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      options
+    );
+
+    autoCompleteRef.current.addListener("place_changed", async function () {
+      const place = await autoCompleteRef.current.getPlace();
+      console.log({ place }, "Testing place");
+      setLocation(place.formatted_address);
+      console.log(autoCompleteRef)
+    });
+  }, []);
+
+  const [chatId, setChatId] = useState(false);
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [month, setMonth] = useState("");
@@ -54,6 +79,21 @@ export default function ProfileDetails() {
       .then((response) => {
         console.log(response, "here is res");
         setUserDetails(response?.data?.user);
+
+        db.collection("Chats")
+          .get()
+          .then((snap) => {
+            snap.forEach((item) => {
+              if (
+                item
+                  .data()
+                  .users.some((e) => e.uuid === response?.data?.user.uuid)
+              ) {
+                console.log(item.id, "Chat Id Exist or not?");
+                setChatId(item.id);
+              }
+            });
+          });
         setLoading(false);
       })
       .catch((error) => {
@@ -255,12 +295,27 @@ export default function ProfileDetails() {
                       text={"Add to Favourites"}
                     />
 
-                    <Link to={`/chats?${userDetails?.uuid}`}>
+                    <div
+                      onClick={() => {
+                        if (chatId) {
+                          navigate("/chats", {
+                            state: {
+                              userId: userDetails?.uuid,
+                              chatId: chatId,
+                            },
+                          });
+                        } else {
+                          navigate("/chats", {
+                            state: { userId: userDetails?.uuid },
+                          });
+                        }
+                      }}
+                    >
                       <CommonPrimaryButton
                         loading={false}
                         text={"Contact this Pro"}
                       />
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -503,8 +558,9 @@ export default function ProfileDetails() {
                   </p>
                   <div className="relative w-full">
                     <input
-                      onChange={(e) => setLocation(e.target.value)}
+                      ref={inputRef}
                       value={counterLocation}
+                      onChange={(e) => setLocation(e.target.value)}
                       placeholder="Select Location"
                       className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                     />

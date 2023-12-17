@@ -7,6 +7,7 @@ import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setAllReasevation } from "../../Store/Actions/Actions";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CommonPrimaryButton from "../CommonPrimaryButton";
+import { db } from "../../firebase";
 const ReservationDetails = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -63,7 +64,7 @@ const ReservationDetails = () => {
     })
       .then((response) => {
         setTerms({ ...terms, toggle: false });
-        navigate('/contacts')
+        navigate("/contacts");
       })
       .catch((error) => {});
   };
@@ -263,9 +264,104 @@ const ReservationDetails = () => {
                 </div>
 
                 <div className="flex gap-3 w-full justify-end pt-6 mt-6 border-t">
-                  <Link to={`/chats?${reservationDetails?.uuid}`}>
+                  <div
+                    to={`/chats?${reservationDetails?.uuid}`}
+                    onClick={() => {
+                      if (reservationDetails.offered_by_me) {
+                        db.collection("Chats")
+                          .get()
+                          .then((snap) => {
+                            if (snap.size != 0) {
+                              snap.forEach((i) => {
+                                if (
+                                  i
+                                    .data()
+                                    .users.some(
+                                      (e) =>
+                                        e.uuid ===
+                                        reservationDetails.offered_to.uuid
+                                    )
+                                ) {
+                                  console.log(
+                                    i.id,
+                                    "Farazfaraakakakakak",
+                                    i
+                                      .data()
+                                      .users.some(
+                                        (e) =>
+                                          e.uuid ===
+                                          reservationDetails.offered_to.uuid
+                                      )
+                                  );
+                                  navigate("/chats", {
+                                    state: {
+                                      userId:
+                                        reservationDetails.offered_to.uuid,
+                                      chatId: i.id,
+                                    },
+                                  });
+                                  return;
+                                } else {
+                                  navigate("/chats", {
+                                    state: {
+                                      userId:
+                                        reservationDetails.offered_to.uuid,
+                                    },
+                                  });
+                                }
+                              });
+                            } else {
+                              navigate("/chats", {
+                                state: {
+                                  userId: reservationDetails.offered_to.uuid,
+                                },
+                              });
+                            }
+                          });
+                      } else {
+                        db.collection("Chats")
+                          .get()
+                          .then((snap) => {
+                            if (snap.size != 0) {
+                              snap.forEach((i) => {
+                                if (
+                                  i
+                                    .data()
+                                    .users.some(
+                                      (e) =>
+                                        e.uuid ===
+                                        reservationDetails.offered_by.uuid
+                                    )
+                                ) {
+                                  navigate("/chats", {
+                                    state: {
+                                      userId:
+                                        reservationDetails.offered_by.uuid,
+                                      chatId: i.id,
+                                    },
+                                  });
+                                } else {
+                                  navigate("/chats", {
+                                    state: {
+                                      userId:
+                                        reservationDetails.offered_by.uuid,
+                                    },
+                                  });
+                                }
+                              });
+                            } else {
+                              navigate("/chats", {
+                                state: {
+                                  userId: reservationDetails.offered_by.uuid,
+                                },
+                              });
+                            }
+                          });
+                      }
+                    }}
+                  >
                     <CommonPrimaryButton loading={false} text={"Chat"} />
-                  </Link>
+                  </div>
 
                   {opentoAcceptoffer?.offered_by_me === false &&
                     opentoAcceptoffer?.status === "open" && (
@@ -309,9 +405,7 @@ const ReservationDetails = () => {
                     )}{" "}
                     {index % 2 === 1 ? (
                       <div
-                        className={`flex w-[85%] left-32 relative flex-row gap-12  p-7 shadow-class rounded-lg ${
-                           "items-start"
-                        }`}
+                        className={`flex w-[85%] left-32 relative flex-row gap-12  p-7 shadow-class rounded-lg ${"items-start"}`}
                       >
                         <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
                           <p className="font-semibold  text-neutral-700 text-lg">
@@ -344,7 +438,7 @@ const ReservationDetails = () => {
                                   ry="2"
                                 />
                                 <line x1="16" x2="16" y1="2" y2="6" />
-                                <line x1="8" x2="8" y1="2" y2="6" />
+                                <line x1="8" x2="8" y1="2" y2="6" />     
                                 <line x1="3" x2="21" y1="10" y2="10" />
                                 <path d="M8 14h.01" />
                                 <path d="M12 14h.01" />
