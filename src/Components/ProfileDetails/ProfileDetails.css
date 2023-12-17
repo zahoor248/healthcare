@@ -1,0 +1,304 @@
+.profile-details-container {
+    display: flex;
+    box-shadow: 0 .3rem 1rem rgb(0 0 0 / 0.2);
+}
+.profile-user-about {
+    flex-basis: 40%;
+    padding-top: 3rem;
+}
+.profile-about-text {
+    flex-basis: 40%;
+    border-left: 1px solid #B0D1EC;
+    padding: 3rem 3rem;
+}
+.profile-working-hours {
+    flex-basis: 20%;
+    background-color: #F6F8FA;
+}
+.avatar-img {
+    border: 1px solid #8F9194;
+    width: 10rem;
+    height: 10rem;
+    background-color: #8F9194;
+    border-radius: 12px;
+}
+.profile-user-text {
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+.profile-user-name {
+    font-family: "GilroySemibold";
+}
+.profile-designation {
+    font-family: "GilroyMedium";
+}
+.contact-profile-btn {
+    font-family: "GilroyMedium";
+}
+.profile-border-bottom {
+    border-bottom: 1px solid #B0D1EC;
+    width: 100%;
+    margin-top: 3rem;
+}
+.profile-attribuites {
+    display: flex;
+}
+.profile-columns {
+    display: flex;
+    flex-direction: row;
+    padding-left: 5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.profile-column1 {
+    display: flex;
+    flex-direction: column;
+}
+.profile-column2 {
+    display: flex;
+    flex-direction: column;
+}
+.star-icon {
+    font-size: 2.5rem;
+    color: #DF6819;
+}
+.rating-section {
+    display: flex;
+}
+.rating-text {
+    margin-left: 1rem;
+}
+.rating-heading{
+    font-size: 1.2rem;
+    font-family: "GilroyMedium";
+    color: #626164;
+    margin-bottom: .2rem;
+}
+.license-icon {
+    font-size: 2.5rem;
+    color: #1C75BC;
+}
+.license-areas {
+    font-size: 1.2rem;
+    font-family: "GilroySemibold";
+    color: #10274F;
+}
+.border-right {
+    border-right: 1px solid #B0D1EC;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+.dollar-icon {
+    font-size: 2.5rem;
+    color: #00B9A0;
+}
+.pin-icon {
+    font-size: 2rem;
+    color: #BE1E2D;
+    margin-right: .4rem;
+    margin-top: .3rem;
+}
+.about-text > h3 {
+    font-size: 1.6rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+}
+.about-pro-desc {
+    font-size: 1rem;
+    font-family: "NunitoRegular";
+    color: #8F9194;
+    margin-top: 1rem;
+    line-height: 2rem;
+    text-align: justify;
+}
+.working-hrs-space {
+    padding: 1.8rem;
+    border-bottom: 1px solid #DEDEDE;
+}
+.working-hrs {
+    font-size: 1.2rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+    text-align: center;
+    margin-top: 1rem;
+
+    padding-bottom: 1rem;
+}
+.working-day-section {
+    display: flex;
+}
+.days-container {
+    border-right: 1px solid #DEDEDE;
+}
+.days-container > p {
+    font-size: 1rem;
+    font-family: "NunitoRegular";
+    color: #1C75BC;
+    text-align: center;
+    padding: .7rem 0;
+    border-bottom: 1px solid #DEDEDE;
+}
+.hrs-container > p {
+    font-size: 1rem;
+    font-family: "NunitoRegular";
+    color: #1C75BC;
+    text-align: center;
+    padding: .7rem 0;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+/* Date & Calendar Section */
+
+.date-selection-container {
+    display: flex;
+    padding-left: 5rem;
+    box-shadow: 0 .3rem 1rem rgb(0 0 0 / 0.2);
+}
+.select-date-section {
+    flex-basis: 50%;
+    padding-top: 3rem;
+    margin-bottom: 4rem;
+    box-shadow: 10px 0 5px -2px #888;
+}
+.calendar-section {
+    flex-basis: 50%;
+    padding: 5rem;
+}
+.select-date-heading {
+    font-size: 1.6rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+    margin-bottom: 1.5rem;
+}
+.month-text {
+    font-size: 1.2rem;
+    font-family: "NunitoSemibold";
+    color: #1C75BC;
+}
+.select-month {
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    font-family: "NunitoSemibold";
+    color: #10274F;
+    padding: 1.5rem;
+    border: 1px solid #C2C9D4;
+    border-radius: 5px;
+}
+.select-month:focus {
+    outline: none;
+}
+.month-selection {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+.react-datepicker__input-container > input {
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    font-family: "NunitoSemibold";
+    color: #10274F;
+    padding: 1.2rem;
+    border: 1px solid #C2C9D4;
+    border-radius: 5px;
+    padding-top: 2rem;
+}
+.react-datepicker-ignore-onclickoutside {
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    font-family: "NunitoSemibold";
+    color: #10274F;
+    padding: 1.2rem;
+    border: 1px solid #C2C9D4;
+    border-radius: 5px;
+}
+.start-days {
+    font-size: .9rem;
+    font-family: "NunitoSemibold";
+    color: #8F9194;
+    position: absolute;
+    top: 3.8rem;
+    left: 1.3rem;
+    z-index: 999;
+}
+.end-days {
+    font-size: .9rem;
+    font-family: "NunitoSemibold";
+    color: #8F9194;
+    position: absolute;
+    top: 1rem;
+    left: 1.3rem;
+    z-index: 999;
+}
+.price-field {
+    width: 45%;
+}
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2rem;
+}
+.price-field > p {
+    font-size: 1.6rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+    margin-bottom: 1rem;
+}
+.price-field > input {
+    font-size: 1.2rem;
+    font-family: "NunitoSemibold";
+    color: #10274F;
+    padding: 1rem 1.8rem;
+    border: 1px solid #C2C9D4;
+    border-radius: 5px;
+    width: 75%;
+}
+.per-hr {
+    font-size: 1.4rem;
+    font-family: "NunitoSemibold";
+    color: #8F9194;
+    margin-left: 1.5rem;
+}
+.pro-description {
+    resize: none;
+    border: 1px solid #C2C9D4;
+    width: 96%;
+    border-radius: 5px;
+    height: 15rem;
+}
+.desc-field {
+    width: 99%;
+}
+.desc-field > p {
+    font-size: 1.6rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+    margin-bottom: 1rem;
+}
+.reserve-btn {
+    font-size: ;
+}
+.reserve-pro-btn {
+    font-size: 1.2rem;
+    font-family: "GilroyMedium";
+    color: #fff;
+    background-color: #1C75BC;
+    border: 1px solid #1C75BC;
+    border-radius: 6px;
+    padding: 1rem 2rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+}
+.reserve-pro-btn:hover {
+    border: 1px solid #10274F;
+    background-color: #fff;
+    color: #1C75BC;
+}
+.pro-btn-container {
+    display: flex;
+    justify-content: end;
+    margin-right: 3rem;
+    margin-top: 2rem;
+}
+.responsive-flex {
+    display: flex;
+}

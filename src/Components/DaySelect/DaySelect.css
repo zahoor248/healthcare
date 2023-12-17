@@ -1,0 +1,143 @@
+/* .Calendar {
+    width: 53em;
+    min-height: 46.7em;
+}
+.Calendar__monthYear {
+    font-size: 1.8rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+}
+.Calendar__monthArrowWrapper.-right {
+    border: 1px solid #C2C9D4;
+    border-radius: 100px;
+    background-color: #EDF1F8 !important;
+}
+.Calendar__monthArrow {
+    width: 1em;
+    height: 1em;
+}
+.Calendar__monthArrowWrapper.-left {
+    border: 1px solid #C2C9D4;
+    border-radius: 100px;
+    background-color: #EDF1F8 !important;
+}
+.Calendar__weekDays {
+    font-size: 2rem;
+    font-family: "NunitoBold";
+    color: #10274F;
+    padding: 0 2.6em;
+    margin-bottom: 0;
+}
+.Calendar__section.-shown {
+    font-size: 1.6rem;
+    font-family: "NunitoRegular";
+    color: #10274F;
+}
+.Calendar__sectionWrapper {
+    height: 34em;
+}
+.Calendar__day.-selected {
+    border-radius: 0%;
+    background-color: #4DECAC;
+}
+.Calendar__day {
+    border-radius: 0%;
+}
+.Calendar__day.-ltr {
+    border-radius: 0% !important;
+    border: 1px solid #C2C9D4;
+    border-top: none;
+    border-bottom: none;
+    margin-bottom: 0;
+    min-height: 2.7em;
+}
+.Calendar__weekRow {
+    border: 1px solid #C2C9D4;
+}
+.Calendar__weekDay {
+    border: 1px solid;
+    padding: 1rem 0;
+}
+.Calendar__day.-weekend:not(.-selected):not(.-blank):not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween) {
+    color: #8F9194;
+}
+.Calendar__sectionWrapper {
+    top: -8px;
+} */
+
+.rmdp-calendar {
+    width: 54em;
+    height: 51.7em;
+    padding: 0;
+}
+.rmdp-day-picker {
+    display: block !important;
+    padding: 0;
+    margin-top: 2.5rem;
+}
+.rmdp-week-day {
+    font-size: 1.8rem;
+    font-family: "NunitoBold";
+    color: #10274F;
+    padding: 3rem 1rem;
+    border: 1px solid #B0D1EC;
+    width: 100%;
+}
+.rmdp-header {
+    margin-top: 2.5rem;
+}
+.rmdp-day {
+    width: 100%;
+    border: 1px solid #B0D1EC;
+    border-top: none;
+    padding: 3rem;
+}
+.rmdp-header-values {
+    font-size: 1.6rem;
+    color: #10274F;
+    font-family: "GilroyBold";
+}
+.rmdp-day span {
+    bottom: -1px;
+    left: 0px;
+    right: -1px;
+    top: -1px;
+    border-radius: 0%;
+    font-size: 1.8rem;
+    font-family: "NunitoSemibold";
+    color: #10274F;
+}
+.rmdp-day.rmdp-selected span:not(.highlight) {
+    background-color: #fff;
+    color: #10274F;
+    background-image: url("../../assets/images/green-pattern.png");
+}
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+    background-color: #fff;
+    color: #10274F;
+    background-image: url("../../assets/images/green-pattern.png");
+}
+.rmdp-day.rmdp-today span {
+    background-color: #fff;
+    color: #10274F;
+    border: 1px solid #B0D1EC;
+    border-left: none;
+}
+.rmdp-arrow-container {
+    border: 1px solid #C2C9D4;
+    background-color: #EDF1F8;
+    height: 1.9rem;
+    width: 1.9rem;
+}
+.rmdp-arrow {
+    border: solid #10274F;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    height: 3px;
+    margin-top: 5px;
+    padding: 2px;
+    width: 3px;
+}
+.rmdp-arrow-container {
+    margin: 0 3rem;
+}

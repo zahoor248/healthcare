@@ -1,0 +1,25 @@
+.modal-review-heading {
+    font-size: 1.5rem;
+    font-family: "GilroyBold";
+    color: #10274F;
+    margin-top: 4rem;
+}
+.modal-slide1 {
+    box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    width: 43%;
+    padding: 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 1rem 1rem 1rem;
+}
+.modal-user-review {
+    font-size: 1.1rem;
+    font-family: "NunitoBold";
+    color: #10274F;
+    margin-bottom: 0;
+}
+.pro-details-modal > .modal-dialog {
+    margin-top: 2rem;
+    margin-bottom: 0;
+}

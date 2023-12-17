@@ -1,0 +1,25 @@
+.react-datepicker__input-container > .availability-picker {
+    padding: 1rem;
+    width: 90%;
+    padding-left: 8rem;
+}
+.datepicker-area {
+    position: relative;
+    width: 81%;
+    margin-left: 5rem;
+    margin-top: 3rem;
+    z-index: 999999;
+}
+.datepicker-area > h4 {
+    position: absolute;
+    z-index: 999;
+    left: 1.8rem;
+    top: 1.6rem;
+}
+.del-date {
+    font-size: 2rem;
+    position: absolute;
+    right: 6.5rem;
+    top: 1.5rem;
+    z-index: 999;
+}
