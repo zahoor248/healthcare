@@ -66,8 +66,8 @@ const ReservationDetails = () => {
       .catch((error) => {});
   };
   return (
-    <div className="flex main-container  overflow-auto w-full">
-      <div className="flex w-full flex-col    py-14">
+    <div className="flex main-container overflow-auto w-full">
+      <div className="flex w-full flex-col  py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
           <div className="text-3xl font-semibold text-neutral-800">
             Offer Details
@@ -86,16 +86,16 @@ const ReservationDetails = () => {
                 </div> */}
               </div>
               <div className="flex justify-start relative shadow-class rounded-xl p-6  mt-6 flex-col ">
-                <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                <div className="  absolute right-0 -mt-0 md:-mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
                   <p className="font-semibold pr-1 text-neutral-700 text-lg">
                     Status:
                   </p>{" "}
                   {reservationDetails.status}
                 </div>
-                <div className="flex  gap-12 w-full">
-                  <div className="flex flex-col items-start gap-4 w-[40%] ">
+                <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full">
+                  <div className="flex flex-col items-start gap-4 w-full md:w-[40%] ">
                     {/* Date here  */}
-                    <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                    <div className="flex items-center text-neutral-700 bg-[#EFF4F8] p-2 md:p-4 rounded-sm flex-row gap-2 md:gap-3 w-full">
                       <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -128,16 +128,16 @@ const ReservationDetails = () => {
                           <path d="M16 18h.01" />
                         </svg>
                       </div>
-                      <div className=" flex flex-col">
+                      <div className=" flex flex-col w-full md:w-fit">
                         <span className=" text-neutral-600">Date</span>
-                        <div className="flex">
-                          <p className="font-semibold">
+                        <div className="flex w-full justify-between md:w-fit md:justify-start">
+                          <p className="font-semibold text-sm md:text-base">
                             {dayjs(reservationDetails.start_date, {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
                           </p>
                           <span className="px-2">-</span>
-                          <p className="font-semibold">
+                          <p className="font-semibold text-sm md:text-base">
                             {dayjs(reservationDetails.end_date, {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
@@ -299,7 +299,7 @@ const ReservationDetails = () => {
               )}
               {reservationDetails?.counterOffers?.map((item, index) => (
                 <div className="flex justify-start w-full flex-col ">
-                  <div className="flex  flex-row gap-6 mt-6">
+                  <div className="flex  flex-row gap-3 md:gap-6 mt-6">
                     {index % 2 != 1 && (
                       <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
                         {item?.offered_to?.firstname.charAt(0)}
@@ -307,19 +307,19 @@ const ReservationDetails = () => {
                     )}{" "}
                     {index % 2 === 1 ? (
                       <div
-                        className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
+                        className={`flex w-[85%] relative flex-col md:flex-row gap-8 md:gap-12 p-4 md:p-7 shadow-class rounded-lg ${
                           index % 2 === 1 ? "items-start" : "items-end"
                         }`}
                       >
-                        <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                        <div className="  absolute right-0 md:top-0 top-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
                           <p className="font-semibold  text-neutral-700 text-lg">
                             Status:
                           </p>{" "}
                           {item.status}
                         </div>
-                        <div className="flex justify-between flex-col  gap-3">
+                        <div className="flex justify-between flex-col  gap-3 w-full">
                           {/* Date here  */}
-                          <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                          <div className="flex items-center text-neutral-700 bg-[#EFF4F8] p-2 md:p-4 rounded-sm flex-row gap-2 md:gap-3 w-full">
                             <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -355,13 +355,13 @@ const ReservationDetails = () => {
                             <div className=" flex flex-col">
                               <span className=" text-neutral-600">Date</span>
                               <div className="flex">
-                                <p className="font-semibold">
+                                <p className="font-semibold text-sm md:text-base">
                                   {dayjs(item.start_date, {
                                     format: "DD/MM/YYYY",
                                   }).format("MMM. DD, YYYY")}
                                 </p>
                                 <span className="px-2">-</span>
-                                <p className="font-semibold">
+                                <p className="font-semibold text-sm md:text-base">
                                   {dayjs(item.end_date, {
                                     format: "DD/MM/YYYY",
                                   }).format("MMM. DD, YYYY")}
@@ -396,7 +396,7 @@ const ReservationDetails = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex flex-col items-start pt-3 gap-4">
+                        <div className="flex flex-col items-start md:pt-3 gap-4">
                           <div className="font-semibold text-xl text-blue-600">
                             Counter Offer:{" "}
                             <span className="text-neutral-700 capitalize">
@@ -435,19 +435,19 @@ const ReservationDetails = () => {
                       </div>
                     ) : (
                       <div
-                        className={`flex w-[85%] relative flex-row gap-12  p-7 shadow-class rounded-lg ${
-                          index % 2 === 1 ? "items-start" : "items-end"
+                        className={`flex w-[85%] relative flex-col md:flex-row gap-8 md:gap-12 p-4 md:p-7 shadow-class rounded-lg ${
+                          index % 2 === 1 ? "items-start" : "md:items-end"
                         }`}
                       >
-                        <div className="  absolute right-0 -mt-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
+                        <div className="  absolute right-0 md:top-0 top-3 px-6  text-green-600  capitalize flex items-center rounded-full py-[2px] ">
                           <p className="font-semibold  text-neutral-700 text-lg">
                             Status:
                           </p>{" "}
                           {item.status}
                         </div>
-                        <div className="flex justify-between flex-col  gap-3">
+                        <div className="flex justify-between flex-col  gap-3 w-full">
                           {/* Date here  */}
-                          <div className="flex items-center text-neutral-700 bg-[#EFF4F8] px-4 rounded-sm flex-row gap-3 py-4 w-full">
+                          <div className="flex items-center text-neutral-700 bg-[#EFF4F8] p-2 md:p-4 rounded-sm flex-row gap-2 md:gap-3 w-full">
                             <div className="p-2 flex justify-center items-center h-fit rounded-full bg-blue-100">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -483,13 +483,13 @@ const ReservationDetails = () => {
                             <div className=" flex flex-col">
                               <span className=" text-neutral-600">Date</span>
                               <div className="flex">
-                                <p className="font-semibold">
+                                <p className="font-semibold text-sm md:text-base">
                                   {dayjs(item.start_date, {
                                     format: "DD/MM/YYYY",
                                   }).format("MMM. DD, YYYY")}
                                 </p>
                                 <span className="px-2">-</span>
-                                <p className="font-semibold">
+                                <p className="font-semibold text-sm md:text-base">
                                   {dayjs(item.end_date, {
                                     format: "DD/MM/YYYY",
                                   }).format("MMM. DD, YYYY")}
@@ -524,7 +524,7 @@ const ReservationDetails = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex flex-col items-start pt-3 gap-4">
+                        <div className="flex flex-col items-start md:pt-3 gap-4">
                           <div className="font-semibold text-xl text-blue-600">
                             Counter Offer:{" "}
                             <span className="text-neutral-700 capitalize">

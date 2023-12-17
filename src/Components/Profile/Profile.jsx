@@ -625,8 +625,8 @@ const Profile = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row main-container gap-8 overflow-auto w-full">
-        <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px] md:h-full">
-          <div className=" bg-white h-fit   md:py-10 w-full md:h-full rounded-lg shadow-class">
+        <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px]">
+          <div className=" bg-white  md:py-10 w-full md:h-full rounded-lg shadow-class">
             <div className="hidden md:flex flex-col pb-6 items-center">
               <img src={User} alt="user profile image" className="w-20 h-20" />
               <p className="text-xl pt-3 font-semibold">
