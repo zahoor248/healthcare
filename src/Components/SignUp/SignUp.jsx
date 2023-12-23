@@ -82,11 +82,11 @@ export default function SignUp() {
         <div className="bg-[#4169e1]  flex items-center justify-center w-full">
           <img
             src={Slide2}
-          className="h-[200px] w-[200px] py-6 md:!p-0  2xl:w-[500px] object-contain 2xl:h-[500px]  xl:w-[400px]  xl:h-[400px]  md:w-[300px]  md:h-[300px] "
+            className="h-[200px] w-[200px] py-6 md:!p-0  2xl:w-[500px] object-contain 2xl:h-[500px]  xl:w-[400px]  xl:h-[400px]  md:w-[300px]  md:h-[300px] "
           />
         </div>
 
-        <div className="h-full w-full md:p-12 p-6 lg:p-24 overflow-auto flex flex-col   justify-start">
+        <div className="h-full w-full md:p-12  p-6 lg:p-24 overflow-auto flex flex-col   justify-start">
           <div class="">
             <a
               class="absolute md:relative  top-6 left-4 md:top-0 md:left-0 md:flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
