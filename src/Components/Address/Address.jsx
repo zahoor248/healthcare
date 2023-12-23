@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Address.css";
 import TextField from "@mui/material/TextField";
 import emptyState from "../../assets/images/address-book-icon-9.jpg";
@@ -10,18 +10,20 @@ import { handleAPIRequest } from "../../helper/ApiHandler";
 import { useSelector } from "react-redux";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 import Toast from "../AppLoader";
+import { useLocation } from "react-router-dom";
 export default function Address() {
-  const [country, setCountry] = useState("");
+  const [nickName, setNickName] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
-
+  const location = useLocation();
   const [addresses, setAddresses] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [openModel, setOpenModel] = useState(false);
   const [button_loading, setButton_loading] = useState(false);
+  const [adressList, setAdressList] = useState([]);
   const [uuid, setUuid] = useState(null);
   const [showToast, setShowToast] = useState({
     toggle: false,
@@ -35,7 +37,7 @@ export default function Address() {
     setOpenModel(true);
     if (address) {
       setSelectedAddress(address);
-      setCountry(address.country);
+      setNickName(address.nickname);
       setState(address.state);
       setCity(address.city);
       setZipCode(address.zip);
@@ -44,7 +46,7 @@ export default function Address() {
       setIsEditing(true);
     } else {
       setSelectedAddress(null);
-      setCountry("");
+      setNickName("");
       setState("");
       setCity("");
       setZipCode("");
@@ -55,7 +57,7 @@ export default function Address() {
 
   const saveAddress = () => {
     if (
-      country == "" ||
+      nickName == "" ||
       state == "" ||
       city == "" ||
       zipCode == "" ||
@@ -78,6 +80,7 @@ export default function Address() {
         let payload = {
           state: selectedAddress.state,
           city: selectedAddress.city,
+          nickname: selectedAddress.nickname,
           zip: selectedAddress.zip,
           [`address_${1}`]: selectedAddress.address_1,
           type: "mailing",
@@ -88,6 +91,7 @@ export default function Address() {
             if (response) {
               setOpenModel(false);
               setButton_loading(false);
+              loadAddres();
 
               setShowToast({
                 ...showToast,
@@ -133,7 +137,7 @@ export default function Address() {
         // Create a new address object and add it to the addresses array
 
         const newAddress = {
-          country,
+          nickName,
           state,
           city,
           zipCode,
@@ -146,7 +150,7 @@ export default function Address() {
 
   const submitHandler = (data) => {
     let payload = {
-      country: data.country,
+      nickname: data.nickName,
       state: data.state,
       city: data.city,
       zip: data.zipCode,
@@ -160,6 +164,7 @@ export default function Address() {
         if (response) {
           setOpenModel(false);
           setAddresses([...addresses, data]);
+          loadAddres();
           setButton_loading(false);
 
           setShowToast({
@@ -203,6 +208,19 @@ export default function Address() {
       });
   };
 
+  useEffect(() => {
+    loadAddres();
+  }, [location, user]);
+
+  const loadAddres = () => {
+    handleAPIRequest("get", `address`, null)
+      .then((response) => {
+        if (response?.addresses) {
+          setAdressList(response.addresses);
+        }
+      })
+      .catch((error) => {});
+  };
   return (
     <div className="w-full flex flex-col gap-4 py-12">
       <div className="profile-editing-header flex justify-between w-full items-center">
@@ -218,9 +236,9 @@ export default function Address() {
       </div>
 
       <div className="bg-white shadow-class rounded-lg h-full p-8 flex flex-col overflow-auto">
-        {user?.addresses?.length > 0 ? (
+        {adressList?.length > 0 ? (
           <div class="w-full flex flex-col gap-4">
-            {user?.addresses?.map((address, index) => (
+            {adressList?.map((address, index) => (
               <div class=" " key={index}>
                 <div class=" bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-700">
                   <div class="text-lg px-6 py-2 flex items-center border-b bg-neutral-100 justify-between w-full font-semibold text-gray-900 dark:text-white">
@@ -264,6 +282,14 @@ export default function Address() {
                   </div>
                   <div className="flex gap-3 flex-col p-6">
                     <div className="flex justify-between w-full">
+                      {address.nickname != "" && (
+                        <p>
+                          <strong className="text-neutral-600 font-bold">
+                            Nick Name:
+                          </strong>{" "}
+                          {address.nickname}
+                        </p>
+                      )}
                       <p>
                         <strong className="text-neutral-600 font-bold">
                           Adress:
@@ -326,15 +352,15 @@ export default function Address() {
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-2">
                 <p className="text-base/none font-normal text-neutral-600">
-                  Country
+                  Nick Name
                 </p>
                 <input
                   className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                  label="Country"
+                  label="nickName"
                   variant="outlined"
-                  placeholder="Enter your Country"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
+                  placeholder="Enter your Nick Name"
+                  value={nickName}
+                  onChange={(e) => setNickName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col gap-2">
