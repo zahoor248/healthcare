@@ -395,7 +395,6 @@ export default function Chat() {
       >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
           <h4>All Conversations ({historyArray.length}) </h4>
-          <BiSearchAlt className="search-message" />
         </div>
 
         <div className=" h-full overflow-auto">
