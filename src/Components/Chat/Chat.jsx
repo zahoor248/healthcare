@@ -253,7 +253,8 @@ export default function Chat() {
       reader.readAsDataURL(selectedImage);
     }
   };
-  const onSend = async () => {
+  const onSend = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("token");
 
     const message = {
@@ -487,7 +488,10 @@ export default function Chat() {
               </div>
 
               <div className=" mx-[100px] ms-auto mb-20 w-full">
-                <div className="px-7 flex flex-row justify-end  gap-2 items-end">
+                <form
+                  onSubmit={(e) => onSend(e)}
+                  className="px-7 flex flex-row justify-end  gap-2 items-end"
+                >
                   {dataURI ? (
                     <div className="w-full relative border  shadow-sm p-2">
                       <button
@@ -556,12 +560,12 @@ export default function Chat() {
                       </svg>
                     </div>
                     <CommonPrimaryButton
-                      onClick={onSend}
+                      onClick={(e) => onSend(e)}
                       loading={false}
                       text={"Send"}
                     />
                   </div>
-                </div>
+                </form>
               </div>
             </>
           )}
