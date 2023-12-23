@@ -82,7 +82,7 @@ export default function SignUp() {
         <div className="bg-[#4169e1]  flex items-center justify-center w-full">
           <img
             src={Slide2}
-            className="h-[200px] w-[200px] py-6 md:!p-0  2xl:w-[500px] object-contain 2xl:h-[500px]  xl:w-[400px]  xl:h-[400px]  md:w-[300px]  md:h-[300px] "
+          className="h-[200px] w-[200px] py-6 md:!p-0  2xl:w-[500px] object-contain 2xl:h-[500px]  xl:w-[400px]  xl:h-[400px]  md:w-[300px]  md:h-[300px] "
           />
         </div>
 
