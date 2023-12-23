@@ -31,8 +31,8 @@ export default function LogIn() {
     message: "",
     status: "",
   });
-  const [email, setEmail] = useState("webbus@yopmail.com");
-  const [password, setPassword] = useState("Faraz@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
