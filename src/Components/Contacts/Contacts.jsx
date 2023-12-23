@@ -276,7 +276,10 @@ const Contacts = () => {
                       Between:
                     </div>
                     <div className="flex items-center  gap-4">
-                      <div className=" !rounded-full overflow-hidden w-10 h-10">
+                      <Link
+                        to={`/profile-details?${item.business?.uuid}`}
+                        className=" !rounded-full overflow-hidden w-10 h-10"
+                      >
                         {item.business?.photo_url != null ? (
                           <img src={item.business?.photo_url} />
                         ) : (
@@ -285,7 +288,7 @@ const Contacts = () => {
                           </div>
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
-                      </div>
+                      </Link>
                       <div className="">
                         <p className="font-semibold text-md text-neutral-600 capitalize">
                           {item?.business?.firstname} {item?.business?.lastname}
@@ -294,7 +297,10 @@ const Contacts = () => {
                       </div>
                     </div>
                     <div className="flex items-center pt-3 gap-4">
-                      <div className=" !rounded-full overflow-hidden w-10 h-10">
+                      <Link
+                        to={`/profile-details?${item.pro?.uuid}`}
+                        className=" !rounded-full overflow-hidden w-10 h-10"
+                      >
                         {item.pro?.photo_url != null ? (
                           <img src={item.pro?.photo_url} />
                         ) : (
@@ -303,7 +309,7 @@ const Contacts = () => {
                           </div>
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
-                      </div>
+                      </Link>
                       <div className="">
                         <p className="font-semibold text-md text-neutral-600 capitalize">
                           {item?.pro?.firstname} {item?.pro?.lastname}

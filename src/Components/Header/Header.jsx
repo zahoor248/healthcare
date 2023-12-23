@@ -276,9 +276,16 @@ export default function Header() {
                   </div>
 
                   <Link to={"/profile"} className="flex items-center gap-2">
-                    <h4 class="text-white   text-sm lg:text-sm 2xl:text-lg  font-normal leading-3 bg-black/50 md:h-8 md:w-8 xl:w-12 xl:h-12 flex items-center m-auto justify-center rounded-full text-center cursor-pointer">
-                      {user?.firstname?.charAt(0)}
-                    </h4>
+                    <div className=" !rounded-full overflow-hidden md:h-8 md:w-8 xl:w-10 xl:h-10">
+                      {user?.photo_url != null ? (
+                        <img src={user?.photo_url} />
+                      ) : (
+                        <h4 class="text-white   text-sm lg:text-sm 2xl:text-md  font-normal leading-3 bg-black md:h-8 md:w-8 xl:w-10 xl:h-10 flex items-center m-auto justify-center rounded-full text-center cursor-pointer">
+                          {user?.firstname?.charAt(0)}
+                        </h4>
+                      )}
+                      {/* <GoPrimitiveDot className='online-icon'/> */}
+                    </div>
                     {/* <h4 class="text-lg leading-3 text-center w-full h-full rounded-full bg-neutral-400 animate-pulse"></h4> */}
                     <div className="text-sm lg:text-sm 2xl:text-lg mt-2 text-neutral-800">
                       <div className="text-[8px] xl:text-xs leading-none">
