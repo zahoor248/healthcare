@@ -23,7 +23,22 @@ const ReservationDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
+    loadDetails();
     console.log(user.uuid);
+  }, [location, user]);
+
+  const handleReviewSubmit = () => {
+    handleAPIRequest("POST", `accept-offer/${location.search.split("?")[1]}`, {
+      additional_terms: "",
+    })
+      .then((response) => {
+        setTerms({ ...terms, toggle: false });
+        loadDetails();
+      })
+      .catch((error) => {});
+  };
+
+  const loadDetails = () => {
     handleAPIRequest(
       "get",
       `reservation/${location.search.split("?")[1]}`,
@@ -56,16 +71,6 @@ const ReservationDetails = () => {
       .catch((error) => {
         setLoading(false);
       });
-  }, [location, user]);
-
-  const handleReviewSubmit = () => {
-    handleAPIRequest("POST", `accept-offer/${location.search.split("?")[1]}`, {
-      additional_terms: "",
-    })
-      .then((response) => {
-        setTerms({ ...terms, toggle: false });
-      })
-      .catch((error) => {});
   };
   return (
     <div className="flex main-container overflow-auto w-full">
