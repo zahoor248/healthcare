@@ -152,6 +152,8 @@ export default function ProfileDetails() {
             message: "This user has been Reserved",
             lable: "Reservation Booked",
           });
+
+          navigate("/reservations");
         }, 2000);
 
         setButtonLoading(false);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -12,6 +12,7 @@ import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function NewOffer() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [openAcceptoffer, setOpenToAcceptOffer] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -442,9 +443,7 @@ export default function NewOffer() {
                 Cancel
               </button>
               <CommonPrimaryButton
-                onClick={() => {
-                  reserveUser();
-                }}
+                onClick={() => reserveUser()}
                 loading={button_loading}
                 text={"Send Offer"}
               />
