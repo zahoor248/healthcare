@@ -12,7 +12,7 @@ import CommonPrimaryButton from "../CommonPrimaryButton";
 import Toast from "../AppLoader";
 import { useLocation } from "react-router-dom";
 export default function Address() {
-  const [nickName, setNickName] = useState("");
+  const [nickname, setNickName] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zipCode, setZipCode] = useState("");
@@ -36,6 +36,7 @@ export default function Address() {
   const openAddressModal = (address = null) => {
     setOpenModel(true);
     if (address) {
+      setIsEditing(true);
       setSelectedAddress(address);
       setNickName(address.nickname);
       setState(address.state);
@@ -43,7 +44,6 @@ export default function Address() {
       setZipCode(address.zip);
       setAddress(address.address_1);
       setUuid(address.uuid);
-      setIsEditing(true);
     } else {
       setSelectedAddress(null);
       setNickName("");
@@ -57,7 +57,7 @@ export default function Address() {
 
   const saveAddress = () => {
     if (
-      nickName == "" ||
+      nickname == "" ||
       state == "" ||
       city == "" ||
       zipCode == "" ||
@@ -78,11 +78,11 @@ export default function Address() {
         setOpenModel(false);
 
         let payload = {
-          state: selectedAddress.state,
-          city: selectedAddress.city,
-          nickname: selectedAddress.nickname,
-          zip: selectedAddress.zip,
-          [`address_${1}`]: selectedAddress.address_1,
+          state: state,
+          city: city,
+          nickname: nickname,
+          zip: zipCode,
+          [`address_${1}`]: address,
           type: "mailing",
         };
 
@@ -137,7 +137,7 @@ export default function Address() {
         // Create a new address object and add it to the addresses array
 
         const newAddress = {
-          nickName,
+          nickname,
           state,
           city,
           zipCode,
@@ -150,7 +150,7 @@ export default function Address() {
 
   const submitHandler = (data) => {
     let payload = {
-      nickname: data.nickName,
+      nickname: data.nickname,
       state: data.state,
       city: data.city,
       zip: data.zipCode,
@@ -356,10 +356,10 @@ export default function Address() {
                 </p>
                 <input
                   className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                  label="nickName"
+                  label="nickname"
                   variant="outlined"
                   placeholder="Enter your Nick Name"
-                  value={nickName}
+                  value={nickname}
                   onChange={(e) => setNickName(e.target.value)}
                 />
               </div>
