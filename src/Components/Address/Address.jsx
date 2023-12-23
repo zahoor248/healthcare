@@ -290,12 +290,7 @@ export default function Address() {
                           {address.nickname}
                         </p>
                       )}
-                      <p>
-                        <strong className="text-neutral-600 font-bold">
-                          Adress:
-                        </strong>{" "}
-                        {address.address_1}
-                      </p>
+
                       <p>
                         <strong className="text-neutral-600 font-bold">
                           State:
@@ -306,10 +301,11 @@ export default function Address() {
                     <div className="flex justify-between w-full">
                       <p>
                         <strong className="text-neutral-600 font-bold">
-                          City:
+                          Adress:
                         </strong>{" "}
-                        {address.city}
+                        {address.address_1}
                       </p>
+
                       <p>
                         <strong className="text-neutral-600 font-bold">
                           {" "}
@@ -318,6 +314,12 @@ export default function Address() {
                         {address.zip}
                       </p>
                     </div>
+                    <p>
+                      <strong className="text-neutral-600 font-bold">
+                        City:
+                      </strong>{" "}
+                      {address.city}
+                    </p>
                   </div>
                 </div>
               </div>
