@@ -67,7 +67,7 @@ const Favouraties = () => {
     <div className="flex main-container  overflow-auto w-full">
       <div className="flex w-full flex-col    py-14">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
-          <div className="text-3xl">Favouraties</div>
+          <div className="text-3xl">Favorites</div>
         </div>
         {loading ? (
           <div className="grid animate-pulse  grid-cols-2 justify-between w-full pt-10 h-[114px] gap-9 flex-wrap">
@@ -137,7 +137,7 @@ const Favouraties = () => {
               <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
                 <img src={emptyState} className="w-28 bg-transparent" />
                 <div className="text-3xl ">
-                  Your Favouraties will appear here
+                  Your Favorites will appear here
                 </div>
               </div>
             )}

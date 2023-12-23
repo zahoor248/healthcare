@@ -195,7 +195,7 @@ export default function Header() {
                             d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
                           />
                         </svg>
-                        Favourites
+                        Favorites
                       </Link>
                     </div>
                   )}
@@ -225,7 +225,7 @@ export default function Header() {
                         Reservations
                       </Link>
                     </div>
-                  ) }
+                  )}
 
                   <div className="flex items-center">
                     <Link
@@ -286,7 +286,6 @@ export default function Header() {
                       </div>
                       <span className="text-sm lg:text-xs 2xl:text-lg leading-none text-neutral-800">
                         {user?.firstname}
-                        {user?.lastname}
                       </span>
                     </div>
                   </Link>

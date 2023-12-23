@@ -23,6 +23,7 @@ export default function NewOffer() {
   const [button_loading, setButtonLoading] = useState(false);
   const reservations = useSelector((state) => state.reservations);
   const user = useSelector((state) => state.user);
+  const [showModel, setShowModel] = useState(false);
 
   const autoCompleteRef = useRef();
   const inputRef = useRef();
@@ -32,7 +33,7 @@ export default function NewOffer() {
     types: ["establishment"],
   };
 
-  useEffect(() => {
+  const handleLocationLoad = () => {
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
       inputRef.current,
       options
@@ -42,8 +43,9 @@ export default function NewOffer() {
       const place = await autoCompleteRef.current.getPlace();
       console.log({ place }, "Testing place");
       setLocation(place.formatted_address);
+      console.log(autoCompleteRef);
     });
-  }, []);
+  };
 
   useEffect(() => {
     console.log(location, "here is the location");
@@ -86,6 +88,7 @@ export default function NewOffer() {
 
   const reserveUser = () => {
     setButtonLoading(true);
+
     let data = {
       start_date: dayjs(startDate).format("YYYY-MM-DD"),
       end_date: dayjs(endDate).format("YYYY-MM-DD"),
@@ -105,6 +108,7 @@ export default function NewOffer() {
       .then((response) => {
         console.log(response);
         setButtonLoading(false);
+        setShowModel(false);
       })
       .catch((err) => {
         setButtonLoading(false);
@@ -328,6 +332,7 @@ export default function NewOffer() {
                     <input
                       ref={inputRef}
                       onChange={(e) => setLocation(e.target.value)}
+                      onKeyUp={() => handleLocationLoad()}
                       value={counterLocation}
                       placeholder="Select Location"
                       className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
@@ -385,14 +390,64 @@ export default function NewOffer() {
                   </div>
                   <div className="w-auto flex justify-center items-center mt-4">
                     <CommonPrimaryButton
-                      onClick={() => reserveUser()}
-                      loading={button_loading}
-                      text={"   Send Offer"}
+                      onClick={() => {
+                        setShowModel(true);
+                      }}
+                      text={"Send Offer"}
                       classes="px-20"
                     />
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showModel && (
+        <div className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"></div>
+      )}
+      {showModel && (
+        <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
+          <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+            <div className="text-xl pb-4">{"Legal Agreement"}</div>
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-2">
+                {/* <p className="text-base mt-2 text-neutral-600">
+                  Additional Terms
+                </p> */}
+                <p
+                  className="text-md placeholder-[#B8C0CB] text-neutral-800 py-3  rounded w-full"
+                  placeholder="Write Something"
+                  variant="outlined"
+                >
+                  By clicking Send Offer you agree that you are creating an
+                  offer for employment to the user indicated above. Should the
+                  user accept your offer, it constitutes a binding legal
+                  agreement. If you chose to terminate the contract prior to the
+                  beginning of the offer date, you agree to compensate the user
+                  80% of the agreed upon rate.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 w-full justify-end mt-8">
+              {" "}
+              <button
+                onClick={() => {
+                  setShowModel(false);
+                }}
+                className="px-6 py-3 text-[#0f75bc] hover:bg-[#0f75bc]/20 transition-all ease-in-out duration-500 rounded-md"
+              >
+                Cancel
+              </button>
+              <CommonPrimaryButton
+                onClick={() => {
+                  reserveUser();
+                }}
+                loading={button_loading}
+                text={"Send Offer"}
+              />
             </div>
           </div>
         </div>

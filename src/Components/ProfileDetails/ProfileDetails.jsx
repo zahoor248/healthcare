@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import "./ProfileDetails.css";
 import { AiOutlineStar, AiFillStar, AiOutlineIdcard } from "react-icons/ai";
 import { TbCurrencyDollar } from "react-icons/tb";
@@ -24,6 +24,8 @@ import { db } from "../../firebase";
 export default function ProfileDetails() {
   const location = useLocation();
 
+  const [showModel, setShowModel] = useState(false);
+
   const autoCompleteRef = useRef();
   const inputRef = useRef();
   const options = {
@@ -36,7 +38,6 @@ export default function ProfileDetails() {
       inputRef.current,
       options
     );
-
     autoCompleteRef.current.addListener("place_changed", async function () {
       const place = await autoCompleteRef.current.getPlace();
       console.log({ place }, "Testing place");
@@ -44,6 +45,19 @@ export default function ProfileDetails() {
       console.log(autoCompleteRef);
     });
   };
+
+  useLayoutEffect(() => {
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      options
+    );
+    autoCompleteRef.current.addListener("place_changed", async function () {
+      const place = await autoCompleteRef.current.getPlace();
+      console.log({ place }, "Testing place");
+      setLocation(place.formatted_address);
+      console.log(autoCompleteRef);
+    });
+  }, []);
 
   const [chatId, setChatId] = useState(false);
   const navigate = useNavigate();
@@ -121,6 +135,7 @@ export default function ProfileDetails() {
 
     handleAPIRequest("POST", `reservation`, data)
       .then((response) => {
+        setShowModel(false);
         setShowToast({
           ...showToast,
           toggle: true,
@@ -559,7 +574,7 @@ export default function ProfileDetails() {
                   <div className="relative w-full">
                     <input
                       ref={inputRef}
-                      onKeyUp={()=>handleLocationLoad()}
+                      onKeyUp={() => handleLocationLoad()}
                       value={counterLocation}
                       onChange={(e) => setLocation(e.target.value)}
                       placeholder="Select Location"
@@ -616,9 +631,9 @@ export default function ProfileDetails() {
                 </div>
                 <div className="w-auto flex justify-center items-end mt-4">
                   <CommonPrimaryButton
-                    onClick={() => reserveUser()}
+                    onClick={() => setShowModel(true)}
                     loading={buttonLoading}
-                    text={"Send Reservation"}
+                    text={"Send Offer"}
                   />
                 </div>
               </div>
@@ -653,6 +668,56 @@ export default function ProfileDetails() {
           </div>
         </div>
       )}
+
+      {showModel && (
+        <div className="fixed w-full inset-0 bg-black/60 backdrop-blur-sm z-[11]"></div>
+      )}
+      {showModel && (
+        <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
+          <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+            <div className="text-xl pb-4">{"Legal Agreement"}</div>
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-2">
+                {/* <p className="text-base mt-2 text-neutral-600">
+                  Additional Terms
+                </p> */}
+                <p
+                  className="text-md placeholder-[#B8C0CB] text-neutral-800 py-3  rounded w-full"
+                  placeholder="Write Something"
+                  variant="outlined"
+                >
+                  By clicking Send Offer you agree that you are creating an
+                  offer for employment to the user indicated above. Should the
+                  user accept your offer, it constitutes a binding legal
+                  agreement. If you chose to terminate the contract prior to the
+                  beginning of the offer date, you agree to compensate the user
+                  80% of the agreed upon rate.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 w-full justify-end mt-8">
+              {" "}
+              <button
+                onClick={() => {
+                  setShowModel(false);
+                }}
+                className="px-6 py-3 text-[#0f75bc] hover:bg-[#0f75bc]/20 transition-all ease-in-out duration-500 rounded-md"
+              >
+                Cancel
+              </button>
+              <CommonPrimaryButton
+                onClick={() => {
+                  reserveUser();
+                }}
+                loading={buttonLoading}
+                text={"Send Offer"}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       <Toast setShowToast={setShowToast} showToast={showToast} />
     </>
   );

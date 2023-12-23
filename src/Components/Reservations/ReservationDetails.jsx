@@ -58,7 +58,7 @@ const ReservationDetails = () => {
 
   const handleReviewSubmit = () => {
     handleAPIRequest("POST", `accept-offer/${location.search.split("?")[1]}`, {
-      additional_terms: terms.termsText,
+      additional_terms: "",
     })
       .then((response) => {
         setTerms({ ...terms, toggle: false });
@@ -590,21 +590,28 @@ const ReservationDetails = () => {
       {terms.toggle && (
         <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
           <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
-            <div className="text-xl pb-4">{"Add Additional Terms"}</div>
+            <div className="text-xl pb-4">{"Legal Agreement"}</div>
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-2">
-                <p className="text-base mt-2 text-neutral-600">
+                {/* <p className="text-base mt-2 text-neutral-600">
                   Additional Terms
-                </p>
-                <textarea
-                  className="text-md placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                </p> */}
+                <p
+                  className="text-md placeholder-[#B8C0CB] text-neutral-800 py-3  rounded w-full"
                   value={terms.termsText}
                   onChange={(e) =>
                     setTerms({ ...terms, termsText: e.target.value })
                   }
                   placeholder="Write Something"
                   variant="outlined"
-                ></textarea>
+                >
+                  By clicking "Accept Now", you agree that you are creating a
+                  binding legal contract. You may terminate this agreement
+                  within 48 hours of the start date. Failure to fulfill the
+                  obligations in this agreement will constitute a breech of
+                  contract for which HealthcareUp, in its sole discretion may
+                  suspend your account.
+                </p>
               </div>
             </div>
 

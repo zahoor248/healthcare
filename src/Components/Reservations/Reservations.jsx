@@ -21,7 +21,11 @@ const Reservations = () => {
     })
       .then((response) => {
         if (response.data) {
-          dispatch(setAllReasevation(response.data)); // Update Redux store with an empty array
+          dispatch(
+            setAllReasevation(
+              response.data.filter((item) => item.status != "closed")
+            )
+          ); // Update Redux store with an empty array
         } else {
           console.log(response, "Here is the response");
           dispatch(setAllReasevation(response));

@@ -43,7 +43,15 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   const filterData = (reset) => {
     if (reset) {
       setFilteredData(data);
-      return;
+      setFilterConditions({
+        tags: [],
+        license: [],
+        rates: {
+          min: 0,
+          max: 0,
+        },
+      });
+      return
     }
     setFilter(true);
     let temp = [...data];
@@ -110,8 +118,8 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
       <div className="pt-4 md:pt-8">
         <p className="text-lg pb-2">Tags</p>
 
-          <TagSelector />
-        </div>
+        <TagSelector />
+      </div>
 
       <div className="pt-4 md:pt-8">
         <p className="text-lg pb-2">License Type</p>

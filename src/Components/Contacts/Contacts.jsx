@@ -325,7 +325,7 @@ const Contacts = () => {
 
                       {user.type == "pro" ? (
                         <>
-                          {user.type == "pro" && !item.pro_acceptance && (
+                          {/* {user.type == "pro" && !item.pro_acceptance && (
                             <div className="flex w-full justify-end pt-2">
                               <div
                                 className="w-full md:w-auto"
@@ -337,10 +337,10 @@ const Contacts = () => {
                                 />
                               </div>
                             </div>
-                          )}
+                          )} */}
 
                           {user.type === "pro" &&
-                          item.pro_acceptance &&
+                          item.status === "closed" &&
                           !item.reviews.some(
                             (review) => review.reviewer_id === user.id
                           ) ? (
@@ -348,7 +348,7 @@ const Contacts = () => {
                               <div
                                 className="w-full md:w-auto"
                                 onClick={() => {
-                                  if (rating > 0 && feedback.length > 6) {
+                                  if (rating > 0 && feedback.length) {
                                     handleSubmit(
                                       item.id,
                                       user.type === "pro"
@@ -374,7 +374,7 @@ const Contacts = () => {
 
                       {user.type == "bus" ? (
                         <>
-                          {user.type == "bus" && !item.bus_acceptance && (
+                          {user.type == "bus" && item.status === "open" && (
                             <div className="flex w-full justify-end pt-2">
                               <div
                                 className="w-full md:w-auto"
@@ -388,8 +388,8 @@ const Contacts = () => {
                             </div>
                           )}
 
-                          {user.type === "bus" &&
-                          item.bus_acceptance &&
+                          {item.reviews &&
+                          item.status === "closed" &&
                           !item.reviews.some(
                             (review) => review.reviewer_id === user.id
                           ) ? (
@@ -397,7 +397,7 @@ const Contacts = () => {
                               <div
                                 className="w-full md:w-auto"
                                 onClick={() => {
-                                  if (rating > 0 && feedback.length > 6) {
+                                  if (rating > 0 && feedback.length) {
                                     handleSubmit(
                                       item.id,
                                       user.type === "pro"
@@ -423,7 +423,7 @@ const Contacts = () => {
                     </div>
 
                     {user.type === "bus" &&
-                    item.bus_acceptance &&
+                    item.status === "closed" &&
                     !item.reviews.some(
                       (review) => review.reviewer_id === user.id
                     ) ? (
@@ -450,7 +450,7 @@ const Contacts = () => {
                     ) : null}
 
                     {user.type === "pro" &&
-                    item.pro_acceptance &&
+                    item.status === "closed" &&
                     !item.reviews.some(
                       (review) => review.reviewer_id === user.id
                     ) ? (
