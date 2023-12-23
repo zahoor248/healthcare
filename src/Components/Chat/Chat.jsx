@@ -374,7 +374,7 @@ export default function Chat() {
     }
   };
   return (
-    <div className="flex h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] pb-2 w-full">
+    <div className="flex pb-2 w-full">
       <div
         className={`${
           !showChat ? "flex " : "hidden "
