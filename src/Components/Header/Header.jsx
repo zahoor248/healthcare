@@ -44,7 +44,7 @@ export default function Header() {
       updateNavbar(false);
     }
   }
-
+  console.log(location);
   window.addEventListener("scroll", scrollHandler);
   return (
     <>
@@ -150,7 +150,11 @@ export default function Header() {
                 >
                   <div className="flex items-center">
                     <Link
-                      className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                      className={`cursor-pointer flex ${
+                        location.pathname == "/"
+                          ? "text-[#0f75bc]"
+                          : "text-neutral-600"
+                      } items-center gap-2 transition-all ease-in-out duration-300 text-sm xl:text-base`}
                       as={Link}
                       to="/"
                       onClick={() => updateExpanded(false)}
@@ -176,7 +180,11 @@ export default function Header() {
                   {user.type == "bus" && (
                     <div className="flex items-center">
                       <Link
-                        className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                        className={`cursor-pointer flex ${
+                          location.pathname == "/favouraties"
+                            ? "text-[#0f75bc]"
+                            : "text-neutral-600"
+                        } items-center gap-2 transition-all ease-in-out duration-300 text-sm xl:text-base`}
                         as={Link}
                         to="/favouraties"
                         onClick={() => updateExpanded(false)}
@@ -203,7 +211,11 @@ export default function Header() {
                   {user.type == "bus" && (
                     <div className="flex items-center">
                       <Link
-                        className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                        className={`cursor-pointer flex ${
+                          location.pathname == "/reservations"
+                            ? "text-[#0f75bc]"
+                            : "text-neutral-600"
+                        } items-center gap-2 transition-all ease-in-out duration-300 text-sm xl:text-base`}
                         as={Link}
                         to="/reservations"
                         onClick={() => updateExpanded(false)}
@@ -229,7 +241,11 @@ export default function Header() {
 
                   <div className="flex items-center">
                     <Link
-                      className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                      className={`cursor-pointer flex ${
+                        location.pathname == "/contacts"
+                          ? "text-[#0f75bc]"
+                          : "text-neutral-600"
+                      } items-center gap-2 transition-all ease-in-out duration-300 text-sm xl:text-base`}
                       as={Link}
                       to="/contacts"
                       onClick={() => updateExpanded(false)}
@@ -253,7 +269,11 @@ export default function Header() {
                   </div>
                   <div className="flex items-center">
                     <Link
-                      className="cursor-pointer flex items-center gap-2 text-sm xl:text-base"
+                      className={`cursor-pointer flex ${
+                        location.pathname == "/chats"
+                          ? "text-[#0f75bc]"
+                          : "text-neutral-600"
+                      } items-center gap-2 transition-all ease-in-out duration-300 text-sm xl:text-base`}
                       to="/chats"
                       onClick={() => updateExpanded(false)}
                     >
