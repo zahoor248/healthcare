@@ -98,12 +98,15 @@ export default function ProfileDetails() {
           .get()
           .then((snap) => {
             snap.forEach((item) => {
-              if (
-                item
-                  .data()
-                  .users.some((e) => e.uuid === response?.data?.user.uuid)
-              ) {
-                console.log(item.id, "Chat Id Exist or not?");
+              const users = item.data().users;
+
+              // Check if the user's UUID exists in the users array
+              const userExistsInChat =
+                users.some((e) => e.uuid === response?.data?.user.uuid) &&
+                users.some((e) => e.uuid === user.uuid);
+
+              if (userExistsInChat) {
+                console.log(item.id, "Chat Id Exist");
                 setChatId(item.id);
               }
             });
@@ -152,8 +155,6 @@ export default function ProfileDetails() {
             message: "This user has been Reserved",
             lable: "Reservation Booked",
           });
-
-          navigate("/reservations");
         }, 2000);
 
         setButtonLoading(false);
@@ -724,3 +725,4 @@ export default function ProfileDetails() {
     </>
   );
 }
+  

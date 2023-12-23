@@ -185,12 +185,15 @@ export default function Chat() {
 
     if (location.state) {
       if (location.state.chatId) {
-        console.log(location.state, "FarazFarazFarazFaraz");
-        setSelectedItem(
-          userChats.filter(
-            (item) => item.user.uuid === location.state.userId
-          )[0]
-        );
+        console.log(location.state, "FarazFarazFarazFaraz", userChats);
+
+        if (userChats.length) {
+          setSelectedItem(
+            userChats.filter(
+              (item) => item.user.uuid === location.state.userId
+            )[0]
+          );
+        }
       } else {
         handleAPIRequest("get", `userChat/${location.state.userId}`, null).then(
           (response2) => {
@@ -395,6 +398,7 @@ export default function Chat() {
       >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
           <h4>All Conversations ({historyArray.length}) </h4>
+          <BiSearchAlt className="search-message" />
         </div>
 
         <div className=" h-full overflow-auto">

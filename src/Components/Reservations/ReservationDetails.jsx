@@ -262,111 +262,94 @@ const ReservationDetails = () => {
                   </div>
                 </div>
 
-                <div
-                  onClick={() => {
-                    if (reservationDetails.offered_by_me) {
-                      db.collection("Chats")
-                        .get()
-                        .then((snap) => {
-                          if (snap.size != 0) {
-                            snap.forEach((i) => {
-                              if (
-                                i
-                                  .data()
-                                  .users.some(
+                <div className="flex gap-3 w-full justify-end pt-6 mt-6 border-t">
+                  <div
+                    onClick={() => {
+                      if (reservationDetails.offered_by_me) {
+                        db.collection("Chats")
+                          .get()
+                          .then((snap) => {
+                            if (snap.size !== 0) {
+                              snap.forEach((i) => {
+                                const users = i.data().users;
+
+                                // Check if both user UUIDs exist in the same users array
+                                const bothUsersExist =
+                                  users.some(
                                     (e) =>
                                       e.uuid ===
                                       reservationDetails.offered_to.uuid
-                                  )
-                              ) {
-                                // navigation.navigate('Chat', {
-                                //   chatId: i.id,
-                                //   userId: item.offered_to.uuid,
-                                // });
+                                  ) && users.some((e) => e.uuid === user.uuid);
 
-                                navigate("/chats", {
-                                  state: {
-                                    chatId: i.id,
-                                    userId: reservationDetails.offered_to.uuid,
-                                  },
-                                });
-                              } else {
-                                // navigation.navigate('Chat', {
-                                //   userId: item.offered_to.uuid,
-                                // });
+                                if (bothUsersExist) {
+                                  navigate("/chats", {
+                                    state: {
+                                      chatId: i.id,
+                                      userId:
+                                        reservationDetails.offered_to.uuid,
+                                    },
+                                  });
+                                } else {
+                                  navigate("/chats", {
+                                    state: {
+                                      userId:
+                                        reservationDetails.offered_to.uuid,
+                                    },
+                                  });
+                                }
+                              });
+                            } else {
+                              navigate("/chats", {
+                                state: {
+                                  userId: reservationDetails.offered_to.uuid,
+                                },
+                              });
+                            }
+                          });
+                      } else {
+                        db.collection("Chats")
+                          .get()
+                          .then((snap) => {
+                            if (snap.size !== 0) {
+                              snap.forEach((i) => {
+                                const users = i.data().users;
 
-                                navigate("/chats", {
-                                  state: {
-                                    userId: reservationDetails.offered_to.uuid,
-                                  },
-                                });
-                              }
-                            });
-                          } else {
-                            // navigation.navigate('Chat', {
-                            //   userId: item.offered_to.uuid,
-                            // });
-                            navigate("/chats", {
-                              state: {
-                                userId: reservationDetails.offered_to.uuid,
-                              },
-                            });
-                          }
-                        });
-                    } else {
-                      db.collection("Chats")
-                        .get()
-                        .then((snap) => {
-                          if (snap.size != 0) {
-                            snap.forEach((i) => {
-                              if (
-                                i
-                                  .data()
-                                  .users.some(
+                                // Check if both user UUIDs exist in the same users array
+                                const bothUsersExist =
+                                  users.some(
                                     (e) =>
                                       e.uuid ===
                                       reservationDetails.offered_by.uuid
-                                  )
-                              ) {
-                                // navigation.navigate("Chat", {
-                                //   chatId: i.id,
-                                //   userId: item.offered_by.uuid,
-                                // });
+                                  ) && users.some((e) => e.uuid === user.uuid);
 
-                                navigate("/chats", {
-                                  state: {
-                                    chatId: i.id,
-                                    userId: reservationDetails.offered_by.uuid,
-                                  },
-                                });
-                              } else {
-                                // navigation.navigate("Chat", {
-                                //   userId: item.offered_by.uuid,
-                                // });
-
-                                navigate("/chats", {
-                                  state: {
-                                    userId: reservationDetails.offered_by.uuid,
-                                  },
-                                });
-                              }
-                            });
-                          } else {
-                            navigate("/chats", {
-                              state: {
-                                userId: reservationDetails.offered_by.uuid,
-                              },
-                            });
-                            // navigation.navigate("Chat", {
-                            //   userId: item.offered_by.uuid,
-                            // });
-                          }
-                        });
-                    }
-                  }}
-                  className="flex gap-3 w-full justify-end pt-6 mt-6 border-t"
-                >
-                  <div to={`/chats?${reservationDetails?.uuid}`}>
+                                if (bothUsersExist) {
+                                  navigate("/chats", {
+                                    state: {
+                                      chatId: i.id,
+                                      userId:
+                                        reservationDetails.offered_by.uuid,
+                                    },
+                                  });
+                                } else {
+                                  navigate("/chats", {
+                                    state: {
+                                      userId:
+                                        reservationDetails.offered_by.uuid,
+                                    },
+                                  });
+                                }
+                              });
+                            } else {
+                              navigate("/chats", {
+                                state: {
+                                  userId: reservationDetails.offered_by.uuid,
+                                },
+                              });
+                            }
+                          });
+                      }
+                    }}
+                  >
                     <CommonPrimaryButton loading={false} text={"Chat"} />
                   </div>
 

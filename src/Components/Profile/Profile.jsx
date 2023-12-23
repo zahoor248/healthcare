@@ -49,6 +49,31 @@ const ProfileData = () => {
   const submitHandler = (event) => {
     setLoading_button(true);
     if (password.passwordToConfirm == password.passwordToSend) {
+      if (
+        (firstName.trim() == "",
+        lastName.trim() == "",
+        email.trim() == "",
+        description.trim() == "")
+      ) {
+        setShowToast({
+          ...showToast,
+          toggle: true,
+          status: "error",
+          message: "Please fill all the fields",
+          lable: "Missing fields",
+        });
+        setTimeout(() => {
+          setShowToast({
+            ...showToast,
+            toggle: false,
+            status: "error",
+            message: "Please fill all the fields",
+            lable: "Missing fields",
+          });
+        }, 2000);
+        setLoading_button(false);
+        return;
+      }
       let data = {
         firstname: firstName,
         lastname: lastName,
