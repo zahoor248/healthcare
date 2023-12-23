@@ -11,8 +11,8 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   const [filter, setFilter] = useState(false);
 
   const licenses = data
-    .map((item) => item.licenses.map((license) => license.abbrev))
-    .flat();
+    .flatMap((item) => item.licenses.map((license) => license.abbrev))
+    .filter((value, index, self) => self.indexOf(value) === index);
 
   const [filterConditions, setFilterConditions] = useState({
     tags: [], // You can store selected tags here
@@ -24,7 +24,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   });
   const handleFilterByLicense = (license) => {
     setFilterConditions((prevFilterConditions) => {
-      if (prevFilterConditions.license.includes(license)) {
+      if (filterConditions.license.includes(license)) {
         return {
           ...prevFilterConditions,
           license: prevFilterConditions.license.filter(
@@ -43,15 +43,19 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   const filterData = (reset) => {
     if (reset) {
       setFilteredData(data);
-      setFilterConditions({
-        tags: [],
-        license: [],
-        rates: {
-          min: 0,
-          max: 0,
-        },
+      setFilterConditions((prevFilterConditions) => {
+        return {
+          ...prevFilterConditions,
+          license: [],
+          rates: {
+            min: 0, // You can store the min rate here
+            max: 0, // You can store the max rate here
+          },
+        };
       });
-      return
+      setValue([0, 0]);
+      console.log(filterConditions, "filterConditions");
+      return;
     }
     setFilter(true);
     let temp = [...data];
@@ -131,9 +135,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
               <input
                 type="checkbox"
                 onChange={() => handleFilterByLicense(license)}
-                value={
-                  filterConditions.license.includes(license) ? true : false
-                }
+                checked={filterConditions.license.includes(license)}
                 class="ui-checkbox"
               ></input>
               {/* <input className="check-box cursor-pointer" type="checkbox" /> */}
