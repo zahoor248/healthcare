@@ -75,7 +75,7 @@ export default function Chat() {
 
     return (
       <div className={`message ${messageClass}`}>
-        <img src={user.avatar} alt="" className="circle-img" />
+        <img src={user.avatar} alt="" className="circle-img rounded-full" />
         <p className="text messageBubble">
           {text ? (
             text
@@ -390,7 +390,7 @@ export default function Chat() {
     }
   };
   return (
-    <div className="flex h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] pb-2 w-full">
+    <div className="flex bg-neutral-100 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] pb-2 w-full">
       <div
         className={`${
           !showChat ? "flex " : "hidden "
@@ -398,7 +398,6 @@ export default function Chat() {
       >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
           <h4>All Conversations ({historyArray.length}) </h4>
-          <BiSearchAlt className="search-message" />
         </div>
 
         <div className=" h-full overflow-auto">
@@ -415,7 +414,7 @@ export default function Chat() {
             >
               <div className="flex px-4 justify-between items-center w-full">
                 <div className="flex items-center gap-4">
-                  <div className=" !rounded-full overflow-hidden w-20 h-20">
+                  <div className=" !rounded-full overflow-hidden  w-20 h-20">
                     <img
                       src={item.user.photo_url ? item.user.photo_url : user1}
                     />
@@ -453,7 +452,7 @@ export default function Chat() {
             {/* <h3><GoPrimitiveDot className='user-online'/>Isabella</h3> */}
 
             <div
-              className="text-neutral-600 flex items-center mr-3"
+              className="text-neutral-600 flex items-center mr-3 md:hidden"
               onClick={() => setShowChat(false)}
             >
               <svg

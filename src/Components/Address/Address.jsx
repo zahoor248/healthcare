@@ -291,14 +291,14 @@ export default function Address() {
                         </p>
                       )}
 
-                      <p>
+                      {/* <p>
                         <strong className="text-neutral-600 font-bold">
                           State:
                         </strong>{" "}
                         {address.state}
-                      </p>
+                      </p> */}
                     </div>
-                    <div className="flex justify-between w-full">
+                    {/* <div className="flex justify-between w-full">
                       <p>
                         <strong className="text-neutral-600 font-bold">
                           Adress:
@@ -313,13 +313,13 @@ export default function Address() {
                         </strong>{" "}
                         {address.zip}
                       </p>
-                    </div>
-                    <p>
+                    </div> */}
+                    {/* <p>
                       <strong className="text-neutral-600 font-bold">
                         City:
                       </strong>{" "}
                       {address.city}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
