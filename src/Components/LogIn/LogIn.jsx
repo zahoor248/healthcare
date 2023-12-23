@@ -92,7 +92,7 @@ export default function LogIn() {
           <div className="bg-[#4169e1]  flex items-center justify-center w-full">
             <img
               src={Slide2}
-              className="w-[100px] py-6 md:!p-0  md:w-[500px]"
+              className="h-[100px] w-[100px] py-6 md:!p-0  md:w-[600px] object-contain md:h-[600px] "
             />
           </div>
 

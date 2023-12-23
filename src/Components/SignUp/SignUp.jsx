@@ -80,7 +80,10 @@ export default function SignUp() {
       {/* <Header /> */}
       <div className="flex w-full h-full justify-center flex-col md:flex-row ">
         <div className="bg-[#4169e1]  flex items-center justify-center w-full">
-          <img src={Slide2} className="w-[100px] py-6 md:!p-0  md:w-[500px]" />
+          <img
+            src={Slide2}
+            className="h-[100px] w-[100px] py-6 md:!p-0  md:w-[600px] object-contain md:h-[600px] "
+          />
         </div>
 
         <div className="h-full w-full md:p-12 p-6 lg:p-24 overflow-auto flex flex-col  md:justify-center justify-start">
