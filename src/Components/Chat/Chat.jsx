@@ -237,7 +237,8 @@ export default function Chat() {
       reader.readAsDataURL(selectedImage);
     }
   };
-  const onSend = async () => {
+  const onSend = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("token");
 
     const message = {
@@ -349,7 +350,7 @@ export default function Chat() {
             .doc(chatId)
             .set({
               users: [userLogin, getUser],
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             });
 
           setText("");
@@ -374,7 +375,7 @@ export default function Chat() {
     }
   };
   return (
-    <div className="flex pb-2 w-full">
+    <div className="flex h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] pb-2 w-full">
       <div
         className={`${
           !showChat ? "flex " : "hidden "
@@ -472,7 +473,10 @@ export default function Chat() {
               </div>
 
               <div className=" mx-[100px] ms-auto mb-20 w-full">
-                <div className="px-7 flex flex-row justify-end  gap-2 items-end">
+                <form
+                  onSubmit={(e) => onSend(e)}
+                  className="px-7 flex flex-row justify-end  gap-2 items-end"
+                >
                   {dataURI ? (
                     <div className="w-full relative border  shadow-sm p-2">
                       <button
@@ -541,12 +545,12 @@ export default function Chat() {
                       </svg>
                     </div>
                     <CommonPrimaryButton
-                      onClick={onSend}
+                      onClick={(e) => onSend(e)}
                       loading={false}
                       text={"Send"}
                     />
                   </div>
-                </div>
+                </form>
               </div>
             </>
           )}
