@@ -137,7 +137,10 @@ const Reservations = () => {
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className=" !rounded-full overflow-hidden w-10 h-10">
+                      <Link
+                        to={`/profile-details?${item.offered_to?.uuid}`}
+                        className=" !rounded-full overflow-hidden w-10 h-10"
+                      >
                         {item.offered_to?.photo_url != null ? (
                           <img src={item.offered_to?.photo_url} />
                         ) : (
@@ -146,7 +149,7 @@ const Reservations = () => {
                           </div>
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
-                      </div>
+                      </Link>
                       <div className=" flex flex-col items-start">
                         <p className="font-medium text-base text-[#696F7A] capitalize">
                           {item?.offered_to?.firstname}{" "}
@@ -168,7 +171,10 @@ const Reservations = () => {
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </div>
                       <div className="flex items-center w-fit gap-2 justify-between pt-3 ">
-                        <div className=" !rounded-full overflow-hidden w-10 h-10">
+                        <Link
+                          to={`/profile-details?${item.offered_by?.uuid}`}
+                          className=" !rounded-full overflow-hidden w-10 h-10"
+                        >
                           {item.offered_by?.photo_url != null ? (
                             <img src={item.offered_by?.photo_url} />
                           ) : (
@@ -177,7 +183,7 @@ const Reservations = () => {
                             </div>
                           )}
                           {/* <GoPrimitiveDot className='online-icon'/> */}
-                        </div>
+                        </Link>
                         <p className="font-medium text-base text-[#696F7A] capitalize">
                           {item?.offered_by?.firstname}{" "}
                           {item?.offered_by?.lastname}
