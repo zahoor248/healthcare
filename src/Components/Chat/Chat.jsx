@@ -82,7 +82,7 @@ export default function Chat() {
           ) : (
             <img
               src={props.message.image}
-              style={{ height: 200, width: 200, border: "2px solid #000" }}
+              style={{ height: 200, width: 200 }}
             />
           )}
           <br />{" "}
@@ -449,7 +449,7 @@ export default function Chat() {
         className={`${showChat ? "block" : "hidden"} md:block border-l w-full`}
       >
         {selectedItem && (
-          <div className="py-5 px-8 bg-neutral-100">
+          <div className="py-5 px-8 bg-slate-50">
             {/* <h3><GoPrimitiveDot className='user-online'/>Isabella</h3> */}
 
             <div
@@ -525,7 +525,7 @@ export default function Chat() {
                     </div>
                   ) : (
                     <input
-                      className="w-full border   outline-[#0f75bc] !outline-[1px] shadow-sm p-2.5"
+                      className="w-full border rounded-full text-sm pl-5 outline-[#0f75bc] !outline-[1px] shadow-sm p-2.5 py-3"
                       value={text}
                       placeholder="Start Writing Here..."
                       resize={"none"}
