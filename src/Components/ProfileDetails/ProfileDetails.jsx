@@ -21,6 +21,8 @@ import Toast from "../AppLoader";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 import { db } from "../../firebase";
 
+import Autocomplete from "react-google-autocomplete";
+
 export default function ProfileDetails() {
   const location = useLocation();
 
@@ -33,33 +35,31 @@ export default function ProfileDetails() {
     fields: ["formatted_address"],
     types: ["establishment"],
   };
-  const handleLocationLoad = () => {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      options
-    );
-    autoCompleteRef.current.addListener("place_changed", async function () {
-      const place = await autoCompleteRef.current.getPlace();
-      console.log({ place }, "Testing place");
-      setLocation(place.formatted_address);
-      console.log(autoCompleteRef);
-    });
-  };
+  // const handleLocationLoad = () => {
+  //   autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+  //     inputRef.current,
+  //     options
+  //   );
+  //   autoCompleteRef.current.addListener("place_changed", async function () {
+  //     const place = await autoCompleteRef.current.getPlace();
+  //     console.log({ place }, "Testing place");
+  //     setLocation(place.formatted_address);
+  //     console.log(autoCompleteRef);
+  //   });
+  // };
 
-  useLayoutEffect(() => {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      options
-    );
-    autoCompleteRef.current.addListener("place_changed", async function () {
-      const place = await autoCompleteRef.current.getPlace();
-      console.log({ place }, "Testing place");
-      if (place) {
-        setLocation(place?.formatted_address);
-      }
-      console.log(autoCompleteRef);
-    });
-  }, []);
+  // useEffect(() => {
+  //   autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+  //     inputRef.current,
+  //     options
+  //   );
+  //   autoCompleteRef.current.addListener("place_changed", async function () {
+  //     const place = await autoCompleteRef.current.getPlace();
+  //     console.log({ place }, "Testing place");
+  //     setLocation(place.formatted_address);
+  //     console.log(autoCompleteRef);
+  //   });
+  // }, []);
 
   const [chatId, setChatId] = useState(false);
   const navigate = useNavigate();
@@ -218,7 +218,6 @@ export default function ProfileDetails() {
   const handleEndDateChange = (date) => {
     setEndDate(dayjs(date).format("DD-MM-YYYY"));
   };
-
   function DateIcon(props) {
     return (
       <div className="px-2 py-1.5 rounded-md bg-blue-700 text-white">
@@ -577,14 +576,28 @@ export default function ProfileDetails() {
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     Location
                   </p>
+
                   <div className="relative w-full">
-                    <input
-                      ref={inputRef}
-                      onKeyUp={() => handleLocationLoad()}
-                      value={counterLocation}
-                      placeholder="Select Location"
+                    <Autocomplete
+                      options={{
+                        componentRestrictions: { country: "us" },
+                        fields: ["formatted_address"],
+                        types: ["establishment"],
+                      }}
                       className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                      apiKey={"AIzaSyCFY588iCbfSu3YRaC2h4UZUIhICOady7c"}
+                      onPlaceSelected={(place) => {
+                        console.log(place.formatted_address);
+                        setLocation(place.formatted_address);
+                      }}
                     />
+                    {/* <input
+                      ref={inputRef}
+                      // onKeyUp={() => handleLocationLoad()}
+                      value={counterLocation}
+                      onChange={(e) => setLocation(e.target.value)}
+                      placeholder="Select Location"
+                    /> */}
                   </div>
                 </div>
                 <div className="flex gap-2 w-full">

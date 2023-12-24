@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -10,9 +10,10 @@ import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 
+import Autocomplete from "react-google-autocomplete";
+
 export default function NewOffer() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [openAcceptoffer, setOpenToAcceptOffer] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -34,19 +35,19 @@ export default function NewOffer() {
     types: ["establishment"],
   };
 
-  const handleLocationLoad = () => {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      options
-    );
+  // const handleLocationLoad = () => {
+  //   autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+  //     inputRef.current,
+  //     options
+  //   );
 
-    autoCompleteRef.current.addListener("place_changed", async function () {
-      const place = await autoCompleteRef.current.getPlace();
-      console.log({ place }, "Testing place");
-      setLocation(place.formatted_address);
-      console.log(autoCompleteRef);
-    });
-  };
+  //   autoCompleteRef.current.addListener("place_changed", async function () {
+  //     const place = await autoCompleteRef.current.getPlace();
+  //     console.log({ place }, "Testing place");
+  //     setLocation(place.formatted_address);
+  //     console.log(autoCompleteRef);
+  //   });
+  // };
 
   useEffect(() => {
     console.log(location, "here is the location");
@@ -330,14 +331,26 @@ export default function NewOffer() {
                     Location
                   </p>
                   <div className="relative w-full">
-                    <input
+                    <Autocomplete
+                      options={{
+                        componentRestrictions: { country: "us" },
+                        fields: ["formatted_address"],
+                        types: ["establishment"],
+                      }}
+                      className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
+                      apiKey={"AIzaSyCFY588iCbfSu3YRaC2h4UZUIhICOady7c"}
+                      onPlaceSelected={(place) => {
+                        console.log(place.formatted_address);
+                        setLocation(place.formatted_address);
+                      }}
+                    />
+                    {/* <input
                       ref={inputRef}
                       onChange={(e) => setLocation(e.target.value)}
                       onKeyUp={() => handleLocationLoad()}
                       value={counterLocation}
                       placeholder="Select Location"
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="flex gap-2 w-full ">
@@ -443,7 +456,9 @@ export default function NewOffer() {
                 Cancel
               </button>
               <CommonPrimaryButton
-                onClick={() => reserveUser()}
+                onClick={() => {
+                  reserveUser();
+                }}
                 loading={button_loading}
                 text={"Send Offer"}
               />

@@ -12,7 +12,7 @@ import Header from "../Header/Header";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // import { GoogleLogin } from "react-google-login";
 import { handleAPIRequest } from "../../helper/ApiHandler";
