@@ -32,8 +32,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
         {/*global  layout  */}
+      <BrowserRouter>
         <Layout>
           {" "}
           {/* Wrap all routes with the Layout component */}
@@ -54,6 +54,7 @@ root.render(
               element={<ReservationDetails />}
             />
             <Route path="/counter-offer" element={<NewOffer />} />
+            <Route path="*" element={<App />} />
           </Routes>
         </Layout>
       </BrowserRouter>

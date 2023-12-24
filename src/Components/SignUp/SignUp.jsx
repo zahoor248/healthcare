@@ -5,7 +5,7 @@ import { REGISTER } from "../../Api/EndPoints";
 import { useDispatch } from "react-redux";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 import Slide2 from "../../assets/images/slide2.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -88,9 +88,9 @@ export default function SignUp() {
 
         <div className="h-full w-full md:p-12  p-6 lg:p-24 overflow-auto flex flex-col   justify-start">
           <div class="">
-            <a
+            <Link
               class="absolute md:relative  top-6 left-4 md:top-0 md:left-0 md:flex pb-4 space-x-1 items-center transition-all ease-in-out duration-300 hover:text-primary"
-              href="/"
+              to="/"
             >
               <div class="flex gap-1 items-center hover:text-primary  transition-colors duration-300 ease-in-out   cursor-pointer font-sm font-normal text-white md:text-neutral-600 underline leading-normal -ml-2">
                 <svg
@@ -109,7 +109,7 @@ export default function SignUp() {
                 </svg>
                 <p class="-ml-1 -mt-1 text-lg">Back</p>
               </div>
-            </a>
+            </Link>
             <p class="text-2xl lg:text-3xl leading-normal font-bold">
               Create a new account.
             </p>
@@ -368,12 +368,12 @@ export default function SignUp() {
           <div className=" pt-4">
             <p>
               Already have an account,{" "}
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="px-2 text-blue-600 hover:text-blue-700 transition-all ease-in-out duration-500 cursor-pointer"
               >
                 Login Now
-              </a>
+              </Link>
             </p>
           </div>
         </div>

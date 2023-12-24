@@ -245,12 +245,12 @@ export default function LogIn() {
             <div className=" pt-4">
               <p>
                 Don't have an account yet?{" "}
-                <a
-                  href="/register"
+                <Link
+                  to="/register"
                   className="px-2 text-blue-600 hover:text-blue-700 transition-all ease-in-out duration-500 cursor-pointer"
                 >
                   Sign Up
-                </a>
+                </Link>
               </p>
             </div>
           </div>
