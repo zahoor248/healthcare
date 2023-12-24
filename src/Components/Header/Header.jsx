@@ -242,12 +242,12 @@ export default function Header() {
                   <div className="flex items-center">
                     <Link
                       className={`cursor-pointer flex ${
-                        location.pathname == "/contacts"
+                        location.pathname == "/contracts"
                           ? "text-[#0f75bc]"
                           : "text-neutral-600"
                       } items-center gap-2 transition-all ease-in-out duration-300 text-sm xl:text-base`}
                       as={Link}
-                      to="/contacts"
+                      to="/contracts"
                       onClick={() => updateExpanded(false)}
                     >
                       <svg

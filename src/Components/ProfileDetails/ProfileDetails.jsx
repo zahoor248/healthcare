@@ -54,7 +54,9 @@ export default function ProfileDetails() {
     autoCompleteRef.current.addListener("place_changed", async function () {
       const place = await autoCompleteRef.current.getPlace();
       console.log({ place }, "Testing place");
-      setLocation(place.formatted_address);
+      if (place) {
+        setLocation(place?.formatted_address);
+      }
       console.log(autoCompleteRef);
     });
   }, []);
@@ -216,6 +218,7 @@ export default function ProfileDetails() {
   const handleEndDateChange = (date) => {
     setEndDate(dayjs(date).format("DD-MM-YYYY"));
   };
+
   function DateIcon(props) {
     return (
       <div className="px-2 py-1.5 rounded-md bg-blue-700 text-white">
@@ -579,7 +582,6 @@ export default function ProfileDetails() {
                       ref={inputRef}
                       onKeyUp={() => handleLocationLoad()}
                       value={counterLocation}
-                      onChange={(e) => setLocation(e.target.value)}
                       placeholder="Select Location"
                       className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                     />
@@ -725,4 +727,3 @@ export default function ProfileDetails() {
     </>
   );
 }
-  

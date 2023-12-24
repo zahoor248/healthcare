@@ -101,7 +101,7 @@ export default function HamburgerSideBar({ setShowBar }) {
             <Link
               className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
               as={Link}
-              to="/contacts"
+              to="/contracts"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
