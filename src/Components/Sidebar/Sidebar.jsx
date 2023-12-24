@@ -17,6 +17,8 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   const [filterConditions, setFilterConditions] = useState({
     tags: [], // You can store selected tags here
     license: [], // You can store selected licenses here
+    searchBase: "", // You can store selected
+    rateBase: "hourly_rate", // You can store selected
     rates: {
       min: 0, // You can store the min rate here
       max: 0, // You can store the max rate here
@@ -47,6 +49,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
         return {
           ...prevFilterConditions,
           license: [],
+          searchBase: "",
           rates: {
             min: 0, // You can store the min rate here
             max: 0, // You can store the max rate here
@@ -60,21 +63,7 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
     setFilter(true);
     let temp = [...data];
 
-    // Filter based on selected tags
-    // if (filterConditions.tags.length > 0) {
-    //   temp = temp.filter((item) => {
-    //     // Replace 'tagProperty' with the actual property to filter by tags
-    //     if (item.tagProperty) {
-    //       return filterConditions.tags.every((tag) =>
-    //         item.tagProperty.includes(tag)
-    //       );
-    //     }
-    //     return false;
-    //   });
-    // }
-    console.log(filterConditions.license);
-    // Filter based on selected licenses
-    if (filterConditions.license.length > 0) {
+    if (filterConditions.license.length) {
       temp = temp.filter((item) => {
         if (item.licenses && item.licenses.length > 0) {
           return item.licenses.some((license) =>
@@ -87,12 +76,23 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
 
     // Filter based on selected hourly rates
     temp = temp.filter((item) => {
-      const rate = item.pro_profile?.hourly_rate;
+      const rate =
+        filterConditions.rateBase == true
+          ? item.pro_profile?.hourly_rate
+          : item.pro_profile?.daily_rate;
       return (
         rate >= filterConditions.rates.min && rate <= filterConditions.rates.max
       );
     });
-
+    if (filterConditions.searchBase !== "") {
+      temp = temp.filter((item) => {
+        console.log(item);
+        const zip = item.addresses.map((item) => {
+          return item.zip;
+        });
+        return filterConditions.searchBase.includes(zip);
+      });
+    }
     // Update the state with the filtered data
 
     setTimeout(() => {
@@ -110,6 +110,20 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
   function valuetext(value) {
     return `${value}°C`;
   }
+
+  const handleChangeRate = (e) => {
+    setFilterConditions((prevFilterConditions) => {
+      return {
+        ...prevFilterConditions,
+        rateBase: e.target.checked,
+      };
+    });
+
+    // ({
+    //   ...filterConditions,
+    //   rateBase: e.target.checked == true ? "hourly_rate" : "daily_rate",
+    // });
+  };
   return (
     <div className="w-full md:w-[250px] 2xl:min-w-[330px]">
       <div className="flex md:pb-3 items-center gap-2 pb-3">
@@ -120,9 +134,20 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
       <div className="border-b"></div>
 
       <div className="pt-4 md:pt-8">
-        <p className="text-lg pb-2">Tags</p>
-
-        <TagSelector />
+        <p className="text-lg pb-2">Zip Code</p>
+        <input
+          className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+          label="nickname"
+          variant="outlined"
+          placeholder="Enter Zip Code here..."
+          value={filterConditions.searchBase}
+          onChange={(e) =>
+            setFilterConditions({
+              ...filterConditions,
+              searchBase: e.target.value,
+            })
+          }
+        />
       </div>
 
       <div className="pt-4 md:pt-8">
@@ -146,7 +171,15 @@ export default function Sidebar({ data, filteredData, setFilteredData }) {
       </div>
 
       <div className="pt-4 md:pt-8">
-        <p className="text-lg">Hourly Rate</p>
+        <div className="flex items-center gap-2">
+          <label class="switch">
+            <input type="checkbox" onChange={(e) => handleChangeRate(e)} />
+            <span class="slider"></span>
+          </label>
+          <p className="text-lg">
+            {filterConditions.rateBase ? "Hourly" : "Daily"} Rate
+          </p>
+        </div>
         <Slider
           getAriaLabel={() => "Temperature range"}
           value={value}

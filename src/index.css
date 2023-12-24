@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .main-container {
   max-width: 1320px;
@@ -68,7 +68,7 @@ body {
   font-family: "GilroyMedium", sans-serif;
 }
 .f-f-g-s {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .f-f-n {
@@ -739,7 +739,6 @@ button:active {
   transform: scale(2);
 }
 
-
 .boxes {
   --size: 32px;
   --duration: 800ms;
@@ -786,7 +785,7 @@ button:active {
 }
 
 .boxes .box > div {
-  --background: #5C8DF6;
+  --background: #5c8df6;
   --top: auto;
   --right: auto;
   --bottom: auto;
@@ -802,7 +801,8 @@ button:active {
   right: var(--right);
   bottom: var(--bottom);
   left: var(--left);
-  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateZ(var(--translateZ));
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+    translateZ(var(--translateZ));
 }
 
 .boxes .box > div:nth-child(1) {
@@ -822,14 +822,15 @@ button:active {
 }
 
 .boxes .box > div:nth-child(4) {
-  --background: #DBE3F4;
+  --background: #dbe3f4;
   --top: 0;
   --left: 0;
   --translateZ: calc(var(--size) * 3 * -1);
 }
 
 @-webkit-keyframes box1 {
-  0%, 50% {
+  0%,
+  50% {
     transform: translate(100%, 0);
   }
 
@@ -839,7 +840,8 @@ button:active {
 }
 
 @keyframes box1 {
-  0%, 50% {
+  0%,
+  50% {
     transform: translate(100%, 0);
   }
 
@@ -877,7 +879,8 @@ button:active {
 }
 
 @-webkit-keyframes box3 {
-  0%, 50% {
+  0%,
+  50% {
     transform: translate(100%, 100%);
   }
 
@@ -887,7 +890,8 @@ button:active {
 }
 
 @keyframes box3 {
-  0%, 50% {
+  0%,
+  50% {
     transform: translate(100%, 100%);
   }
 
@@ -922,4 +926,54 @@ button:active {
   100% {
     transform: translate(100%, 100%);
   }
+}
+
+.switch {
+  /* font-size: 17px; */
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #e5e5e5;
+  border-radius: 50px;
+  transition: all 0.2s ease-out;
+}
+
+.slider:before {
+  position: absolute;
+  top: 10% !important;
+  content: "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
+  inset: 0;
+  border-radius: 50px;
+  transition: all 0.2s ease-out;
+  background-color: #fff;
+  left: 2px;
+}
+
+.switch input:checked + .slider {
+  background: #2563eb;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(16px);
+  background-color: #ffff;
 }
