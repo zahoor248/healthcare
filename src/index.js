@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./fonts/Gilroy/Gilroy-Semibold.ttf";
 import "./fonts/Gilroy/Gilroy-Medium.ttf";
@@ -32,8 +32,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-        {/*global  layout  */}
-      <BrowserRouter>
+      {/*global  layout  */}
+      <HashRouter>
         <Layout>
           {" "}
           {/* Wrap all routes with the Layout component */}
@@ -57,7 +57,7 @@ root.render(
             <Route path="*" element={<App />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </React.StrictMode>
 );

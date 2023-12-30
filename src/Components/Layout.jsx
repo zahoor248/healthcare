@@ -74,7 +74,9 @@ const Layout = ({ children }) => {
       ) : (
         <div className="f-f-g-s flex flex-col ">
           <Header />
-          <main  className=" min-h-[calc(100vh-147px)] md:min-h-[calc(100vh-172px)]  xl:min-h-[calc(100vh-184px)] 2xl:min-h-[calc(100vh-192px)]">{children}</main>
+          <main className=" min-h-[calc(100vh-147px)] md:min-h-[calc(100vh-172px)] overflow-auto  xl:min-h-[calc(100vh-184px)] 2xl:min-h-[calc(100vh-192px)]">
+            {children}
+          </main>
           <Footer />
         </div>
       )}

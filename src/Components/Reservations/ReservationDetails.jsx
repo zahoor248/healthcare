@@ -34,6 +34,8 @@ const ReservationDetails = () => {
       .then((response) => {
         setTerms({ ...terms, toggle: false });
         loadDetails();
+
+        navigate("/contracts");
       })
       .catch((error) => {});
   };
@@ -182,23 +184,81 @@ const ReservationDetails = () => {
                   <div className="w-[60%]">
                     {reservationDetails?.offered_by_me ? (
                       <>
+                        <Link
+                          to={
+                            reservationDetails.offered_to?.type === "pro" &&
+                            user.type === "bus"
+                              ? `/profile-details?${reservationDetails.offered_to?.uuid}`
+                              : null
+                          }
+                          className=" !rounded-full overflow-hidden w-10 h-10"
+                        >
+                          <div className="flex items-start gap-4 flex-col w-full">
+                            <div className=" capitalize font-semibold text-xl text-neutral-600">
+                              ${reservationDetails?.pay_rate}{" "}
+                              {reservationDetails?.pay_duration} offer to:
+                              {/* <GoPrimitiveDot className='online-icon'/> */}
+                            </div>
+
+                            <div className="flex items-center gap-4">
+                              <div className=" !rounded-full overflow-hidden w-10 h-10">
+                                {reservationDetails.offered_to?.photo_url !=
+                                null ? (
+                                  <img
+                                    src={
+                                      reservationDetails.offered_to?.photo_url
+                                    }
+                                  />
+                                ) : (
+                                  <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
+                                    {reservationDetails?.offered_to?.firstname.charAt(
+                                      0
+                                    )}
+                                  </div>
+                                )}
+                                {/* <GoPrimitiveDot className='online-icon'/> */}
+                              </div>
+                              <div className="">
+                                <p className="font-medium text-base text-neutral-500 capitalize">
+                                  {reservationDetails?.offered_to?.firstname}{" "}
+                                  {reservationDetails?.offered_to?.lastname}
+                                </p>
+                                <p className="text-sm pt-2">
+                                  {reservationDetails?.offered_to?.about_me ||
+                                    "N/A"}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </>
+                    ) : (
+                      <Link
+                        to={
+                          reservationDetails.offered_by?.type === "pro" &&
+                          user.type === "bus"
+                            ? `/profile-details?${reservationDetails.offered_by?.uuid}`
+                            : null
+                        }
+                        className=" !rounded-full overflow-hidden w-10 h-10"
+                      >
                         <div className="flex items-start gap-4 flex-col w-full">
-                          <div className=" capitalize font-semibold text-xl text-neutral-600">
+                          <div className=" capitalize font-bold text-lg text-neutral-600">
                             ${reservationDetails?.pay_rate}{" "}
-                            {reservationDetails?.pay_duration} offer to:
+                            {reservationDetails?.pay_duration} offer by:
                             {/* <GoPrimitiveDot className='online-icon'/> */}
                           </div>
 
                           <div className="flex items-center gap-4">
                             <div className=" !rounded-full overflow-hidden w-10 h-10">
-                              {reservationDetails.offered_to?.photo_url !=
+                              {reservationDetails.offered_by?.photo_url !=
                               null ? (
                                 <img
-                                  src={reservationDetails.offered_to?.photo_url}
+                                  src={reservationDetails.offered_by?.photo_url}
                                 />
                               ) : (
                                 <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
-                                  {reservationDetails?.offered_to?.firstname.charAt(
+                                  {reservationDetails?.offered_by?.firstname.charAt(
                                     0
                                   )}
                                 </div>
@@ -206,54 +266,18 @@ const ReservationDetails = () => {
                               {/* <GoPrimitiveDot className='online-icon'/> */}
                             </div>
                             <div className="">
-                              <p className="font-medium text-base text-neutral-500 capitalize">
-                                {reservationDetails?.offered_to?.firstname}{" "}
-                                {reservationDetails?.offered_to?.lastname}
+                              <p className="font-semibold text-base text-neutral-600 capitalize">
+                                {reservationDetails?.offered_by?.firstname}{" "}
+                                {reservationDetails?.offered_by?.lastname}
                               </p>
                               <p className="text-sm pt-2">
-                                {reservationDetails?.offered_to?.about_me ||
+                                {reservationDetails?.offered_by?.about_me ||
                                   "N/A"}
                               </p>
                             </div>
                           </div>
                         </div>
-                      </>
-                    ) : (
-                      <div className="flex items-start gap-4 flex-col w-full">
-                        <div className=" capitalize font-bold text-lg text-neutral-600">
-                          ${reservationDetails?.pay_rate}{" "}
-                          {reservationDetails?.pay_duration} offer by:
-                          {/* <GoPrimitiveDot className='online-icon'/> */}
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                          <div className=" !rounded-full overflow-hidden w-10 h-10">
-                            {reservationDetails.offered_by?.photo_url !=
-                            null ? (
-                              <img
-                                src={reservationDetails.offered_by?.photo_url}
-                              />
-                            ) : (
-                              <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
-                                {reservationDetails?.offered_by?.firstname.charAt(
-                                  0
-                                )}
-                              </div>
-                            )}
-                            {/* <GoPrimitiveDot className='online-icon'/> */}
-                          </div>
-                          <div className="">
-                            <p className="font-semibold text-base text-neutral-600 capitalize">
-                              {reservationDetails?.offered_by?.firstname}{" "}
-                              {reservationDetails?.offered_by?.lastname}
-                            </p>
-                            <p className="text-sm pt-2">
-                              {reservationDetails?.offered_by?.about_me ||
-                                "N/A"}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                      </Link>
                     )}
 
                     <div className="flex flex-row gap-3 pt-8">

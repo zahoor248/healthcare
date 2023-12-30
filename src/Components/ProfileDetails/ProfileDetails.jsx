@@ -149,15 +149,17 @@ export default function ProfileDetails() {
           lable: "Reservation Booked",
         });
 
-        setTimeout(() => {
-          setShowToast({
-            ...showToast,
-            toggle: false,
-            status: "info",
-            message: "This user has been Reserved",
-            lable: "Reservation Booked",
-          });
-        }, 2000);
+        // setTimeout(() => {
+        //   setShowToast({
+        //     ...showToast,
+        //     toggle: false,
+        //     status: "info",
+        //     message: "This user has been Reserved",
+        //     lable: "Reservation Booked",
+        //   });
+        // }, 2000);
+
+        navigate("/reservations");
 
         setButtonLoading(false);
       })

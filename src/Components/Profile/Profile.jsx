@@ -10,6 +10,11 @@ import {
   HiStar,
 } from "react-icons/hi";
 import { BiMessageSquareEdit } from "react-icons/bi";
+import { FaIdCard } from "react-icons/fa";
+
+import { FaClock } from "react-icons/fa6";
+
+import { MdBusinessCenter } from "react-icons/md";
 
 import { TbLicense } from "react-icons/tb";
 import { MdRoomPreferences } from "react-icons/md";
@@ -683,7 +688,7 @@ const Profile = () => {
                     }`}
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
-                      <HiUserCircle className="pen-icon" />
+                      <MdBusinessCenter className="pen-icon" />
                       <span className="normal-case !text-xs md:!text-base whitespace-nowrap md:whitespace-normal">
                         Business Profile
                       </span>
@@ -725,7 +730,7 @@ const Profile = () => {
                     }`}
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
-                      <TbLicense className="pen-icon" />
+                      <FaIdCard className="pen-icon" />
                       <span className="normal-case !text-xs md:!text-base">
                         Licenses
                       </span>
@@ -741,7 +746,7 @@ const Profile = () => {
                     }`}
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
-                      <MdRoomPreferences className="pen-icon" />
+                      <FaClock className="pen-icon" />
                       <span className="normal-case !text-xs md:!text-base mr-2.5 md:mr-0">
                         Preferences
                       </span>
