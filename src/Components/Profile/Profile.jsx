@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
-import User from "../../assets/images/avatar.png";
+import User from "../../assets/images/holderpic.jpeg";
 import {
   HiUserCircle,
   HiPencilAlt,
@@ -658,7 +658,7 @@ const Profile = () => {
         <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px]">
           <div className=" bg-white  md:py-10 w-full md:h-full rounded-lg shadow-class">
             <div className="hidden md:flex flex-col pb-6 items-center">
-              <img src={User} alt="user profile image" className="w-20 h-20" />
+              <img src={User} alt="user profile image" className="w-20 h-20 border border-neutral-200 rounded-full" />
               <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
               </p>

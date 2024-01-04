@@ -1,0 +1,101 @@
+public function register2(Request $request, $uuid){
+
+        $user = User::where("uuid",$uuid)->first();
+        if(!$user){
+            return response()->json(['data' => "User Not Found"], 200);
+        }
+
+        $user_type = ($user->type === "pro")? "pro" : "bus";
+
+        //add address
+        if($request->address){
+            $atype = ($user_type === "pro")? "mailing" : "business";
+            try{
+                $address = Address::create([
+                    'uuid' => (string) Str::uuid(),
+                    'user_id' => $user->id,
+                    'nickname' => "Default",
+                    'address_1' => $request->address_1,
+                    'address_2' => $request->address_2,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip' => $request->zip,
+                    'type' => $atype,
+                    'status' => "active"
+                ]);
+            }catch(Exception $e){
+                return parent::respondWithError("Error adding address: " . $e->getMessage());
+            }
+        }
+
+        if($request->license){
+            try{
+                $license = License::create([
+                    'uuid' => (string) Str::uuid(),
+                    'user_id' => $user->id,
+                    'license_type' => $request->license_type,
+                    'license_state' => $request->license_state,
+                    'license_id'=> $request->license_id,
+                    'verified' => "false",
+                ]);
+
+            }catch(Exception $e){
+                return parent::respondWithError("Error adding license: " . $e->getMessage());
+            }
+        }
+
+        $user->status = "active";
+        $user->save();
+
+        if($user_type === "bus"){
+            $account = Account::where("owner_id",$user->id)->first();
+            $bus = [];
+            $bus['name'] = $account->name;
+            $bus['first'] = $user->firstname;
+            $bus['last'] = $user->lastname;
+            $bus['email'] = $user->email;
+            $bus['phone'] = $user->phone;
+            $bus['street'] = $request->address_1;
+            $bus['address2'] = $request->address_2;
+            $bus['city'] = $request->city;
+            $bus['state'] = $request->state;
+            $bus['zip'] = $request->zip;
+
+            try {
+                Mail::to($user->email)->send(new AdminNewBus($bus));
+                return response()->json(['success' => true], 200);
+            } catch (\Exception $e) {
+                // Handle email sending error
+                return response()->json(['success' => false, 'error' => $e], 500);
+            }
+
+        }
+
+        if($user_type === "pro"){
+            $account = Account::where("owner_id",$user->id)->first();
+            $pro = [];
+            $pro['name'] = $account->name;
+            $pro['first'] = $user->firstname;
+            $pro['last'] = $user->lastname;
+            $pro['email'] = $user->email;
+            $pro['phone'] = $user->phone;
+            $pro['street'] = $request->address_1;
+            $pro['address2'] = $request->address_2;
+            $pro['city'] = $request->city;
+            $pro['state'] = $request->state;
+            $pro['zip'] = $request->zip;
+
+            try {
+                Mail::to($user->email)->send(new AdminNewPro($pro));
+                return response()->json(['success' => true], 200);
+            } catch (\Exception $e) {
+                // Handle email sending error
+                return response()->json(['success' => false, 'error' => $e], 500);
+            }
+        }
+
+        $return = new stdClass;
+        $return->user = $user;
+        return $return;
+
+    }

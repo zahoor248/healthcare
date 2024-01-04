@@ -4,7 +4,8 @@ import emptyState from "../../assets/images/reservation.png";
 import "./ProfessionalCard.css";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
-import EmptyState from "../EmptyState/EmptyState";
+import User from "../../assets/images/holderpic.jpeg";
+
 
 export default function ProfessionalCard({ data, setFilteredData }) {
   const [show, setShow] = useState(null);
@@ -49,11 +50,11 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           src={
                             item.photo_url
                               ? item.photo_url
-                              : require("../../assets/images/avatar.png")
+                              : User
                           }
                           width={55}
                           height={32}
-                          className="rounded-full object-cover w-10 md:w-8 md:h-8 h-10 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14"
+                          className="rounded-full border object-cover w-10 md:w-8 md:h-8 h-10 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14"
                           alt="User Image"
                         />
                         <div className="username-details">

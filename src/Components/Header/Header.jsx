@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Logo from "../../assets/images/logo-image.png";
-import User from "../../assets/images/avatar.png";
+import User from "../../assets/images/holderpic.jpeg";
 import { Link, useLocation } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { MdFavorite } from "react-icons/md";
@@ -311,9 +311,7 @@ export default function Header() {
                       {user?.photo_url != null ? (
                         <img src={user?.photo_url} />
                       ) : (
-                        <h4 class="text-white   text-sm lg:text-sm 2xl:text-md  font-normal leading-3 bg-black md:h-8 md:w-8 xl:w-10 xl:h-10 flex items-center m-auto justify-center rounded-full text-center cursor-pointer">
-                          {user?.firstname?.charAt(0)}
-                        </h4>
+                        <img src={User} />
                       )}
                       {/* <GoPrimitiveDot className='online-icon'/> */}
                     </div>

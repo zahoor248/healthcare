@@ -1,0 +1,267 @@
+now lets update the date header for the custom to week date 
+import React, { useEffect, useState } from 'react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import listPlugin from '@fullcalendar/list'
+import dayjs from 'dayjs'
+import customViewPlugin from './CustomPlugin'
+import './CalendarStyle.css'
+import { setConstantValue } from 'typescript'
+const Calendar = ({ data }) => {
+  const [calendarView, setCalendarView] = useState({
+    showDayActions: false,
+    showWeekActions: false,
+    showMonthActions: true,
+  })
+  const [jumpToday, setJumpToday] = useState(new Date())
+  const [showModal, setShowModal] = useState(false)
+  const get_calendar_data = () => {
+    let events_data = data.map((item, index) => {
+      return {
+        title: 'New Airport',
+        start: item.service_date,
+        ...item,
+      }
+    })
+    return events_data
+  }
+
+  const calendarOptions = {
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, customViewPlugin],
+    customButtons: {
+      createAction: {
+        text: 'Create Event',
+        click: function () {
+          setShowModal(true)
+        },
+      },
+    },
+    headerToolbar: {
+      left: 'dayGridMonth,custom,dayGridDay',
+      center: 'prev,title,next',
+      right: 'createAction',
+    },
+    initialView: 'dayGridMonth',
+    events: get_calendar_data(),
+    editable: false,
+    selectable: true,
+    selectMirror: true,
+    fixedWeekCount: false,
+    initialDate: jumpToday,
+    weekends: true,
+    eventContent: (eventinfo, screen) => renderEventContent(eventinfo, calendarView),
+    displayEventTime: true,
+    eventOverlap: false,
+    firstDay: 1,
+    eventTimeFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: true,
+    },
+
+    views: {
+      dayGridMonth: {
+        dayMaxEvents: 3,
+      },
+      dayGridWeek: {
+        type: 'timeGridWeek',
+        duration: { weeks: 1 },
+        columnHeaderFormat: { weekday: 'long' },
+        allDaySlot: false,
+        slotDuration: '00:30:00',
+        slotLabelInterval: '01:00',
+        slotLabelFormat: {
+          hour: '2-digit',
+          minute: '2-digit',
+        },
+      },
+      dayGridWeek: {
+        allDaySlot: false,
+        dayHeaderContent: (args) => {
+          return dayjs(args.date).format('dddd Do')
+        },
+      },
+      dayGridDay: {
+        allDaySlot: false,
+        dayHeaderContent: (args) => {
+          return dayjs(args.date).format('dddd Do')
+        },
+      },
+    },
+    eventClick: (info) => {
+      console.log(info)
+    },
+  }
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window) {
+      let dayViewbutton = document.getElementsByClassName('fc-dayGridDay-button')[0]
+
+      let weekViewbutton = document.getElementsByClassName('fc-dayGridWeek-button')[0]
+
+      let monthViewbutton = document.getElementsByClassName('fc-dayGridMonth-button')[0]
+      // here are the button of calender
+      // day
+      dayViewbutton?.addEventListener('click', function () {
+        setCalendarView({
+          ...calendarView,
+          showDayActions: true,
+          showWeekActions: false,
+          showMonthActions: false,
+        })
+      })
+      // // week
+      weekViewbutton?.addEventListener('click', function () {
+        setCalendarView({
+          ...calendarView,
+          showDayActions: false,
+          showWeekActions: true,
+          showMonthActions: false,
+        })
+      })
+      // month
+      monthViewbutton?.addEventListener('click', function () {
+        setCalendarView({
+          ...calendarView,
+          showDayActions: false,
+          showWeekActions: false,
+          showMonthActions: true,
+        })
+      })
+    }
+  }, [])
+
+  return (
+    <>
+      <button onClick={() => setJumpToday(new Date())}>Today</button>
+      <div className="mt-3">
+        <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" {...calendarOptions} />
+      </div>
+
+      {showModal && (
+        <>
+          <div className="containe">
+            <div className="model-body">
+              <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                  <div className="modal-header border-bottom-0">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Create Event
+                    </h5>
+                    <svg
+                      onClick={() => setShowModal(false)}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-x pointer"
+                    >
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
+                  </div>
+                  <form>
+                    <div className="modal-body d-flex flex-column gap-2 py-4">
+                      <div className="form-group">
+                        <label htmlFor="email1">AirPort Name</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="email1"
+                          aria-describedby="emailHelp"
+                          placeholder="Airport name"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="password1">Vehicle</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="password1"
+                          placeholder="Vehicle"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="password1">Shift Time</label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="password2"
+                          placeholder="Morining/Evening "
+                        />
+                      </div>
+                    </div>
+                    <div className="modal-footer border-top-0 d-flex justify-content-end">
+                      <button type="submit" className="btn btn-primary px-8 py-2.5">
+                        Create Action
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  )
+}
+
+// a custom render function
+function renderEventContent(eventInfo, screen) {
+  console.log(eventInfo, 'eventInfo')
+  return (
+    <div className="event-container">
+      {screen?.showMonthActions ? (
+        <div className="calendar-event">
+          {/* <div className="calendar-dot"></div> */}
+          <div className="event-time">Picker:{eventInfo.timeText} / Vehicle:</div>
+          <div className="event-name">{eventInfo?.event?.title}</div>
+        </div>
+      ) : screen?.showWeekActions ? (
+        <div className="week-event">
+          <div className="d-flex w-100 px-1 justify-content-between  gap-2">
+            <div className="event-name">{eventInfo?.event?.title}</div>
+            <div className="event-time">{eventInfo.timeText} </div>
+          </div>
+          <div className="week-description">
+            <div className="event-name pb-2">
+              {' '}
+              <b>AirPort:</b> Marid
+            </div>
+            <div className="week-event-name px-2 border p-2 ">
+              {' '}
+              <b>Shift:</b> Morning
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="week-event">
+          <div className="d-flex w-100 px-1 justify-content-between  gap-2">
+            <div className="event-name">{eventInfo?.event?.title}</div>
+            <div className="event-time">{eventInfo.timeText} </div>
+          </div>
+          <div className="week-description">
+            <div className="event-name pb-2">
+              {' '}
+              <b>AirPort:</b> Marid
+            </div>
+            <div className="week-event-name px-2 border p-2 ">
+              {' '}
+              <b>Shift:</b> Morning
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default 
+

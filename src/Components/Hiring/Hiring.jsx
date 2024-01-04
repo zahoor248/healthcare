@@ -3,6 +3,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import "./Hiring.css";
 import ProfessionalCard from "../ProfessionalCard/ProfessionalCard";
 import { useDispatch, useSelector } from "react-redux";
+import User from "../../assets/images/holderpic.jpeg";
+
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { getAllFav, getAllPros } from "../../Store/Actions/Actions";
 export default function Hiring() {
