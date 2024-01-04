@@ -21,7 +21,7 @@ export default function SignUp() {
     showPassword_confirm: false,
   });
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [userType, setUserType] = useState("pro");
+  const [userType, setUserType] = useState("bus");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 

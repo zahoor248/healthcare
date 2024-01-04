@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { handleAPIRequest } from "../helper/ApiHandler";
 import { getAllPros, setIsLoggedIn, setUser } from "../Store/Actions/Actions";
+import WelcomeModel from "./WelcomeModel";
 // Create a Footer component
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.isLoggedIn);
-  const user = useSelector((state) => state.isLoggedIn);
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const unStrictPages = ["/", "register", "login"];
   const location = useLocation();
@@ -73,6 +74,7 @@ const Layout = ({ children }) => {
         </div>
       ) : (
         <div className="f-f-g-s flex flex-col ">
+          {user?.type == "bus" && user?.status != "active" && <WelcomeModel />}
           <Header />
           <main className=" min-h-[calc(100vh-147px)] md:min-h-[calc(100vh-172px)] overflow-auto  xl:min-h-[calc(100vh-184px)] 2xl:min-h-[calc(100vh-192px)]">
             {children}
