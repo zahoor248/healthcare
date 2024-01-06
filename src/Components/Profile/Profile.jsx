@@ -251,7 +251,7 @@ const ProfileData = () => {
               ></textarea>
             </div>
           </div>
-          <div className="flex mt-6 gap-3 justify-end w-auto">
+          <div className="flex mt-6 gap-3 justify-between w-auto">
             <button
               onClick={() => handleLogout()}
               className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "

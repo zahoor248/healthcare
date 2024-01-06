@@ -48,7 +48,7 @@ root.render(
             <Route path="/profile" element={<Profile />} />
             <Route path="/favouraties" element={<Favouraties />} />
             <Route path="/contracts" element={<Contacts />} />
-            <Route path="/reservations" element={<Reservations />} />
+            <Route path="/offers" element={<Reservations />} />
             <Route
               path="/reservation-detail"
               element={<ReservationDetails />}

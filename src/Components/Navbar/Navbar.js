@@ -94,7 +94,7 @@ function NavBar() {
 
             <div>
               <div as={Link} to="/about" onClick={() => updateExpanded(false)}>
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Reservations
+                <CgFileDocument style={{ marginBottom: "2px" }} /> Offers
               </div>
             </div>
 

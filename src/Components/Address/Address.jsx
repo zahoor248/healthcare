@@ -25,6 +25,7 @@ export default function Address() {
   const [button_loading, setButton_loading] = useState(false);
   const [adressList, setAdressList] = useState([]);
   const [uuid, setUuid] = useState(null);
+  const [address2, setAddress2] = useState("");
   const [showToast, setShowToast] = useState({
     toggle: false,
     lable: "",
@@ -44,6 +45,7 @@ export default function Address() {
       setZipCode(address.zip);
       setAddress(address.address_1);
       setUuid(address.uuid);
+      setAddress2(address.address_2);
     } else {
       setSelectedAddress(null);
       setNickName("");
@@ -61,7 +63,8 @@ export default function Address() {
       state == "" ||
       city == "" ||
       zipCode == "" ||
-      address == ""
+      address == "" ||
+      address2 == ""
     ) {
       setShowToast({
         ...showToast,
@@ -82,7 +85,8 @@ export default function Address() {
           city: city,
           nickname: nickname,
           zip: zipCode,
-          [`address_${1}`]: address,
+          [`address_1`]: address,
+          [`address_2`]: address2,
           type: "mailing",
         };
 
@@ -154,7 +158,8 @@ export default function Address() {
       state: data.state,
       city: data.city,
       zip: data.zipCode,
-      [`address_${1}`]: data.address,
+      [`address_1`]: data.address,
+      [`address_2`]: data.address2,
       type: "mailing",
       uuid: generateUUID(),
     };
@@ -241,8 +246,10 @@ export default function Address() {
             {adressList?.map((address, index) => (
               <div class=" " key={index}>
                 <div class=" bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-700">
-                  <div class="text-lg px-6 py-2 flex items-center border-b bg-neutral-100 justify-between w-full font-semibold text-gray-900 dark:text-white">
-                    Address {index + 1}
+                  <div class="text-md px-6 py-2 flex items-center border-b bg-neutral-100 justify-between w-full font-semibold text-neutral-800 dark:text-white">
+                    <span className="text-base text-neutral-700">
+                      Name: <span className="text-sm">{address.nickname}</span>
+                    </span>
                     <div className="flex gap-2 items-center">
                       <button
                         class=" font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -265,47 +272,43 @@ export default function Address() {
                       </button>
                       {/* delete icon here  */}
                       {/* <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="#ef4444"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                        />
-                      </svg> */}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="#ef4444"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                      />
+                    </svg> */}
                     </div>
                   </div>
                   <div className="flex gap-3 flex-col p-6">
                     <div className="flex justify-between w-full">
-                      {address.nickname != "" && (
-                        <p>
-                          <strong className="text-neutral-600 font-bold">
-                            NickName:
-                          </strong>{" "}
-                          {address.nickname}
-                        </p>
-                      )}
-
-                      {/* <p>
-                        <strong className="text-neutral-600 font-bold">
-                          State:
-                        </strong>{" "}
-                        {address.state}
-                      </p> */}
-                    </div>
-                    {/* <div className="flex justify-between w-full">
                       <p>
                         <strong className="text-neutral-600 font-bold">
                           Adress:
                         </strong>{" "}
                         {address.address_1}
                       </p>
-
+                      <p>
+                        <strong className="text-neutral-600 font-bold">
+                          State:
+                        </strong>{" "}
+                        {address.state}
+                      </p>
+                    </div>
+                    <div className="flex justify-between w-full">
+                      <p>
+                        <strong className="text-neutral-600 font-bold">
+                          City:
+                        </strong>{" "}
+                        {address.city}
+                      </p>
                       <p>
                         <strong className="text-neutral-600 font-bold">
                           {" "}
@@ -313,13 +316,7 @@ export default function Address() {
                         </strong>{" "}
                         {address.zip}
                       </p>
-                    </div> */}
-                    {/* <p>
-                      <strong className="text-neutral-600 font-bold">
-                        City:
-                      </strong>{" "}
-                      {address.city}
-                    </p> */}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -367,6 +364,45 @@ export default function Address() {
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-base/none font-normal text-neutral-600">
+                  Street Address
+                </p>
+                <input
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="Address"
+                  placeholder="Enter your address"
+                  variant="outlined"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-base/none font-normal text-neutral-600">
+                  Address 2
+                </p>
+                <input
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="Address"
+                  placeholder="Enter your address"
+                  variant="outlined"
+                  value={address2}
+                  onChange={(e) => setAddress2(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-base/none font-normal text-neutral-600">
+                  City
+                </p>
+                <input
+                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                  label="City"
+                  placeholder="Enter your City"
+                  variant="outlined"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-base/none font-normal text-neutral-600">
                   State
                 </p>
                 <select
@@ -384,19 +420,7 @@ export default function Address() {
                   ))}
                 </select>
               </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-base/none font-normal text-neutral-600">
-                  City
-                </p>
-                <input
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                  label="City"
-                  placeholder="Enter your City"
-                  variant="outlined"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </div>
+
               <div className="flex flex-col gap-2">
                 <p className="text-base/none font-normal text-neutral-600">
                   Zip Code
@@ -408,19 +432,6 @@ export default function Address() {
                   variant="outlined"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-base/none font-normal text-neutral-600">
-                  Address
-                </p>
-                <input
-                  className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                  label="Address"
-                  placeholder="Enter your address"
-                  variant="outlined"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
             </div>

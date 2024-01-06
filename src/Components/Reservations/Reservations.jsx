@@ -40,7 +40,7 @@ const Reservations = () => {
     <div className="flex main-container overflow-auto w-full">
       <div className="flex w-full flex-col    py-[52px]">
         <div className=" justify-center items-start text-neutral-700 flex w-full">
-          <div className="text-[32px] font-semibold">My Offers</div>
+          <div className="text-[32px] font-semibold">Offers</div>
         </div>
         {reservations?.length > 0 ? (
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-8">
