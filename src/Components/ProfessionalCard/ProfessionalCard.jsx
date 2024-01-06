@@ -133,7 +133,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
         ) : (
           <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 h-[60vh] bg-slate-50 rounded-md mt-8">
             <img src={emptyState} className="w-32" />
-            <div className="text-3xl ">No Profile matches your search</div>
+            <div className="text-3xl ">No matching pros found. Please try a different search.</div>
           </div>
         )}
         {show != null && show == profileData.uuid && (

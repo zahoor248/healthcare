@@ -285,7 +285,7 @@ export default function Address() {
                       {address.nickname != "" && (
                         <p>
                           <strong className="text-neutral-600 font-bold">
-                            Nick Name:
+                            NickName:
                           </strong>{" "}
                           {address.nickname}
                         </p>
@@ -354,13 +354,13 @@ export default function Address() {
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-2">
                 <p className="text-base/none font-normal text-neutral-600">
-                  Nick Name
+                  NickName
                 </p>
                 <input
                   className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                   label="nickname"
                   variant="outlined"
-                  placeholder="Enter your Nick Name"
+                  placeholder="Enter your NickName"
                   value={nickname}
                   onChange={(e) => setNickName(e.target.value)}
                 />
