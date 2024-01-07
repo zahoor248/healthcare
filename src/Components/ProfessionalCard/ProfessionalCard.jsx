@@ -228,7 +228,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           </span>{" "}
                           <span className="text-neutral-700 font-medium">
                             within {profileData?.pro_profile?.radius} miles of{" "}
-                            {user.addresses[0]?.zip}
+                            {user.addresses && user.addresses[0]?.zip}
                           </span>
                         </div>
                         <div className="flex pt-2 flex-col gap-3">
@@ -253,7 +253,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                       </div>
                     </div>
 
-                    <div className=" flex items-start flex-col w-[50%]">
+                    <div className=" md:flex items-start flex-col hidden w-[50%]">
                       <div className="bg-blue-50 h-full w-full flex items-center py-6 flex-col rounded-2xl">
                         <div>
                           <h5 className="text-neutral-800 pb-3 font-semibold">

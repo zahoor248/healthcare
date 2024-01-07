@@ -110,7 +110,7 @@ export default function NewOffer() {
       .then((response) => {
         console.log(response);
         setButtonLoading(false);
-        navigate("/reservations");
+        navigate("/offers");
       })
       .catch((err) => {
         setButtonLoading(false);
@@ -194,7 +194,7 @@ export default function NewOffer() {
           </div>
           <div className="">
             <div className="xl:w-[60vw] bg-white px-10  rounded-md mx-auto mt-4 md:mt-10 flex flex-col gap-3 md:gap-5  ">
-              <div className="flex gap-12 lg:gap-12 mb-6">
+              <div className="flex gap-4 md:gap-12 md:flex-row flex-col  lg:gap-12 mb-6">
                 <div className="flex items-center gap-5 border p-4 w-full rounded-lg">
                   <span className="text-blue-600">Offer by:</span>
                   <div className="flex items-center gap-4">
@@ -233,7 +233,7 @@ export default function NewOffer() {
                 </div>
               </div>
 
-              <div className="flex gap-12 lg:gap-24">
+              <div className="flex  gap-4 md:gap-12 md:flex-row flex-col  lg:gap-24">
                 <div className="w-full flex flex-col gap-2">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     Start Date
@@ -327,7 +327,7 @@ export default function NewOffer() {
                   </div>
                 </div>
               </div>
-              <div className="flex pt-4 justify-between gap-12 lg:gap-24">
+              <div className="flex pt-4 justify-between  gap-4 md:gap-12 md:flex-row flex-col  lg:gap-24">
                 <div className=" flex flex-col gap-2 w-full">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     Location
@@ -405,7 +405,7 @@ export default function NewOffer() {
                       />
                     </div>
                   </div>
-                  <div className="w-auto flex justify-center items-center mt-4">
+                  <div className="w-auto  pb-3 flex justify-center items-center mt-4">
                     <CommonPrimaryButton
                       onClick={() => {
                         reserveUser();

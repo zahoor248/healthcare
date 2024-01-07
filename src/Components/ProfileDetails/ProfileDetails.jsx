@@ -159,7 +159,7 @@ const ProfileDetails = () => {
         //   });
         // }, 2000);
 
-        navigate("/reservations");
+        navigate("/offers");
 
         setButtonLoading(false);
       })
@@ -309,7 +309,7 @@ const ProfileDetails = () => {
         <div>
           <div className="flex flex-col xl:flex-row border-b">
             <div className="basis-2/5 pt-12 col-span-2">
-              <div className=" flex w-full gap-6 pl-20 items-center ">
+              <div className=" flex w-full gap-6 pl-6 md:pl-20 items-center ">
                 {userDetails.photo_url != null ? (
                   <img
                     className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white"
@@ -370,13 +370,13 @@ const ProfileDetails = () => {
               <div className="border-b border-blue-300 w-full mt-12"></div>
 
               <div className="">
-                <div className="flex flex-col sm:flex-row xl:flex-col 2xl:flex-row gap-4 2xl:gap-0 pl-20 mt-10 mb-10">
+                <div className="flex flex-col sm:flex-row xl:flex-col 2xl:flex-row gap-4 2xl:gap-0 pl-5 md:pl-20 mt-10 mb-10">
                   <div className="flex flex-col">
                     <div className="flex">
                       <AiOutlineStar className="star-icon" />
                       <div className="ml-4">
                         <p className="text-lg flex flex-col gap-2 text-gray-600 mb-2">
-                          Reviews{" "} # ({userDetails.reviewer?.length})
+                          Reviews # ({userDetails.reviewer?.length})
                           <Rating
                             // maxScale={5}
                             // style={{marginVertical: 20}}
@@ -455,7 +455,7 @@ const ProfileDetails = () => {
               </div>
             </div>
 
-            <div className=" flex flex-col items-center justify-start w-[30%] border-l">
+            <div className=" flex flex-col items-center justify-start md:w-[30%] border-l">
               <p className="working-hrs">Preferred Working Hours</p>
               {userDetails?.pro_profile?.working_hours.length > 0 ? (
                 <div className="w-full flex flex-col justify-center items-center">
@@ -509,8 +509,8 @@ const ProfileDetails = () => {
           </div>
           <div className="flex flex-col items-center py-5 mb-28">
             <h3 className=" text-neutral-800 text-3xl ">Book Reservation</h3>
-            <div className="w-[60vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
-              <div className="flex gap-12 lg:gap-24">
+            <div className="md:w-[60vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
+              <div className="flex flex-col md:flex-row gap-4 md:gap-12 lg:gap-24">
                 <div className="w-full flex flex-col gap-2">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     Start Date
@@ -594,7 +594,7 @@ const ProfileDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex pt-4 justify-between gap-12 lg:gap-24">
+              <div className="flex pt-4 justify-between flex-col md:flex-row gap-4 md:gap-12 lg:gap-24">
                 <div className="w-full flex flex-col gap-2">
                   <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
                     Location

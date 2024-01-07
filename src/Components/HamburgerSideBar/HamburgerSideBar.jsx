@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Logo from "../../assets/images/logo-image.png";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function HamburgerSideBar({ setShowBar }) {
+  const user = useSelector((state) => state.user);
   return (
     <>
       <div className="md:hidden">
@@ -54,46 +56,50 @@ export default function HamburgerSideBar({ setShowBar }) {
               </svg>
               Home
             </Link>
-            <Link
-              className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
-              as={Link}
-              to="/favouraties"
-            >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                stroke-width="0"
-                viewBox="0 0 24 24"
-                height="20"
-                width="20"
-                xmlns="http://www.w3.org/2000/svg"
+            {user.type == "bus" && (
+              <Link
+                className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
+                as={Link}
+                to="/favouraties"
               >
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
-              </svg>
-              Favorites
-            </Link>
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  height="20"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+                </svg>
+                Favorites
+              </Link>
+            )}
 
-            <Link
-              className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
-              as={Link}
-              to="/offers"
-            >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                stroke-width="0"
-                viewBox="0 0 24 24"
-                height="20"
-                width="20"
-                xmlns="http://www.w3.org/2000/svg"
+            {user.type == "bus" && (
+              <Link
+                className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
+                as={Link}
+                to="/offers"
               >
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <circle cx="12" cy="4" r="2"></circle>
-                <path d="M15.89 8.11C15.5 7.72 14.83 7 13.53 7h-2.54C8.24 6.99 6 4.75 6 2H4c0 3.16 2.11 5.84 5 6.71V22h2v-6h2v6h2V10.05L18.95 14l1.41-1.41-4.47-4.48z"></path>
-              </svg>
-              Offers
-            </Link>
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  height="20"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <circle cx="12" cy="4" r="2"></circle>
+                  <path d="M15.89 8.11C15.5 7.72 14.83 7 13.53 7h-2.54C8.24 6.99 6 4.75 6 2H4c0 3.16 2.11 5.84 5 6.71V22h2v-6h2v6h2V10.05L18.95 14l1.41-1.41-4.47-4.48z"></path>
+                </svg>
+                Offers
+              </Link>
+            )}
 
             <Link
               className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"

@@ -163,7 +163,7 @@ export default function SignUp() {
           </div>
         </div>
 
-        <div className="h-full w-full md:w-[90%] md:p-12   p-6 lg:p-24 overflow-auto flex flex-col   justify-center">
+        <div className="h-full w-full md:w-[90%] md:p-12  overflow-auto p-6 lg:p-24 ">
           {registrationStep == 1 ? (
             <div class="">
               <Link

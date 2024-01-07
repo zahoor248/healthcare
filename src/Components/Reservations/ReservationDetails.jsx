@@ -103,7 +103,7 @@ const ReservationDetails = () => {
                   <p className="font-semibold pr-1 text-neutral-700 text-lg">
                     Status:
                   </p>{" "}
-                  {opentoAcceptoffer.status}
+                  {opentoAcceptoffer?.status}
                 </div>
                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full">
                   <div className="flex flex-col items-start gap-4 w-full md:w-[40%] ">
@@ -390,7 +390,7 @@ const ReservationDetails = () => {
                           />
                         </div>
 
-                        <Link to={`/counter-offer?${reservationDetails?.uuid}`}>
+                        <Link to={`/counter-offer?${opentoAcceptoffer?.uuid}`}>
                           <CommonPrimaryButton
                             loading={false}
                             text={"Counter"}
