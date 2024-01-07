@@ -5,7 +5,7 @@ import { TbPhoneCall } from "react-icons/tb";
 import { FaMapPin, FaStar } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 import emptyState from "../../assets/images/add-to-wishlist-icon-1.jpg";
-import User from "../../assets/images/holderpic.jpeg";
+
 import ReviewSlider from "../ReviewSlider/ReviewSlider";
 import DaySelect from "../DaySelect/DaySelect";
 import Header from "../Header/Header";
@@ -121,9 +121,9 @@ const BusinessProfile = () => {
       ) : (
         <>
           {userDetails === null ? (
-            <div className="flex w-[60%] justify-center mx-auto flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
-              <img src={User} className="w-28 rounded-full bg-transparent" />
-              <div className="text-3xl "> Profile Not Found</div>
+            <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
+              <img src={emptyState} className="w-28 bg-transparent" />
+              <div className="text-3xl ">Your Favorites will appear here</div>
             </div>
           ) : (
             <div>

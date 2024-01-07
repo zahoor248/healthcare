@@ -286,6 +286,7 @@ const BusinessProfileData = () => {
     url: "",
     public_phone: "",
     bus_logo: "",
+    bus_url: "",
   });
   const [showToast, setShowToast] = useState({
     toggle: false,
@@ -327,34 +328,41 @@ const BusinessProfileData = () => {
       .then((response) => {
         if (response) {
           // return;
-          postData();
+          const res = postData();
 
-          handleAPIRequest("get", "user", null)
-            .then((response) => {
-              dispatch(setUser(response.user.profile));
-              setLoading_button(false);
-              // to prevent from loading on listing page we are making call here
-            })
-            .catch((error) => {
-              console.log(error);
-              setLoading_button(false);
-            });
-          setShowToast({
-            ...showToast,
-            toggle: true,
-            status: "success",
-            message: "Settings has been updated successfully",
-            lable: "Settings Updated",
-          });
-          setTimeout(() => {
-            setShowToast({
-              ...showToast,
-              toggle: false,
-              status: "success",
-              message: "Settings has been updated successfully",
-              lable: "Settings Updated",
-            });
-          }, 2000);
+          if (res) {
+            handleAPIRequest("get", "user", null)
+              .then((response) => {
+                dispatch(setUser(response.user.profile));
+                setBusiness({
+                  ...business,
+                  bus_url: "",
+                  bus_logo: "",
+                });
+                setLoading_button(false);
+                setShowToast({
+                  ...showToast,
+                  toggle: true,
+                  status: "success",
+                  message: "Settings has been updated successfully",
+                  lable: "Settings Updated",
+                });
+                setTimeout(() => {
+                  setShowToast({
+                    ...showToast,
+                    toggle: false,
+                    status: "success",
+                    message: "Settings has been updated successfully",
+                    lable: "Settings Updated",
+                  });
+                }, 2000);
+                // to prevent from loading on listing page we are making call here
+              })
+              .catch((error) => {
+                console.log(error);
+                setLoading_button(false);
+              });
+          }
         }
       })
       .catch((error) => {
@@ -364,6 +372,8 @@ const BusinessProfileData = () => {
 
   // upload image request
   async function postData() {
+    setLoading_button(true);
+
     const token = localStorage.getItem("token");
     if (business.bus_logo instanceof File) {
       // Check if a file object is available
@@ -389,22 +399,35 @@ const BusinessProfileData = () => {
         if (response.data) {
           handleAPIRequest("get", "user", null).then((response) => {
             dispatch(setUser(response.user.profile));
+            setLoading_button(false);
           });
+          return true;
           // Handle the response data here
         }
       } catch (error) {
         console.error("Error:", error);
         // Handle errors
+        setLoading_button(false);
       }
     }
   }
 
   // Create a function to handle file selection
   const handleFileSelect = (event) => {
-    const selectedFile = event.target.files[0];
+    const selectedFile = event.target?.files[0];
     if (selectedFile) {
-      // Set the selected file to the bus_logo state
-      setBusiness({ ...business, bus_logo: selectedFile });
+      // Set the selected file and its data URL to the bus_logo and bus_url state
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setBusiness({
+          ...business,
+          bus_url: reader.result,
+          bus_logo: selectedFile,
+        });
+      };
+
+      reader.readAsDataURL(selectedFile);
     }
   };
 
@@ -425,9 +448,13 @@ const BusinessProfileData = () => {
         <form onSubmit={submitHandler}>
           <div className=" flex flex-col justify-center items-center gap-4 w-full">
             <div class="profileImage">
-              {user.accounts[0].bus_profile?.logo_url ? (
+              {business?.bus_url || user.accounts[0].bus_profile?.logo_url ? (
                 <img
-                  src={user.accounts[0].bus_profile?.logo_url}
+                  src={
+                    business?.bus_url
+                      ? business?.bus_url
+                      : user.accounts[0].bus_profile?.logo_url
+                  }
                   className="object-cover h-full w-full"
                 />
               ) : (
@@ -551,7 +578,7 @@ const BusinessProfileData = () => {
                 <input
                   type="file"
                   ref={fileInputRef}
-                  onChange={handleFileSelect}
+                  onChange={(e) => handleFileSelect(e)}
                   className="opacity-0 cursor-pointer z-10 absolute px-6 -left-0 py-4 w-full"
                 />
                 <div class="svg-wrapper-1">
