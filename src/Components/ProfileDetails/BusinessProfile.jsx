@@ -122,7 +122,12 @@ const BusinessProfile = () => {
         <>
           {userDetails === null ? (
             <div className="flex w-[60%] justify-center mx-auto flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
-              <img src={User} className="w-28 rounded-full bg-transparent" />
+              <img
+                src={
+                  "https://thenounproject.com/api/private/icons/4474310/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageF"
+                }
+                className="w-40 rounded-full bg-transparent"
+              />
               <div className="text-3xl "> Profile Not Found</div>
             </div>
           ) : (

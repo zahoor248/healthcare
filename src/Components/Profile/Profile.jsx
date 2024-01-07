@@ -339,28 +339,13 @@ const BusinessProfileData = () => {
                   bus_url: "",
                   bus_logo: "",
                 });
-                setLoading_button(false);
-                setShowToast({
-                  ...showToast,
-                  toggle: true,
-                  status: "success",
-                  message: "Settings has been updated successfully",
-                  lable: "Settings Updated",
-                });
-                setTimeout(() => {
-                  setShowToast({
-                    ...showToast,
-                    toggle: false,
-                    status: "success",
-                    message: "Settings has been updated successfully",
-                    lable: "Settings Updated",
-                  });
-                }, 2000);
+                // setLoading_button(false);
+
                 // to prevent from loading on listing page we are making call here
               })
               .catch((error) => {
                 console.log(error);
-                setLoading_button(false);
+                // setLoading_button(false);
               });
           }
         }
@@ -401,7 +386,22 @@ const BusinessProfileData = () => {
             dispatch(setUser(response.user.profile));
             setLoading_button(false);
           });
-          return true;
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "success",
+            message: "Settings has been updated successfully",
+            lable: "Settings Updated",
+          });
+          setTimeout(() => {
+            setShowToast({
+              ...showToast,
+              toggle: false,
+              status: "success",
+              message: "Settings has been updated successfully",
+              lable: "Settings Updated",
+            });
+          }, 2000);
           // Handle the response data here
         }
       } catch (error) {
@@ -409,6 +409,23 @@ const BusinessProfileData = () => {
         // Handle errors
         setLoading_button(false);
       }
+    } else {
+      setShowToast({
+        ...showToast,
+        toggle: true,
+        status: "success",
+        message: "Settings has been updated successfully",
+        lable: "Settings Updated",
+      });
+      setTimeout(() => {
+        setShowToast({
+          ...showToast,
+          toggle: false,
+          status: "success",
+          message: "Settings has been updated successfully",
+          lable: "Settings Updated",
+        });
+      }, 2000);
     }
   }
 
