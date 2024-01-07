@@ -152,11 +152,11 @@ export default function SignUp() {
             src={Slide2}
             className="h-[200px] w-[200px] py-6 md:!p-0  2xl:w-[500px] object-contain 2xl:h-[500px]  xl:w-[400px]  xl:h-[400px]  md:w-[300px]  md:h-[300px] "
           />
-          <div className=" hidden md:flex items-center flex-col">
+          <div className=" px-2 text-center  hidden md:flex items-center flex-col">
             <h1 className=" text-neutral-200 text-2xl pt-5">
               Healthcare professionals Ready to Hire.
             </h1>
-            <p className="max-w-[70%] text-center text-neutral-800">
+            <p className="lg:max-w-[70%] flex items-center text-center text-neutral-800">
               Pulvinar elementum integer enim neque. Et netus et malesuada fames
               ac turpis. Lectus nulla at volutpat diam ut.
             </p>
