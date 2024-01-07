@@ -3,6 +3,8 @@ import "./Preferences.css";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
 import { setUser } from "../../Store/Actions/Actions";
+import Toast from "../AppLoader";
+import CommonPrimaryButton from "../CommonPrimaryButton";
 
 export default function Preferences() {
   const user = useSelector((state) => state.user);
@@ -65,6 +67,13 @@ export default function Preferences() {
   const [editedFromTime, setEditedFromTime] = useState("00:00");
   const [editedToTime, setEditedToTime] = useState("00:00");
   const [applyToAll, setApplyToAll] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
   const dispatch = useDispatch();
   const openModalForDay = (day) => {
     setSelectedDay(day);
@@ -91,6 +100,8 @@ export default function Preferences() {
   };
 
   const savePreferences = () => {
+    setButtonLoader(true);
+
     // Assuming handleAPIRequest is a function that makes an API call
     handleAPIRequest("POST", "pro-profile", {
       ...preferences,
@@ -100,6 +111,23 @@ export default function Preferences() {
       .then((response) => {
         handleAPIRequest("get", "user", null).then((response) => {
           dispatch(setUser(response.user.profile));
+          setButtonLoader(false);
+          setShowToast({
+            ...showToast,
+            toggle: true,
+            status: "success",
+            message: "Prefrences has been updated successfully",
+            lable: "Prefrences Updated",
+          });
+          setTimeout(() => {
+            setShowToast({
+              ...showToast,
+              toggle: false,
+              status: "success",
+              message: "Prefrences has been updated successfully",
+              lable: "Prefrences Updated",
+            });
+          }, 2000);
         });
       })
       .catch((error) => {});
@@ -262,14 +290,15 @@ export default function Preferences() {
         )}
 
         <div className="flex items-center gap-2 w-full justify-end mt-12">
-          <button
+          <CommonPrimaryButton
+            loading={buttonLoader}
             onClick={() => savePreferences()}
+            text={"Update"}
             className="  hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3  bg-[#0f75bc] text-white rounded-md  "
-          >
-            Update
-          </button>
+          ></CommonPrimaryButton>
         </div>
       </div>{" "}
+      <Toast setShowToast={setShowToast} showToast={showToast} />
     </div>
   );
 }
