@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import emptyState from "../../assets/images/reservation.png";
+import User from "../../assets/images/holderpic.jpeg";
 
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
@@ -201,7 +202,7 @@ const ReservationDetails = () => {
                             </div>
 
                             <div className="flex items-center gap-4">
-                              <div className=" !rounded-full overflow-hidden w-10 h-10">
+                              <div className=" !rounded-full border overflow-hidden w-10 h-10">
                                 {reservationDetails.offered_to?.photo_url !=
                                 null ? (
                                   <img
@@ -210,11 +211,7 @@ const ReservationDetails = () => {
                                     }
                                   />
                                 ) : (
-                                  <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
-                                    {reservationDetails?.offered_to?.firstname.charAt(
-                                      0
-                                    )}
-                                  </div>
+                                  <img src={User}  />
                                 )}
                                 {/* <GoPrimitiveDot className='online-icon'/> */}
                               </div>
@@ -250,18 +247,14 @@ const ReservationDetails = () => {
                           </div>
 
                           <div className="flex items-center gap-4">
-                            <div className=" !rounded-full overflow-hidden w-10 h-10">
+                            <div className=" !rounded-full border overflow-hidden w-10 h-10">
                               {reservationDetails.offered_by?.photo_url !=
                               null ? (
                                 <img
                                   src={reservationDetails.offered_by?.photo_url}
                                 />
                               ) : (
-                                <div className="w-10 h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
-                                  {reservationDetails?.offered_by?.firstname.charAt(
-                                    0
-                                  )}
-                                </div>
+                                <img src={User}  />
                               )}
                               {/* <GoPrimitiveDot className='online-icon'/> */}
                             </div>
@@ -425,9 +418,10 @@ const ReservationDetails = () => {
                       }`}
                     >
                       {index % 2 != 1 && (
-                        <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-blue-500 text-white">
-                          {item?.offered_to?.firstname.charAt(0)}
-                        </div>
+                        <img
+                          className="w-10 border rounded-full h-10 flex justify-center items-center"
+                          src={User}
+                        />
                       )}{" "}
                       {index % 2 === 1 ? (
                         <div
@@ -531,14 +525,12 @@ const ReservationDetails = () => {
                               <div className="flex items-center gap-4">
                                 <Link
                                   to={`/bussiness-profile-details?${item.offered_to?.uuid}`}
-                                  className=" !rounded-full overflow-hidden w-10 h-10"
+                                  className=" !rounded-full border overflow-hidden w-10 h-10"
                                 >
                                   {item?.offered_to?.photo_url != null ? (
                                     <img src={item?.offered_to?.photo_url} />
                                   ) : (
-                                    <div className="w-10 h-10 flex justify-center items-center font-normal text-base capitalize  bg-blue-500 text-white">
-                                      {item?.offered_to?.firstname.charAt(0)}
-                                    </div>
+                                    <img src={User}  />
                                   )}
                                   {/* <GoPrimitiveDot className='online-icon'/> */}
                                 </Link>
@@ -671,14 +663,12 @@ const ReservationDetails = () => {
                                       ? `/bussiness-profile-details?${item.offered_to?.uuid}`
                                       : `/profile-details?${item.offered_to?.uuid}`
                                   }
-                                  className=" !rounded-full overflow-hidden w-10 h-10"
+                                  className=" !rounded-full border overflow-hidden w-10 h-10"
                                 >
                                   {item?.offered_by?.photo_url != null ? (
                                     <img src={item?.offered_by?.photo_url} />
                                   ) : (
-                                    <div className="w-10 h-10 flex justify-center items-center font-normal text-base capitalize  bg-[#39B7A5] text-white">
-                                      {item?.offered_by?.firstname.charAt(0)}
-                                    </div>
+                                    <img src={User} />
                                   )}
                                   {/* <GoPrimitiveDot className='online-icon'/> */}
                                 </Link>
@@ -707,9 +697,10 @@ const ReservationDetails = () => {
                         </div>
                       )}
                       {index % 2 == 1 && (
-                        <div className="w-10 rounded-full h-10 flex justify-center items-center capitalize  bg-[#39B7A5] text-white">
-                          {item?.offered_to?.firstname.charAt(0)}
-                        </div>
+                        <img
+                          className="w-10 border rounded-full h-10 flex justify-center items-center"
+                          src={User}
+                        />
                       )}{" "}
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import emptyState from "../../assets/images/reservation.png";
+import User from "../../assets/images/holderpic.jpeg";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
@@ -141,16 +142,14 @@ const Reservations = () => {
                         to={
                           item.offered_to.type === "pro" && user.type === "bus"
                             ? `/profile-details?${item.offered_to?.uuid}`
-                            :  `/bussiness-profile-details?${item.offered_to?.uuid}`
+                            : `/bussiness-profile-details?${item.offered_to?.uuid}`
                         }
-                        className=" !rounded-full overflow-hidden w-10 h-10"
+                        className=" !rounded-full border overflow-hidden w-10 h-10"
                       >
                         {item.offered_to?.photo_url != null ? (
                           <img src={item.offered_to?.photo_url} />
                         ) : (
-                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-[#39B7A5] text-white">
-                            {item?.offered_to?.firstname.charAt(0)}
-                          </div>
+                          <img src={User} />
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </Link>
@@ -182,14 +181,12 @@ const Reservations = () => {
                               ? `/bussiness-profile-details?${item.offered_by?.uuid}`
                               : `/bussiness-profile-details?${item.offered_by?.uuid}`
                           }
-                          className=" !rounded-full overflow-hidden w-10 h-10"
+                          className=" !rounded-full border overflow-hidden w-10 h-10"
                         >
                           {item.offered_by?.photo_url != null ? (
                             <img src={item.offered_by?.photo_url} />
                           ) : (
-                            <div className="w-10 h-10 flex justify-center capitalize items-center bg-blue-500 text-white">
-                              {item?.offered_by?.firstname.charAt(0)}
-                            </div>
+                            <img src={User} />
                           )}
                           {/* <GoPrimitiveDot className='online-icon'/> */}
                         </Link>
