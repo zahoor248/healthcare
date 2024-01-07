@@ -275,7 +275,7 @@ const Contacts = () => {
                     <div className="  pb-2 text-neutral-600 capitalize">
                       Pay Duration:{" "}
                       <span className="text-blue-600">
-                        {item.pay_rate} $/ {item.pay_duration}
+                        $ {item.pay_rate} / {item.pay_duration}
                       </span>
                     </div>
 
