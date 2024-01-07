@@ -190,10 +190,11 @@ const ReservationDetails = () => {
                       <>
                         <Link
                           to={
-                            opentoAcceptoffer.offered_to?.type === "pro" &&
+                            opentoAcceptoffer.offered_to?.uuid != user.uuid &&
+                            (opentoAcceptoffer.offered_to?.type === "pro" &&
                             user.type === "bus"
                               ? `/profile-details?${opentoAcceptoffer.offered_to?.uuid}`
-                              : `/bussiness-profile-details?${opentoAcceptoffer.offered_to?.uuid}`
+                              : `/bussiness-profile-details?${opentoAcceptoffer.offered_to?.uuid}`)
                           }
                           className=" !rounded-full overflow-hidden w-10 h-10"
                         >
@@ -235,10 +236,11 @@ const ReservationDetails = () => {
                     ) : (
                       <Link
                         to={
-                          opentoAcceptoffer.offered_by?.type === "pro" &&
+                          opentoAcceptoffer.offered_by?.uuid != user.uuid &&
+                          (opentoAcceptoffer.offered_by?.type === "pro" &&
                           user.type === "bus"
                             ? `/profile-details?${opentoAcceptoffer.offered_by?.uuid}`
-                            : `/bussiness-profile-details?${opentoAcceptoffer.offered_to?.uuid}`
+                            : `/bussiness-profile-details?${opentoAcceptoffer.offered_to?.uuid}`)
                         }
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
@@ -524,7 +526,10 @@ const ReservationDetails = () => {
                               <div className="text-blue-600 text-xl"> to:</div>{" "}
                               <div className="flex items-center gap-4">
                                 <Link
-                                  to={`/bussiness-profile-details?${item.offered_to?.uuid}`}
+                                  to={
+                                    item.offered_to?.uuid != user.uuid &&
+                                    `/bussiness-profile-details?${item.offered_to?.uuid}`
+                                  }
                                   className=" !rounded-full border overflow-hidden w-10 h-10"
                                 >
                                   {item?.offered_to?.photo_url != null ? (
@@ -659,9 +664,10 @@ const ReservationDetails = () => {
                               <div className="flex items-center gap-4">
                                 <Link
                                   to={
-                                    user.type == "pro"
+                                    item.offered_to?.uuid != user.uuid &&
+                                    (user.type == "pro"
                                       ? `/bussiness-profile-details?${item.offered_to?.uuid}`
-                                      : `/profile-details?${item.offered_to?.uuid}`
+                                      : `/profile-details?${item.offered_to?.uuid}`)
                                   }
                                   className=" !rounded-full border overflow-hidden w-10 h-10"
                                 >

@@ -6,16 +6,17 @@ import { generateUUID, getStates } from "../../Store/helper";
 import emptyState from "../../assets/images/address-book-icon-9.jpg";
 
 import { handleAPIRequest } from "../../helper/ApiHandler";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CommonPrimaryButton from "../CommonPrimaryButton";
+import { setUser } from "../../Store/Actions/Actions";
 export default function License() {
   const [state, setState] = useState("");
   const [user_license, setLicense] = useState("");
   const [number, setNumber] = useState("");
   const [uuid, setUuid] = useState("");
   const [all_licenses, setAllLicenses] = useState([]);
-
+  const dispatch = useDispatch();
   const location = useLocation();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -26,8 +27,9 @@ export default function License() {
   const openAddressModal = (license = null) => {
     setOpenModel(true);
     if (license) {
+      console.log(license);
       setState(license.license_state);
-      setLicense(license.name);
+      setLicense(license.license_type);
       setNumber(license.license_id);
       setUuid(license.uuid);
       setIsEditing(true);
@@ -49,6 +51,9 @@ export default function License() {
         .then((response) => {
           setOpenModel(false);
           setIsEditing(false);
+          handleAPIRequest("get", "user", null).then((response) => {
+            dispatch(setUser(response.user.profile));
+          });
         })
         .catch((erroe) => {
           console.log(erroe);
@@ -63,6 +68,9 @@ export default function License() {
       })
         .then((response) => {
           setOpenModel(false);
+          handleAPIRequest("get", "user", null).then((response) => {
+            dispatch(setUser(response.user.profile));
+          });
         })
         .catch((erroe) => {
           console.log(erroe);

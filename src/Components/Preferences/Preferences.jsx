@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Preferences.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleAPIRequest } from "../../helper/ApiHandler";
+import { setUser } from "../../Store/Actions/Actions";
 
 export default function Preferences() {
   const user = useSelector((state) => state.user);
@@ -64,6 +65,7 @@ export default function Preferences() {
   const [editedFromTime, setEditedFromTime] = useState("00:00");
   const [editedToTime, setEditedToTime] = useState("00:00");
   const [applyToAll, setApplyToAll] = useState(false);
+  const dispatch = useDispatch();
   const openModalForDay = (day) => {
     setSelectedDay(day);
     setEditedFromTime(day.fromTime);
@@ -95,7 +97,11 @@ export default function Preferences() {
       working_hours: workingHours,
       account_uuid: user.accounts[0].uuid,
     })
-      .then((response) => {})
+      .then((response) => {
+        handleAPIRequest("get", "user", null).then((response) => {
+          dispatch(setUser(response.user.profile));
+        });
+      })
       .catch((error) => {});
   };
   const formatTime = (time) => {

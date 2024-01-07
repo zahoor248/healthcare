@@ -291,7 +291,10 @@ const Contacts = () => {
                     </div>
                     <div className="flex items-center  gap-4">
                       <Link
-                        to={`/bussiness-profile-details?${item.business?.uuid}`}
+                        to={
+                          item.business?.uuid != user.uuid &&
+                          `/bussiness-profile-details?${item.business?.uuid}`
+                        }
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
                         {item.business?.photo_url != null ? (
@@ -310,7 +313,10 @@ const Contacts = () => {
                     </div>
                     <div className="flex items-center pt-3 gap-4">
                       <Link
-                        to={`/profile-details?${item.pro?.uuid}`}
+                        to={
+                          item.pro?.uuid != user.uuid &&
+                          `/profile-details?${item.pro?.uuid}`
+                        }
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
                         {item.pro?.photo_url != null ? (

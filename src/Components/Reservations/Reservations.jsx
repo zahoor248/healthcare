@@ -43,7 +43,7 @@ const Reservations = () => {
         <div className=" justify-center items-start text-neutral-700 flex w-full">
           <div className="text-[32px] font-semibold">Offers</div>
         </div>
-        {!reservations?.length   ? (
+        {reservations?.length > 0 ? (
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-8">
             {reservations?.map((item, index) => (
               <div className=" h-full w-full  shadow-class rounded-lg overflow-hidden p-6 ">
@@ -140,9 +140,10 @@ const Reservations = () => {
                     <div className="flex items-center gap-4">
                       <Link
                         to={
-                          item.offered_to.type === "pro" && user.type === "bus"
+                          item.offered_to?.uuid != user.uuid &&
+                          (item.offered_to.type === "pro" && user.type === "bus"
                             ? `/profile-details?${item.offered_to?.uuid}`
-                            : `/bussiness-profile-details?${item.offered_to?.uuid}`
+                            : `/bussiness-profile-details?${item.offered_to?.uuid}`)
                         }
                         className=" !rounded-full border overflow-hidden w-10 h-10"
                       >
@@ -176,10 +177,11 @@ const Reservations = () => {
                       <div className="flex items-center w-fit gap-2 justify-between pt-3 ">
                         <Link
                           to={
-                            item.offered_by?.type === "pro" &&
+                            item.offered_by?.uuid != user.uuid &&
+                            (item.offered_by?.type === "pro" &&
                             user.type === "bus"
                               ? `/bussiness-profile-details?${item.offered_by?.uuid}`
-                              : `/bussiness-profile-details?${item.offered_by?.uuid}`
+                              : `/bussiness-profile-details?${item.offered_by?.uuid}`)
                           }
                           className=" !rounded-full border overflow-hidden w-10 h-10"
                         >
@@ -211,7 +213,9 @@ const Reservations = () => {
         ) : (
           <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
             <img src={emptyState} className="w-32" />
-            <div className="text-xl text-center md:text-3xl ">Your reservations will appear here</div>
+            <div className="text-xl md:text-3xl ">
+              Your reservations will appear here
+            </div>
           </div>
         )}
       </div>
