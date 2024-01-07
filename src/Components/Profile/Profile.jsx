@@ -308,8 +308,9 @@ const BusinessProfileData = () => {
           uuid: user.accounts[0].uuid,
         });
       }
+      console.log("Test");
     }
-  }, [user.accounts]);
+  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -327,7 +328,17 @@ const BusinessProfileData = () => {
         if (response) {
           // return;
           postData();
-          setLoading_button(false);
+
+          handleAPIRequest("get", "user", null)
+            .then((response) => {
+              dispatch(setUser(response.user.profile));
+              setLoading_button(false);
+              // to prevent from loading on listing page we are making call here
+            })
+            .catch((error) => {
+              console.log(error);
+              setLoading_button(false);
+            });
           setShowToast({
             ...showToast,
             toggle: true,
