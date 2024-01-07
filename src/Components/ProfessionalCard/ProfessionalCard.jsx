@@ -180,16 +180,16 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                 <div className="flex flex-col">
                   <div className="flex">
                     <div className="flex flex-col px-10 pt-6 w-[50%]">
-                      <div className="flex items-center flex-col gap-2">
+                      <div className="flex  items-center flex-col gap-2">
                         <img
                           src={
                             profileData.photo_url
                               ? profileData.photo_url
-                              : require("../../assets/images/avatar.png")
+                              : User
                           }
                           width={65}
                           height={32}
-                          className="rounded-full object-cover w-20 h-20 "
+                          className="rounded-full border object-cover w-20 h-20 "
                           alt="User Image"
                         />
                         <div className="">
@@ -227,9 +227,8 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                             Radius:
                           </span>{" "}
                           <span className="text-neutral-700 font-medium">
-                            {profileData.pro_profile?.radius
-                              ? `${profileData.pro_profile?.radius} miles`
-                              : "N/A"}
+                            within {profileData?.pro_profile?.radius} miles of{" "}
+                            {user.addresses[0]?.zip}
                           </span>
                         </div>
                         <div className="flex pt-2 flex-col gap-3">
@@ -293,7 +292,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                             )}
                           </div>
                         ) : (
-                          <div className="flex flex-col h-full justify-center text-neutral-800 font-normal items-center">
+                          <div className="flex flex-col h-full justify-center  text-neutral-800 font-normal items-center">
                             <div>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -317,12 +316,12 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                     </div>
                   </div>
                   <div className="flex gap-3 pt-8">
-                    <button className="hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3 w-full items-center text-center bg-[#0f75bc] text-white rounded-md ">
+                    <button className="py-3 text-center border rounded-lg hover:bg-[#0f75bc]/5 border-[#0f75bc] w-full text-[#0f75bc]">
                       Cancel
                     </button>
                     <Link
                       to={`/profile-details?${profileData?.uuid}`}
-                      className="py-3 text-center border rounded-lg hover:bg-[#0f75bc]/5 border-[#0f75bc] w-full text-[#0f75bc]"
+                      className="hover:shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px 0px] transition-all ease-in-out duration-300 px-6 py-3 w-full items-center text-center bg-[#0f75bc] text-white rounded-md "
                     >
                       View Profile
                     </Link>

@@ -23,7 +23,7 @@ import { db } from "../../firebase";
 
 import Autocomplete from "react-google-autocomplete";
 
-const ProfileDetails = () => {
+const BusinessProfile = () => {
   const location = useLocation();
 
   const [showModel, setShowModel] = useState(false);
@@ -91,7 +91,7 @@ const ProfileDetails = () => {
     let filter_user = [...professionals];
     let route_uuid = location.search.split("?")[1];
     let getuser = filter_user.find((temp) => temp.uuid === route_uuid);
-    handleAPIRequest("get", `pros/${route_uuid}`, null)
+    handleAPIRequest("get", `bus/${route_uuid}`, null)
       .then((response) => {
         console.log(response, "here is res");
         setUserDetails(response?.data?.user);
@@ -336,11 +336,11 @@ const ProfileDetails = () => {
                     )}
                   </p>
                   <div className="flex gap-3 mt-4 flex-wrap">
-                    <CommonPrimaryButton
+                    {/* <CommonPrimaryButton
                       onClick={() => handleAddFav(userDetails)}
                       loading={false}
                       text={"Add to Favourites"}
-                    />
+                    /> */}
 
                     <div
                       onClick={() => {
@@ -360,7 +360,7 @@ const ProfileDetails = () => {
                     >
                       <CommonPrimaryButton
                         loading={false}
-                        text={"Contact this Pro"}
+                        text={"Contact this Bus"}
                       />
                     </div>
                   </div>
@@ -376,7 +376,7 @@ const ProfileDetails = () => {
                       <AiOutlineStar className="star-icon" />
                       <div className="ml-4">
                         <p className="text-lg flex flex-col gap-2 text-gray-600 mb-2">
-                          Reviews{" "} # ({userDetails.reviewer?.length})
+                          Reviews # ({userDetails.reviewer?.length})
                           <Rating
                             // maxScale={5}
                             // style={{marginVertical: 20}}
@@ -454,232 +454,8 @@ const ProfileDetails = () => {
                 </p>
               </div>
             </div>
-
-            <div className=" flex flex-col items-center justify-start w-[30%] border-l">
-              <p className="working-hrs">Preferred Working Hours</p>
-              {userDetails?.pro_profile?.working_hours.length > 0 ? (
-                <div className="w-full flex flex-col justify-center items-center">
-                  {userDetails?.pro_profile?.working_hours.map((item) => (
-                    <div className="flex px-4 py-2 border-t  w-full">
-                      <div
-                        className="responsive-days w-full xl:w-[12rem]"
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <div className="p-2 w-full">{item.name}</div>
-                      </div>
-
-                      <div className=" w-full xl:w-[14rem]">
-                        <div className=" flex text-neutral-500 p-2 w-full">
-                          <p>
-                            {item?.fromTime
-                              ? item?.fromTime + "-"
-                              : "Not available "}{" "}
-                            {item?.toTime}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex flex-col  p-6 rounded-xl bg-blue-50 justify-center text-neutral-800 font-normal items-center">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="#5c5c5c"
-                      className="w-20 h-20 mb-3"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  Hours not available for this PRO
-                </div>
-              )}
-            </div>
           </div>
-          <div className="flex flex-col items-center py-5 mb-28">
-            <h3 className=" text-neutral-800 text-3xl ">Book Reservation</h3>
-            <div className="w-[60vw] bg-white px-10  rounded-md mx-auto mt-10 flex flex-col gap-5  ">
-              <div className="flex gap-12 lg:gap-24">
-                <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                    Start Date
-                  </p>
-                  <div className="relative w-full">
-                    <LocalizationProvider
-                      className="w-full"
-                      dateAdapter={AdapterDayjs}
-                    >
-                      <Box
-                        sx={{
-                          width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                          position: "relative",
-                        }}
-                      >
-                        <DatePicker
-                          sx={{
-                            width: "100%",
-                            "& .MuiInputBase-input": {
-                              padding: "12px",
-                              // Your other styles for the Paper component
-                            },
-                          }}
-                          onChange={handleStartDateChange}
-                          defaultValue={startDate}
-                          slotProps={{
-                            field: {
-                              clearable: true,
-                            },
-                          }}
-                          slots={{
-                            openPickerIcon: DateIcon,
-                          }}
-                        />
-                      </Box>
-                    </LocalizationProvider>
-                  </div>
-                </div>
-                <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                    End Date
-                  </p>
-                  <div className="relative w-full">
-                    <LocalizationProvider
-                      className="w-full"
-                      dateAdapter={AdapterDayjs}
-                    >
-                      <Box
-                        sx={{
-                          width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                          position: "relative",
-                        }}
-                      >
-                        <DatePicker
-                          sx={{
-                            width: "100%",
-                            "& .MuiInputBase-input": {
-                              padding: "12px",
-                              // Your other styles for the Paper component
-                            },
-                          }}
-                          onChange={handleEndDateChange}
-                          defaultValue={endDate}
-                          slotProps={{
-                            field: {
-                              clearable: true,
-                            },
-                          }}
-                          slots={{
-                            openPickerIcon: DateIcon,
-                          }}
-                        />
-                      </Box>
-                    </LocalizationProvider>
-                  </div>
-                </div>
-              </div>
-              <div className="flex pt-4 justify-between gap-12 lg:gap-24">
-                <div className="w-full flex flex-col gap-2">
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                    Location
-                  </p>
 
-                  <div className="relative w-full">
-                    <Autocomplete
-                      options={{
-                        componentRestrictions: { country: "us" },
-                        fields: ["formatted_address"],
-                        types: ["establishment"],
-                      }}
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                      apiKey={"AIzaSyCFY588iCbfSu3YRaC2h4UZUIhICOady7c"}
-                      onPlaceSelected={(place) => {
-                        console.log(place.formatted_address);
-                        setLocation(place.formatted_address);
-                      }}
-                    />
-                    {/* <input
-                      ref={inputRef}
-                      // onKeyUp={() => handleLocationLoad()}
-                      value={counterLocation}
-                      onChange={(e) => setLocation(e.target.value)}
-                      placeholder="Select Location"
-                    /> */}
-                  </div>
-                </div>
-                <div className="flex gap-2 w-full">
-                  <div className="w-full flex flex-col gap-2">
-                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                      Rate
-                    </p>
-                    <div className="relative w-full">
-                      <input
-                        onChange={(e) => setPrice(e.target.value)}
-                        value={price}
-                        placeholder="Enter Value"
-                        type="number"
-                        className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
-                      />
-                    </div>
-                  </div>
-                  /{" "}
-                  <div className="w-full flex flex-col gap-2">
-                    <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                      Options
-                    </p>
-                    <div className="relative w-full">
-                      <select
-                        onChange={(e) => setPayDuration(e.target.value)}
-                        className="text-lg bg-transparent placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-[11px] -mt-0.5 focus:outline-none px-4 border border-[#C2C9D4] rounded w-full"
-                      >
-                        <option>Hourly</option>
-                        <option>Daily</option>
-                        <option>Fixed</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full flex flex-col gap-2">
-                <div>
-                  <p className="font-semibold text-base/none lg:text-xl/none pb-2 text-neutral-800">
-                    Description
-                  </p>
-                  <div className="relative w-full">
-                    <textarea
-                      onChange={(e) => setDescription(e.target.value)}
-                      value={description}
-                      placeholder="Describe your self"
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                    />
-                  </div>
-                </div>
-                <div className="w-auto flex justify-center items-end mt-4">
-                  <CommonPrimaryButton
-                    onClick={() => setShowModel(true)}
-                    loading={buttonLoading}
-                    text={"Send Offer"}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="review-section-container">
             <div className="slides-container">
               {userDetails?.reviewer?.map((item) => (
@@ -761,4 +537,4 @@ const ProfileDetails = () => {
     </>
   );
 };
-export default ProfileDetails;
+export default BusinessProfile;

@@ -289,7 +289,7 @@ const Contacts = () => {
                     </div>
                     <div className="flex items-center  gap-4">
                       <Link
-                        to={`/profile-details?${item.business?.uuid}`}
+                        to={`/bussiness-profile-details?${item.business?.uuid}`}
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
                         {item.business?.photo_url != null ? (

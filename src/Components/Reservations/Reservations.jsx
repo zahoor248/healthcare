@@ -141,7 +141,7 @@ const Reservations = () => {
                         to={
                           item.offered_to.type === "pro" && user.type === "bus"
                             ? `/profile-details?${item.offered_to?.uuid}`
-                            : null
+                            :  `/bussiness-profile-details?${item.offered_to?.uuid}`
                         }
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
@@ -179,8 +179,8 @@ const Reservations = () => {
                           to={
                             item.offered_by?.type === "pro" &&
                             user.type === "bus"
-                              ? `/profile-details?${item.offered_by?.uuid}`
-                              : null
+                              ? `/bussiness-profile-details?${item.offered_by?.uuid}`
+                              : `/bussiness-profile-details?${item.offered_by?.uuid}`
                           }
                           className=" !rounded-full overflow-hidden w-10 h-10"
                         >

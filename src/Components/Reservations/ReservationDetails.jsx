@@ -189,7 +189,7 @@ const ReservationDetails = () => {
                             reservationDetails.offered_to?.type === "pro" &&
                             user.type === "bus"
                               ? `/profile-details?${reservationDetails.offered_to?.uuid}`
-                              : null
+                              : `/bussiness-profile-details?${reservationDetails.offered_to?.uuid}`
                           }
                           className=" !rounded-full overflow-hidden w-10 h-10"
                         >
@@ -238,7 +238,7 @@ const ReservationDetails = () => {
                           reservationDetails.offered_by?.type === "pro" &&
                           user.type === "bus"
                             ? `/profile-details?${reservationDetails.offered_by?.uuid}`
-                            : null
+                            : `/bussiness-profile-details?${reservationDetails.offered_to?.uuid}`
                         }
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
@@ -529,7 +529,10 @@ const ReservationDetails = () => {
                             <div className="font-bold flex items-center gap-4  text-xl">
                               <div className="text-blue-600 text-xl"> to:</div>{" "}
                               <div className="flex items-center gap-4">
-                                <div className=" !rounded-full overflow-hidden w-10 h-10">
+                                <Link
+                                  to={`/bussiness-profile-details?${item.offered_to?.uuid}`}
+                                  className=" !rounded-full overflow-hidden w-10 h-10"
+                                >
                                   {item?.offered_to?.photo_url != null ? (
                                     <img src={item?.offered_to?.photo_url} />
                                   ) : (
@@ -538,7 +541,7 @@ const ReservationDetails = () => {
                                     </div>
                                   )}
                                   {/* <GoPrimitiveDot className='online-icon'/> */}
-                                </div>
+                                </Link>
                                 <div className="">
                                   <p className="font-semibold text-base text-neutral-600 capitalize">
                                     {item?.offered_to?.firstname}{" "}
@@ -662,7 +665,14 @@ const ReservationDetails = () => {
                             <div className="font-bold flex items-center gap-4  text-xl">
                               <div className="text-blue-600 text-xl"> to:</div>{" "}
                               <div className="flex items-center gap-4">
-                                <div className=" !rounded-full overflow-hidden w-10 h-10">
+                                <Link
+                                  to={
+                                    user.type == "pro"
+                                      ? `/bussiness-profile-details?${item.offered_to?.uuid}`
+                                      : `/profile-details?${item.offered_to?.uuid}`
+                                  }
+                                  className=" !rounded-full overflow-hidden w-10 h-10"
+                                >
                                   {item?.offered_by?.photo_url != null ? (
                                     <img src={item?.offered_by?.photo_url} />
                                   ) : (
@@ -671,7 +681,7 @@ const ReservationDetails = () => {
                                     </div>
                                   )}
                                   {/* <GoPrimitiveDot className='online-icon'/> */}
-                                </div>
+                                </Link>
                                 <div className="">
                                   <p className="font-semibold text-base text-neutral-600 capitalize">
                                     {item?.offered_by?.firstname}{" "}

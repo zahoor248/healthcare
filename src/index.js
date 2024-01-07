@@ -24,6 +24,7 @@ import Favouraties from "./Components/Favouraties/Favouraties";
 import Contacts from "./Components/Contacts/Contacts";
 import Reservations from "./Components/Reservations/Reservations";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
+import BusinessProfile from "./Components/ProfileDetails/BusinessProfile";
 import ReservationDetails from "./Components/Reservations/ReservationDetails";
 import NewOffer from "./Components/Reservations/NewOffer";
 import ChatBox from "./Components/Chat/TestChat";
@@ -45,6 +46,10 @@ root.render(
             <Route path="/chats" element={<Chat />} />
             <Route path="/availability" element={<Availability />} />
             <Route path="/profile-details" element={<ProfileDetails />} />
+            <Route
+              path="/bussiness-profile-details"
+              element={<BusinessProfile />}
+            />
             <Route path="/profile" element={<Profile />} />
             <Route path="/favouraties" element={<Favouraties />} />
             <Route path="/contracts" element={<Contacts />} />
