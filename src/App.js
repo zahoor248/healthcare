@@ -4,6 +4,7 @@ import HomeLayout from "./Components/HomeLayout";
 import HiringLayout from "./Components/HiringLayout";
 import "./Responsive.css";
 import Reservations from "./Components/Reservations/Reservations";
+import LogIn from "./Components/LogIn/LogIn";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -15,7 +16,7 @@ function App() {
       ) : isAuthenticated && user.type == "pro" ? (
         <Reservations />
       ) : (
-        <HomeLayout />
+        <LogIn />
       )}
     </>
   );

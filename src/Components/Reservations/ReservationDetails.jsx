@@ -63,7 +63,7 @@ const ReservationDetails = () => {
           let opentoAcceptoffer = parentReservation.filter(
             (item) => item.status === "open"
           );
-
+          console.log(opentoAcceptoffer);
           setOpenToAcceptOffer(opentoAcceptoffer[0]);
         } else {
           setReservationDetails(response);
@@ -100,7 +100,7 @@ const ReservationDetails = () => {
                   <p className="font-semibold pr-1 text-neutral-700 text-lg">
                     Status:
                   </p>{" "}
-                  {reservationDetails.status}
+                  {opentoAcceptoffer.status}
                 </div>
                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full">
                   <div className="flex flex-col items-start gap-4 w-full md:w-[40%] ">
@@ -142,13 +142,13 @@ const ReservationDetails = () => {
                         <span className=" text-neutral-600">Date</span>
                         <div className="flex w-full justify-between md:w-fit md:justify-start">
                           <p className="font-semibold text-sm md:text-base">
-                            {dayjs(reservationDetails.start_date, {
+                            {dayjs(opentoAcceptoffer.start_date, {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
                           </p>
                           <span className="px-2">-</span>
                           <p className="font-semibold text-sm md:text-base">
-                            {dayjs(reservationDetails.end_date, {
+                            {dayjs(opentoAcceptoffer.end_date, {
                               format: "DD/MM/YYYY",
                             }).format("MMM. DD, YYYY")}
                           </p>
@@ -176,52 +176,52 @@ const ReservationDetails = () => {
                         </span>
                       </div>
                       <p className="whitespace-pre-wrap pl-1 font-semibold text-blue-700 capitalize">
-                        {reservationDetails?.location}
+                        {opentoAcceptoffer?.location}
                       </p>
                     </div>
                   </div>
 
                   {/* reservation offer section  */}
                   <div className="w-[60%]">
-                    {reservationDetails?.offered_by_me ? (
+                    {opentoAcceptoffer?.offered_by_me ? (
                       <>
                         <Link
                           to={
-                            reservationDetails.offered_to?.type === "pro" &&
+                            opentoAcceptoffer.offered_to?.type === "pro" &&
                             user.type === "bus"
-                              ? `/profile-details?${reservationDetails.offered_to?.uuid}`
-                              : `/bussiness-profile-details?${reservationDetails.offered_to?.uuid}`
+                              ? `/profile-details?${opentoAcceptoffer.offered_to?.uuid}`
+                              : `/bussiness-profile-details?${opentoAcceptoffer.offered_to?.uuid}`
                           }
                           className=" !rounded-full overflow-hidden w-10 h-10"
                         >
                           <div className="flex items-start gap-4 flex-col w-full">
                             <div className=" capitalize font-semibold text-xl text-neutral-600">
-                              ${reservationDetails?.pay_rate}{" "}
-                              {reservationDetails?.pay_duration} offer to:
+                              ${opentoAcceptoffer?.pay_rate}{" "}
+                              {opentoAcceptoffer?.pay_duration} offer to:
                               {/* <GoPrimitiveDot className='online-icon'/> */}
                             </div>
 
                             <div className="flex items-center gap-4">
                               <div className=" !rounded-full border overflow-hidden w-10 h-10">
-                                {reservationDetails.offered_to?.photo_url !=
+                                {opentoAcceptoffer.offered_to?.photo_url !=
                                 null ? (
                                   <img
                                     src={
-                                      reservationDetails.offered_to?.photo_url
+                                      opentoAcceptoffer.offered_to?.photo_url
                                     }
                                   />
                                 ) : (
-                                  <img src={User}  />
+                                  <img src={User} />
                                 )}
                                 {/* <GoPrimitiveDot className='online-icon'/> */}
                               </div>
                               <div className="">
                                 <p className="font-medium text-base text-neutral-500 capitalize">
-                                  {reservationDetails?.offered_to?.firstname}{" "}
-                                  {reservationDetails?.offered_to?.lastname}
+                                  {opentoAcceptoffer?.offered_to?.firstname}{" "}
+                                  {opentoAcceptoffer?.offered_to?.lastname}
                                 </p>
                                 <p className="text-sm pt-2">
-                                  {reservationDetails?.offered_to?.about_me ||
+                                  {opentoAcceptoffer?.offered_to?.about_me ||
                                     "N/A"}
                                 </p>
                               </div>
@@ -232,39 +232,39 @@ const ReservationDetails = () => {
                     ) : (
                       <Link
                         to={
-                          reservationDetails.offered_by?.type === "pro" &&
+                          opentoAcceptoffer.offered_by?.type === "pro" &&
                           user.type === "bus"
-                            ? `/profile-details?${reservationDetails.offered_by?.uuid}`
-                            : `/bussiness-profile-details?${reservationDetails.offered_to?.uuid}`
+                            ? `/profile-details?${opentoAcceptoffer.offered_by?.uuid}`
+                            : `/bussiness-profile-details?${opentoAcceptoffer.offered_to?.uuid}`
                         }
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
                         <div className="flex items-start gap-4 flex-col w-full">
                           <div className=" capitalize font-bold text-lg text-neutral-600">
-                            ${reservationDetails?.pay_rate}{" "}
-                            {reservationDetails?.pay_duration} offer by:
+                            ${opentoAcceptoffer?.pay_rate}{" "}
+                            {opentoAcceptoffer?.pay_duration} offer by:
                             {/* <GoPrimitiveDot className='online-icon'/> */}
                           </div>
 
                           <div className="flex items-center gap-4">
                             <div className=" !rounded-full border overflow-hidden w-10 h-10">
-                              {reservationDetails.offered_by?.photo_url !=
+                              {opentoAcceptoffer.offered_by?.photo_url !=
                               null ? (
                                 <img
-                                  src={reservationDetails.offered_by?.photo_url}
+                                  src={opentoAcceptoffer.offered_by?.photo_url}
                                 />
                               ) : (
-                                <img src={User}  />
+                                <img src={User} />
                               )}
                               {/* <GoPrimitiveDot className='online-icon'/> */}
                             </div>
                             <div className="">
                               <p className="font-semibold text-base text-neutral-600 capitalize">
-                                {reservationDetails?.offered_by?.firstname}{" "}
-                                {reservationDetails?.offered_by?.lastname}
+                                {opentoAcceptoffer?.offered_by?.firstname}{" "}
+                                {opentoAcceptoffer?.offered_by?.lastname}
                               </p>
                               <p className="text-sm pt-2">
-                                {reservationDetails?.offered_by?.about_me ||
+                                {opentoAcceptoffer?.offered_by?.about_me ||
                                   "N/A"}
                               </p>
                             </div>
@@ -278,7 +278,7 @@ const ReservationDetails = () => {
                         Description:
                       </div>
                       <p className="text-neutral-500">
-                        {reservationDetails?.description}
+                        {opentoAcceptoffer?.description}
                       </p>
                     </div>
                   </div>
@@ -287,7 +287,7 @@ const ReservationDetails = () => {
                 <div className="flex gap-3 w-full justify-end pt-6 mt-6 border-t">
                   <div
                     onClick={() => {
-                      if (reservationDetails.offered_by_me) {
+                      if (opentoAcceptoffer.offered_by_me) {
                         db.collection("Chats")
                           .get()
                           .then((snap) => {
@@ -300,22 +300,20 @@ const ReservationDetails = () => {
                                   users.some(
                                     (e) =>
                                       e.uuid ===
-                                      reservationDetails.offered_to.uuid
+                                      opentoAcceptoffer.offered_to.uuid
                                   ) && users.some((e) => e.uuid === user.uuid);
 
                                 if (bothUsersExist) {
                                   navigate("/chats", {
                                     state: {
                                       chatId: i.id,
-                                      userId:
-                                        reservationDetails.offered_to.uuid,
+                                      userId: opentoAcceptoffer.offered_to.uuid,
                                     },
                                   });
                                 } else {
                                   navigate("/chats", {
                                     state: {
-                                      userId:
-                                        reservationDetails.offered_to.uuid,
+                                      userId: opentoAcceptoffer.offered_to.uuid,
                                     },
                                   });
                                 }
@@ -323,7 +321,7 @@ const ReservationDetails = () => {
                             } else {
                               navigate("/chats", {
                                 state: {
-                                  userId: reservationDetails.offered_to.uuid,
+                                  userId: opentoAcceptoffer.offered_to.uuid,
                                 },
                               });
                             }
@@ -341,22 +339,20 @@ const ReservationDetails = () => {
                                   users.some(
                                     (e) =>
                                       e.uuid ===
-                                      reservationDetails.offered_by.uuid
+                                      opentoAcceptoffer.offered_by.uuid
                                   ) && users.some((e) => e.uuid === user.uuid);
 
                                 if (bothUsersExist) {
                                   navigate("/chats", {
                                     state: {
                                       chatId: i.id,
-                                      userId:
-                                        reservationDetails.offered_by.uuid,
+                                      userId: opentoAcceptoffer.offered_by.uuid,
                                     },
                                   });
                                 } else {
                                   navigate("/chats", {
                                     state: {
-                                      userId:
-                                        reservationDetails.offered_by.uuid,
+                                      userId: opentoAcceptoffer.offered_by.uuid,
                                     },
                                   });
                                 }
@@ -364,7 +360,7 @@ const ReservationDetails = () => {
                             } else {
                               navigate("/chats", {
                                 state: {
-                                  userId: reservationDetails.offered_by.uuid,
+                                  userId: opentoAcceptoffer.offered_by.uuid,
                                 },
                               });
                             }
@@ -530,7 +526,7 @@ const ReservationDetails = () => {
                                   {item?.offered_to?.photo_url != null ? (
                                     <img src={item?.offered_to?.photo_url} />
                                   ) : (
-                                    <img src={User}  />
+                                    <img src={User} />
                                   )}
                                   {/* <GoPrimitiveDot className='online-icon'/> */}
                                 </Link>

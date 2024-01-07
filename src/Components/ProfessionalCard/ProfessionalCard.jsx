@@ -96,7 +96,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           </span>{" "}
                           <span className="text-neutral-700 text-sm  2xl:text-lg font-medium">
                             {item.pro_profile
-                              ? `$${item.pro_profile.daily_rate}/day $${item.pro_profile.hourly_rate}/hour`
+                              ? `$${item?.pro_profile?.daily_rate}/day $${item?.pro_profile?.hourly_rate}/hour`
                               : "0"}
                           </span>
                         </div>
@@ -108,7 +108,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           </span>{" "}
                           <span className="text-neutral-700 text-sm xl:text-lg font-medium">
                             within {item?.pro_profile?.radius} miles of{" "}
-                            {user.addresses[0]?.zip}
+                            {user?.addresses && user?.addresses[0]?.zip}
                           </span>
                         </div>
                         <div className="flex items-center">
@@ -120,7 +120,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           <Rating
                             // maxScale={5}
                             // style={{marginVertical: 20}}
-                            rating={item.reviews?.length}
+                            rating={item?.reviews?.length}
                           />
                         </div>
                       </div>
@@ -147,7 +147,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
             </div>
           </div>
         )}
-        {show != null && show == profileData.uuid && (
+        {show != null && show == profileData?.uuid && (
           <div>
             <div className="fixed inset-0 w-full h-full !bg-black/60  backdrop-blur-sm z-30"></div>
             <div
@@ -183,8 +183,8 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                       <div className="flex  items-center flex-col gap-2">
                         <img
                           src={
-                            profileData.photo_url
-                              ? profileData.photo_url
+                            profileData?.photo_url
+                              ? profileData?.photo_url
                               : User
                           }
                           width={65}
@@ -194,10 +194,10 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                         />
                         <div className="">
                           <p className="text-neutral-900 font-semibold text-xl capitalize">
-                            {profileData.firstname} {profileData.lastname}
+                            {profileData?.firstname} {profileData?.lastname}
                           </p>
                           <p className="card-designation">
-                            {profileData.designation}
+                            {profileData?.designation}
                           </p>
                         </div>
                       </div>
@@ -212,8 +212,8 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                             Rates:
                           </span>{" "}
                           <span className="text-neutral-700 font-medium">
-                            {profileData.pro_profile
-                              ? `$${profileData.pro_profile.daily_rate}/day $${profileData.pro_profile.hourly_rate}/hour`
+                            {profileData?.pro_profile
+                              ? `$${profileData?.pro_profile?.daily_rate}/day $${profileData?.pro_profile?.hourly_rate}/hour`
                               : "0"}
                           </span>
                         </div>
@@ -245,7 +245,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                               <Rating
                                 // maxScale={5}
                                 // style={{marginVertical: 20}}
-                                rating={profileData.reviews?.length}
+                                rating={profileData?.reviews?.length}
                               />
                             </span>
                           </div>

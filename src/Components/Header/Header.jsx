@@ -54,7 +54,7 @@ export default function Header() {
   window.addEventListener("scroll", scrollHandler);
   return (
     <>
-      {!hideHeader.includes(routePath) && (
+      {!hideHeader.includes(routePath) && user != null && (
         <div className="  bg-[#e5f0ff] w-full ">
           <div className="main-container w-full py-4 2xl:py-[26px] px-3 items-start  flex justify-between">
             <Link to={"/"}>

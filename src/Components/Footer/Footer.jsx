@@ -1,16 +1,18 @@
 import React from "react";
 
 import { BsDot } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 export default function Footer() {
   const location = useLocation();
   const routePath = location.pathname.split("/")[1];
+  const user = useSelector((state) => state.user);
 
   let hideHeader = ["login", "register"];
   return (
     <>
-      {!hideHeader.includes(routePath) && (
+      {!hideHeader.includes(routePath) && user != null && (
         <div className="bg-[#10274F]  w-full bottom-0">
           <div className="main-container flex flex-col md:flex-row text-white md:items-center justify-between py-8 gap-2 md:gap-0 h-fit ">
             <p className="text-white text-xs sm:text-base">

@@ -211,7 +211,7 @@ const Reservations = () => {
         ) : (
           <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
             <img src={emptyState} className="w-32" />
-            <div className="text-3xl ">Your reservations will appear here</div>
+            <div className="text-xl md:text-3xl ">Your reservations will appear here</div>
           </div>
         )}
       </div>

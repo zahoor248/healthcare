@@ -106,7 +106,7 @@ export default function SignUp() {
       address_2: adressDetails.address,
       city: adressDetails.city,
       state: adressDetails.state,
-      zip: adressDetails.zipCode,
+      zip: adressDetails.zip,
       status: "active",
       address: true,
       license: userType == "pro" ? true : false,
@@ -114,10 +114,15 @@ export default function SignUp() {
       license_state: licenseDetails.licenseState,
       license_id: licenseDetails.license_id,
     };
-    handleAPIRequest("POST", `registration2`, payload)
-      .then((response) => {})
+    handleAPIRequest("POST", `register2/${user.uuid}`, payload)
+      .then((response) => {
+        if (response.success) {
+          navigate(`/?varified=${user.type == "pro" ? true : false}`);
+        }
+      })
       .catch((error) => {
         console.log(error);
+        navigate(`/?varified=${user.type == "pro" ? true : false}`);
         setLoading(false);
         setError(error?.response?.data?.data);
       });
@@ -141,15 +146,24 @@ export default function SignUp() {
   return (
     <div className="flex flex-col w-full h-screen  overflow-auto items-center ">
       {/* <Header /> */}
-      <div className="flex w-full h-full justify-center flex-col md:flex-row ">
-        <div className="bg-[#4169e1]  flex items-center justify-center w-full">
+      <div className="flex w-full h-full justify-center flex-col md:flex-row-reverse ">
+        <div className="bg-[#4169e1] relative flex-col  flex items-center justify-center w-full">
           <img
             src={Slide2}
             className="h-[200px] w-[200px] py-6 md:!p-0  2xl:w-[500px] object-contain 2xl:h-[500px]  xl:w-[400px]  xl:h-[400px]  md:w-[300px]  md:h-[300px] "
           />
+          <div className=" hidden md:flex items-center flex-col">
+            <h1 className=" text-neutral-200 text-2xl pt-5">
+              Healthcare professionals Ready to Hire.
+            </h1>
+            <p className="max-w-[70%] text-center text-neutral-800">
+              Pulvinar elementum integer enim neque. Et netus et malesuada fames
+              ac turpis. Lectus nulla at volutpat diam ut.
+            </p>
+          </div>
         </div>
 
-        <div className="h-full w-full md:p-12   p-6 lg:p-24 overflow-auto flex flex-col   justify-center">
+        <div className="h-full w-full md:w-[90%] md:p-12   p-6 lg:p-24 overflow-auto flex flex-col   justify-center">
           {registrationStep == 1 ? (
             <div class="">
               <Link

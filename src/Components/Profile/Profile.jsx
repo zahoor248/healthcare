@@ -658,7 +658,11 @@ const Profile = () => {
         <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px]">
           <div className=" bg-white  md:py-10 w-full md:h-full rounded-lg shadow-class">
             <div className="hidden md:flex flex-col pb-6 items-center">
-              <img src={User} alt="user profile image" className="w-20 h-20 border border-neutral-200 rounded-full" />
+              <img
+                src={User}
+                alt="user profile image"
+                className="w-20 h-20 border border-neutral-200 rounded-full"
+              />
               <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
               </p>
@@ -673,8 +677,8 @@ const Profile = () => {
                   }`}
                 >
                   <div className="side-nav-link !py-2 md:!py-4">
-                    <HiUserCircle className="pen-icon" />
-                    <span className="normal-case !text-xs md:!text-base">
+                    <HiUserCircle className="pen-icon " />
+                    <span className="normal-case !text-[10px] md:!text-base">
                       My Profile
                     </span>
                   </div>
@@ -689,7 +693,7 @@ const Profile = () => {
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
                       <MdBusinessCenter className="pen-icon" />
-                      <span className="normal-case !text-xs md:!text-base whitespace-nowrap md:whitespace-normal">
+                      <span className="normal-case  !text-[10px]  md:!text-base whitespace-nowrap md:whitespace-normal">
                         Business Profile
                       </span>
                     </div>
@@ -716,7 +720,7 @@ const Profile = () => {
                       <path fill="none" d="M0 0h24v24H0z"></path>
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path>
                     </svg>
-                    <span className="normal-case !text-xs md:!text-base">
+                    <span className="normal-case  !text-[10px]  md:!text-base">
                       Address
                     </span>
                   </div>
@@ -731,7 +735,7 @@ const Profile = () => {
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
                       <FaIdCard className="pen-icon" />
-                      <span className="normal-case !text-xs md:!text-base">
+                      <span className="normal-case  !text-[10px]  md:!text-base">
                         Licenses
                       </span>
                     </div>
@@ -747,7 +751,7 @@ const Profile = () => {
                   >
                     <div className="side-nav-link !py-2 md:!py-4">
                       <FaClock className="pen-icon" />
-                      <span className="normal-case !text-xs md:!text-base mr-2.5 md:mr-0">
+                      <span className="normal-case  !text-[10px]  md:!text-base mr-2.5 md:mr-0">
                         Preferences
                       </span>
                     </div>

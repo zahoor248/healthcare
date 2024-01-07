@@ -72,10 +72,8 @@ const Favouraties = () => {
         {loading ? (
           <div className="grid animate-pulse  grid-cols-2 justify-between w-full pt-10 h-[114px] gap-9 flex-wrap">
             {" "}
-            <div class="rounded-xl bg-slate-200 h-full py-10 w-full"></div>
-            <div class="rounded-xl bg-slate-200 h-full py-10 w-full"></div>
-            <div class="rounded-xl bg-slate-200 h-full py-10 w-full"></div>
-            <div class="rounded-xl bg-slate-200 h-full py-10 w-full"></div>
+            <div class="rounded-xl bg-slate-200 h-24 w-full"></div>
+            <div class="rounded-xl bg-slate-200 h-24 w-full"></div>
           </div>
         ) : (
           <div className="flex justify-between w-full py-10 gap-9 flex-wrap">
@@ -136,9 +134,7 @@ const Favouraties = () => {
             ) : (
               <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 bg-slate-50 rounded-md mt-8">
                 <img src={emptyState} className="w-28 bg-transparent" />
-                <div className="text-3xl ">
-                  Your Favorites will appear here
-                </div>
+                <div className="text-3xl ">Your Favorites will appear here</div>
               </div>
             )}
           </div>

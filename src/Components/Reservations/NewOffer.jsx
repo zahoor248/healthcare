@@ -188,7 +188,9 @@ export default function NewOffer() {
       ) : (
         <div className="flex m-auto flex-col justify-center overflow-auto w-full">
           <div className=" justify-center items-center text-neutral-700 flex w-full">
-            <div className="text-2xl md:text-3xl">Make a Counter Offer</div>
+            <div className="text-xl mt-12 md:text-3xl">
+              Make a Counter Offer
+            </div>
           </div>
           <div className="">
             <div className="xl:w-[60vw] bg-white px-10  rounded-md mx-auto mt-4 md:mt-10 flex flex-col gap-3 md:gap-5  ">
