@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import emptyState from "../../assets/images/icon-contract-19.jpg";
+import User from "../../assets/images/holderpic.jpeg";
 
 import dayjs from "dayjs";
 import { setContracts } from "../../Store/Actions/Actions";
@@ -270,6 +271,17 @@ const Contacts = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="border rounded bg-neutral-50 p-4 mb-4 mx-4">
+                    <div className="  pb-2 text-neutral-600 capitalize">
+                      Pay Duration:{" "}
+                      <span className="text-blue-600">{item.pay_duration}</span>
+                    </div>
+
+                    <div className="  text-neutral-600 capitalize">
+                      Location:{" "}
+                      <span className="text-blue-600">{item.location}</span>
+                    </div>
+                  </div>
                   <div className="flex items-start gap-4 w-full flex-col px-5 pb-8 lg:px-8 h-full">
                     <div className="font-bold text-neutral-800 text-xl">
                       {/* <GoPrimitiveDot className='online-icon'/> */}
@@ -283,9 +295,7 @@ const Contacts = () => {
                         {item.business?.photo_url != null ? (
                           <img src={item.business?.photo_url} />
                         ) : (
-                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-[#39B7A5] text-white">
-                            {item?.business?.firstname.charAt(0)}
-                          </div>
+                          <img src={User} />
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </Link>
@@ -304,9 +314,7 @@ const Contacts = () => {
                         {item.pro?.photo_url != null ? (
                           <img src={item.pro?.photo_url} />
                         ) : (
-                          <div className="w-10 h-10 flex justify-center capitalize items-center bg-blue-500 text-white">
-                            {item?.pro?.firstname.charAt(0)}
-                          </div>
+                          <img src={User} />
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </Link>
@@ -325,7 +333,7 @@ const Contacts = () => {
                           Status:{" "}
                         </span>
                         <span className="underline px-1 f-f-g-m capitalize text-green-500">
-                          {item.business.status}
+                          {item.status}
                         </span>
                       </div>
 
@@ -426,6 +434,10 @@ const Contacts = () => {
                           ) : null}
                         </>
                       ) : null}
+                    </div>
+
+                    <div className="text-neutral-600">
+                      Notes: {item.description}
                     </div>
 
                     {user.type === "bus" &&

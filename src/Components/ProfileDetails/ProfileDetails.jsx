@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import "./ProfileDetails.css";
 import { AiOutlineStar, AiFillStar, AiOutlineIdcard } from "react-icons/ai";
 import { TbCurrencyDollar } from "react-icons/tb";
-import { FaMapPin } from "react-icons/fa";
+import { FaMapPin, FaStar } from "react-icons/fa";
 
 import ReviewSlider from "../ReviewSlider/ReviewSlider";
 import DaySelect from "../DaySelect/DaySelect";
@@ -23,7 +23,7 @@ import { db } from "../../firebase";
 
 import Autocomplete from "react-google-autocomplete";
 
-export default function ProfileDetails() {
+const ProfileDetails = () => {
   const location = useLocation();
 
   const [showModel, setShowModel] = useState(false);
@@ -249,6 +249,31 @@ export default function ProfileDetails() {
       </div>
     );
   }
+  const Rating = ({ rating, onRatingPress }) => {
+    const stars = [];
+    const maxRating = 5; // Change this to set the maximum rating
+
+    for (let i = 1; i <= maxRating; i++) {
+      const iconColor = i <= rating ? "gold" : "#9E9E9E";
+      // Use 'gold' for selected stars and 'gray' for unselected stars
+
+      // Use 'star' for filled and 'star-o' for empty stars
+      stars.push(
+        <div key={i}>
+          <FaStar color={iconColor} />
+        </div>
+      );
+    }
+
+    return (
+      <div
+        className="text-2xl gap-2.5"
+        style={{ display: "flex", flexDirection: "row", marginVertical: 5 }}
+      >
+        {stars}
+      </div>
+    );
+  };
   return (
     <>
       {loading ? (
@@ -350,22 +375,16 @@ export default function ProfileDetails() {
                     <div className="flex">
                       <AiOutlineStar className="star-icon" />
                       <div className="ml-4">
-                        <p className="text-lg text-gray-600 mb-2">Ratings</p>
+                        <p className="text-lg flex flex-col gap-2 text-gray-600 mb-2">
+                          Ratings{" "}
+                          <Rating
+                            // maxScale={5}
+                            // style={{marginVertical: 20}}
+                            rating={userDetails.reviewer?.length}
+                          />
+                        </p>
                         <div className="flex">
-                          {userDetails?.reviews?.length ? (
-                            <div>
-                              {userDetails?.reviews?.map((item) => (
-                                <AiFillStar
-                                  style={{
-                                    fontSize: "1.2rem",
-                                    color: "#F2BC27",
-                                  }}
-                                />
-                              ))}
-                            </div>
-                          ) : (
-                            "N/A"
-                          )}
+                          {userDetails.pro_profile.reviewers?.length}
                         </div>
                       </div>
                     </div>
@@ -376,8 +395,11 @@ export default function ProfileDetails() {
                         <p className="rating-heading">Licensed in</p>
                         {userDetails?.licenses?.length ? (
                           <div className="flex gap-1">
-                            {userDetails?.licenses?.map((item) => (
-                              <p className="license-areas">{item?.abbrev}</p>
+                            {userDetails?.licenses?.map((item, idx) => (
+                              <p className="license-areas">
+                                {idx > 0 && ", "}
+                                {item?.abbrev} ({item.license_state})
+                              </p>
                             ))}
                           </div>
                         ) : (
@@ -412,9 +434,8 @@ export default function ProfileDetails() {
                         <p className="rating-heading">Radius</p>
                         <p className="license-areas">
                           {" "}
-                          {userDetails?.pro_profile?.radius
-                            ? `${userDetails?.pro_profile?.radius} miles away`
-                            : "N/A"}
+                          within {userDetails?.pro_profile?.radius} miles of{" "}
+                          {user.addresses[0]?.zip}
                         </p>
                       </div>
                     </div>
@@ -662,7 +683,7 @@ export default function ProfileDetails() {
           <div className="review-section-container">
             <div className="slides-container">
               {userDetails?.reviewer?.map((item) => (
-                <div className="slide1">
+                <div className="slide1 flex">
                   <div style={{ display: "flex" }}>
                     <div className="slide-image-container"></div>
                     <div style={{ marginLeft: "1.2rem", marginTop: "0.2rem" }}>
@@ -670,18 +691,16 @@ export default function ProfileDetails() {
                         {" "}
                         {item?.reviewer?.firstname} {item?.reviewer?.lastname}
                       </p>
-                      <div style={{ marginTop: ".5rem" }} className="flex">
-                        <AiFillStar className="review-stars" />
-                        <AiFillStar className="review-stars" />
-                        <AiFillStar className="review-stars" />
-                        <AiFillStar className="review-stars" />
-                        <AiFillStar className="review-stars" />
-                      </div>
+                      <Rating
+                        // maxScale={5}
+                        // style={{marginVertical: 20}}
+                        rating={item?.rating}
+                      />
                     </div>
                   </div>
-                  <p className="review-desc w-full break-words">
+                  <div className=" w-full whitespace-normal py-2 text-neutral-600">
                     {item.feedback}
-                  </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -741,4 +760,5 @@ export default function ProfileDetails() {
       <Toast setShowToast={setShowToast} showToast={showToast} />
     </>
   );
-}
+};
+export default ProfileDetails;

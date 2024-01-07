@@ -5,11 +5,13 @@ import "./ProfessionalCard.css";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 import User from "../../assets/images/holderpic.jpeg";
-
+import { FaStar } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function ProfessionalCard({ data, setFilteredData }) {
   const [show, setShow] = useState(null);
   const [profileData, setProfileData] = useState(null);
+  const user = useSelector((state) => state.user);
   let [currentPage, setCurrentPage] = useState(1);
   const handleClose = () => setShow(null);
   const handleShow = (item) => {
@@ -21,6 +23,32 @@ export default function ProfessionalCard({ data, setFilteredData }) {
   const handlePageChange = (page) => {
     // Handle page change event
     setCurrentPage(page);
+  };
+
+  const Rating = ({ rating, onRatingPress }) => {
+    const stars = [];
+    const maxRating = 5; // Change this to set the maximum rating
+
+    for (let i = 1; i <= maxRating; i++) {
+      const iconColor = i <= rating ? "gold" : "#9E9E9E";
+      // Use 'gold' for selected stars and 'gray' for unselected stars
+
+      // Use 'star' for filled and 'star-o' for empty stars
+      stars.push(
+        <div key={i}>
+          <FaStar color={iconColor} />
+        </div>
+      );
+    }
+
+    return (
+      <div
+        className="text-2xl gap-2.5"
+        style={{ display: "flex", flexDirection: "row", marginVertical: 5 }}
+      >
+        {stars}
+      </div>
+    );
   };
   return (
     <>
@@ -47,11 +75,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                     <div className="flex flex-col p-6 lg:p-6 2xl:p-10">
                       <div className="flex items-center">
                         <img
-                          src={
-                            item.photo_url
-                              ? item.photo_url
-                              : User
-                          }
+                          src={item.photo_url ? item.photo_url : User}
                           width={55}
                           height={32}
                           className="rounded-full border object-cover w-10 md:w-8 md:h-8 h-10 2xl:w-16 2xl:h-16 xl:w-14 xl:h-14"
@@ -83,9 +107,8 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                             Radius:
                           </span>{" "}
                           <span className="text-neutral-700 text-sm xl:text-lg font-medium">
-                            {item.pro_profile?.radius
-                              ? `${item.pro_profile?.radius} miles`
-                              : "N/A"}
+                            within {item?.pro_profile?.radius} miles of{" "}
+                            {user.addresses[0]?.zip}
                           </span>
                         </div>
                         <div className="flex items-center">
@@ -94,25 +117,11 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                           >
                             Ratings:
                           </span>{" "}
-                          <span>
-                            {item.pro_profile?.rating ? (
-                              item.pro_profile.rating
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#F3E5AB"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                className="w-6 h-6"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                                />
-                              </svg>
-                            )}
-                          </span>
+                          <Rating
+                            // maxScale={5}
+                            // style={{marginVertical: 20}}
+                            rating={item.reviews?.length}
+                          />
                         </div>
                       </div>
 
@@ -133,7 +142,9 @@ export default function ProfessionalCard({ data, setFilteredData }) {
         ) : (
           <div className="flex w-full justify-center center flex-col items-center gap-5 border p-12 h-[60vh] bg-slate-50 rounded-md mt-8">
             <img src={emptyState} className="w-32" />
-            <div className="text-3xl ">No matching pros found. Please try a different search.</div>
+            <div className="text-3xl ">
+              No matching pros found. Please try a different search.
+            </div>
           </div>
         )}
         {show != null && show == profileData.uuid && (
@@ -232,23 +243,11 @@ export default function ProfessionalCard({ data, setFilteredData }) {
                               Ratings:
                             </span>{" "}
                             <span>
-                              {profileData.pro_profile?.rating ? (
-                                profileData.pro_profile.rating
-                              ) : (
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="#F3E5AB"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth={1.5}
-                                  className="w-6 h-6"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
-                                  />
-                                </svg>
-                              )}
+                              <Rating
+                                // maxScale={5}
+                                // style={{marginVertical: 20}}
+                                rating={profileData.reviews?.length}
+                              />
                             </span>
                           </div>
                         </div>

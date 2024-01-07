@@ -3,6 +3,8 @@ import "./Chat.css";
 import { BiSearchAlt } from "react-icons/bi";
 import { BiPhotoAlbum } from "react-icons/bi";
 import user1 from "../../assets/images/chat1.jpg";
+import User from "../../assets/images/holderpic.jpeg";
+
 import firebase from "firebase";
 import { useSelector } from "react-redux";
 import { db } from "../../firebase";
@@ -417,7 +419,7 @@ export default function Chat() {
                 <div className="flex items-center gap-4">
                   <div className=" !rounded-full overflow-hidden  w-20 h-20">
                     <img
-                      src={item.user.photo_url ? item.user.photo_url : user1}
+                      src={item.user.photo_url ? item.user.photo_url : User }
                     />
                     {/* <GoPrimitiveDot className='online-icon'/> */}
                   </div>
