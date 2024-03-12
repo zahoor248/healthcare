@@ -1,0 +1,150 @@
+.license-editing-card {
+  border: 1px solid #fff;
+  background-color: aliceblue;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 20%);
+  padding-bottom: 3rem;
+}
+.license-container {
+  border: 1px solid #fff;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 20%);
+  margin: 0 auto;
+  width: 85%;
+  padding: 3rem;
+}
+.license-fields-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-left: 4rem;
+}
+.license-input {
+  width: 35%;
+  margin-right: 5rem !important;
+  background-color: #fff;
+}
+.license-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+.license-btn-container > button {
+  border: 1px solid navy;
+  background-color: aliceblue;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  color: navy;
+  font-weight: 700;
+  border-radius: 0.5rem;
+}
+.license-btn-container > button:hover {
+  background-color: navy;
+  color: aliceblue;
+}
+.license-container2 {
+  border: 1px solid #fff;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 20%);
+  margin: 0 auto;
+  width: 85%;
+  padding: 3rem;
+  margin-top: 3rem;
+}
+.license-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.license-edit-btn {
+  border: 1px solid navy;
+  background-color: aliceblue;
+  color: navy;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+}
+.license-tbl-header {
+  font-size: 1.2rem;
+  /* font-weight: 700; */
+}
+.license-detail2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ghostwhite;
+  margin-top: 1rem;
+}
+.license-heading {
+  font-weight: 700;
+  margin-bottom: 4rem;
+}
+.license-edit-btn:hover {
+  background-color: navy;
+  color: aliceblue;
+}
+.license-btn-container2 > button {
+  border: 1px solid navy;
+  background-color: aliceblue;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  color: navy;
+  font-weight: 700;
+  border-radius: 0.5rem;
+}
+.license-btn-container2 > button:hover {
+  background-color: navy;
+  color: aliceblue;
+}
+.license-btn-container2 {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+.license-del {
+  font-size: 2rem;
+  color: red;
+  margin-right: 2rem;
+}
+.license-state-type {
+  width: 34%;
+  margin-right: 5rem;
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+}
+.license-state-type > option {
+  font-size: 1.2rem;
+}
+.license-picker > .datepicker-area {
+  margin-left: 0;
+  margin-top: 0;
+}
+.license-expire-picker {
+  margin-top: 0.3rem !important;
+  padding-top: 0 !important;
+  padding: 1rem !important;
+}
+.license-list-header {
+  display: flex;
+}
+.license-list-header > p {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.sr-container {
+  width: 10%;
+}
+.lic-container {
+  width: 15%;
+}
+.state-container {
+  width: 16.5%;
+}
+.id-container {
+  width: 16%;
+}
