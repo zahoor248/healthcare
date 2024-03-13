@@ -30,6 +30,7 @@ import { handleAPIRequest } from "../../helper/ApiHandler";
 import { useNavigate } from "react-router-dom";
 import Toast from "../AppLoader";
 import CommonPrimaryButton from "../CommonPrimaryButton";
+import DeleteAccount from "../DeleteAccount";
 
 const ProfileData = () => {
   const dispatch = useDispatch();
@@ -252,12 +253,12 @@ const ProfileData = () => {
             </div>
           </div>
           <div className="flex mt-6 gap-3 justify-between w-auto">
-            <button
+            {/* <button
               onClick={() => handleLogout()}
               className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
             >
               Logout
-            </button>
+            </button> */}
             <CommonPrimaryButton
               onClick={() => submitHandler()}
               loading={loading_button}
@@ -717,17 +718,110 @@ const BusinessProfileData = () => {
 const Profile = () => {
   const [nav, setNav] = useState("profile");
   const user = useSelector((state) => state.user);
+  const fileInputRef = useRef(null);
+  const dispatch = useDispatch();
+  const [deleteUser, setDeleteUser] = useState(false);
+  const [showToast, setShowToast] = useState({
+    toggle: false,
+    lable: "",
+    message: "",
+    status: "",
+  });
+
+  const handleFileSelect = async (event) => {
+    try {
+      const selectedFile = event.target.files[0];
+      if (!selectedFile) return;
+
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const formData = new FormData();
+        formData.append("image", selectedFile);
+        formData.append("uuid", user.uuid);
+
+        const response = await axios.post(
+          `https://app.healthcare-up.com/api/v1/user-photo`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NzBmYzQzZS0zNjdlLTQ5YzMtYTIzNS02ZGU4MjAxY2QxMmMiLCJqdGkiOiJjMjBiOWFiZjM1M2Y2MGNlNDAyMzVmZTUzOWNmMzc4OTIxNWVhZjRhM2E2YjYyZWQ5YjY4N2ViNzQ2OWU1YzhjYThhMTQxZGJjNzBhN2U3ZiIsImlhdCI6MTcxMDE3NjA1Mi4wODk1NjkwOTE3OTY4NzUsIm5iZiI6MTcxMDE3NjA1Mi4wODk1NzAwNDU0NzExOTE0MDYyNSwiZXhwIjoxNzQxNzEyMDUyLjA4NzEzMTk3NzA4MTI5ODgyODEyNSwic3ViIjoiMzYiLCJzY29wZXMiOltdfQ.ADhbhxHn2rpniEqBt_asOHmsUjAQ6m_RTb4BBwfVwbSfB9H23va5uFq4DxCotTaag0VanYsrHzpiMytWCnvwHtcdcQUuK8Gkyo1XluhWIKxGfxIefUhZ9piDjQ0jgY509J78HiBwYW2ejEPrFFARvHh0K4R-jXIs5aIsHboSambCLReFzVlnPnfL8z1F9XpiBOZ4J-hEP12lfiK_4Yv9M_X5XVGkSauo3flFAn3s1DN-eCYKULzcvDqDxxb84-Cqx9B8OmFRzNx5771CS_R7SmrynKtEtpjUu2DfuLzphkcbYlBp3UENVgRfuiuuwrX4iJa6jzv3MsacNzcYsahVB9eNsbVMWbKX6NArpDXaZI8Km-bghG88HVZxFZsyPmdGOpqa1WNvVRGTh_MylTBEOj8i6CnPyRpnBauUDnGEJDE_boC_FgI8r4whxo8vSbieb1SasD6L5W34lLjlTSD9BF6oL8Z6WsqSH48PvqqmitIM2anA1U2DlLNE0vqj5Zdqgya5P61uGAC5RlQJGxw5Mkq6NjLy8JFf2p2E-Ml4LW9_W5AGRX5wqF0LpPUQtnopPs9GKrMQac3yAAMA4DK9Z5lCHvWkH8swhhsQo2cz6X4GDtg_mOqKpBC-NROgp-HZt9nrEOcaoaIjebNIkccbuaAN_glPIUeDVTfEre_wc-M`,
+            },
+          }
+        );
+
+        if (response.data) {
+          handleAPIRequest("get", "user", null)
+            .then((response) => {
+              dispatch(setUser(response.user.profile));
+              setShowToast({
+                ...showToast,
+                toggle: true,
+                status: "success",
+                message: "Profile has been uploaded successfully",
+                lable: "Upload Successfull",
+              });
+              setTimeout(() => {
+                setShowToast({
+                  ...showToast,
+                  toggle: false,
+                  status: "success",
+                  message: "Profile has been uploaded successfully",
+                  lable: "Upload Successfull",
+                });
+              }, 2000);
+            })
+            .catch((error) => {
+              setTimeout(() => {
+                setShowToast({
+                  ...showToast,
+                  toggle: false,
+                  status: "error",
+                  message: "Please try again later",
+                  lable: "Error Uploading",
+                });
+              });
+              setShowToast({
+                ...showToast,
+                toggle: true,
+                status: "success",
+                message: "Please try again later",
+                lable: "Error Uploading",
+              });
+            });
+
+          // Handle the response data here
+        }
+      };
+      reader.readAsDataURL(selectedFile);
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle errors, e.g., show error message to user
+    }
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+    dispatch(setUser(null));
+    dispatch(setIsLoggedIn(false));
+  };
 
   return (
     <>
       <div className="flex flex-col md:flex-row main-container gap-8 overflow-auto w-full">
         <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px]">
-          <div className=" bg-white  md:py-10 w-full md:h-full rounded-lg shadow-class">
+          <div className=" bg-white relative  md:py-10 w-full md:h-full rounded-lg shadow-class">
             <div className="hidden md:flex flex-col pb-6 items-center">
               <img
-                src={User}
+                src={user?.photo_url != null ? user?.photo_url : User}
                 alt="user profile image"
                 className="w-20 h-20 border border-neutral-200 rounded-full"
+              />
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={(e) => handleFileSelect(e)}
+                className="opacity-0 cursor-pointer z-10 absolute px-6 -left-0 py-4 w-full"
               />
               <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
@@ -825,6 +919,20 @@ const Profile = () => {
                 )}
               </ul>
             </div>
+            <div className="flex w-full absolute -left-[0.45rem] bottom-6 justify-between gap-3  px-6">
+              <button
+                onClick={() => setDeleteUser(true)}
+                className="  text-red-600 hover:bg-red-50 transition-all ease-in-out duration-300 border-[#0f75bc] whitespace-nowrap px-5 py-2 rounded-md "
+              >
+                Delete Account
+              </button>
+              <button
+                onClick={() => handleLogout()}
+                className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
 
@@ -833,14 +941,20 @@ const Profile = () => {
         {/* <BusinessProfile/> */}
         {/* <Preferences/> */}
         {/* <Notification/> */}
-        {nav === "profile" && <ProfileData />}
-        {nav == "business-profile" && user.type == "bus" && (
-          <BusinessProfileData />
-        )}
-        {nav === "address" && <Address />}
-        {nav === "licenses" && <License />}
-        {nav === "preferences" && <Preferences />}
+
+        <div className="min-h-[750px] w-full">
+          {nav === "profile" && <ProfileData />}
+          {nav == "business-profile" && user.type == "bus" && (
+            <BusinessProfileData />
+          )}
+          {nav === "address" && <Address />}
+          {nav === "licenses" && <License />}
+          {nav === "preferences" && <Preferences />}
+        </div>
       </div>
+      <Toast setShowToast={setShowToast} showToast={showToast} />
+
+      <DeleteAccount deleteUser={deleteUser} setDeleteUser={setDeleteUser} />
     </>
   );
 };
