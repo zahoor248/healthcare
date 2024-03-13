@@ -442,10 +442,10 @@ export default function Chat() {
     }
   };
   return (
-    <div className="flex bg-neutral-100 h-[calc(100vh-147px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)] pb-2 w-full">
+    <div className="flex bg-neutral-100  pb-2 w-full">
       <div
         className={`${
-          !showChat ? "flex " : "hidden "
+          !showChat ? "flex  h-[calc(100vh-120px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]" : "hidden "
         } md:flex flex-col w-full md:max-w-[450px]`}
       >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
@@ -497,7 +497,7 @@ export default function Chat() {
       </div>
 
       <div
-        className={`${showChat ? "block" : "hidden"} md:block border-l w-full`}
+        className={`${showChat ? "block relative h-[calc(100vh-120px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]" : "hidden"} md:block border-l w-full`}
       >
         {selectedItem && (
           <div className="py-5 px-8 bg-slate-50">
@@ -529,16 +529,17 @@ export default function Chat() {
           </div>
         )}
 
-        <div className="w-full h-full flex justify-end overflow-auto flex-col">
+        <div className="w-full h-[90%] flex justify-end overflow-auto flex-col">
           {selectedItem && (
             <>
-              <div className="overflow-auto mb-8">
+              <div className="max-h-[80%]">
                 {messages.map((item, index) => (
                   <ChatMessage key={index} message={item} />
                 ))}
+                <div className="h-14"></div>
               </div>
 
-              <div className=" mx-[100px] ms-auto mb-20 w-full">
+              <div className=" mx-[100px] ms-auto bg-neutral-100 pt-3 absolute w-full">
                 <form
                   onSubmit={(e) => onSend(e)}
                   className="px-7 flex flex-row justify-end  gap-2 items-end"
