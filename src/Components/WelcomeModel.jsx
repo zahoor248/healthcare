@@ -26,7 +26,7 @@ const WelcomeModel = () => {
             src={Logo}
             class="w-72 h-14 object-fit absolute top-[100px] left-10"
           />
-          <h3 class="font-bold text-3xl/none text-neutral-800 dark:text-neutral-200">
+          <h3 class="font-bold text-3xl/none text-neutral-800 ">
             Welcome {user?.firstname} &#x1F44B;
           </h3>
           <div>Thanks for signing up for the Healthcare Up beta program.</div>

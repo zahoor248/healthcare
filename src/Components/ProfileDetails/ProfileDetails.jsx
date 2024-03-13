@@ -327,7 +327,7 @@ const ProfileDetails = () => {
                     <CommonPrimaryButton
                       onClick={() => handleAddFav(userDetails)}
                       loading={false}
-                      text={"Add to Favourites"}
+                      text={"Add to Favorites"}
                     />
 
                     <div
@@ -462,10 +462,10 @@ const ProfileDetails = () => {
                       <div className=" w-full xl:w-[14rem]">
                         <div className=" flex text-neutral-500 p-2 w-full">
                           <p>
-                            {item?.fromTime
-                              ? item?.fromTime + "-"
+                            {item?.toTime
+                              ? item?.toTime + " -"
                               : "Not available "}{" "}
-                            {item?.toTime}
+                            {item?.fromTime}
                           </p>
                         </div>
                       </div>
@@ -653,7 +653,7 @@ const ProfileDetails = () => {
                     <textarea
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
-                      placeholder="Describe your self"
+                      placeholder="Enter job details"
                       className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                     />
                   </div>
@@ -701,7 +701,7 @@ const ProfileDetails = () => {
       )}
       {showModel && (
         <div className="h-screen inset-0 flex justify-center items-center w-full fixed z-50  m-auto">
-          <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+          <div className="w-full max-w-[600px] flex flex-col fixed justify-start items-start p-8 z-20 transition-all ease-in-out duration-300 bg-white shadow-xl content-scroll overflow-auto">
             <div className="text-xl pb-4">{"Legal Agreement"}</div>
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col gap-2">

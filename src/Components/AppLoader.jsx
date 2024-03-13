@@ -17,10 +17,10 @@ export default function Toast({ showToast, setShowToast }) {
           : showToast.status === "success"
           ? "!border-green-500 dark:border-green-400"
           : "!border-rose-500 dark:border-rose-400"
-      } z-[99999] bottom-20 bg-white dark:bg-neutral-800 delay-200 transition-all ease-in-out duration-500  max-w-[225px] fixed border-l-4 rounded-l-md`}
+      } z-[99999] bottom-20 bg-white  delay-200 transition-all ease-in-out duration-500  max-w-[225px] fixed border-l-4 rounded-l-md`}
     >
       <div
-        className="w-[400px] bg-white dark:bg-neutral-800 shadow-class rounded-r-md overflow-hidden"
+        className="w-[400px] bg-white shadow-class rounded-r-md overflow-hidden"
         role="alert"
       >
         <div className="flex p-4 items-start justify-between w-full">
@@ -64,7 +64,7 @@ export default function Toast({ showToast, setShowToast }) {
               </svg>
             )}
             <div className="ml-2">
-              <h3 className="text-base text-neutral-800 font-medium dark:text-neutral-200">
+              <h3 className="text-base text-neutral-800 font-medium ">
                 {showToast?.lable}
               </h3>
               <p className="font-normal text-xs text-neutral-600 dark:text-neutral-400">

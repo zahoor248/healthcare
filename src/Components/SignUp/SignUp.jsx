@@ -483,6 +483,24 @@ export default function SignUp() {
                 <div className="flex flex-row gap-4">
                   <div className="flex flex-col gap-2 w-full">
                     <p className="text-base/none font-normal text-neutral-600">
+                      City
+                    </p>
+                    <input
+                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                      label="City"
+                      placeholder="Enter your City"
+                      variant="outlined"
+                      value={adressDetails.city}
+                      onChange={(e) =>
+                        setAdressDetails({
+                          ...adressDetails,
+                          city: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2 w-full">
+                    <p className="text-base/none font-normal text-neutral-600">
                       State
                     </p>
                     <select
@@ -504,24 +522,6 @@ export default function SignUp() {
                         </option>
                       ))}
                     </select>
-                  </div>
-                  <div className="flex flex-col gap-2 w-full">
-                    <p className="text-base/none font-normal text-neutral-600">
-                      City
-                    </p>
-                    <input
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                      label="City"
-                      placeholder="Enter your City"
-                      variant="outlined"
-                      value={adressDetails.city}
-                      onChange={(e) =>
-                        setAdressDetails({
-                          ...adressDetails,
-                          city: e.target.value,
-                        })
-                      }
-                    />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">

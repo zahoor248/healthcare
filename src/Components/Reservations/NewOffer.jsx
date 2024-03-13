@@ -400,7 +400,7 @@ export default function NewOffer() {
                       <textarea
                         onChange={(e) => setDescription(e.target.value)}
                         value={description}
-                        placeholder="Describe your self"
+                        placeholder="Enter job details"
                         className="text-lg placeholder-[#B8C0CB] text-neutral-500 f-f-g-m py-2 px-4 border border-[#C2C9D4] rounded w-full"
                       />
                     </div>

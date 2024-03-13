@@ -233,7 +233,7 @@ export default function Preferences() {
         )}
         {selectedDay && (
           <>
-            <div className="w-full max-w-[600px] flex flex-col fixed p-8 z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+            <div className="w-full max-w-[600px] flex flex-col fixed p-8 z-20 transition-all ease-in-out duration-300 bg-white  shadow-xl content-scroll overflow-auto">
               <div className="text-xl font-medium pb-4 capitalize">
                 Working Hours For {selectedDay.day}
               </div>

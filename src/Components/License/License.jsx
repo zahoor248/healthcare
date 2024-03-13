@@ -113,12 +113,12 @@ export default function License() {
           <div class="w-full flex flex-col gap-4">
             {user?.licenses?.map((address, index) => (
               <div class=" " key={index}>
-                <div class=" bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-700">
-                  <div class="text-lg px-6 py-2 flex items-center border-b bg-neutral-100 justify-between w-full font-semibold text-gray-900 dark:text-white">
+                <div class=" bg-white border rounded-lg">
+                  <div class="text-lg px-6 py-2 flex items-center border-b bg-neutral-100 justify-between w-full font-semibold text-gray-900">
                     License# {index + 1}
                     <div className="flex gap-2 items-center">
                       <button
-                        class=" font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        class=" font-medium text-blue-600 hover:underline"
                         onClick={() => openAddressModal(address)}
                       >
                         <svg
@@ -201,7 +201,7 @@ export default function License() {
         ></div>
       )}
       {openModel && (
-        <div className="w-full max-w-[600px] flex flex-col fixed p-8  z-20 transition-all ease-in-out duration-300 bg-white dark-bg-neutral-900 shadow-xl content-scroll overflow-auto">
+        <div className="w-full max-w-[600px] flex flex-col fixed p-8  z-20 transition-all ease-in-out duration-300 bg-white shadow-xl content-scroll overflow-auto">
           <div className="text-xl pb-4">
             {isEditing ? "Edit License" : "Add License"}
           </div>

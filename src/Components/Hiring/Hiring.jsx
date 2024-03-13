@@ -185,7 +185,7 @@ export default function Hiring() {
               <div className="xl:pl-14 lg:pl-10 md:pl-6 w-full">
                 {/* sorting large screen  */}
                 <div className="card-section-header  justify-between items-center !hidden md:!flex">
-                  <div className="flex gap-2">
+                  {/* <div className="flex gap-2">
                     <p>Sort by:</p>
                     <select
                       className="bg-[#0f75bc]/90  transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
@@ -194,7 +194,7 @@ export default function Hiring() {
                       <option>Hourly Rate</option>
                       <option>Daily Rate</option>
                     </select>
-                  </div>
+                  </div> */}
 
                   {/* <div className="pagi-icons flex items-center">
                 <IoIosArrowDropleft className="mr-2" />
