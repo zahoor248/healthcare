@@ -812,16 +812,32 @@ const Profile = () => {
         <div className="md:py-12 py-2 w-full md:w-[40%] md:max-w-[310px]">
           <div className=" bg-white relative  md:py-10 w-full md:h-full rounded-lg shadow-class">
             <div className="hidden md:flex flex-col pb-6 items-center">
+
               <img
                 src={user?.photo_url != null ? user?.photo_url : User}
                 alt="user profile image"
                 className="w-20 h-20 border border-neutral-200 rounded-full"
               />
+
+              <svg
+               className="absolute mt-[53px] w-6 h-6 p-0.5  ml-8 bg-neutral-700 border rounded-full"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#fafafa"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                />
+              </svg>
               <input
                 type="file"
                 ref={fileInputRef}
                 onChange={(e) => handleFileSelect(e)}
-                className="opacity-0 cursor-pointer z-10 absolute px-6 -left-0 py-4 w-full"
+                className="opacity-0 cursor-pointer z-10 absolute px-6 -left-0 py-6 w-full"
               />
               <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
