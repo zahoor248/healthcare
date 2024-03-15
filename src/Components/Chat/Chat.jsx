@@ -532,7 +532,7 @@ export default function Chat() {
         <div className="w-full h-[90%] flex justify-end overflow-auto flex-col">
           {selectedItem && (
             <>
-              <div className="max-h-[80%]">
+              <div className="lg:max-h-[80%]">
                 {messages.map((item, index) => (
                   <ChatMessage key={index} message={item} />
                 ))}
