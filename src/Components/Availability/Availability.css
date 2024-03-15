@@ -1,0 +1,208 @@
+.availability-container {
+  display: flex;
+  padding-top: 3rem;
+  flex-direction: column;
+  width: 79%;
+}
+.appointment-sections {
+  display: flex;
+}
+.standard-availability {
+  width: 45%;
+  border-right: 1px solid #888;
+  padding-bottom: 5rem;
+}
+.vacations {
+  flex: 1;
+}
+.book-line {
+  border-bottom: 1px solid #ccc;
+  margin-top: 1.5rem;
+}
+.booking-heading {
+  margin-left: 5rem;
+  border: 1px solid navy;
+  background-color: navy;
+  color: aliceblue;
+  border-radius: 0.5rem;
+  width: 73%;
+  padding: 1rem;
+}
+.patient-details-border {
+  width: 82%;
+  display: block;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 0.2);
+}
+.patient-image {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 5rem;
+}
+.patient-details-container {
+  display: flex;
+  align-items: center;
+}
+.patient-details-container > p {
+  font-size: 1.6rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+.patient-details-container > h5 {
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+}
+.doctor-search {
+  display: block;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 92%;
+  margin-top: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding-left: 4rem;
+  font-size: 1.2rem;
+}
+.doctor-search-icon-container {
+  position: relative;
+}
+.doctor-search-icon {
+  font-size: 2rem;
+  position: absolute;
+  top: 1.1rem;
+  left: 3.8rem;
+}
+.input-line {
+  border-bottom: 1px solid #eee;
+  display: block;
+  margin: 0 auto;
+  width: 92%;
+  margin-top: 1.5rem;
+}
+.booking-day {
+  margin-left: 3rem;
+  margin-top: 1.5rem;
+}
+.booking-options {
+  box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 0.2);
+  display: block;
+  margin: 0 auto;
+  width: 92%;
+  margin-top: 1rem;
+  padding: 3rem 1rem;
+  border-bottom: 2px solid #ccc;
+}
+.booking-time {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #888;
+}
+.booking-logo {
+  width: 25%;
+  margin-left: 10rem;
+}
+.booking-option-container {
+  display: flex;
+}
+.booking-name > h4 {
+  margin: 0;
+}
+.booking-name {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.booking-name > p {
+  font-weight: 600;
+}
+.booking-btn-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.booking-btn-container > button {
+  padding: 0.6rem 1.5rem;
+  border: 1px solid navy;
+  color: navy;
+  background-color: aliceblue;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+}
+.booking-btn-container > button:hover {
+  color: aliceblue;
+  background-color: navy;
+}
+.options-scroll {
+  height: 54.5rem;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  margin-bottom: 5rem;
+}
+.hours-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5rem;
+  margin-top: 3rem;
+}
+.hours-input {
+  width: 35%;
+  margin-right: 5rem !important;
+}
+.hours-input-closed {
+  width: 82%;
+  margin-right: 5rem !important;
+}
+.available-hours {
+  margin-top: 2rem;
+}
+.headings-container {
+  display: flex;
+  justify-content: space-between;
+}
+.vacation-btn {
+  border: 1px solid navy;
+  background-color: aliceblue;
+  color: navy;
+  font-size: 1.4rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+.vacation-btn:hover {
+  background-color: navy;
+  color: aliceblue;
+}
+.vacation-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 4rem;
+  margin-top: 5rem;
+}
+.booking-heading2 {
+  margin-left: 5rem;
+  border: 1px solid navy;
+  background-color: navy;
+  color: aliceblue;
+  border-radius: 0.5rem;
+  width: 73%;
+  padding: 1rem;
+  margin-top: 4rem;
+}
+.vacation-update-btn {
+  border: 1px solid navy;
+  background-color: aliceblue;
+  color: navy;
+  font-size: 1.4rem;
+  padding: 1rem 3rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+.vacation-update-btn:hover {
+  background-color: navy;
+  color: aliceblue;
+}

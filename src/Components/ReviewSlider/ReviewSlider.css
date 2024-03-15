@@ -1,0 +1,52 @@
+.review-slider-container {
+  padding-left: 5rem;
+  margin-bottom: 4rem;
+}
+.slides-container {
+  display: flex;
+  width: 96%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.review-heading {
+  font-size: 2rem;
+  font-family: "GilroyBold";
+  color: #10274f;
+  margin-top: 2rem;
+}
+.slide1 {
+  box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 0.2);
+  border-radius: 6px;
+  width: 300px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 1rem 1rem 1rem;
+}
+.slide-image-container {
+  border: 1px solid #8f9194;
+  background-color: #8f9194;
+  border-radius: 5px;
+  width: 3.6rem;
+  height: 3.6rem;
+}
+.user-review {
+  font-size: 1.2rem;
+  font-family: "NunitoBold";
+  color: #10274f;
+}
+.review-stars {
+  font-size: 1.2rem;
+  color: #f2bc27;
+  margin-right: 0.3rem;
+}
+.review-desc {
+  font-size: 1rem;
+  font-family: "NunitoRegular";
+  color: #6a6a73;
+  width: 90%;
+  margin-top: 1rem;
+}
+/* ::-webkit-scrollbar {
+    display: none;
+} */
