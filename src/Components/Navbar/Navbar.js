@@ -28,6 +28,7 @@ function NavBar() {
   const [expand, updateExpanded] = React.useState(false);
   const [navColour, updateNavbar] = React.useState(false);
 
+
   function scrollHandler() {
     if (window.scrollY >= 20) {
       updateNavbar(true);

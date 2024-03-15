@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
+import DeleteAccount from "../DeleteAccount";
 
 const HamburgerSideBar = () => {
   const user = useSelector((state) => state.user);
+  const [deleteUser, setDeleteUser] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -182,6 +185,7 @@ const HamburgerSideBar = () => {
           </div>
         </div>
       </div>
+      <DeleteAccount deleteUser={deleteUser} setDeleteUser={setDeleteUser} />
     </>
   );
 };
