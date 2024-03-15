@@ -23,6 +23,7 @@ import { db } from "../../firebase";
 
 import Autocomplete from "react-google-autocomplete";
 import { getChatId } from "../../helper/GetChatId";
+import { calculateAverageRating } from "../../helper/CalculateRating";
 
 const ProfileDetails = () => {
   const location = useLocation();
@@ -368,7 +369,9 @@ const ProfileDetails = () => {
                           <Rating
                             // maxScale={5}
                             // style={{marginVertical: 20}}
-                            rating={userDetails.reviewer?.length}
+                            rating={calculateAverageRating(
+                              userDetails.reviewer
+                            )}
                           />
                         </p>
                         <div className="flex">

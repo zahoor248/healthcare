@@ -32,7 +32,7 @@ export default function Sidebar({
 
   const [filterConditions, setFilterConditions] = useState({
     tags: [], // You can store selected tags here
-    license: [], // You can store selected licenses here
+    license: "", // You can store selected licenses here
     searchBase: zipCodeUser, // You can store selected
     rateBase: "hourly_rate", // You can store selected
     rates: {
@@ -40,23 +40,6 @@ export default function Sidebar({
       max: 0, // You can store the max rate here
     },
   });
-  const handleFilterByLicense = (license) => {
-    setFilterConditions((prevFilterConditions) => {
-      if (filterConditions.license.includes(license)) {
-        return {
-          ...prevFilterConditions,
-          license: prevFilterConditions.license.filter(
-            (lic) => lic !== license
-          ),
-        };
-      } else {
-        return {
-          ...prevFilterConditions,
-          license: [...prevFilterConditions.license, license],
-        };
-      }
-    });
-  };
 
   const filterData = (reset) => {
     if (reset) {
@@ -91,7 +74,9 @@ export default function Sidebar({
 
     handleAPIRequest("get", "pros", null, {
       filters: {
-        license: filterConditions.license,
+        license: filterConditions.license
+          ? filterConditions.license.abbrev
+          : "",
         zip: filterConditions.searchBase,
         rate: filterConditions.rates.max,
         rateType: filterConditions.rateBase ? "hourly" : "daily",
@@ -163,14 +148,18 @@ export default function Sidebar({
 
         <div className="w-64">
           <div className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full">
-            Selected license type
+            {filterConditions.license
+              ? filterConditions.license.name
+              : "Selected license type"}
           </div>
           <ul className="max-h-64 overflow-y-auto divide-y divide-gray-200">
             {licenseTypes.map((item, index) => (
               <li
                 key={index}
                 className={`p-4 cursor-pointer hover:bg-gray-100 ${"bg-white-100"}`}
-                // onClick={() => handleItemClick(item)}
+                onClick={() => {
+                  setFilterConditions({ ...filter, license: item });
+                }}
               >
                 {item.name}
               </li>
