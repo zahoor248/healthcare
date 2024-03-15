@@ -539,7 +539,7 @@ export default function Chat() {
                 <div className="h-14"></div>
               </div>
 
-              <div className=" mx-[100px] ms-auto bg-neutral-100 pt-3 absolute w-full">
+              <div className=" mx-[100px] ms-auto bg-neutral-100 py-3 absolute w-full">
                 <form
                   onSubmit={(e) => onSend(e)}
                   className="px-7 flex flex-row justify-end  gap-2 items-end"
