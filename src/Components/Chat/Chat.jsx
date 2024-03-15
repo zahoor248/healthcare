@@ -442,10 +442,10 @@ export default function Chat() {
     }
   };
   return (
-    <div className="flex bg-neutral-100  pb-2 w-full">
+    <div className="flex bg-neutral-100  pb-2 w-full h-[82vh] md:h-full">
       <div
         className={`${
-          !showChat ? "flex  h-[calc(100vh-120px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]" : "hidden "
+          !showChat ? "flex  h-[calc(100vh-188px)] bg-neutral-100 md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]" : "hidden "
         } md:flex flex-col w-full md:max-w-[450px]`}
       >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
@@ -497,7 +497,7 @@ export default function Chat() {
       </div>
 
       <div
-        className={`${showChat ? "block relative h-[calc(100vh-120px)] md:h-[calc(100vh-148px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]" : "hidden"} md:block border-l w-full`}
+        className={`${showChat ? "block relative h-[calc(100vh-172px)] md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]" : "hidden"} md:block border-l w-full`}
       >
         {selectedItem && (
           <div className="py-5 px-8 bg-slate-50">
@@ -532,7 +532,7 @@ export default function Chat() {
         <div className="w-full h-[90%] flex justify-end overflow-auto flex-col">
           {selectedItem && (
             <>
-              <div className="lg:max-h-[80%]">
+              <div className="max-h-[80%]">
                 {messages.map((item, index) => (
                   <ChatMessage key={index} message={item} />
                 ))}

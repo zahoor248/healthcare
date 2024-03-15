@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 import DeleteAccount from "../DeleteAccount";
 
-const HamburgerSideBar = () => {
+const HamburgerSideBar = ({setShowBar}) => {
   const user = useSelector((state) => state.user);
   const [deleteUser, setDeleteUser] = useState(false);
 
@@ -178,7 +178,7 @@ const HamburgerSideBar = () => {
             </button>
             <button
               onClick={() => handleLogout()}
-              className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
+              className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md font "
             >
               Logout
             </button>
