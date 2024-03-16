@@ -176,12 +176,6 @@ const HamburgerSideBar = () => {
             >
               Delete Account
             </button>
-            <button
-              onClick={() => handleLogout()}
-              className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
-            >
-              Logout
-            </button>
           </div>
         </div>
       </div>

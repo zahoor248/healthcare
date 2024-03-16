@@ -12,9 +12,12 @@ import {
 import { BiMessageSquareEdit } from "react-icons/bi";
 import { FaIdCard } from "react-icons/fa";
 
+import { CiLogout } from "react-icons/ci";
+
 import { FaClock } from "react-icons/fa6";
 
 import { MdBusinessCenter } from "react-icons/md";
+import { formatPhoneNumber } from "../../helper/PhoneFormat";
 
 import { TbLicense } from "react-icons/tb";
 import { MdRoomPreferences } from "react-icons/md";
@@ -679,7 +682,10 @@ const BusinessProfileData = () => {
                 name="public_phone"
                 value={business.public_phone}
                 onChange={(e) =>
-                  setBusiness({ ...business, public_phone: e.target.value })
+                  setBusiness({
+                    ...business,
+                    public_phone: formatPhoneNumber(e.target.value),
+                  })
                 }
               />
             </div>
@@ -740,12 +746,12 @@ const Profile = () => {
         formData.append("uuid", user.uuid);
 
         const response = await axios.post(
-          `https://app.healthcare-up.com/api/v1/user-photo`,
+          `https://app.healthcare-up.com/user-photo`,
           formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NzBmYzQzZS0zNjdlLTQ5YzMtYTIzNS02ZGU4MjAxY2QxMmMiLCJqdGkiOiJjMjBiOWFiZjM1M2Y2MGNlNDAyMzVmZTUzOWNmMzc4OTIxNWVhZjRhM2E2YjYyZWQ5YjY4N2ViNzQ2OWU1YzhjYThhMTQxZGJjNzBhN2U3ZiIsImlhdCI6MTcxMDE3NjA1Mi4wODk1NjkwOTE3OTY4NzUsIm5iZiI6MTcxMDE3NjA1Mi4wODk1NzAwNDU0NzExOTE0MDYyNSwiZXhwIjoxNzQxNzEyMDUyLjA4NzEzMTk3NzA4MTI5ODgyODEyNSwic3ViIjoiMzYiLCJzY29wZXMiOltdfQ.ADhbhxHn2rpniEqBt_asOHmsUjAQ6m_RTb4BBwfVwbSfB9H23va5uFq4DxCotTaag0VanYsrHzpiMytWCnvwHtcdcQUuK8Gkyo1XluhWIKxGfxIefUhZ9piDjQ0jgY509J78HiBwYW2ejEPrFFARvHh0K4R-jXIs5aIsHboSambCLReFzVlnPnfL8z1F9XpiBOZ4J-hEP12lfiK_4Yv9M_X5XVGkSauo3flFAn3s1DN-eCYKULzcvDqDxxb84-Cqx9B8OmFRzNx5771CS_R7SmrynKtEtpjUu2DfuLzphkcbYlBp3UENVgRfuiuuwrX4iJa6jzv3MsacNzcYsahVB9eNsbVMWbKX6NArpDXaZI8Km-bghG88HVZxFZsyPmdGOpqa1WNvVRGTh_MylTBEOj8i6CnPyRpnBauUDnGEJDE_boC_FgI8r4whxo8vSbieb1SasD6L5W34lLjlTSD9BF6oL8Z6WsqSH48PvqqmitIM2anA1U2DlLNE0vqj5Zdqgya5P61uGAC5RlQJGxw5Mkq6NjLy8JFf2p2E-Ml4LW9_W5AGRX5wqF0LpPUQtnopPs9GKrMQac3yAAMA4DK9Z5lCHvWkH8swhhsQo2cz6X4GDtg_mOqKpBC-NROgp-HZt9nrEOcaoaIjebNIkccbuaAN_glPIUeDVTfEre_wc-M`,
+              // Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NzBmYzQzZS0zNjdlLTQ5YzMtYTIzNS02ZGU4MjAxY2QxMmMiLCJqdGkiOiJjMjBiOWFiZjM1M2Y2MGNlNDAyMzVmZTUzOWNmMzc4OTIxNWVhZjRhM2E2YjYyZWQ5YjY4N2ViNzQ2OWU1YzhjYThhMTQxZGJjNzBhN2U3ZiIsImlhdCI6MTcxMDE3NjA1Mi4wODk1NjkwOTE3OTY4NzUsIm5iZiI6MTcxMDE3NjA1Mi4wODk1NzAwNDU0NzExOTE0MDYyNSwiZXhwIjoxNzQxNzEyMDUyLjA4NzEzMTk3NzA4MTI5ODgyODEyNSwic3ViIjoiMzYiLCJzY29wZXMiOltdfQ.ADhbhxHn2rpniEqBt_asOHmsUjAQ6m_RTb4BBwfVwbSfB9H23va5uFq4DxCotTaag0VanYsrHzpiMytWCnvwHtcdcQUuK8Gkyo1XluhWIKxGfxIefUhZ9piDjQ0jgY509J78HiBwYW2ejEPrFFARvHh0K4R-jXIs5aIsHboSambCLReFzVlnPnfL8z1F9XpiBOZ4J-hEP12lfiK_4Yv9M_X5XVGkSauo3flFAn3s1DN-eCYKULzcvDqDxxb84-Cqx9B8OmFRzNx5771CS_R7SmrynKtEtpjUu2DfuLzphkcbYlBp3UENVgRfuiuuwrX4iJa6jzv3MsacNzcYsahVB9eNsbVMWbKX6NArpDXaZI8Km-bghG88HVZxFZsyPmdGOpqa1WNvVRGTh_MylTBEOj8i6CnPyRpnBauUDnGEJDE_boC_FgI8r4whxo8vSbieb1SasD6L5W34lLjlTSD9BF6oL8Z6WsqSH48PvqqmitIM2anA1U2DlLNE0vqj5Zdqgya5P61uGAC5RlQJGxw5Mkq6NjLy8JFf2p2E-Ml4LW9_W5AGRX5wqF0LpPUQtnopPs9GKrMQac3yAAMA4DK9Z5lCHvWkH8swhhsQo2cz6X4GDtg_mOqKpBC-NROgp-HZt9nrEOcaoaIjebNIkccbuaAN_glPIUeDVTfEre_wc-M`,
             },
           }
         );
@@ -817,11 +823,26 @@ const Profile = () => {
                 alt="user profile image"
                 className="w-20 h-20 border border-neutral-200 rounded-full"
               />
+
+              <svg
+                className="absolute mt-[53px] w-6 h-6 p-0.5  ml-8 bg-neutral-700 border rounded-full"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#fafafa"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                />
+              </svg>
               <input
                 type="file"
                 ref={fileInputRef}
                 onChange={(e) => handleFileSelect(e)}
-                className="opacity-0 cursor-pointer z-10 absolute px-6 -left-0 py-4 w-full"
+                className="opacity-0 cursor-pointer z-10 absolute px-6 -left-0 py-6 w-full"
               />
               <p className="text-xl pt-3 font-semibold">
                 {user?.firstname} {user?.lastname}
@@ -881,7 +902,7 @@ const Profile = () => {
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path>
                     </svg>
                     <span className="normal-case  !text-[10px]  md:!text-base">
-                      Address
+                      Addresses
                     </span>
                   </div>
                 </li>
@@ -917,6 +938,22 @@ const Profile = () => {
                     </div>
                   </li>
                 )}
+
+                <li
+                  onClick={() => {
+                    document.getElementById("logout-form").submit();
+                  }}
+                  className={`side-nav-item ${
+                    nav === "preferences" && "side-nav-item-active"
+                  }`}
+                >
+                  <div className="side-nav-link !py-2 md:!py-4">
+                    <CiLogout className="pen-icon" />
+                    <span className="normal-case  !text-[10px]  md:!text-base mr-2.5 md:mr-0">
+                      Logout
+                    </span>
+                  </div>
+                </li>
               </ul>
             </div>
             <div className="hidden md:flex w-full absolute -left-[0.45rem] bottom-6 justify-between gap-3  flex-col px-6">
@@ -925,12 +962,6 @@ const Profile = () => {
                 className="  text-red-600 hover:bg-red-50 transition-all ease-in-out duration-300 border-[#0f75bc] whitespace-nowrap px-5 py-2 rounded-md "
               >
                 Delete Account
-              </button>
-              <button
-                onClick={() => handleLogout()}
-                className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
-              >
-                Logout
               </button>
             </div>
           </div>

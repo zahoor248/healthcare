@@ -20,6 +20,7 @@ const DeleteAccount = ({ deleteUser, setDeleteUser }) => {
 
         dispatch(setUser(null));
         dispatch(setIsLoggedIn(false));
+
         setShowToast({
           ...showToast,
           toggle: true,
@@ -27,6 +28,8 @@ const DeleteAccount = ({ deleteUser, setDeleteUser }) => {
           message: "Account deletion successful. We're sad to see you go. 😔",
           lable: "Account Deleted",
         });
+
+        document.getElementById("logout-form").submit();
       })
       .catch((e) => {
         console.log(e);

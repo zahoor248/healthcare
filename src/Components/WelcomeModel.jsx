@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const WelcomeModel = () => {
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    document.getElementById("logout-form").submit();
     dispatch(setUser(null));
     dispatch(setIsLoggedIn(false));
   };
@@ -37,12 +37,12 @@ const WelcomeModel = () => {
             plan. Thanks for your interest in Healthcare Up
           </div>
         </div>
-      <button
-        onClick={() => handleLogout()}
-        className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
-      >
-        Logout
-      </button>
+        <button
+          onClick={() => handleLogout()}
+          className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
+        >
+          Logout
+        </button>
       </div>
     </div>
   );
