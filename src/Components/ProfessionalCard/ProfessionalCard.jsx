@@ -148,7 +148,10 @@ export default function ProfessionalCard({ data, setFilteredData }) {
         )}
         {show != null && show == profileData?.uuid && (
           <div>
-            <div className="fixed inset-0 w-full h-full !bg-black/60  backdrop-blur-sm z-30"></div>
+            <div
+              onClick={() => setShow(false)}
+            
+            className="fixed inset-0 w-full h-full !bg-black/60  backdrop-blur-sm z-30"></div>
             <div
               onClick={() => setShow(false)}
               className="w-full px-4 max-w-[90%] md:max-w-[700px] flex flex-col gap-6  z-[9999999] h-fit bg-white border-t box-border border-neutral-200 p-6 md:p-8 fixed inset-0 m-auto rounded"
