@@ -169,7 +169,7 @@ export default function Sidebar({
       </div>
 
       <div className="pt-4 md:pt-8">
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <label class="switch">
             <input type="checkbox" onChange={(e) => handleChangeRate(e)} />
             <span class="slider"></span>
@@ -177,7 +177,7 @@ export default function Sidebar({
           <p className="text-lg">
             {filterConditions.rateBase ? "Hourly" : "Daily"} Rate
           </p>
-        </div>
+        </div> */}
         <Slider
           getAriaLabel={() => "Temperature range"}
           value={value}

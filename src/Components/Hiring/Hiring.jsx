@@ -157,17 +157,7 @@ export default function Hiring() {
           <div className="flex -mt-32 xl:-mt-28 f md:flex-row w-full px-6 xl:px-24 2xl:px-32 ">
             <div className="flex w-full flex-col md:flex-row relative bg-white  shadow-class p-6 md:p-4 lg:p-8 xl:p-14 rounded-2xl h-100vh overflow-auto mb-32">
               <div className="card-section-header absolute right-4 justify-between items-center  md:!hidden">
-                <div className="flex gap-2">
-                  <p>Sort by:</p>
-                  <select
-                    className="bg-blue-400 hover:bg-blue-500 transition-all ease-in-out duration-300 pr-1 !rounded-[2px] text-white"
-                    onChange={(e) => handleSortItem(e.target.value)}
-                  >
-                    <option>Hourly Rate</option>
-                    <option>Daily Rate</option>
-                  </select>
-                </div>
-
+             
                 {/* <div className="pagi-icons flex items-center">
                 <IoIosArrowDropleft className="mr-2" />
                 <IoIosArrowDropright />
