@@ -128,13 +128,19 @@ export default function Chat() {
 
     return (
       <div className={`message ${messageClass}`}>
-        <img src={user.avatar} alt="" className="circle-img rounded-full" />
+        <img src={user.avatar} alt=""
+        
+        
+        
+        className="circle-img rounded-full w-full h-full object-cover" />
         <p className="text messageBubble">
           {text ? (
             text
           ) : (
             <img
               src={props.message.image}
+              className="w-full h-full object-cover"
+
               style={{ height: 200, width: 200 }}
             />
           )}
@@ -445,9 +451,7 @@ export default function Chat() {
     <div className="flex bg-neutral-100  pb-2 w-full h-[82vh] md:h-full">
       <div
         className={`${
-          !showChat
-            ? "flex  h-[calc(100vh-188px)] bg-neutral-100 md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]"
-            : "hidden "
+          !showChat ? "flex  h-[calc(100vh-188px)] bg-neutral-100 md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-188px)] 2xl:h-[calc(100vh-202px)]" : "hidden "
         } md:flex flex-col w-full md:max-w-[450px]`}
       >
         <div className="flex justify-between w-full p-4 bg-neutral-100 py-5">
@@ -470,6 +474,7 @@ export default function Chat() {
                 <div className="flex items-center gap-4">
                   <div className=" !rounded-full overflow-hidden  w-20 h-20">
                     <img
+                    className="w-full h-full object-cover"
                       src={item.user.photo_url ? item.user.photo_url : User}
                     />
                     {/* <GoPrimitiveDot className='online-icon'/> */}
@@ -499,11 +504,7 @@ export default function Chat() {
       </div>
 
       <div
-        className={`${
-          showChat
-            ? "block relative h-[calc(100vh-172px)] md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-160px)] 2xl:h-[calc(100vh-202px)]"
-            : "hidden"
-        } md:block border-l w-full`}
+        className={`${showChat ? "block relative h-[calc(100vh-172px)] md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-188px)] 2xl:h-[calc(100vh-202px)]" : "hidden"} md:block border-l w-full`}
       >
         {selectedItem && (
           <div className="py-5 px-8 bg-slate-50">
