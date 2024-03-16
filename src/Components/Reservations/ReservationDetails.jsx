@@ -211,6 +211,8 @@ const ReservationDetails = () => {
                                 {opentoAcceptoffer.offered_to?.photo_url !=
                                 null ? (
                                   <img
+                                  className="w-full h-full object-cover"
+
                                     src={
                                       opentoAcceptoffer.offered_to?.photo_url
                                     }
@@ -257,6 +259,8 @@ const ReservationDetails = () => {
                               {opentoAcceptoffer.offered_by?.photo_url !=
                               null ? (
                                 <img
+                                className="w-full h-full object-cover"
+
                                   src={opentoAcceptoffer.offered_by?.photo_url}
                                 />
                               ) : (
@@ -479,7 +483,11 @@ const ReservationDetails = () => {
                                   className=" !rounded-full border overflow-hidden w-10 h-10"
                                 >
                                   {item?.offered_to?.photo_url != null ? (
-                                    <img src={item?.offered_to?.photo_url} />
+                                    <img 
+                                    className="w-full h-full object-cover"
+
+                                    
+                                    src={item?.offered_to?.photo_url} />
                                   ) : (
                                     <img src={User} />
                                   )}
@@ -618,7 +626,10 @@ const ReservationDetails = () => {
                                   className=" !rounded-full border overflow-hidden w-10 h-10"
                                 >
                                   {item?.offered_by?.photo_url != null ? (
-                                    <img src={item?.offered_by?.photo_url} />
+                                    <img 
+                                    className="w-full h-full object-cover"
+
+                                    src={item?.offered_by?.photo_url} />
                                   ) : (
                                     <img src={User} />
                                   )}

@@ -128,13 +128,19 @@ export default function Chat() {
 
     return (
       <div className={`message ${messageClass}`}>
-        <img src={user.avatar} alt="" className="circle-img rounded-full" />
+        <img src={user.avatar} alt=""
+        
+        
+        
+        className="circle-img rounded-full w-full h-full object-cover" />
         <p className="text messageBubble">
           {text ? (
             text
           ) : (
             <img
               src={props.message.image}
+              className="w-full h-full object-cover"
+
               style={{ height: 200, width: 200 }}
             />
           )}
@@ -468,6 +474,7 @@ export default function Chat() {
                 <div className="flex items-center gap-4">
                   <div className=" !rounded-full overflow-hidden  w-20 h-20">
                     <img
+                    className="w-full h-full object-cover"
                       src={item.user.photo_url ? item.user.photo_url : User}
                     />
                     {/* <GoPrimitiveDot className='online-icon'/> */}

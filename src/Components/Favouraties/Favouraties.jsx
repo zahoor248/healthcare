@@ -90,7 +90,11 @@ const Favouraties = () => {
                         <div className="flex items-center w-full gap-4">
                           <div className=" !rounded-full overflow-hidden w-20 h-20">
                             {item.photo_url != null ? (
-                              <img src={item.photo_url} />
+                              <img 
+                              className="w-full h-full object-cover"
+
+                              
+                              src={item.photo_url} />
                             ) : (
                               <div className="w-20 h-20 flex justify-center capitalize items-center bg-slate-700 text-xl font-bold text-white">
                                 {item?.firstname.charAt(0)}

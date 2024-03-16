@@ -298,9 +298,16 @@ const Contacts = () => {
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
                         {item.business?.photo_url != null ? (
-                          <img src={item.business?.photo_url} />
+                          <img src={item.business?.photo_url} 
+                          className="w-full h-full object-cover"
+
+                          />
                         ) : (
-                          <img src={User} />
+                          <img src={User} 
+                          
+                          className="w-full h-full object-cover"
+
+                          />
                         )}
                         {/* <GoPrimitiveDot className='online-icon'/> */}
                       </Link>
@@ -320,7 +327,11 @@ const Contacts = () => {
                         className=" !rounded-full overflow-hidden w-10 h-10"
                       >
                         {item.pro?.photo_url != null ? (
-                          <img src={item.pro?.photo_url} />
+                          <img 
+                          className="w-full h-full object-cover"
+ 
+                          
+                          src={item.pro?.photo_url} />
                         ) : (
                           <img src={User} />
                         )}

@@ -309,7 +309,10 @@ export default function Header() {
                   <Link to={"/profile"} className="flex items-center gap-2">
                     <div className=" !rounded-full overflow-hidden md:h-8 md:w-8 xl:w-10 xl:h-10">
                       {user?.photo_url != null ? (
-                        <img src={user?.photo_url} />
+                        <img
+                        className="w-full h-full object-cover"
+ 
+                        src={user?.photo_url} />
                       ) : (
                         <img src={User} />
                       )}

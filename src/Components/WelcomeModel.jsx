@@ -24,6 +24,7 @@ const WelcomeModel = () => {
         >
           <img
             src={Logo}
+            
             class="w-72 h-14 object-fit absolute top-[100px] left-10"
           />
           <h3 class="font-bold text-3xl/none text-neutral-800 ">

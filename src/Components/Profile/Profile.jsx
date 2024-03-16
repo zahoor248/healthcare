@@ -816,7 +816,7 @@ const Profile = () => {
               <img
                 src={user?.photo_url != null ? user?.photo_url : User}
                 alt="user profile image"
-                className="w-20 h-20 border border-neutral-200 rounded-full"
+                className="w-20 h-20 border object-cover border-neutral-200 rounded-full"
               />
 
               <svg

@@ -300,7 +300,7 @@ const ProfileDetails = () => {
               <div className=" flex w-full gap-6 pl-6 md:pl-20 items-center ">
                 {userDetails.photo_url != null ? (
                   <img
-                    className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white"
+                    className="w-28 h-28 flex justify-center  capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white"
                     src={userDetails.photo_url}
                   />
                 ) : (
