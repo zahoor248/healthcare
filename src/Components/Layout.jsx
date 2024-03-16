@@ -80,7 +80,7 @@ const Layout = ({ children }) => {
           )}
           {user && user?.addresses.length && <Header />}
 
-          <main className=" min-h-[calc(100vh-162px)] md:min-h-[calc(100vh-172px)] md:overflow-auto  xl:min-h-[calc(100vh-184px)] 2xl:min-h-[calc(100vh-192px)]">
+          <main className=" min-h-[calc(100vh-162px)] md:min-h-[calc(100vh-172px)] md:overflow-auto  xl:min-h-[calc(100vh-180px)] 2xl:min-h-[calc(100vh-192px)]">
             {children}
           </main>
           <Footer />
