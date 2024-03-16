@@ -24,7 +24,7 @@ export const handleAPIRequest = async (method, url, data, params) => {
   }
   try {
     const response = await axios({
-      method: method,
+      method: method,    
       url: `${BASE_URL}${url}`,
       headers: header,
       data: data,
