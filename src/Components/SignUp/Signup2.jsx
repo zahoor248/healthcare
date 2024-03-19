@@ -682,10 +682,10 @@ export default function SignUp() {
             <h1 className=" text-neutral-200 text-2xl pt-5">
               Healthcare professionals Ready to Hire.
             </h1>
-            <p className="lg:max-w-[70%] flex items-center text-center text-neutral-800">
+            {/* <p className="lg:max-w-[70%] flex items-center text-center text-neutral-800">
               Pulvinar elementum integer enim neque. Et netus et malesuada fames
               ac turpis. Lectus nulla at volutpat diam ut.
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -777,21 +777,39 @@ export default function SignUp() {
                     }
                   />
                 </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <p className="text-base/none font-normal text-neutral-600">
+                    City
+                  </p>
+                  <input
+                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                    label="City"
+                    placeholder="Enter your City"
+                    variant="outlined"
+                    value={adressDetails.city}
+                    onChange={(e) =>
+                      setAdressDetails({
+                        ...adressDetails,
+                        city: e.target.value,
+                      })
+                    }
+                  />
+                </div>
                 <div className="flex flex-row gap-4">
-                  <div className="flex flex-col gap-2 w-full">
+                  <div className="flex flex-col gap-2">
                     <p className="text-base/none font-normal text-neutral-600">
-                      City
+                      Zip Code
                     </p>
                     <input
                       className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                      label="City"
-                      placeholder="Enter your City"
+                      label="Zip Code"
+                      placeholder="Enter Zip Code"
                       variant="outlined"
-                      value={adressDetails.city}
+                      value={adressDetails.zip}
                       onChange={(e) =>
                         setAdressDetails({
                           ...adressDetails,
-                          city: e.target.value,
+                          zip: e.target.value,
                         })
                       }
                     />
@@ -820,24 +838,6 @@ export default function SignUp() {
                       ))}
                     </select>
                   </div>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <p className="text-base/none font-normal text-neutral-600">
-                    Zip Code
-                  </p>
-                  <input
-                    className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                    label="Zip Code"
-                    placeholder="Enter Zip Code"
-                    variant="outlined"
-                    value={adressDetails.zip}
-                    onChange={(e) =>
-                      setAdressDetails({
-                        ...adressDetails,
-                        zip: e.target.value,
-                      })
-                    }
-                  />
                 </div>
               </div>
               {/* <hr className="w-[60%] m-auto justify-center flex justify-self-end bg-neutral-200"></hr> */}

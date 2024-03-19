@@ -156,10 +156,10 @@ export default function SignUp() {
             <h1 className=" text-neutral-200 text-2xl pt-5">
               Healthcare professionals Ready to Hire.
             </h1>
-            <p className="lg:max-w-[70%] flex items-center text-center text-neutral-800">
-              Pulvinar elementum integer enim neque. Et netus et malesuada fames
-              ac turpis. Lectus nulla at volutpat diam ut.
-            </p>
+            {/* <p className="lg:max-w-[70%] flex items-center text-center text-neutral-800"> */}
+              {/* Pulvinar elementum integer enim neque. Et netus et malesuada fames */}
+              {/* ac turpis. Lectus nulla at volutpat diam ut. */}
+            {/* </p> */}
           </div>
         </div>
 
