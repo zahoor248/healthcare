@@ -6,6 +6,7 @@ import "./Responsive.css";
 import Reservations from "./Components/Reservations/Reservations";
 import LogIn from "./Components/LogIn/LogIn";
 import SignUp from "./Components/SignUp/Signup2";
+import ScrollToTop from "./helper/ScrollToTop";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -25,6 +26,8 @@ function App() {
       ) : (
         <div />
       )}
+
+      <ScrollToTop />
     </>
   );
 }

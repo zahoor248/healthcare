@@ -54,7 +54,7 @@ export default function ProfessionalCard({ data, setFilteredData }) {
   };
   return (
     <>
-      <div className="h-full">
+      <div>
         <div className="py-3 md:hidden  text-xl font-bold text-neutral-800">
           All Professionals:
         </div>
