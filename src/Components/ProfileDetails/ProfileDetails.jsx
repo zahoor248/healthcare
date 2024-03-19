@@ -20,7 +20,7 @@ import dayjs from "dayjs";
 import Toast from "../AppLoader";
 import CommonPrimaryButton from "../CommonPrimaryButton";
 import { db } from "../../firebase";
-
+import User from "../../assets/images/holderpic.jpeg";
 import Autocomplete from "react-google-autocomplete";
 import { getChatId } from "../../helper/GetChatId";
 import { calculateAverageRating } from "../../helper/CalculateRating";
@@ -305,9 +305,10 @@ const ProfileDetails = () => {
                     src={userDetails.photo_url}
                   />
                 ) : (
-                  <div className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin text-white">
-                    {userDetails?.firstname}
-                  </div>
+                  <img
+                    className="w-28 h-28 flex justify-center capitalize rounded-xl shadow-class items-center bg-slate-700 text-xl font-thin object-cover text-white"
+                    src={User}
+                  />
                 )}
                 <div className=" mt-4">
                   <p className="profile-user-name capitalize text-2xl text-blue-900">

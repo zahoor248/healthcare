@@ -91,7 +91,6 @@ export default function SignUp() {
   const handleMoreInformation = (value) => {
     if (
       adressDetails.streetAddress == "" ||
-      adressDetails.address == "" ||
       adressDetails.city == "" ||
       adressDetails.state == "" ||
       adressDetails.zip == "" ||
@@ -741,7 +740,7 @@ export default function SignUp() {
               </div>
 
               <div className="flex flex-col bg-neutral-100 p-6 gap-4 w-full rounded-xl">
-                <div className="font-semibold text-lg">Adress Details</div>
+                <div className="font-semibold text-lg">Address Details</div>
                 <div className="flex flex-col gap-2">
                   <p className="text-base/none font-normal text-neutral-600">
                     Street Address
@@ -781,6 +780,24 @@ export default function SignUp() {
                 <div className="flex flex-row gap-4">
                   <div className="flex flex-col gap-2 w-full">
                     <p className="text-base/none font-normal text-neutral-600">
+                      City
+                    </p>
+                    <input
+                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
+                      label="City"
+                      placeholder="Enter your City"
+                      variant="outlined"
+                      value={adressDetails.city}
+                      onChange={(e) =>
+                        setAdressDetails({
+                          ...adressDetails,
+                          city: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2 w-full">
+                    <p className="text-base/none font-normal text-neutral-600">
                       State
                     </p>
                     <select
@@ -802,24 +819,6 @@ export default function SignUp() {
                         </option>
                       ))}
                     </select>
-                  </div>
-                  <div className="flex flex-col gap-2 w-full">
-                    <p className="text-base/none font-normal text-neutral-600">
-                      City
-                    </p>
-                    <input
-                      className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
-                      label="City"
-                      placeholder="Enter your City"
-                      variant="outlined"
-                      value={adressDetails.city}
-                      onChange={(e) =>
-                        setAdressDetails({
-                          ...adressDetails,
-                          city: e.target.value,
-                        })
-                      }
-                    />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -891,12 +890,12 @@ export default function SignUp() {
 
                   <div className="flex flex-col gap-2">
                     <p className="text-base/none font-normal text-neutral-600">
-                      Number
+                      License Number
                     </p>
                     <input
                       className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full"
                       label="Address"
-                      placeholder="Enter your address"
+                      placeholder="Enter your license number"
                       variant="outlined"
                       value={licenseDetails.license_id}
                       onChange={(e) =>
