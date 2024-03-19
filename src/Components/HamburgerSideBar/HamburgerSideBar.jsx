@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsLoggedIn, setUser } from "../../Store/Actions/Actions";
 import DeleteAccount from "../DeleteAccount";
 
-const HamburgerSideBar = ({setShowBar}) => {
+const HamburgerSideBar = ({ setShowBar }) => {
   const user = useSelector((state) => state.user);
   const [deleteUser, setDeleteUser] = useState(false);
 
@@ -170,6 +170,14 @@ const HamburgerSideBar = ({setShowBar}) => {
             </Link>
           </div>
           <div className="flex w-full absolute -left-[0.45rem] bottom-6 justify-between gap-3  flex-col px-6">
+            <button
+            onClick={() => {
+              document.getElementById("logout-form").submit();
+            }}
+              className=" border text-[#0f75bc] border-[#0f75bc] px-5 py-2 rounded-md "
+            >
+              Logout
+            </button>
             <button
               onClick={() => setDeleteUser(true)}
               className="  text-red-600 hover:bg-red-50 transition-all ease-in-out duration-300 border-[#0f75bc] whitespace-nowrap px-5 py-2 rounded-md "

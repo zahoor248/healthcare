@@ -551,7 +551,7 @@ export default function Chat() {
                 {messages.map((item, index) => (
                   <ChatMessage key={index} message={item} index={index} />
                 ))}
-                <div className="h-14"></div>
+                <div className="h-20"></div>
               </div>
 
               <div className=" mx-[100px] ms-auto bg-neutral-100 py-3 absolute w-full">

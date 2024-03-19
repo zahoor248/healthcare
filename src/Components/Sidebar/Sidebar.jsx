@@ -146,7 +146,7 @@ export default function Sidebar({
       <div className="pt-4 md:pt-8">
         <p className="text-lg pb-2">License Type</p>
 
-        <div className="w-full md:w-64">
+        <div className="w-full ">
           <div className="text-lg placeholder-[#B8C0CB] text-neutral-800 py-3 px-4 border border-[#C2C9D4] rounded w-full">
             {filterConditions.license
               ? filterConditions.license.name
@@ -178,7 +178,7 @@ export default function Sidebar({
             {filterConditions.rateBase ? "Hourly" : "Daily"} Rate
           </p>
         </div> */}
-        <Slider
+        {/* <Slider
           getAriaLabel={() => "Temperature range"}
           value={value}
           onChange={handleChange}
@@ -191,7 +191,7 @@ export default function Sidebar({
               borderRadius: "4px",
             },
           }}
-        />
+        /> */}
       </div>
 
       <div className="pt-4 flex gap-4 justify-center md:justify-end md:pt-8">

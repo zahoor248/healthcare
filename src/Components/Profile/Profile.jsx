@@ -943,7 +943,7 @@ const Profile = () => {
                   onClick={() => {
                     document.getElementById("logout-form").submit();
                   }}
-                  className={`side-nav-item ${
+                  className={`side-nav-item !hidden md:!block ${
                     nav === "preferences" && "side-nav-item-active"
                   }`}
                 >
