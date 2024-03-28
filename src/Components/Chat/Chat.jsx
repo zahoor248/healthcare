@@ -450,11 +450,11 @@ export default function Chat() {
     }
   };
   return (
-    <div className="flex bg-neutral-100  pb-2 w-full h-[82vh] md:h-full">
+    <div className="flex bg-neutral-100  pb-2 w-full h-[79.1vh] md:h-full">
       <div
         className={`${
           !showChat
-            ? "flex  h-[calc(100vh-188px)] bg-neutral-100 md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-196)] 2xl:h-[calc(100vh-202px)]"
+            ? "flex  h-[calc(100vh-193px)] bg-neutral-100 md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-196)] 2xl:h-[calc(100vh-202px)]"
             : "hidden "
         } md:flex flex-col w-full md:max-w-[450px]`}
       >
@@ -510,7 +510,7 @@ export default function Chat() {
       <div
         className={`${
           showChat
-            ? "block relative h-[calc(100vh-172px)] md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-196px)] 2xl:h-[calc(100vh-202px)]"
+            ? "block relative h-[calc(100vh-193px)] md:h-[calc(100vh-180px)]  xl:h-[calc(100vh-196px)] 2xl:h-[calc(100vh-202px)]"
             : "hidden"
         } md:block border-l w-full`}
       >

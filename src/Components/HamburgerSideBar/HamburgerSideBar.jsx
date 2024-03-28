@@ -50,6 +50,7 @@ const HamburgerSideBar = ({ setShowBar }) => {
               } cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300`}
               as={Link}
               to="/"
+              onClick={() => setShowBar(false)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +73,7 @@ const HamburgerSideBar = ({ setShowBar }) => {
                 className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
                 as={Link}
                 to="/favouraties"
+                onClick={() => setShowBar(false)}
               >
                 <svg
                   stroke="currentColor"
@@ -94,6 +96,7 @@ const HamburgerSideBar = ({ setShowBar }) => {
                 className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
                 as={Link}
                 to="/offers"
+                onClick={() => setShowBar(false)}
               >
                 <svg
                   stroke="currentColor"
@@ -116,6 +119,7 @@ const HamburgerSideBar = ({ setShowBar }) => {
               className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
               as={Link}
               to="/contracts"
+              onClick={() => setShowBar(false)}
             >
               <svg
                 stroke="currentColor"
@@ -134,6 +138,7 @@ const HamburgerSideBar = ({ setShowBar }) => {
             <Link
               className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
               to="/chats"
+              onClick={() => setShowBar(false)}
             >
               <svg
                 stroke="currentColor"
@@ -151,6 +156,7 @@ const HamburgerSideBar = ({ setShowBar }) => {
             <Link
               className="cursor-pointer flex items-center gap-2 text-base hover:bg-neutral-200 rounded-lg w-full px-3 py-2 transition-all ease-in-out duration-300"
               to="/profile"
+              onClick={() => setShowBar(false)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

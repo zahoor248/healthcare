@@ -28,7 +28,6 @@ function NavBar() {
   const [expand, updateExpanded] = React.useState(false);
   const [navColour, updateNavbar] = React.useState(false);
 
-
   function scrollHandler() {
     if (window.scrollY >= 20) {
       updateNavbar(true);
@@ -39,8 +38,9 @@ function NavBar() {
 
   window.addEventListener("scroll", scrollHandler);
 
+
   return (
-    <div className={navColour ? "" : "navbar"}>
+    <div id="topScroll" className={navColour ? "" : "navbar"}>
       <div className="flex justify-between">
         <Link to="/" className="d-flex">
           <img src={logo} className="img-fluid logo" alt="brand" />

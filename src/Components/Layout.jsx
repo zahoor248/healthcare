@@ -8,6 +8,7 @@ import { handleAPIRequest } from "../helper/ApiHandler";
 import { getAllPros, setIsLoggedIn, setUser } from "../Store/Actions/Actions";
 import WelcomeModel from "./WelcomeModel";
 import { Alert } from "@mui/material";
+
 // Create a Footer component
 
 const Layout = ({ children }) => {
@@ -41,6 +42,14 @@ const Layout = ({ children }) => {
       navigate("/");
     }
   }, [isAuthenticated, routePath, navigate]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      window.scrollTo(0, 0);
+    };
+
+    handleScroll(); // Scroll to top when the component mountsconsole
+  }, [location.pathname]);
 
   return (
     <>
@@ -80,7 +89,9 @@ const Layout = ({ children }) => {
           )}
           {user && user?.addresses.length && <Header />}
 
-          <main className=" min-h-[calc(100vh-162px)] md:min-h-[calc(100vh-172px)] md:overflow-auto  xl:min-h-[calc(100vh-180px)] 2xl:min-h-[calc(100vh-192px)]">
+          <main
+            className={`min-h-[calc(100vh-162px)] sm:min-h-[calc(100vh-192px)] md:min-h-[calc(100vh-172px)] md:overflow-auto  xl:min-h-[calc(100vh-180px)] 2xl:min-h-[calc(100vh-192px)] ${routePath == 'chats' && 'bg-neutral-100'}`}
+          >
             {children}
           </main>
           <Footer />

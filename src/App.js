@@ -11,6 +11,8 @@ import ScrollToTop from "./helper/ScrollToTop";
 function App() {
   const user = useSelector((state) => state.user);
   const isAuthenticated = useSelector((state) => state.isLoggedIn);
+
+
   return (
     <>
       {isAuthenticated && user.type == "bus" ? (
